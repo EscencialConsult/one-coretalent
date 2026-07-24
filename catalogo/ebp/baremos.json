@@ -1,0 +1,54 @@
+{
+  "_fuente": "Test15/script.gs · BAREMOS_GENERALES + obtenerPercentil + interpretarPercentil",
+  "_descripcion": "Baremos por subescala (puntuación directa PD -> percentil). obtenerPercentil recorre la tabla en orden y devuelve el percentil del PRIMER umbral cuyo 'pd' es <= PD. Si ningún umbral aplica (PD < menor pd), devuelve 1. Las tablas están ordenadas de mayor a menor pd, igual que en el .gs.",
+  "tablas": {
+    "BPS": [
+      { "pd": 145, "percentil": 99 }, { "pd": 140, "percentil": 95 }, { "pd": 135, "percentil": 90 },
+      { "pd": 130, "percentil": 85 }, { "pd": 125, "percentil": 80 }, { "pd": 120, "percentil": 75 },
+      { "pd": 115, "percentil": 70 }, { "pd": 110, "percentil": 65 }, { "pd": 105, "percentil": 60 },
+      { "pd": 100, "percentil": 55 }, { "pd": 95, "percentil": 50 }, { "pd": 90, "percentil": 45 },
+      { "pd": 85, "percentil": 40 }, { "pd": 80, "percentil": 35 }, { "pd": 75, "percentil": 30 },
+      { "pd": 70, "percentil": 25 }, { "pd": 65, "percentil": 20 }, { "pd": 60, "percentil": 15 },
+      { "pd": 55, "percentil": 10 }, { "pd": 50, "percentil": 5 }, { "pd": 30, "percentil": 1 }
+    ],
+    "BM": [
+      { "pd": 48, "percentil": 99 }, { "pd": 46, "percentil": 95 }, { "pd": 44, "percentil": 90 },
+      { "pd": 42, "percentil": 85 }, { "pd": 40, "percentil": 80 }, { "pd": 38, "percentil": 75 },
+      { "pd": 36, "percentil": 70 }, { "pd": 34, "percentil": 65 }, { "pd": 32, "percentil": 60 },
+      { "pd": 30, "percentil": 55 }, { "pd": 28, "percentil": 50 }, { "pd": 26, "percentil": 45 },
+      { "pd": 24, "percentil": 40 }, { "pd": 22, "percentil": 35 }, { "pd": 20, "percentil": 30 },
+      { "pd": 18, "percentil": 25 }, { "pd": 16, "percentil": 20 }, { "pd": 14, "percentil": 15 },
+      { "pd": 12, "percentil": 10 }, { "pd": 10, "percentil": 5 }, { "pd": 5, "percentil": 1 }
+    ],
+    "BL": [
+      { "pd": 48, "percentil": 99 }, { "pd": 46, "percentil": 95 }, { "pd": 44, "percentil": 90 },
+      { "pd": 42, "percentil": 85 }, { "pd": 40, "percentil": 80 }, { "pd": 38, "percentil": 75 },
+      { "pd": 36, "percentil": 70 }, { "pd": 34, "percentil": 65 }, { "pd": 32, "percentil": 60 },
+      { "pd": 30, "percentil": 55 }, { "pd": 28, "percentil": 50 }, { "pd": 26, "percentil": 45 },
+      { "pd": 24, "percentil": 40 }, { "pd": 22, "percentil": 35 }, { "pd": 20, "percentil": 30 },
+      { "pd": 18, "percentil": 25 }, { "pd": 16, "percentil": 20 }, { "pd": 14, "percentil": 15 },
+      { "pd": 12, "percentil": 10 }, { "pd": 10, "percentil": 5 }, { "pd": 5, "percentil": 1 }
+    ],
+    "RP": [
+      { "pd": 72, "percentil": 99 }, { "pd": 69, "percentil": 95 }, { "pd": 66, "percentil": 90 },
+      { "pd": 63, "percentil": 85 }, { "pd": 60, "percentil": 80 }, { "pd": 57, "percentil": 75 },
+      { "pd": 54, "percentil": 70 }, { "pd": 51, "percentil": 65 }, { "pd": 48, "percentil": 60 },
+      { "pd": 45, "percentil": 55 }, { "pd": 42, "percentil": 50 }, { "pd": 39, "percentil": 45 },
+      { "pd": 36, "percentil": 40 }, { "pd": 33, "percentil": 35 }, { "pd": 30, "percentil": 30 },
+      { "pd": 27, "percentil": 25 }, { "pd": 24, "percentil": 20 }, { "pd": 21, "percentil": 15 },
+      { "pd": 18, "percentil": 10 }, { "pd": 15, "percentil": 5 }, { "pd": 10, "percentil": 1 }
+    ]
+  },
+  "niveles": {
+    "_descripcion": "interpretarPercentil(percentil): clasificación por umbral descendente del percentil.",
+    "umbral_descendente": [
+      { "min_percentil": 99, "nivel": "Excepcional" },
+      { "min_percentil": 90, "nivel": "Muy Alto" },
+      { "min_percentil": 75, "nivel": "Alto" },
+      { "min_percentil": 50, "nivel": "Medio-Alto" },
+      { "min_percentil": 25, "nivel": "Medio-Bajo" },
+      { "min_percentil": 10, "nivel": "Bajo" },
+      { "min_percentil": 0, "nivel": "Muy Bajo" }
+    ]
+  }
+}

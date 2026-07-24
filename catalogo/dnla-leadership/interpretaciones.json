@@ -1,0 +1,93 @@
+{
+  "_fuente": "Test12/index.html · getDimensionAnalysis (descriptors) + getGlobalAnalysis + displayProfileSynthesis. Contenido aprobado; seleccionado por el nivel calculado, no generado por IA.",
+  "_descripcion": "Niveles por dimensión (umbrales sobre la puntuación promedio 1-5) y textos por dimensión/nivel; niveles e interpretaciones globales; y plantillas de síntesis. Las claves de nivel internas son: sobresaliente, fortaleza, medio, desarrollo, bajo.",
+
+  "niveles_dimension": {
+    "_descripcion": "Umbrales descendentes sobre score (promedio de la dimensión, ya redondeado a 2 decimales).",
+    "umbral_descendente": [
+      { "nivel": "sobresaliente", "min_score": 4.6, "label": "Sobresaliente", "badge": "badge-sobresaliente" },
+      { "nivel": "fortaleza", "min_score": 3.8, "label": "Efectivo", "badge": "badge-fortaleza" },
+      { "nivel": "medio", "min_score": 3.0, "label": "Potencial Medio", "badge": "badge-medio" },
+      { "nivel": "desarrollo", "min_score": 2.0, "label": "Necesita Desarrollo", "badge": "badge-desarrollo" },
+      { "nivel": "bajo", "min_score": 0.0, "label": "Bajo", "badge": "badge-bajo" }
+    ]
+  },
+
+  "niveles_global": {
+    "_descripcion": "Umbrales descendentes sobre el promedio global (media de los 8 promedios de dimensión, redondeada a 2 decimales).",
+    "umbral_descendente": [
+      { "min_score": 4.6, "label": "LIDERAZGO SOBRESALIENTE", "color": "#10b981", "interpretation": "Perfil de liderazgo sobresaliente con excelentes competencias en todas las áreas clave...", "recomendacion": "Mantener el alto nivel..." },
+      { "min_score": 3.8, "label": "LIDERAZGO EFECTIVO Y CONSOLIDADO", "color": "#3b82f6", "interpretation": "Perfil de liderazgo efectivo con competencias bien desarrolladas...", "recomendacion": "Fortalecer áreas específicas..." },
+      { "min_score": 3.0, "label": "POTENCIAL MEDIO - OPORTUNIDAD DE DESARROLLO", "color": "#f59e0b", "interpretation": "Potencial medio con oportunidades claras de mejora...", "recomendacion": "Establecer plan de desarrollo..." },
+      { "min_score": 2.0, "label": "REQUIERE DESARROLLO EN HABILIDADES DE LIDERAZGO", "color": "#ef4444", "interpretation": "Nivel que requiere desarrollo intensivo...", "recomendacion": "Implementar programa intensivo..." },
+      { "min_score": 0.0, "label": "BAJO NIVEL DE INFLUENCIA O DIRECCIÓN", "color": "#7f1d1d", "interpretation": "El perfil sugiere limitaciones significativas...", "recomendacion": "Realizar evaluación complementaria..." }
+    ]
+  },
+
+  "sintesis": {
+    "_descripcion": "Reglas de síntesis: fortaleza si score >= 3.8; debilidad si score < 3.0.",
+    "umbral_fortaleza": 3.8,
+    "umbral_debilidad": 3.0,
+    "sin_fortalezas": "No se identificaron competencias en nivel sobresaliente.",
+    "sin_debilidades": "No se identificaron competencias en nivel crítico."
+  },
+
+  "por_dimension": {
+    "vision_estrategica": {
+      "sobresaliente": "Excelente capacidad para definir objetivos claros, comunicar la visión organizacional y orientar al equipo hacia metas medibles. Inspira a través de la coherencia entre discurso y acción.",
+      "fortaleza": "Comunica efectivamente los objetivos y mantiene al equipo alineado con la estrategia organizacional. Adapta la planificación según prioridades cambiantes.",
+      "medio": "Define objetivos básicos pero puede mejorar en la comunicación de la visión estratégica y en inspirar al equipo con propósito claro.",
+      "desarrollo": "Requiere fortalecer la capacidad de articular una visión clara y traducirla en objetivos concretos y medibles para el equipo.",
+      "bajo": "Necesita desarrollar habilidades para establecer dirección estratégica, comunicar objetivos y alinear al equipo con las metas organizacionales."
+    },
+    "comunicacion": {
+      "sobresaliente": "Comunicación excepcional con alta capacidad de escucha activa. Brinda retroalimentación constructiva frecuente y fomenta un ambiente de apertura y diálogo.",
+      "fortaleza": "Se comunica con claridad y empatía, escucha al equipo y brinda retroalimentación útil. Crea espacios para la participación.",
+      "medio": "Comunica adecuadamente pero puede mejorar en escucha activa, frecuencia de feedback y claridad en la comunicación de tareas.",
+      "desarrollo": "Requiere fortalecer habilidades de comunicación bidireccional, retroalimentación constructiva y capacidad de escucha empática.",
+      "bajo": "Necesita desarrollar competencias básicas de comunicación efectiva, escucha activa y capacidad para brindar feedback constructivo."
+    },
+    "decision": {
+      "sobresaliente": "Toma decisiones oportunas evaluando riesgos y consultando perspectivas diversas. Asume plena responsabilidad y mantiene criterio firme en situaciones complejas.",
+      "fortaleza": "Decide con criterio considerando información disponible y consultando al equipo. Asume responsabilidad por sus decisiones.",
+      "medio": "Toma decisiones básicas pero puede mejorar en evaluación de riesgos, consulta al equipo y firmeza en situaciones difíciles.",
+      "desarrollo": "Requiere desarrollar criterio para decisiones más complejas, evaluación de riesgos y capacidad de asumir responsabilidad.",
+      "bajo": "Necesita fortalecer significativamente su capacidad de toma de decisiones, evaluación de consecuencias y responsabilidad."
+    },
+    "motivacion": {
+      "sobresaliente": "Inspira y motiva excepcionalmente al equipo. Reconoce logros, identifica fortalezas individuales y promueve el desarrollo mediante delegación efectiva y ejemplo personal.",
+      "fortaleza": "Reconoce el esfuerzo del equipo, delega apropiadamente y transmite energía positiva. Predica con el ejemplo.",
+      "medio": "Motiva básicamente pero puede mejorar en reconocimiento sistemático, delegación para desarrollo y transmisión de entusiasmo.",
+      "desarrollo": "Requiere fortalecer habilidades de reconocimiento, identificación de fortalezas individuales y delegación para el crecimiento del equipo.",
+      "bajo": "Necesita desarrollar capacidad para motivar, reconocer logros y promover el desarrollo del equipo mediante delegación y ejemplo."
+    },
+    "conflictos": {
+      "sobresaliente": "Gestiona conflictos de manera excepcional, promoviendo el diálogo constructivo y manteniendo la calma. Logra acuerdos que fortalecen la colaboración sin afectar la productividad.",
+      "fortaleza": "Enfrenta conflictos directamente buscando soluciones equilibradas. Promueve el diálogo y mantiene el control emocional.",
+      "medio": "Maneja conflictos básicamente pero puede mejorar en confrontación directa, promoción del diálogo y mantenimiento de la calma.",
+      "desarrollo": "Requiere desarrollar estrategias para enfrentar conflictos de manera constructiva, promover el diálogo y evitar impactos en la productividad.",
+      "bajo": "Necesita fortalecer significativamente su capacidad para gestionar conflictos, mantener la calma y promover soluciones colaborativas."
+    },
+    "resiliencia": {
+      "sobresaliente": "Excelente control emocional y capacidad de recuperación. Recibe críticas con apertura y transmite serenidad en momentos difíciles. Busca soluciones constructivas ante contratiempos.",
+      "fortaleza": "Mantiene control emocional bajo presión, se recupera rápidamente y transmite contención en momentos de incertidumbre.",
+      "medio": "Gestiona emociones básicamente pero puede mejorar en recuperación rápida, apertura a críticas y transmisión de serenidad.",
+      "desarrollo": "Requiere fortalecer control emocional, capacidad de recuperación y habilidad para transmitir calma en situaciones desafiantes.",
+      "bajo": "Necesita desarrollar resiliencia emocional, capacidad de recuperación ante adversidades y manejo constructivo de errores."
+    },
+    "innovacion": {
+      "sobresaliente": "Alta capacidad de innovación y adaptación al cambio. Propone ideas nuevas, motiva la participación del equipo y valora la creatividad e iniciativa.",
+      "fortaleza": "Propone mejoras, se adapta a cambios y valora las ideas del equipo. Prueba nuevos enfoques cuando es necesario.",
+      "medio": "Innova básicamente pero puede mejorar en propuesta proactiva de ideas, motivación de la participación y apertura al cambio.",
+      "desarrollo": "Requiere desarrollar pensamiento innovador, apertura al cambio y capacidad para motivar ideas y sugerencias del equipo.",
+      "bajo": "Necesita fortalecer significativamente su capacidad de innovación, adaptación al cambio y valoración de la creatividad del equipo."
+    },
+    "autogestion": {
+      "sobresaliente": "Excelente organización y gestión del tiempo. Define prioridades claras, cumple compromisos y mantiene seguimiento constante de objetivos. Busca mejora continua.",
+      "fortaleza": "Organiza efectivamente tareas según prioridades, cumple plazos y mantiene seguimiento de resultados. Busca mejorar continuamente.",
+      "medio": "Organiza básicamente pero puede mejorar en establecimiento de prioridades, cumplimiento de plazos y seguimiento sistemático.",
+      "desarrollo": "Requiere fortalecer capacidades de organización, gestión del tiempo, establecimiento de prioridades y seguimiento de objetivos.",
+      "bajo": "Necesita desarrollar habilidades fundamentales de autogestión, organización, establecimiento de prioridades y seguimiento de resultados."
+    }
+  }
+}

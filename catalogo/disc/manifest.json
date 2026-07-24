@@ -1,0 +1,16 @@
+{
+  "id": "disc",
+  "nombre": "Test DISC Profesional",
+  "codigo": "DISC-CLEAVER",
+  "descripcion": "Perfil conductual DISC (modelo de W. M. Marston, Método Cleaver): 28 grupos de 4 características donde el evaluado elige la que MÁS y la que MENOS lo describe. Determina el estilo D/I/S/C, el patrón conductual, el perfil natural vs. bajo presión y la consistencia.",
+  "categoria": "personalidad",
+  "version": "1.0",
+  "n_items": 28,
+  "_n_items_nota": "28 grupos; cada uno con 2 respuestas (MÁS + MENOS). Elección forzada (ipsativo).",
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "eleccion_forzada_mas_menos",
+  "dimensiones": ["D", "I", "S", "C"],
+  "scoring": "scoring.py",
+  "archivos": { "preguntas": "preguntas.json" },
+  "estado": "completo"
+}

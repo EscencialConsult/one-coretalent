@@ -1,0 +1,44 @@
+{
+  "_fuente": "Test11/index.html · questions[] (24 ítems) + Test11/script.gs · calcularDimensiones (agrupación por índice base-0)",
+  "_descripcion": "24 ítems en escala de frecuencia 1-5 (1=Nunca ... 5=Siempre). NO hay ítems inversos. Cada dimensión agrupa 4 ítems consecutivos (índices base-0 según el .gs). El promedio de dimensión = suma de sus 4 ítems / 4.",
+  "escala": {
+    "5": "Siempre",
+    "4": "Frecuentemente",
+    "3": "A veces",
+    "2": "Rara vez",
+    "1": "Nunca"
+  },
+  "_escala_opciones_front": [
+    { "text": "🔵 Siempre", "value": 5 },
+    { "text": "🟢 Frecuentemente", "value": 4 },
+    { "text": "🟡 A veces", "value": 3 },
+    { "text": "🟠 Rara vez", "value": 2 },
+    { "text": "🔴 Nunca", "value": 1 }
+  ],
+  "items": [
+    { "id": 1, "indice": 0, "dimension": "autopercepcion_autoestima", "text": "Reconozco mis fortalezas y las utilizo conscientemente." },
+    { "id": 2, "indice": 1, "dimension": "autopercepcion_autoestima", "text": "Confío en mis capacidades para enfrentar desafíos." },
+    { "id": 3, "indice": 2, "dimension": "autopercepcion_autoestima", "text": "Acepto mis errores como parte de mi aprendizaje." },
+    { "id": 4, "indice": 3, "dimension": "autopercepcion_autoestima", "text": "Me siento valorado/a por quién soy." },
+    { "id": 5, "indice": 4, "dimension": "motivacion_proposito", "text": "Siento que mi vida tiene un propósito claro." },
+    { "id": 6, "indice": 5, "dimension": "motivacion_proposito", "text": "Tengo metas personales que me motivan." },
+    { "id": 7, "indice": 6, "dimension": "motivacion_proposito", "text": "Disfruto aprender cosas nuevas." },
+    { "id": 8, "indice": 7, "dimension": "motivacion_proposito", "text": "Cuando enfrento obstáculos, mantengo mi motivación." },
+    { "id": 9, "indice": 8, "dimension": "adaptabilidad_emocional", "text": "Mantengo la calma en situaciones de estrés." },
+    { "id": 10, "indice": 9, "dimension": "adaptabilidad_emocional", "text": "Me adapto fácilmente a cambios imprevistos." },
+    { "id": 11, "indice": 10, "dimension": "adaptabilidad_emocional", "text": "Busco soluciones constructivas ante problemas." },
+    { "id": 12, "indice": 11, "dimension": "adaptabilidad_emocional", "text": "Me recupero rápidamente de situaciones difíciles." },
+    { "id": 13, "indice": 12, "dimension": "relaciones_empatia", "text": "Escucho activamente las necesidades de los demás." },
+    { "id": 14, "indice": 13, "dimension": "relaciones_empatia", "text": "Comprendo perspectivas diferentes a la mía." },
+    { "id": 15, "indice": 14, "dimension": "relaciones_empatia", "text": "Mantengo relaciones saludables y equilibradas." },
+    { "id": 16, "indice": 15, "dimension": "relaciones_empatia", "text": "Ofrezco apoyo emocional cuando otros lo necesitan." },
+    { "id": 17, "indice": 16, "dimension": "bienestar_equilibrio", "text": "Mantengo un equilibrio entre vida personal y responsabilidades." },
+    { "id": 18, "indice": 17, "dimension": "bienestar_equilibrio", "text": "Dedico tiempo a actividades que me recargan." },
+    { "id": 19, "indice": 18, "dimension": "bienestar_equilibrio", "text": "Reconozco cuándo necesito descansar." },
+    { "id": 20, "indice": 19, "dimension": "bienestar_equilibrio", "text": "Priorizo mi bienestar sin sentir culpa." },
+    { "id": 21, "indice": 20, "dimension": "crecimiento_personal", "text": "Aprendo de mis experiencias pasadas." },
+    { "id": 22, "indice": 21, "dimension": "crecimiento_personal", "text": "Reflexiono sobre mis decisiones regularmente." },
+    { "id": 23, "indice": 22, "dimension": "crecimiento_personal", "text": "Estoy abierto/a a recibir feedback constructivo." },
+    { "id": 24, "indice": 23, "dimension": "crecimiento_personal", "text": "Siento que estoy creciendo como persona." }
+  ]
+}

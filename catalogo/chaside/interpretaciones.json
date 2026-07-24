@@ -1,0 +1,85 @@
+{
+  "_fuente": "Test7/script.gs · AREAS + TEXTOS_INTERPRETACION + COMBINACIONES_PROFESIONES",
+  "_descripcion": "Contenido aprobado, portado fielmente. 'areas' define nombre, descripción, aptitudes y profesiones por letra. 'por_nivel' da el texto interpretativo según el nivel calculado (MUY_ALTO..MUY_BAJO). 'combinaciones' sugiere profesiones según el código de las 2 áreas dominantes (clave = letras ordenadas alfabéticamente unidas por '-').",
+  "areas": {
+    "C": {
+      "nombre": "ADMINISTRATIVAS Y CONTABLES",
+      "letra": "C",
+      "descripcion": "Interés por actividades que implican organización, supervisión, orden, análisis, cálculo, precisión y responsabilidad en el manejo de datos y recursos.",
+      "aptitudes": ["Organizativo", "Supervisión", "Orden", "Análisis y síntesis", "Colaboración", "Cálculo", "Persuasivo", "Objetivo", "Práctico", "Tolerante", "Responsable", "Ambicioso", "Precisión", "Verbal", "Organización", "Relación de Hechos"],
+      "profesiones": ["Contador Público", "Administrador de Empresas", "Licenciado en Economía", "Licenciado en Comercio Exterior", "Analista de Sistemas Administrativos", "Técnico en Marketing", "Licenciado en Recursos Humanos", "Actuario", "Auditor", "Gerente Comercial", "Asesor Financiero"]
+    },
+    "H": {
+      "nombre": "HUMANÍSTICAS Y SOCIALES",
+      "letra": "H",
+      "descripcion": "Preferencia por actividades vinculadas a la justicia, la mediación, la expresión lingüística, el análisis social, la relación de hechos históricos y la comunicación.",
+      "aptitudes": ["Lingüística", "Orden", "Justicia", "Responsable", "Justo", "Conciliador", "Persuasivo", "Sagaz", "Imaginativo"],
+      "profesiones": ["Abogado", "Licenciado en Ciencias Políticas", "Sociólogo", "Psicólogo Social", "Periodista", "Licenciado en Relaciones Internacionales", "Filósofo", "Historiador", "Profesor de Letras/Historia", "Diplomático", "Trabajador Social", "Comunicador Social"]
+    },
+    "A": {
+      "nombre": "ARTÍSTICAS",
+      "letra": "A",
+      "descripcion": "Inclinación hacia actividades creativas, estéticas, manuales y de expresión artística. Sensibilidad para lo visual, auditivo y la innovación.",
+      "aptitudes": ["Estético", "Armónico", "Manual", "Visual", "Auditivo", "Sensible", "Imaginativo", "Creativo", "Detallista", "Innovador", "Intuitivo"],
+      "profesiones": ["Diseñador Gráfico", "Arquitecto", "Diseñador de Interiores", "Diseñador Industrial", "Músico", "Actor/Actriz", "Director de Cine/Teatro", "Fotógrafo", "Artista Plástico", "Diseñador de Moda", "Publicista Creativo", "Animador Digital"]
+    },
+    "S": {
+      "nombre": "MEDICINA Y CIENCIAS DE LA SALUD",
+      "letra": "S",
+      "descripcion": "Interés por actividades de asistencia, investigación médica, cuidado de personas, solidaridad y comprensión de las necesidades del otro.",
+      "aptitudes": ["Asistir", "Investigativo", "Precisión", "Senso-Perceptivo", "Analítico", "Ayudar", "Altruista", "Solidario", "Paciente", "Comprensivo", "Respetuoso", "Persuasivo"],
+      "profesiones": ["Médico", "Enfermero/a", "Odontólogo", "Farmacéutico", "Kinesiólogo", "Nutricionista", "Psicólogo Clínico", "Bioquímico", "Veterinario", "Fonoaudiólogo", "Terapeuta Ocupacional", "Instrumentador Quirúrgico"]
+    },
+    "I": {
+      "nombre": "INGENIERÍA Y COMPUTACIÓN",
+      "letra": "I",
+      "descripcion": "Preferencia por el cálculo, la planificación, la precisión técnica, el análisis crítico y el trabajo con tecnología y sistemas.",
+      "aptitudes": ["Cálculo", "Científico", "Manual", "Exacto", "Planificar", "Preciso", "Práctico", "Crítico", "Analítico"],
+      "profesiones": ["Ingeniero Civil", "Ingeniero en Sistemas", "Ingeniero Electrónico", "Ingeniero Industrial", "Ingeniero Mecánico", "Programador", "Analista de Sistemas", "Técnico en Redes", "Ingeniero Químico", "Desarrollador de Software", "Ingeniero en Telecomunicaciones"]
+    },
+    "D": {
+      "nombre": "DEFENSA Y SEGURIDAD",
+      "letra": "D",
+      "descripcion": "Inclinación por actividades que implican justicia, equidad, liderazgo, trabajo en equipo, valentía y acción en situaciones de riesgo.",
+      "aptitudes": ["Rígido", "Justicia", "Equidad", "Colaboración", "Espíritu de Equipo", "Liderazgo", "Arriesgado", "Solidario", "Valiente", "Agresivo", "Persuasivo"],
+      "profesiones": ["Oficial de las Fuerzas Armadas", "Oficial de Policía", "Licenciado en Seguridad", "Bombero Profesional", "Piloto Aviador", "Oficial de Marina", "Criminalista", "Perito Forense", "Guardavidas", "Defensa Civil", "Licenciado en Seguridad e Higiene"]
+    },
+    "E": {
+      "nombre": "CIENCIAS EXACTAS Y AGRARIAS",
+      "letra": "E",
+      "descripcion": "Interés por la investigación, la observación metódica, el análisis numérico, la clasificación y el contacto con la naturaleza y los fenómenos naturales.",
+      "aptitudes": ["Investigación", "Orden", "Organización", "Análisis y Síntesis", "Numérico", "Clasificar", "Metódico", "Analítico", "Observador", "Introvertido", "Paciente", "Seguro"],
+      "profesiones": ["Ingeniero Agrónomo", "Biólogo", "Químico", "Físico", "Matemático", "Geólogo", "Licenciado en Ciencias Ambientales", "Meteorólogo", "Astrónomo", "Oceanógrafo", "Ingeniero en Alimentos", "Técnico Agropecuario"]
+    }
+  },
+  "por_nivel": {
+    "MUY_ALTO": { "rango": "12-14", "descripcion": "Interés muy marcado y definido. Esta área representa una fuerte inclinación vocacional que debería considerarse prioritaria en la orientación profesional." },
+    "ALTO": { "rango": "9-11", "descripcion": "Interés significativo. Esta área debería explorarse como posible campo de desarrollo profesional." },
+    "PROMEDIO": { "rango": "5-8", "descripcion": "Interés dentro del rango esperado. No representa una preferencia distintiva ni rechazo." },
+    "BAJO": { "rango": "2-4", "descripcion": "Interés por debajo del promedio. Esta área probablemente no representa una vocación primaria." },
+    "MUY_BAJO": { "rango": "0-1", "descripcion": "Escaso interés en esta área. Se recomienda evitar profesiones que dependan principalmente de estas actividades." }
+  },
+  "combinaciones": {
+    "C-H": ["Abogado Corporativo", "Licenciado en Relaciones Laborales", "Mediador", "Asesor de Política Económica", "Consultor en Gestión Pública"],
+    "A-C": ["Diseñador de Moda con Gestión", "Director de Arte Publicitario", "Productor Audiovisual", "Gestor Cultural"],
+    "C-S": ["Administrador Hospitalario", "Gerente de Servicios de Salud", "Director de ONG", "Gestor en Salud Pública"],
+    "C-I": ["Ingeniero Industrial", "Analista de Sistemas de Gestión", "Project Manager de TI", "Consultor ERP"],
+    "C-D": ["Oficial de Logística Militar", "Administrador de Seguridad", "Director de Protección Civil", "Gestor de Riesgos"],
+    "C-E": ["Administrador Agropecuario", "Gerente de Empresa Alimenticia", "Economista Agrario", "Consultor Ambiental Corporativo"],
+    "A-H": ["Director de Teatro/Cine", "Periodista Cultural", "Curador de Arte", "Comunicador Social", "Gestor Cultural"],
+    "H-S": ["Psicólogo Clínico", "Trabajador Social", "Psicopedagogo", "Mediador Familiar", "Profesor de Educación Especial"],
+    "H-I": ["Ingeniero en Sistemas Sociales", "Analista de Políticas Públicas con Tecnología", "Periodista de Tecnología"],
+    "D-H": ["Abogado Penalista", "Juez", "Criminólogo", "Defensor Público", "Licenciado en Seguridad Ciudadana"],
+    "E-H": ["Antropólogo", "Arqueólogo", "Historiador de la Ciencia", "Profesor de Ciencias Naturales", "Divulgador Científico"],
+    "A-S": ["Musicoterapeuta", "Arteterapeuta", "Terapeuta Ocupacional Creativo", "Diseñador de Espacios Terapéuticos"],
+    "A-I": ["Diseñador UX/UI", "Arquitecto de Software", "Animador 3D", "Diseñador Industrial", "Desarrollador de Videojuegos"],
+    "A-D": ["Director de Producciones de Acción", "Diseñador de Equipamiento Táctico", "Fotógrafo de Guerra/Documental"],
+    "A-E": ["Arquitecto Paisajista", "Fotógrafo de Naturaleza", "Diseñador de Parques y Reservas", "Ilustrador Científico"],
+    "I-S": ["Ingeniero Biomédico", "Bioinformático", "Desarrollador de Software Médico", "Técnico en Imagenología"],
+    "D-S": ["Médico de Emergencias", "Paramédico", "Médico Militar", "Enfermero de Terapia Intensiva", "Rescatista"],
+    "E-S": ["Biólogo Médico", "Bioquímico", "Investigador en Salud", "Epidemiólogo", "Farmacólogo"],
+    "D-I": ["Ingeniero en Armamento", "Piloto de Avión", "Ingeniero Naval", "Ingeniero en Telecomunicaciones Militares"],
+    "E-I": ["Ingeniero Ambiental", "Ingeniero en Alimentos", "Ingeniero Agrónomo", "Desarrollador de Tecnología Agro", "Científico de Datos"],
+    "D-E": ["Ingeniero Forestal con énfasis en Gestión", "Oficial de Guardaparques", "Bombero Forestal", "Defensa Civil Ambiental"]
+  }
+}

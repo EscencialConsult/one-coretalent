@@ -1,0 +1,107 @@
+{
+  "_descripcion": "Casos de regresión WAIS-IV. Cada caso define respuestas por parte. Modos: 'preset' usa generadores (perfecto/vacio/llenar) resueltos por test_scoring.py contra las claves; 'parte1'/'parte2' = dict id->letra explícito; 'raw' = string crudo del front. Valores esperados derivados del algoritmo del .gs (pendiente validar también contra salidas históricas reales).",
+  "casos": [
+    {
+      "nombre": "Perfecto — todas las claves correctas (rama % >= 90, CI máximo)",
+      "preset": "perfecto",
+      "esperado": {
+        "ciTotal": 154,
+        "totalCorrectas": 100,
+        "porcentajeTotal": 100,
+        "nivelCI": { "nivel": "Muy Superior" },
+        "fortaleza": { "codigo": "ICV" },
+        "debilidad": { "codigo": "IVP" },
+        "indices": {
+          "ICV": { "correctas": 25, "porcentaje": 100, "pe": 19, "rango": "Muy Superior" },
+          "IRP": { "correctas": 25, "porcentaje": 100, "pe": 19, "rango": "Muy Superior" },
+          "IMT": { "correctas": 25, "porcentaje": 100, "pe": 19, "rango": "Muy Superior" },
+          "IVP": { "correctas": 25, "porcentaje": 100, "pe": 19, "rango": "Muy Superior" }
+        }
+      }
+    },
+    {
+      "nombre": "Vacío — sin respuestas (omisión = fallo, rama % = 0, CI mínimo)",
+      "preset": "vacio",
+      "esperado": {
+        "ciTotal": 46,
+        "totalCorrectas": 0,
+        "porcentajeTotal": 0,
+        "nivelCI": { "nivel": "Muy Bajo" },
+        "fortaleza": { "codigo": "ICV" },
+        "debilidad": { "codigo": "IVP" },
+        "indices": {
+          "ICV": { "correctas": 0, "porcentaje": 0, "pe": 1, "rango": "Muy Bajo" },
+          "IRP": { "correctas": 0, "porcentaje": 0, "pe": 1, "rango": "Muy Bajo" },
+          "IMT": { "correctas": 0, "porcentaje": 0, "pe": 1, "rango": "Muy Bajo" },
+          "IVP": { "correctas": 0, "porcentaje": 0, "pe": 1, "rango": "Muy Bajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 'a' — verifica desempate de fortaleza por orden de inserción (IMT gana)",
+      "fill_parte1": "a",
+      "fill_parte2": "a",
+      "esperado": {
+        "ciTotal": 51,
+        "totalCorrectas": 11,
+        "porcentajeTotal": 11,
+        "nivelCI": { "nivel": "Muy Bajo" },
+        "fortaleza": { "codigo": "IMT" },
+        "debilidad": { "codigo": "IVP" },
+        "indices": {
+          "ICV": { "correctas": 1, "porcentaje": 4, "pe": 1, "rango": "Muy Bajo" },
+          "IRP": { "correctas": 1, "porcentaje": 4, "pe": 1, "rango": "Muy Bajo" },
+          "IMT": { "correctas": 8, "porcentaje": 32, "pe": 4, "rango": "Límite" },
+          "IVP": { "correctas": 1, "porcentaje": 4, "pe": 1, "rango": "Muy Bajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Solo ICV perfecto, resto nulo (CI Límite = 73)",
+      "preset": "solo_icv",
+      "esperado": {
+        "ciTotal": 73,
+        "totalCorrectas": 25,
+        "porcentajeTotal": 25,
+        "nivelCI": { "nivel": "Límite" },
+        "fortaleza": { "codigo": "ICV" },
+        "debilidad": { "codigo": "IVP" },
+        "indices": {
+          "ICV": { "correctas": 25, "porcentaje": 100, "pe": 19, "rango": "Muy Superior" },
+          "IRP": { "correctas": 0, "porcentaje": 0, "pe": 1, "rango": "Muy Bajo" },
+          "IMT": { "correctas": 0, "porcentaje": 0, "pe": 1, "rango": "Muy Bajo" },
+          "IVP": { "correctas": 0, "porcentaje": 0, "pe": 1, "rango": "Muy Bajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Mixto — distintos tramos por índice (verifica half-up en CI: 95.5 -> 96)",
+      "preset": "mixto",
+      "esperado": {
+        "ciTotal": 96,
+        "totalCorrectas": 50,
+        "porcentajeTotal": 50,
+        "nivelCI": { "nivel": "Promedio" },
+        "fortaleza": { "codigo": "IRP" },
+        "debilidad": { "codigo": "IVP" },
+        "indices": {
+          "ICV": { "correctas": 15, "porcentaje": 60, "pe": 10, "rango": "Promedio" },
+          "IRP": { "correctas": 20, "porcentaje": 80, "pe": 16, "rango": "Superior" },
+          "IMT": { "correctas": 10, "porcentaje": 40, "pe": 7, "rango": "Promedio Bajo" },
+          "IVP": { "correctas": 5, "porcentaje": 20, "pe": 4, "rango": "Límite" }
+        }
+      }
+    },
+    {
+      "nombre": "String crudo del front — parsea tiempos y respuestas perfectas",
+      "raw_perfecto": true,
+      "esperado": {
+        "ciTotal": 154,
+        "totalCorrectas": 100,
+        "nivelCI": { "nivel": "Muy Superior" },
+        "tiempoParte1": "0m 55s",
+        "tiempoParte2": "1m 11s"
+      }
+    }
+  ]
+}

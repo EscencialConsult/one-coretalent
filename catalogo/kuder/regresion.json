@@ -1,0 +1,73 @@
+{
+  "_descripcion": "Casos de regresión para el Test de Kuder. Valores esperados derivados del algoritmo del .gs (Test2/script.gs), verificados con una reimplementación independiente del .gs (no de scoring.py). Construcción de input: 'patron' aplica {mas,menos} a TODAS las 165 tríadas; 'segmentos' aplica distintos {mas,menos} por rango [desde,hasta) base-0. PD = puntajesDirectos por área (0-9); 'percentiles' y 'niveles' por área en orden 0-9. NOTA: ninguno de estos patrones constantes representa una respuesta humana real; sirven para fijar la lógica determinista del motor.",
+  "casos": [
+    {
+      "nombre": "c1 — todas mas=0, menos=1 (verificacion 165 -> INVALIDO)",
+      "patron": { "mas": 0, "menos": 1 },
+      "esperado": {
+        "puntajesDirectos": [55, 52, 4, 54, 53, 54, 3, 51, 4, 0],
+        "verificacion": 165,
+        "estadoValidez": "INVALIDO",
+        "esValido": false,
+        "codigoPerfil": "1-3",
+        "percentiles": [90, 95, 15, 95, 85, 50, 15, 50, 5, 5],
+        "niveles": ["MUY_ALTO", "MUY_ALTO", "BAJO", "MUY_ALTO", "ALTO", "PROMEDIO", "BAJO", "PROMEDIO", "BAJO", "BAJO"]
+      }
+    },
+    {
+      "nombre": "c2 — todas mas=2, menos=0 (verificacion 165 -> INVALIDO)",
+      "patron": { "mas": 2, "menos": 0 },
+      "esperado": {
+        "puntajesDirectos": [55, 0, 13, 54, 3, 5, 52, 51, 53, 44],
+        "verificacion": 165,
+        "estadoValidez": "INVALIDO",
+        "esValido": false,
+        "codigoPerfil": "0-3",
+        "percentiles": [90, 5, 35, 95, 5, 15, 50, 50, 90, 75],
+        "niveles": ["MUY_ALTO", "BAJO", "PROMEDIO_BAJO", "MUY_ALTO", "BAJO", "BAJO", "PROMEDIO", "PROMEDIO", "MUY_ALTO", "ALTO"]
+      }
+    },
+    {
+      "nombre": "c3 — todas mas=1, menos=2 (verificacion 165 -> INVALIDO)",
+      "patron": { "mas": 1, "menos": 2 },
+      "esperado": {
+        "puntajesDirectos": [0, 52, 13, 2, 54, 53, 55, 4, 53, 44],
+        "verificacion": 165,
+        "estadoValidez": "INVALIDO",
+        "esValido": false,
+        "codigoPerfil": "1-8",
+        "percentiles": [5, 95, 35, 5, 85, 50, 50, 25, 90, 75],
+        "niveles": ["BAJO", "MUY_ALTO", "PROMEDIO_BAJO", "BAJO", "ALTO", "PROMEDIO", "PROMEDIO", "PROMEDIO_BAJO", "MUY_ALTO", "ALTO"]
+      }
+    },
+    {
+      "nombre": "c4 — todas mas=menos=0 (verificacion 0 -> INVALIDO; solo cuenta el area del 'mas'=='menos' dos veces)",
+      "patron": { "mas": 0, "menos": 0 },
+      "esperado": {
+        "puntajesDirectos": [110, 0, 4, 106, 2, 6, 0, 98, 4, 0],
+        "verificacion": 0,
+        "estadoValidez": "INVALIDO",
+        "esValido": false,
+        "codigoPerfil": "0-3",
+        "percentiles": [50, 5, 15, 50, 5, 15, 5, 50, 5, 5],
+        "niveles": ["PROMEDIO", "BAJO", "BAJO", "PROMEDIO", "BAJO", "BAJO", "BAJO", "PROMEDIO", "BAJO", "BAJO"]
+      }
+    },
+    {
+      "nombre": "c5 — 35 triadas coherentes (mas=0,menos=1) + resto incoherentes (mas=menos=2) -> verificacion 35 -> VALIDO",
+      "segmentos": [
+        { "desde": 0, "hasta": 35, "mas": 0, "menos": 1 },
+        { "desde": 35, "hasta": 165, "mas": 2, "menos": 2 }
+      ],
+      "esperado": {
+        "puntajesDirectos": [12, 9, 18, 10, 10, 10, 91, 8, 90, 72],
+        "verificacion": 35,
+        "estadoValidez": "VALIDO",
+        "esValido": true,
+        "codigoPerfil": "2-9",
+        "percentiles": [25, 25, 55, 25, 15, 35, 50, 45, 50, 90],
+        "niveles": ["PROMEDIO_BAJO", "PROMEDIO_BAJO", "PROMEDIO", "PROMEDIO_BAJO", "BAJO", "PROMEDIO_BAJO", "PROMEDIO", "PROMEDIO", "PROMEDIO", "MUY_ALTO"]
+      }
+    }
+  ]
+}

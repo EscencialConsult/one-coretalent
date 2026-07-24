@@ -1,0 +1,46 @@
+{
+  "_descripcion": "Configuración del informe GDS-15. El renderizador consume la salida de scoring.py (puntuacion_total + nivel + interpretación + desglose).",
+  "titulo": "Informe — Escala de Depresión Geriátrica (GDS-15)",
+  "subtitulo": "Short Geriatric Depression Scale",
+  "secciones": [
+    {
+      "id": "puntuacion",
+      "tipo": "marcador_numerico",
+      "titulo": "Puntuación total",
+      "datos": {
+        "valor": "puntuacion_total",
+        "eje": { "min": 0, "max": 15 },
+        "badge": "badge"
+      }
+    },
+    {
+      "id": "interpretacion",
+      "tipo": "bloque_nivel",
+      "titulo": "Interpretación",
+      "datos": {
+        "encabezado": "{nombre_nivel} (puntuación {puntuacion_total}/15)",
+        "campos": [
+          { "label": "Descripción", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Recomendación", "tipo": "texto", "valor": "recomendacion" }
+        ]
+      }
+    },
+    {
+      "id": "desglose",
+      "tipo": "lista_datos",
+      "titulo": "Desglose del resultado",
+      "datos": {
+        "campos": [
+          { "label": "Preguntas respondidas (de 15)", "valor": "desglose.respondidas" },
+          { "label": "Preguntas sin responder", "valor": "desglose.sin_responder" },
+          { "label": "Respuestas indicadoras de depresión", "valor": "desglose.sintomaticas" }
+        ]
+      }
+    },
+    {
+      "id": "leyenda",
+      "tipo": "leyenda",
+      "texto": "Escala de interpretación: 0-4 Normal | 5-8 Depresión leve | 9-11 Depresión moderada | 12-15 Depresión grave. El GDS-15 es un instrumento de cribado, no diagnóstico."
+    }
+  ]
+}

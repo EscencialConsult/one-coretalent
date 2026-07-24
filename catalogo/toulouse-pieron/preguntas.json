@@ -1,0 +1,37 @@
+{
+  "_fuente": "Test13/index.html (createSymbol, initializeTest) + Test13/script.gs (CONSTANTES_TEST, analizarRespuestas)",
+  "_descripcion": "El Toulouse-Pieron no tiene 'preguntas' al estilo cuestionario. Es una prueba de cancelacion: una cuadricula de 1600 estimulos generados aleatoriamente por el front (8 tipos de simbolo). El evaluado marca los que coinciden con 2 simbolos de referencia (tambien aleatorios). Este archivo documenta el esquema de estimulos y la plantilla de correccion que reconstruye el legacy. IMPORTANTE: el legacy NO compara las marcas contra los objetivos reales (no los envia), sino que estima los aciertos. Ver ANALISIS.md.",
+  "estimulos": {
+    "total_cuadrados": 1600,
+    "cuadricula": { "filas": 40, "columnas": 40 },
+    "tipos_simbolo": 8,
+    "_tipos_simbolo_descripcion": {
+      "0": "linea horizontal",
+      "1": "linea vertical",
+      "2": "diagonal ascendente (abajo-izq a arriba-der)",
+      "3": "diagonal descendente (arriba-izq a abajo-der)",
+      "4": "cruz (vertical + horizontal)",
+      "5": "aspa (ambas diagonales)",
+      "6": "vacio (solo el borde del cuadrado)",
+      "7": "punto central"
+    },
+    "objetivos": {
+      "cantidad": 2,
+      "_nota": "2 tipos de simbolo distintos elegidos aleatoriamente por el front en cada sesion. El evaluado debe marcar todos los cuadrados que coincidan con cualquiera de los 2 objetivos."
+    }
+  },
+  "respuesta": {
+    "formato_front": "{<tiempo> - <indices>}",
+    "_formato_front_nota": "Ej: '{4m 20s - 12,45,300,899}'. Los indices son 0-based, ordenados ascendentemente. El scoring acepta tambien una lista de enteros o un string crudo 'idx,idx,...'.",
+    "indices_0_based": true
+  },
+  "plantilla_correccion": {
+    "_descripcion": "Plantilla EXACTA del legacy (analizarRespuestas en script.gs). NO usa los objetivos reales.",
+    "total_cuadrados": 1600,
+    "objetivos_esperados": 320,
+    "_objetivos_esperados_nota": "20% del total (1600 * 0.20). Es la cantidad de cuadrados que teoricamente serian objetivo.",
+    "porcentaje_objetivos": 0.20,
+    "factor_estimacion_aciertos": 0.20,
+    "_factor_estimacion_aciertos_nota": "aciertos = round(totalMarcados * 0.20). El legacy ESTIMA aciertos como el 20% de lo marcado, no por comparacion real."
+  }
+}

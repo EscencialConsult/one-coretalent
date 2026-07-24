@@ -1,0 +1,26 @@
+{
+  "nombre": "ONE Core-Talent",
+  "font": "\"Segoe UI\", -apple-system, Roboto, system-ui, sans-serif",
+  "radio": "22px",
+  "radioChico": "13px",
+  "colores": {
+    "negro": "#000000",
+    "tinta": "#1a181d",
+    "blanco": "#fefeff",
+    "rosa": "#e17bd7",
+    "cian": "#6be1e3",
+    "oro": "#e4c76a",
+    "violeta": "#4d248f",
+    "muted": "#a4a8c0",
+    "linea": "#c6c9d7",
+    "fondo": "#f4f4f7"
+  },
+  "gradiente": "linear-gradient(135deg, #e17bd7 0%, #6be1e3 100%)",
+  "sombra": "0 22px 60px -22px rgba(26,24,29,.28)",
+  "marcaDefault": {
+    "razon_social": "ONE Core-Talent",
+    "color_acento": "#4d248f",
+    "color_secundario": "#6be1e3",
+    "logo_url": null
+  }
+}

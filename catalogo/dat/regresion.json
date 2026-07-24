@@ -1,0 +1,95 @@
+{
+  "_descripcion": "Casos de regresión para DAT. Valores esperados derivados del algoritmo de Test1/script.gs (calcularResultados + generarTextosExpandidos). Formato de entrada del runner: 'psa' = nº de respuestas dadas (string crudo o entero); para VR/ORT/NR/AR/SR, 'correctas' = nº de ítems respondidos correctamente (el runner toma las primeras N claves correctas). Esto reproduce el cálculo: pct = round_half_up(correctas/total*100), total = nº de claves (VR=50, AR=50, SR=50, ORT=40, NR=40).",
+  "casos": [
+    {
+      "nombre": "Todo perfecto + PSA=50 — todos 100%, sin estilo extremo",
+      "psa": 50,
+      "correctas": { "VR": 50, "ORT": 40, "NR": 40, "AR": 50, "SR": 50 },
+      "esperado": {
+        "subtests": {
+          "PSA": { "pct": 50 },
+          "VR": { "raw": 50, "total": 50, "pct": 100, "nivel": "ALTO" },
+          "ORT": { "raw": 40, "total": 40, "pct": 100 },
+          "NR": { "raw": 40, "total": 40, "pct": 100, "nivel": "ALTO" },
+          "AR": { "raw": 50, "total": 50, "pct": 100, "nivel": "ALTO" },
+          "SR": { "raw": 50, "total": 50, "pct": 100, "nivel": "ALTO" }
+        },
+        "estilo_trabajo": "ESTANDAR",
+        "roles": ["Gestión Comercial y Negociación", "Análisis de Datos y Finanzas", "Estrategia e Innovación", "Logística y Diseño", "Control de Calidad"]
+      }
+    },
+    {
+      "nombre": "Vacío — 0% en todo, roles por defecto",
+      "psa": 0,
+      "correctas": { "VR": 0, "ORT": 0, "NR": 0, "AR": 0, "SR": 0 },
+      "esperado": {
+        "subtests": {
+          "PSA": { "pct": 0 },
+          "VR": { "raw": 0, "total": 50, "pct": 0, "nivel": "BAJO" },
+          "ORT": { "raw": 0, "total": 40, "pct": 0 },
+          "NR": { "raw": 0, "total": 40, "pct": 0, "nivel": "BAJO" },
+          "AR": { "raw": 0, "total": 50, "pct": 0, "nivel": "BAJO" },
+          "SR": { "raw": 0, "total": 50, "pct": 0, "nivel": "BAJO" }
+        },
+        "estilo_trabajo": "ESTANDAR",
+        "roles": ["Soporte Operativo General"]
+      }
+    },
+    {
+      "nombre": "Mixto half-up — 21/40=52.5 redondea a 53; cortes de nivel",
+      "psa": 30,
+      "correctas": { "VR": 35, "ORT": 18, "NR": 21, "AR": 36, "SR": 31 },
+      "esperado": {
+        "subtests": {
+          "PSA": { "pct": 30 },
+          "VR": { "raw": 35, "total": 50, "pct": 70, "nivel": "ALTO" },
+          "ORT": { "raw": 18, "total": 40, "pct": 45 },
+          "NR": { "raw": 21, "total": 40, "pct": 53, "nivel": "MEDIO" },
+          "AR": { "raw": 36, "total": 50, "pct": 72, "nivel": "ALTO" },
+          "SR": { "raw": 31, "total": 50, "pct": 62, "nivel": "MEDIO" }
+        },
+        "estilo_trabajo": "ESTANDAR",
+        "roles": ["Gestión Comercial y Negociación", "Estrategia e Innovación", "Logística y Diseño"]
+      }
+    },
+    {
+      "nombre": "Estilo DINAMICO — PSA alto (75), ORT bajo (25%)",
+      "psa": 75,
+      "correctas": { "VR": 0, "ORT": 10, "NR": 0, "AR": 0, "SR": 0 },
+      "esperado": {
+        "subtests": {
+          "PSA": { "pct": 75 },
+          "ORT": { "raw": 10, "total": 40, "pct": 25 }
+        },
+        "estilo_trabajo": "DINAMICO",
+        "roles": ["Soporte Operativo General"]
+      }
+    },
+    {
+      "nombre": "Estilo METICULOSO — PSA bajo (30), ORT alto (75%)",
+      "psa": 30,
+      "correctas": { "VR": 0, "ORT": 30, "NR": 0, "AR": 0, "SR": 0 },
+      "esperado": {
+        "subtests": {
+          "PSA": { "pct": 30 },
+          "ORT": { "raw": 30, "total": 40, "pct": 75 }
+        },
+        "estilo_trabajo": "METICULOSO",
+        "roles": ["Soporte Operativo General"]
+      }
+    },
+    {
+      "nombre": "Estilo EFICIENTE — PSA 80, ORT 100% (control de calidad)",
+      "psa": 80,
+      "correctas": { "VR": 0, "ORT": 40, "NR": 0, "AR": 0, "SR": 0 },
+      "esperado": {
+        "subtests": {
+          "PSA": { "pct": 80 },
+          "ORT": { "raw": 40, "total": 40, "pct": 100 }
+        },
+        "estilo_trabajo": "EFICIENTE",
+        "roles": ["Control de Calidad"]
+      }
+    }
+  ]
+}

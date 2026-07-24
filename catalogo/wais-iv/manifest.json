@@ -1,0 +1,33 @@
+{
+  "id": "wais-iv",
+  "nombre": "WAIS-IV",
+  "codigo": "WAIS-IV",
+  "descripcion": "Escala de Inteligencia para Adultos de Wechsler — Cuarta Edición (adaptación tipo screening de opción múltiple). Evalúa cuatro índices cognitivos: Comprensión Verbal (ICV), Razonamiento Perceptivo (IRP), Memoria de Trabajo (IMT) y Velocidad de Procesamiento (IVP), y estima un CI Total.",
+  "categoria": "inteligencia",
+  "version": "2.0",
+  "n_items": 100,
+  "_n_items_nota": "100 ítems = 50 en Parte I (ICV 1-25 + IRP 26-50) + 50 en Parte II (IMT 1-25 + IVP 26-50). Cada índice tiene 25 ítems.",
+  "tiempo_limite_min": null,
+  "_tiempo_nota": "El front mide tiempo por parte (cronómetro informativo) pero NO impone límite. Estimado mostrado al evaluado: 25-35 min.",
+  "tipo_respuesta": "opcion_multiple_abcd",
+  "_tipo_respuesta_nota": "Cada ítem tiene opciones a/b/c/d (algunos solo a/b/c). Se compara la letra elegida contra la clave correcta. Acierto = 1, fallo/omisión = 0.",
+  "indices": ["ICV", "IRP", "IMT", "IVP"],
+  "subtests": [
+    "Semejanzas", "Vocabulario", "Información", "Matrices", "Razonamiento",
+    "Dígitos", "Aritmética Mental", "Aritmética", "Búsqueda", "Codificación"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "indices (correctas, total, porcentaje, pe, rango, color, interpretacion)",
+    "ciTotal", "nivelCI", "totalCorrectas/totalPreguntas/porcentajeTotal",
+    "fortaleza", "debilidad"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo"
+}

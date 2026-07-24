@@ -1,0 +1,897 @@
+{
+  "_fuente": "Test17/index.html (textos de los 133 ítems) + Test17/script.gs (SUBESCALAS: mapeo ítem->subescala). AUTORIDAD de scoring: script.gs.",
+  "_descripcion": "Bar-On EQ-i, 133 ítems. Escala Likert de 5 puntos con VALORES 2-6 (Nunca=2, Pocas veces=3, A veces=4, Muchas veces=5, Siempre=6). El scoring NO invierte ítems por valor (no hay reverse 7-x); el manejo de ítems 'negativos' se hace por RESTA a nivel de escala (ver baremos.json itemsResta / itemsRestaCETotal). Un ítem puede pertenecer a varias subescalas (overlap del .gs, portado fielmente).",
+  "escala": {
+    "2": "Nunca",
+    "3": "Pocas veces",
+    "4": "A veces",
+    "5": "Muchas veces",
+    "6": "Siempre"
+  },
+  "rango_valor": {
+    "min": 2,
+    "max": 6
+  },
+  "n_items": 133,
+  "items": [
+    {
+      "id": 1,
+      "texto": "Para superar las dificultades que se me presentan actuó paso a paso",
+      "subescalas": [
+        "CM"
+      ]
+    },
+    {
+      "id": 2,
+      "texto": "Es duro para mi disfrutar la vida",
+      "subescalas": [
+        "FE"
+      ]
+    },
+    {
+      "id": 3,
+      "texto": "Prefiero un trabajo en el que se me diga casi todo lo que tengo que hacer",
+      "subescalas": [
+        "IN"
+      ]
+    },
+    {
+      "id": 4,
+      "texto": "Sé cómo enfrentar los problemas más desagradables",
+      "subescalas": []
+    },
+    {
+      "id": 5,
+      "texto": "Me agradan las personas que conozco",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 6,
+      "texto": "Trato de valorar y darle el mejor sentido a mi vida",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 7,
+      "texto": "Me resulta relativamente fácil expresar mis sentimientos",
+      "subescalas": [
+        "CM"
+      ]
+    },
+    {
+      "id": 8,
+      "texto": "Trato de ser realista, no me gusta fantasear ni soñar despierto",
+      "subescalas": [
+        "PR"
+      ]
+    },
+    {
+      "id": 9,
+      "texto": "Reconozco con facilidad mis emociones",
+      "subescalas": [
+        "CM"
+      ]
+    },
+    {
+      "id": 10,
+      "texto": "Soy incapaz de demostrar afecto",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 11,
+      "texto": "Me siento seguro de mí mismo en la mayoría de situaciones",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 12,
+      "texto": "Tengo la sensación que algo no está bien en mi cabeza",
+      "subescalas": []
+    },
+    {
+      "id": 13,
+      "texto": "Tengo problemas para controlarme cuando me enojo",
+      "subescalas": [
+        "TE"
+      ]
+    },
+    {
+      "id": 14,
+      "texto": "Me resulta difícil comenzar cosas nuevas",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 15,
+      "texto": "Cuando enfrento una situación difícil me gusta reunir toda la información que pueda sobre ella",
+      "subescalas": [
+        "SP"
+      ]
+    },
+    {
+      "id": 16,
+      "texto": "Me gusta ayudar a la gente",
+      "subescalas": [
+        "RS"
+      ]
+    },
+    {
+      "id": 17,
+      "texto": "Me es difícil sonreír",
+      "subescalas": []
+    },
+    {
+      "id": 18,
+      "texto": "Soy incapaz de comprender como se sienten los demás",
+      "subescalas": [
+        "EN"
+      ]
+    },
+    {
+      "id": 19,
+      "texto": "Cuando trabajo. Tiendo a confiar más en sus ideas que en las mías",
+      "subescalas": [
+        "IN"
+      ]
+    },
+    {
+      "id": 20,
+      "texto": "Creo que puedo controlarme en situaciones muy difíciles",
+      "subescalas": []
+    },
+    {
+      "id": 21,
+      "texto": "No sé para que soy bueno",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 22,
+      "texto": "Soy incapaz de expresar mis ideas",
+      "subescalas": [
+        "AS"
+      ]
+    },
+    {
+      "id": 23,
+      "texto": "Me es difícil compartir mis sentimientos más íntimos con los demás",
+      "subescalas": [
+        "AS",
+        "RI"
+      ]
+    },
+    {
+      "id": 24,
+      "texto": "Me falta confianza en mí mismo",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 25,
+      "texto": "Creo que he perdido la cabeza",
+      "subescalas": []
+    },
+    {
+      "id": 26,
+      "texto": "Soy optimista en la mayoría de las cosas que hago",
+      "subescalas": [
+        "OP"
+      ]
+    },
+    {
+      "id": 27,
+      "texto": "Cuando comienzo a hablar me resulta difícil detenerme",
+      "subescalas": []
+    },
+    {
+      "id": 28,
+      "texto": "En general, me resulta difícil adaptarme",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 29,
+      "texto": "Me gusta tener una visión general de un problema antes de intentar solucionarlo",
+      "subescalas": [
+        "SP"
+      ]
+    },
+    {
+      "id": 30,
+      "texto": "No me molesta aprovecharme de los demás, especialmente si se lo merecen",
+      "subescalas": [
+        "RS"
+      ]
+    },
+    {
+      "id": 31,
+      "texto": "Soy una persona bastante alegre y optimista",
+      "subescalas": [
+        "FE"
+      ]
+    },
+    {
+      "id": 32,
+      "texto": "Prefiero que otros tomen decisiones por mi",
+      "subescalas": [
+        "IN"
+      ]
+    },
+    {
+      "id": 33,
+      "texto": "Puedo manejar situaciones de estrés, sin ponerme demasiado nervioso",
+      "subescalas": [
+        "TE"
+      ]
+    },
+    {
+      "id": 34,
+      "texto": "Pienso bien de las personas",
+      "subescalas": [
+        "PR"
+      ]
+    },
+    {
+      "id": 35,
+      "texto": "Me es difícil entender como me siento",
+      "subescalas": [
+        "CM"
+      ]
+    },
+    {
+      "id": 36,
+      "texto": "He logrado muy poco en los últimos años",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 37,
+      "texto": "Cuando estoy enojado con alguien se lo puedo decir",
+      "subescalas": [
+        "AS"
+      ]
+    },
+    {
+      "id": 38,
+      "texto": "He tenido experiencia extrañas que no puedo explicar",
+      "subescalas": []
+    },
+    {
+      "id": 39,
+      "texto": "Me resulta fácil hacer amigos",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 40,
+      "texto": "Me tengo mucho respeto",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 41,
+      "texto": "Hago cosas muy raras",
+      "subescalas": []
+    },
+    {
+      "id": 42,
+      "texto": "Soy impulsivo y eso me trae problemas",
+      "subescalas": [
+        "CI"
+      ]
+    },
+    {
+      "id": 43,
+      "texto": "Me resulta difícil cambiar de opinión",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 44,
+      "texto": "Soy bueno para comprender los sentimientos de las personas",
+      "subescalas": [
+        "EN"
+      ]
+    },
+    {
+      "id": 45,
+      "texto": "Lo primero que hago cuando tengo un problema es detenerme a pensar",
+      "subescalas": [
+        "SP"
+      ]
+    },
+    {
+      "id": 46,
+      "texto": "A la gente de resulta difícil confiar en mi",
+      "subescalas": [
+        "RS"
+      ]
+    },
+    {
+      "id": 47,
+      "texto": "Estoy contento con mi vida",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 48,
+      "texto": "Me resulta difícil tomar decisiones por mi mismo",
+      "subescalas": [
+        "IN"
+      ]
+    },
+    {
+      "id": 49,
+      "texto": "No puedo soportar el estrés",
+      "subescalas": [
+        "TE"
+      ]
+    },
+    {
+      "id": 50,
+      "texto": "No hago nada malo en mi vida",
+      "subescalas": []
+    },
+    {
+      "id": 51,
+      "texto": "No disfruto lo que hago",
+      "subescalas": [
+        "FE"
+      ]
+    },
+    {
+      "id": 52,
+      "texto": "Me resulta difícil expresar mis sentimientos más íntimos",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 53,
+      "texto": "La gente no comprende mi manera de pensar",
+      "subescalas": [
+        "PR"
+      ]
+    },
+    {
+      "id": 54,
+      "texto": "Generalmente espero lo mejor",
+      "subescalas": [
+        "OP"
+      ]
+    },
+    {
+      "id": 55,
+      "texto": "Mis amigos me confían sus intimidades",
+      "subescalas": [
+        "RS"
+      ]
+    },
+    {
+      "id": 56,
+      "texto": "No me siento bien conmigo mismo",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 57,
+      "texto": "Percibo cosas extrañas que los demás no ven",
+      "subescalas": []
+    },
+    {
+      "id": 58,
+      "texto": "La gente me dice que baje el tono de voz cuando discuto",
+      "subescalas": [
+        "CI"
+      ]
+    },
+    {
+      "id": 59,
+      "texto": "Me resulta fácil adaptarme a situaciones nuevas",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 60,
+      "texto": "Cuando intento resolver un problema analizo todas las posibles soluciones y luego escojo la que considero mejor",
+      "subescalas": [
+        "SP"
+      ]
+    },
+    {
+      "id": 61,
+      "texto": "Me detendría y ayudaría a un niño que llora por encontrar a sus padres, aun cuando tuviese algo que hacer en ese momento",
+      "subescalas": [
+        "RS"
+      ]
+    },
+    {
+      "id": 62,
+      "texto": "Soy una persona divertida",
+      "subescalas": [
+        "FE"
+      ]
+    },
+    {
+      "id": 63,
+      "texto": "Soy consciente de cómo me siento",
+      "subescalas": [
+        "CM"
+      ]
+    },
+    {
+      "id": 64,
+      "texto": "Siento que me resulta difícil controlar mi ansiedad",
+      "subescalas": [
+        "TE"
+      ]
+    },
+    {
+      "id": 65,
+      "texto": "Nada me perturba",
+      "subescalas": []
+    },
+    {
+      "id": 66,
+      "texto": "No me entusiasman mucho mis intereses",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 67,
+      "texto": "Cuando estoy en desacuerdo con alguien soy capaz de decírselo",
+      "subescalas": [
+        "AS"
+      ]
+    },
+    {
+      "id": 68,
+      "texto": "Tengo tendencia a fantasear y a perder el contacto con lo que ocurre a mi alrededor",
+      "subescalas": []
+    },
+    {
+      "id": 69,
+      "texto": "Me es difícil llevarme con los demás",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 70,
+      "texto": "Me resulta difícil aceptarme como soy",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 71,
+      "texto": "Me siento como si estuviera separado de mi cuerpo",
+      "subescalas": []
+    },
+    {
+      "id": 72,
+      "texto": "Me importa lo que puede sucederle a los demás",
+      "subescalas": [
+        "EN"
+      ]
+    },
+    {
+      "id": 73,
+      "texto": "Soy impaciente",
+      "subescalas": [
+        "CI"
+      ]
+    },
+    {
+      "id": 74,
+      "texto": "Puedo cambiar mis viejas costumbres",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 75,
+      "texto": "Me resulta difícil escoger la mejor solución cuando tengo que resolver un problema",
+      "subescalas": [
+        "SP"
+      ]
+    },
+    {
+      "id": 76,
+      "texto": "Si pudiera violar la ley sin pagar las consecuencias, lo haría en determinadas situaciones",
+      "subescalas": []
+    },
+    {
+      "id": 77,
+      "texto": "Me deprimo",
+      "subescalas": [
+        "FE"
+      ]
+    },
+    {
+      "id": 78,
+      "texto": "Sé cómo mantener la calma en situaciones difíciles",
+      "subescalas": []
+    },
+    {
+      "id": 79,
+      "texto": "Yo no mentido en mi vida",
+      "subescalas": []
+    },
+    {
+      "id": 80,
+      "texto": "En general me siento motivado para continuar adelante, incluso cuando las cosas se ponen difíciles",
+      "subescalas": [
+        "OP"
+      ]
+    },
+    {
+      "id": 81,
+      "texto": "Trato de continuar y desarrollar aquellas cosas que me divierten",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 82,
+      "texto": "Me resulta difícil decir “no” aunque tenga el deseo de hacerlo",
+      "subescalas": [
+        "IN"
+      ]
+    },
+    {
+      "id": 83,
+      "texto": "Me dejo llevar por mis imaginación y mis fantasías",
+      "subescalas": [
+        "PR"
+      ]
+    },
+    {
+      "id": 84,
+      "texto": "Mis relaciones más cercanas significan mucho, tanto para mí como para mis amigos",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 85,
+      "texto": "Me siento feliz con el tipo de persona que soy",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 86,
+      "texto": "Tengo reacciones fuertes, intensas que son difíciles de controlar",
+      "subescalas": [
+        "TE",
+        "CI"
+      ]
+    },
+    {
+      "id": 87,
+      "texto": "En general, me resulta difícil realizar cambien en mi vida cotidiana",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 88,
+      "texto": "Soy consciente de lo que me está pasando, aun cuando estoy alterado",
+      "subescalas": [
+        "CM"
+      ]
+    },
+    {
+      "id": 89,
+      "texto": "Para poder resolver una situación que se presenta, analizo todas las posibilidades existentes",
+      "subescalas": [
+        "SP"
+      ]
+    },
+    {
+      "id": 90,
+      "texto": "Soy capaz de respetar a los demás",
+      "subescalas": [
+        "RS"
+      ]
+    },
+    {
+      "id": 91,
+      "texto": "No estoy muy contento con mi vida",
+      "subescalas": [
+        "FE"
+      ]
+    },
+    {
+      "id": 92,
+      "texto": "Prefiero seguir otros que ser líder",
+      "subescalas": []
+    },
+    {
+      "id": 93,
+      "texto": "Me resulta difícil enfrentar las cosas desagradables de la vida",
+      "subescalas": []
+    },
+    {
+      "id": 94,
+      "texto": "Yo no he violado ningún tipo de ley",
+      "subescalas": []
+    },
+    {
+      "id": 95,
+      "texto": "Disfruto de las cosas que me interesan",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 96,
+      "texto": "Me resulta relativamente difícil decirle a la gente lo que pienso",
+      "subescalas": [
+        "AS"
+      ]
+    },
+    {
+      "id": 97,
+      "texto": "Tiendo a exagerar",
+      "subescalas": [
+        "PR"
+      ]
+    },
+    {
+      "id": 98,
+      "texto": "Soy sensible a los sentimientos de las personas",
+      "subescalas": [
+        "EN"
+      ]
+    },
+    {
+      "id": 99,
+      "texto": "Mantengo buenas relaciones con los demás",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 100,
+      "texto": "Estoy contento con mi cuerpo",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 101,
+      "texto": "Soy una persona muy extraña",
+      "subescalas": []
+    },
+    {
+      "id": 102,
+      "texto": "Soy impulsivo",
+      "subescalas": [
+        "CI"
+      ]
+    },
+    {
+      "id": 103,
+      "texto": "Me resulta difícil cambiar mis costumbres",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 104,
+      "texto": "Considero que es muy importante ser un ciudadano que respeta la ley",
+      "subescalas": []
+    },
+    {
+      "id": 105,
+      "texto": "Disfruto las vacaciones y los fines de semana",
+      "subescalas": [
+        "FE"
+      ]
+    },
+    {
+      "id": 106,
+      "texto": "En general tengo una actitud positiva para todos, aun cuando surgen problemas",
+      "subescalas": [
+        "OP"
+      ]
+    },
+    {
+      "id": 107,
+      "texto": "Tengo tendencia a depender de otros",
+      "subescalas": [
+        "IN"
+      ]
+    },
+    {
+      "id": 108,
+      "texto": "Creo en mi capacidad para manejar los problemas más difíciles",
+      "subescalas": []
+    },
+    {
+      "id": 109,
+      "texto": "No me siento avergonzado por nada de lo que haya hecho",
+      "subescalas": []
+    },
+    {
+      "id": 110,
+      "texto": "Trato de aprovechar al máximo las cosas que me gustan y me divierten",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 111,
+      "texto": "Los demás piensan que no me hago valor, que me falta firmeza",
+      "subescalas": [
+        "AS"
+      ]
+    },
+    {
+      "id": 112,
+      "texto": "Soy capaz de dejar de fantasear para volver a ponerme en contacto con la realidad",
+      "subescalas": [
+        "CM",
+        "PR"
+      ]
+    },
+    {
+      "id": 113,
+      "texto": "Los demás opinan que soy una persona sociable",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 114,
+      "texto": "Estoy contento con la forma en que me veo",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 115,
+      "texto": "Tengo pensamientos extraños que los demás no logran entender",
+      "subescalas": []
+    },
+    {
+      "id": 116,
+      "texto": "Me es difícil describir lo que siento",
+      "subescalas": [
+        "CM"
+      ]
+    },
+    {
+      "id": 117,
+      "texto": "Tengo mal carácter",
+      "subescalas": [
+        "CI"
+      ]
+    },
+    {
+      "id": 118,
+      "texto": "Por lo general, me trabo cuando pienso acerca de las diferentes maneras de resolver un problema",
+      "subescalas": [
+        "SP"
+      ]
+    },
+    {
+      "id": 119,
+      "texto": "Me es difícil ver sufrir a la gente",
+      "subescalas": [
+        "RS",
+        "EN"
+      ]
+    },
+    {
+      "id": 120,
+      "texto": "Me gusta divertirme",
+      "subescalas": []
+    },
+    {
+      "id": 121,
+      "texto": "Me parece que necesito de los demás más de lo que ellos me necesitan",
+      "subescalas": [
+        "IN"
+      ]
+    },
+    {
+      "id": 122,
+      "texto": "Me pongo ansioso",
+      "subescalas": [
+        "TE"
+      ]
+    },
+    {
+      "id": 123,
+      "texto": "Yo no tengo días malos",
+      "subescalas": []
+    },
+    {
+      "id": 124,
+      "texto": "Intento no herir los sentimientos de los demás",
+      "subescalas": [
+        "RS"
+      ]
+    },
+    {
+      "id": 125,
+      "texto": "No tengo una buena idea de lo que quiero en la vida",
+      "subescalas": [
+        "AR"
+      ]
+    },
+    {
+      "id": 126,
+      "texto": "Me es difícil hacer valer mis derechos",
+      "subescalas": [
+        "AS"
+      ]
+    },
+    {
+      "id": 127,
+      "texto": "Es duro para mi ser realista",
+      "subescalas": [
+        "PR"
+      ]
+    },
+    {
+      "id": 128,
+      "texto": "No mantengo relación con mis amistades",
+      "subescalas": [
+        "RI"
+      ]
+    },
+    {
+      "id": 129,
+      "texto": "Haciendo un balance de mis puntos positivos y negativos me siento bien conmigo mismo",
+      "subescalas": [
+        "AC"
+      ]
+    },
+    {
+      "id": 130,
+      "texto": "Tengo una tendencia a explotar de cólera fácilmente",
+      "subescalas": [
+        "CI"
+      ]
+    },
+    {
+      "id": 131,
+      "texto": "Si me viera obligado a dejar mi casa actual, me sería difícil adaptarme nuevamente",
+      "subescalas": [
+        "FL"
+      ]
+    },
+    {
+      "id": 132,
+      "texto": "En general, cuando comienzo algo nuevo tengo la sensación que voy a fracasar",
+      "subescalas": []
+    },
+    {
+      "id": 133,
+      "texto": "He respondido sincera y honestamente las frases anteriores",
+      "subescalas": []
+    }
+  ]
+}

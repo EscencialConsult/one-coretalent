@@ -1,0 +1,20 @@
+{
+  "_fuente": "Test14/script.gs · CAD_INFO.notaInterpretacion",
+  "_estado": "NO HAY BAREMOS OFICIALES",
+  "_descripcion": "El CAD (Soriano y Monsalve) NO establece puntos de corte ni baremos poblacionales. Ni el front (script.js) ni el back (script.gs) aplican ninguna tabla de percentiles o niveles. La comparación es ipsativa: entre las escalas del MISMO perfil (qué estrategia usa más / menos el evaluado), usando el promedio normalizado (avg, 0-4) para comparar escalas con distinto número de ítems.",
+  "nota_oficial": "El CAD no establece puntos de corte oficiales. Las comparaciones se realizan entre escalas del mismo perfil. La puntuación normalizada (0 a 4) facilita comparar escalas con distinto número de ítems.",
+  "rangos_por_escala": {
+    "_descripcion": "Rango teórico de puntaje total por escala (n_items * 0 .. n_items * 4). Informativo; no es un baremo.",
+    "Religión": { "n": 5, "min": 0, "max": 20 },
+    "Catarsis": { "n": 5, "min": 0, "max": 20 },
+    "Distracción": { "n": 6, "min": 0, "max": 24 },
+    "Autocontrol mental": { "n": 5, "min": 0, "max": 20 },
+    "Autoafirmación": { "n": 5, "min": 0, "max": 20 },
+    "Búsqueda de información": { "n": 5, "min": 0, "max": 20 }
+  },
+  "comparacion": {
+    "metodo": "ipsativo",
+    "metrica": "avg (promedio normalizado por ítem, rango 0-4)",
+    "ranking": "top 2 escalas con mayor avg (estrategias predominantes) y bottom 2 con menor avg (estrategias menos usadas)"
+  }
+}

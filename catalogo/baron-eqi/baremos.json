@@ -1,0 +1,72 @@
+{
+  "_fuente": "Test17/script.gs · SUBESCALAS, ESCALAS_COMPUESTAS, ITEMS_RESTA_CE_TOTAL, clasificarNivel. AUTORIDAD del scoring.",
+  "_descripcion": "Bar-On EQ-i no usa baremos poblacionales (tablas puntaje->percentil). El 'puntaje' de cada escala es un PORCENTAJE de normalización interna 0-100: pct = ((suma - min) / (max - min)) * 100, con min = nItems*2 y max = nItems*6 (escala 2-6). El nivel se clasifica por umbrales sobre ese porcentaje (sin redondear). Aquí se documentan las estructuras y constantes que el .gs usa como 'baremo'.",
+
+  "escala_respuesta": { "min": 2, "max": 6 },
+
+  "subescalas": {
+    "_orden_salida": ["CM", "AS", "AC", "AR", "IN", "RI", "RS", "EN", "SP", "PR", "FL", "TE", "CI", "FE", "OP"],
+    "CM": { "nombre": "Comprensión de Sí Mismo", "items": [1, 7, 9, 35, 63, 88, 112, 116] },
+    "AS": { "nombre": "Asertividad", "items": [22, 23, 37, 67, 96, 111, 126] },
+    "AC": { "nombre": "Autoconcepto", "items": [11, 24, 40, 56, 70, 85, 100, 114, 129] },
+    "AR": { "nombre": "Autorrealización", "items": [6, 21, 36, 47, 66, 81, 95, 110, 125] },
+    "IN": { "nombre": "Independencia", "items": [3, 19, 32, 48, 82, 107, 121] },
+    "RI": { "nombre": "Relaciones Interpersonales", "items": [5, 10, 23, 39, 52, 69, 84, 99, 113, 128] },
+    "RS": { "nombre": "Responsabilidad Social", "items": [16, 30, 46, 55, 61, 90, 119, 124] },
+    "EN": { "nombre": "Empatía", "items": [18, 44, 72, 98, 119] },
+    "SP": { "nombre": "Solución de Problemas", "items": [15, 29, 45, 60, 75, 89, 118] },
+    "PR": { "nombre": "Prueba de la Realidad", "items": [8, 34, 53, 83, 97, 112, 127] },
+    "FL": { "nombre": "Flexibilidad", "items": [14, 28, 43, 59, 74, 87, 103, 131] },
+    "TE": { "nombre": "Tolerancia al Estrés", "items": [13, 33, 49, 64, 86, 122] },
+    "CI": { "nombre": "Control de Impulsos", "items": [42, 58, 73, 86, 102, 117, 130] },
+    "FE": { "nombre": "Felicidad", "items": [2, 31, 51, 62, 77, 91, 105] },
+    "OP": { "nombre": "Optimismo", "items": [26, 54, 80, 106] }
+  },
+
+  "escalas_compuestas": {
+    "_orden_salida": ["CEIA", "CEIE", "CEAD", "CEME", "CEAG"],
+    "CEIA": {
+      "nombre": "Componente Intrapersonal",
+      "descripcion": "Capacidad de reconocer y expresar emociones propias",
+      "subescalas": ["CM", "AS", "AC", "AR", "IN"]
+    },
+    "CEIE": {
+      "nombre": "Componente Interpersonal",
+      "descripcion": "Habilidades sociales y relacionales",
+      "subescalas": ["RI", "RS", "EN"],
+      "itemsResta": [55, 61, 72, 98, 119]
+    },
+    "CEAD": {
+      "nombre": "Componente de Adaptabilidad",
+      "descripcion": "Flexibilidad y ajuste a cambios",
+      "subescalas": ["SP", "PR", "FL"]
+    },
+    "CEME": {
+      "nombre": "Componente de Manejo del Estrés",
+      "descripcion": "Tolerancia a la presión y control emocional",
+      "subescalas": ["TE", "CI"]
+    },
+    "CEAG": {
+      "nombre": "Componente de Estado de Ánimo General",
+      "descripcion": "Bienestar y actitud positiva",
+      "subescalas": ["FE", "OP"]
+    }
+  },
+
+  "ce_total": {
+    "_descripcion": "CE Total = suma de los puntajeBruto de las 5 escalas compuestas; luego se RESTA Math.abs(respuesta) de cada itemsRestaCETotal. Normalización con nItems fijo = 133 (min=266, max=798).",
+    "itemsRestaCETotal": [11, 20, 31, 62, 88, 108],
+    "n_items_normalizacion": 133
+  },
+
+  "niveles": {
+    "_descripcion": "clasificarNivel(porcentaje) del .gs. Se evalúa sobre el porcentaje SIN redondear, en orden descendente.",
+    "umbral_descendente": [
+      { "min_pct": 81, "nivel": "MUY_ALTO", "nombre": "Muy Alto" },
+      { "min_pct": 61, "nivel": "ALTO", "nombre": "Alto" },
+      { "min_pct": 41, "nivel": "PROMEDIO", "nombre": "Promedio" },
+      { "min_pct": 21, "nivel": "BAJO", "nombre": "Bajo" },
+      { "min_pct": 0, "nivel": "MUY_BAJO", "nombre": "Muy Bajo" }
+    ]
+  }
+}

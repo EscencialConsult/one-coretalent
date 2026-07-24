@@ -1,0 +1,67 @@
+{
+  "_fuente": "Test12/index.html · const questions + const options (DNLA Leadership & Middle Management)",
+  "_descripcion": "40 ítems de autoevaluación de liderazgo, 5 por cada una de las 8 dimensiones. Escala de frecuencia 1-5 (1=Nunca ... 5=Siempre). No hay ítems inversos: todos puntúan en sentido directo. La dimensión de cada ítem es fija por id.",
+  "escala": {
+    "5": "Siempre",
+    "4": "Frecuentemente",
+    "3": "A veces",
+    "2": "Rara vez",
+    "1": "Nunca"
+  },
+  "_escala_emojis": {
+    "5": "🔵 Siempre",
+    "4": "🟢 Frecuentemente",
+    "3": "🟡 A veces",
+    "2": "🟠 Rara vez",
+    "1": "🔴 Nunca"
+  },
+  "items": [
+    { "id": 1, "dimension": "vision_estrategica", "text": "Comunico con claridad los objetivos de mi sector y su importancia para la organización." },
+    { "id": 2, "dimension": "vision_estrategica", "text": "Sé orientar las tareas del equipo hacia metas medibles y alcanzables." },
+    { "id": 3, "dimension": "vision_estrategica", "text": "Inspiro a otros mostrando propósito y coherencia entre lo que digo y hago." },
+    { "id": 4, "dimension": "vision_estrategica", "text": "Adapto la planificación según los cambios o prioridades de la empresa." },
+    { "id": 5, "dimension": "vision_estrategica", "text": "Evalúo periódicamente si estamos avanzando en la dirección correcta." },
+
+    { "id": 6, "dimension": "comunicacion", "text": "Escucho al equipo antes de tomar decisiones importantes." },
+    { "id": 7, "dimension": "comunicacion", "text": "Doy retroalimentación frecuente y constructiva sobre el desempeño." },
+    { "id": 8, "dimension": "comunicacion", "text": "Explico claramente las tareas, evitando ambigüedades o confusiones." },
+    { "id": 9, "dimension": "comunicacion", "text": "Me comunico con respeto y empatía, incluso bajo presión." },
+    { "id": 10, "dimension": "comunicacion", "text": "Fomento espacios donde todos puedan opinar libremente." },
+
+    { "id": 11, "dimension": "decision", "text": "Tomo decisiones oportunas considerando la información disponible." },
+    { "id": 12, "dimension": "decision", "text": "Evalúo riesgos y consecuencias antes de actuar." },
+    { "id": 13, "dimension": "decision", "text": "Consulto a mi equipo para obtener diferentes perspectivas." },
+    { "id": 14, "dimension": "decision", "text": "Mantengo firmeza y criterio en situaciones difíciles." },
+    { "id": 15, "dimension": "decision", "text": "Asumo la responsabilidad por las decisiones tomadas." },
+
+    { "id": 16, "dimension": "motivacion", "text": "Reconozco los logros y el esfuerzo de mi equipo." },
+    { "id": 17, "dimension": "motivacion", "text": "Identifico las fortalezas individuales y promuevo su desarrollo." },
+    { "id": 18, "dimension": "motivacion", "text": "Delego responsabilidades para fomentar autonomía y crecimiento." },
+    { "id": 19, "dimension": "motivacion", "text": "Transmito entusiasmo y energía positiva en momentos de desafío." },
+    { "id": 20, "dimension": "motivacion", "text": "Predico con el ejemplo en compromiso y ética laboral." },
+
+    { "id": 21, "dimension": "conflictos", "text": "Enfrento los conflictos de manera directa, buscando soluciones equilibradas." },
+    { "id": 22, "dimension": "conflictos", "text": "Promuevo el diálogo para resolver diferencias dentro del equipo." },
+    { "id": 23, "dimension": "conflictos", "text": "Mantengo la calma durante conversaciones difíciles." },
+    { "id": 24, "dimension": "conflictos", "text": "Evito que los desacuerdos afecten la productividad." },
+    { "id": 25, "dimension": "conflictos", "text": "Logro acuerdos que fortalecen la colaboración." },
+
+    { "id": 26, "dimension": "resiliencia", "text": "Mantengo el control emocional ante la presión o la sobrecarga." },
+    { "id": 27, "dimension": "resiliencia", "text": "Me recupero con rapidez después de una situación difícil." },
+    { "id": 28, "dimension": "resiliencia", "text": "Recibo las críticas con apertura y sin tomarlo como algo personal." },
+    { "id": 29, "dimension": "resiliencia", "text": "Transmito serenidad y contención en momentos de incertidumbre." },
+    { "id": 30, "dimension": "resiliencia", "text": "Busco soluciones constructivas frente a los errores o contratiempos." },
+
+    { "id": 31, "dimension": "innovacion", "text": "Propongo ideas nuevas para mejorar procesos o resultados." },
+    { "id": 32, "dimension": "innovacion", "text": "Motivo al equipo a participar con ideas o sugerencias." },
+    { "id": 33, "dimension": "innovacion", "text": "Me adapto fácilmente a los cambios internos o externos." },
+    { "id": 34, "dimension": "innovacion", "text": "Pruebo nuevos enfoques cuando los métodos habituales no funcionan." },
+    { "id": 35, "dimension": "innovacion", "text": "Valoro la creatividad y la iniciativa de los demás." },
+
+    { "id": 36, "dimension": "autogestion", "text": "Organizo mis tareas y las del equipo según prioridades claras." },
+    { "id": 37, "dimension": "autogestion", "text": "Cumplo compromisos y plazos incluso en contextos exigentes." },
+    { "id": 38, "dimension": "autogestion", "text": "Distribuyo el tiempo de manera equilibrada entre planificación y acción." },
+    { "id": 39, "dimension": "autogestion", "text": "Soy constante en el seguimiento de objetivos y resultados." },
+    { "id": 40, "dimension": "autogestion", "text": "Busco mejorar continuamente mi desempeño y el del equipo." }
+  ]
+}

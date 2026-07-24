@@ -1,0 +1,14 @@
+{
+  "id": "excel-intermedio",
+  "nombre": "Excel Integral — Nivel Intermedio",
+  "codigo": "EXCEL-INT",
+  "descripcion": "Test de conocimientos de Microsoft Excel, nivel Intermedio: tablas dinámicas, formato condicional, funciones avanzadas (BUSCARV, SUMAR.SI), gráficos y validación de datos. 20 preguntas de opción múltiple seleccionadas al azar; se puntúa por % de aciertos con desglose por categoría.",
+  "categoria": "conocimiento",
+  "version": "1.0",
+  "n_items": 20,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "opcion_multiple",
+  "scoring": "scoring.py",
+  "archivos": { "preguntas": "preguntas.json" },
+  "estado": "completo"
+}

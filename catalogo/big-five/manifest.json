@@ -1,0 +1,23 @@
+{
+  "id": "big-five",
+  "nombre": "Big Five",
+  "codigo": "IPIP-50",
+  "descripcion": "Inventario de personalidad de los Cinco Grandes (IPIP-50): Extraversión, Amabilidad, Responsabilidad, Neuroticismo y Apertura.",
+  "categoria": "personalidad",
+  "version": "1.2",
+  "n_items": 50,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "likert_1_5",
+  "_tipo_respuesta_nota": "Escala 1 (Muy en desacuerdo) a 5 (Muy de acuerdo). Ítems 'reverse' se invierten (6 - valor).",
+  "dimensiones": ["extraversion", "agreeableness", "conscientiousness", "neuroticism", "openness"],
+  "scoring": "scoring.py",
+  "salida": ["dimensiones (puntuacion, percentil, nivel, interpretacion)", "dimension_dominante"],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "normas": "normas.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo"
+}

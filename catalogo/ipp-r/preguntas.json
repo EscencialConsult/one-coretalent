@@ -1,0 +1,1289 @@
+{
+  "_fuente": "Test8/script.js (textos de items) + Test8/script.gs (clave AC/PR por campo).",
+  "_descripcion": "180 items IPP-R agrupados en 15 campos (12 items c/u: 6 AC actividades + 6 PR profesiones). Escala 0-3: 0=No Conozco, 1=Desagrado, 2=Indiferencia, 3=Agrado.",
+  "escala": {
+    "0": "No Conozco",
+    "1": "Desagrado",
+    "2": "Indiferencia",
+    "3": "Agrado"
+  },
+  "campos_nombre_front": {
+    "1": "Campo 1 — Ciencias Naturales",
+    "2": "Campo 2 — Construcción e Ingeniería",
+    "3": "Campo 3 — Ciencias de la Salud",
+    "4": "Campo 4 — Ciencias Sociales y Humanidades",
+    "5": "Campo 5 — Derecho y Criminología",
+    "6": "Campo 6 — Comunicación y Medios",
+    "7": "Campo 7 — Educación y Psicología",
+    "8": "Campo 8 — Economía y Empresa",
+    "9": "Campo 9 — Informática y Tecnología",
+    "10": "Campo 10 — Agronomía y Veterinaria",
+    "11": "Campo 11 — Artes Plásticas y Diseño",
+    "12": "Campo 12 — Música, Danza y Teatro",
+    "13": "Campo 13 — Seguridad y Fuerzas Armadas",
+    "14": "Campo 14 — Actividad Física y Deporte",
+    "15": "Campo 15 — Turismo y Hostelería"
+  },
+  "items": [
+    {
+      "id": 1,
+      "campo": 1,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Estudiar los seres vivos y realizar trabajos en campo como la botánica, la zoología o la genética."
+    },
+    {
+      "id": 2,
+      "campo": 1,
+      "tipo": "PR",
+      "numero_en_campo": 2,
+      "text": "Ser astrónomo."
+    },
+    {
+      "id": 3,
+      "campo": 1,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Trabajar en centros de cultivo de especies acuáticas, vegetales o animales."
+    },
+    {
+      "id": 4,
+      "campo": 1,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Ser geólogo."
+    },
+    {
+      "id": 5,
+      "campo": 1,
+      "tipo": "PR",
+      "numero_en_campo": 5,
+      "text": "Ser licenciado en ciencias del mar."
+    },
+    {
+      "id": 6,
+      "campo": 1,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Estudiar los fenómenos del firmamento y aplicar estos conocimientos a la navegación o a la utilización del espacio."
+    },
+    {
+      "id": 7,
+      "campo": 1,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Investigar las propiedades de la materia para los productos de medicina, agricultura y otras."
+    },
+    {
+      "id": 8,
+      "campo": 1,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Ser químico."
+    },
+    {
+      "id": 9,
+      "campo": 1,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Ser biólogo."
+    },
+    {
+      "id": 10,
+      "campo": 1,
+      "tipo": "AC",
+      "numero_en_campo": 10,
+      "text": "Estudiar la tierra y sus componentes."
+    },
+    {
+      "id": 11,
+      "campo": 1,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Trabajar como ingeniero ambiental."
+    },
+    {
+      "id": 12,
+      "campo": 1,
+      "tipo": "AC",
+      "numero_en_campo": 12,
+      "text": "Dedicarse a la conservación de recursos naturales."
+    },
+    {
+      "id": 13,
+      "campo": 2,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Proyectar edificios y supervisar la construcción de los mismos."
+    },
+    {
+      "id": 14,
+      "campo": 2,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Dirigir la realización material en las obras de construcción de edificios y controlar los materiales empleados."
+    },
+    {
+      "id": 15,
+      "campo": 2,
+      "tipo": "PR",
+      "numero_en_campo": 3,
+      "text": "Ser controlador aéreo."
+    },
+    {
+      "id": 16,
+      "campo": 2,
+      "tipo": "AC",
+      "numero_en_campo": 4,
+      "text": "Desarrollar proyectos y trabajos de electrónica aplicados a la industria."
+    },
+    {
+      "id": 17,
+      "campo": 2,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Diseñar instalaciones relacionadas con las comunicaciones (telefonía, radio, etc.)."
+    },
+    {
+      "id": 18,
+      "campo": 2,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Realizar proyectos para la construcción de puentes, carreteras y aeropuertos."
+    },
+    {
+      "id": 19,
+      "campo": 2,
+      "tipo": "PR",
+      "numero_en_campo": 7,
+      "text": "Ser ingeniero de telecomunicación."
+    },
+    {
+      "id": 20,
+      "campo": 2,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Ser ingeniero de caminos."
+    },
+    {
+      "id": 21,
+      "campo": 2,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Ser arquitecto."
+    },
+    {
+      "id": 22,
+      "campo": 2,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Ser experto en edificación y construcción civil."
+    },
+    {
+      "id": 23,
+      "campo": 2,
+      "tipo": "AC",
+      "numero_en_campo": 11,
+      "text": "Realizar tareas relacionadas de seguridad del tráfico aéreo."
+    },
+    {
+      "id": 24,
+      "campo": 2,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Ser ingeniero en electrónica."
+    },
+    {
+      "id": 25,
+      "campo": 3,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Asesorar y tratar a personas con problemas de alimentación."
+    },
+    {
+      "id": 26,
+      "campo": 3,
+      "tipo": "PR",
+      "numero_en_campo": 2,
+      "text": "Ser dietista."
+    },
+    {
+      "id": 27,
+      "campo": 3,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Curar algunas enfermedades del aparato locomotor o del sistema nervioso mediante técnicas y medios naturales."
+    },
+    {
+      "id": 28,
+      "campo": 3,
+      "tipo": "AC",
+      "numero_en_campo": 4,
+      "text": "Aplicar conocimientos científicos trabajando en laboratorios donde se preparan medicamentos."
+    },
+    {
+      "id": 29,
+      "campo": 3,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Trabajar como fisioterapeuta."
+    },
+    {
+      "id": 30,
+      "campo": 3,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Ser enfermero/a."
+    },
+    {
+      "id": 31,
+      "campo": 3,
+      "tipo": "PR",
+      "numero_en_campo": 7,
+      "text": "Ser farmacéutico."
+    },
+    {
+      "id": 32,
+      "campo": 3,
+      "tipo": "AC",
+      "numero_en_campo": 8,
+      "text": "Aplicar los conocimientos de la anatomía, las funciones y el comportamiento de las personas sanas para establecer el diagnóstico y el tratamiento."
+    },
+    {
+      "id": 33,
+      "campo": 3,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Aplicar los conocimientos de medicina a tratamientos de enfermedades mentales."
+    },
+    {
+      "id": 34,
+      "campo": 3,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Ser odontólogo."
+    },
+    {
+      "id": 35,
+      "campo": 3,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Colaborar con el médico en el cuidado de los enfermos."
+    },
+    {
+      "id": 36,
+      "campo": 3,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Ser médico."
+    },
+    {
+      "id": 37,
+      "campo": 4,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Analizar e investigar la actuación del hombre en su aspecto social y evolutivo a lo largo del tiempo."
+    },
+    {
+      "id": 38,
+      "campo": 4,
+      "tipo": "PR",
+      "numero_en_campo": 2,
+      "text": "Ejercer la profesión de historiador."
+    },
+    {
+      "id": 39,
+      "campo": 4,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Estudiar la sociedad, los grupos humanos y sus realizaciones aplicando estos conocimientos en análisis sociológicos."
+    },
+    {
+      "id": 40,
+      "campo": 4,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Investigar los fundamentos de la religión católica, analizar textos escritos, restos arqueológicos y tradiciones."
+    },
+    {
+      "id": 41,
+      "campo": 4,
+      "tipo": "PR",
+      "numero_en_campo": 5,
+      "text": "Ejercer la profesión del trabajador social."
+    },
+    {
+      "id": 42,
+      "campo": 4,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Colaborar con personas o familias para solucionar problemas de tipo social o personal."
+    },
+    {
+      "id": 43,
+      "campo": 4,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Ejercer la profesión de filólogo."
+    },
+    {
+      "id": 44,
+      "campo": 4,
+      "tipo": "AC",
+      "numero_en_campo": 8,
+      "text": "Interpretar y traducir textos aplicando los conocimientos lingüísticos, teóricos y prácticos."
+    },
+    {
+      "id": 45,
+      "campo": 4,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Ser teólogo."
+    },
+    {
+      "id": 46,
+      "campo": 4,
+      "tipo": "AC",
+      "numero_en_campo": 10,
+      "text": "Aplicar los conocimientos sobre las distintas manifestaciones artísticas."
+    },
+    {
+      "id": 47,
+      "campo": 4,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Ejercer la profesión de especialista en arte."
+    },
+    {
+      "id": 48,
+      "campo": 4,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Ejercer la profesión de sociólogo."
+    },
+    {
+      "id": 49,
+      "campo": 5,
+      "tipo": "PR",
+      "numero_en_campo": 1,
+      "text": "Ser criminólogo."
+    },
+    {
+      "id": 50,
+      "campo": 5,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Intervenir ante los tribunales de justicia en nombre de la ley, representando a una persona o al estado."
+    },
+    {
+      "id": 51,
+      "campo": 5,
+      "tipo": "PR",
+      "numero_en_campo": 3,
+      "text": "Trabajar como licenciado en ciencias del trabajo."
+    },
+    {
+      "id": 52,
+      "campo": 5,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Ser abogado."
+    },
+    {
+      "id": 53,
+      "campo": 5,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Ser diplomático (embajador)."
+    },
+    {
+      "id": 54,
+      "campo": 5,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Representar al propio país en otros países."
+    },
+    {
+      "id": 55,
+      "campo": 5,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Hacer averiguaciones e informar a jueces y policías sobre aspectos relacionados con comportamientos delictivos."
+    },
+    {
+      "id": 56,
+      "campo": 5,
+      "tipo": "AC",
+      "numero_en_campo": 8,
+      "text": "Representar a empresas o trabajadores ante los tribunales de lo social."
+    },
+    {
+      "id": 57,
+      "campo": 5,
+      "tipo": "AC",
+      "numero_en_campo": 9,
+      "text": "Aplicar conocimientos profesionales para resolver problemas relacionados con los trabajadores de una empresa."
+    },
+    {
+      "id": 58,
+      "campo": 5,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Trabajar como diplomado en relaciones laborales."
+    },
+    {
+      "id": 59,
+      "campo": 5,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Trabajar asesorando a las fuerzas de seguridad en temas referentes a comportamientos criminales."
+    },
+    {
+      "id": 60,
+      "campo": 5,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Trabajar como investigador privado."
+    },
+    {
+      "id": 61,
+      "campo": 6,
+      "tipo": "PR",
+      "numero_en_campo": 1,
+      "text": "Trabajar como publicista."
+    },
+    {
+      "id": 62,
+      "campo": 6,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Buscar y redactar noticias para publicarlas en la prensa escrita o difundirlas para radio u otros medios."
+    },
+    {
+      "id": 63,
+      "campo": 6,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Trabajar como licenciado en comunicación audiovisual."
+    },
+    {
+      "id": 64,
+      "campo": 6,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Trabajar como técnico de sonido."
+    },
+    {
+      "id": 65,
+      "campo": 6,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Elaborar la información para presentarla en los medios de comunicación audiovisual."
+    },
+    {
+      "id": 66,
+      "campo": 6,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Diseñar campañas publicitarias para dar a conocer un producto y lograr su aceptación o para difundir mensajes."
+    },
+    {
+      "id": 67,
+      "campo": 6,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Obtener imágenes por medio de fotografía, video y presentarlas en cualquier soporte."
+    },
+    {
+      "id": 68,
+      "campo": 6,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Ser técnico en imagen."
+    },
+    {
+      "id": 69,
+      "campo": 6,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Ser periodista."
+    },
+    {
+      "id": 70,
+      "campo": 6,
+      "tipo": "AC",
+      "numero_en_campo": 10,
+      "text": "Estudiar los procesos y técnicas de los medios audiovisuales y los elementos que intervienen en ella."
+    },
+    {
+      "id": 71,
+      "campo": 6,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Ser director realizador de medios audiovisuales."
+    },
+    {
+      "id": 72,
+      "campo": 6,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Aplicar los conocimientos profesionales para registrar y reproducir en producciones de diversos tipos."
+    },
+    {
+      "id": 73,
+      "campo": 7,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Trabajar en la educación de adultos utilizando recursos didácticos."
+    },
+    {
+      "id": 74,
+      "campo": 7,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Enseñar a alumnos con necesidades especiales."
+    },
+    {
+      "id": 75,
+      "campo": 7,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Cooperar en la educación de niños de 0 a 3 años contribuyendo a la mejora de sus hábitos de alimentación."
+    },
+    {
+      "id": 76,
+      "campo": 7,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Trabajar como pedagogo."
+    },
+    {
+      "id": 77,
+      "campo": 7,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Aplicar pruebas psicológicas para evaluar la inteligencia, aptitudes y personalidad de los alumnos."
+    },
+    {
+      "id": 78,
+      "campo": 7,
+      "tipo": "PR",
+      "numero_en_campo": 6,
+      "text": "Trabajar como maestro en educación especial."
+    },
+    {
+      "id": 79,
+      "campo": 7,
+      "tipo": "PR",
+      "numero_en_campo": 7,
+      "text": "Trabajar como educador social."
+    },
+    {
+      "id": 80,
+      "campo": 7,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Trabajar como psicólogo escolar."
+    },
+    {
+      "id": 81,
+      "campo": 7,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Trabajar como educador infantil."
+    },
+    {
+      "id": 82,
+      "campo": 7,
+      "tipo": "AC",
+      "numero_en_campo": 10,
+      "text": "Analizar las técnicas y métodos de enseñanza para dirigir y organizar centros educativos."
+    },
+    {
+      "id": 83,
+      "campo": 7,
+      "tipo": "AC",
+      "numero_en_campo": 11,
+      "text": "Impartir las enseñanzas de educación física."
+    },
+    {
+      "id": 84,
+      "campo": 7,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Enseñar técnicas a niños de educación primaria."
+    },
+    {
+      "id": 85,
+      "campo": 8,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Ser gestor administrativo."
+    },
+    {
+      "id": 86,
+      "campo": 8,
+      "tipo": "PR",
+      "numero_en_campo": 2,
+      "text": "Ser administrador de fincas."
+    },
+    {
+      "id": 87,
+      "campo": 8,
+      "tipo": "PR",
+      "numero_en_campo": 3,
+      "text": "Ser economista."
+    },
+    {
+      "id": 88,
+      "campo": 8,
+      "tipo": "AC",
+      "numero_en_campo": 4,
+      "text": "Realizar trámites para empresas."
+    },
+    {
+      "id": 89,
+      "campo": 8,
+      "tipo": "PR",
+      "numero_en_campo": 5,
+      "text": "Trabajar como licenciado en ciencias contables y financieras."
+    },
+    {
+      "id": 90,
+      "campo": 8,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Comprar, vender o alquilar pisos o solares."
+    },
+    {
+      "id": 91,
+      "campo": 8,
+      "tipo": "PR",
+      "numero_en_campo": 7,
+      "text": "Ser agente de la propiedad inmobiliaria (compra venta de casas, departamentos, etc.)."
+    },
+    {
+      "id": 92,
+      "campo": 8,
+      "tipo": "AC",
+      "numero_en_campo": 8,
+      "text": "Realizar los planes establecidos para la comercialización de productos."
+    },
+    {
+      "id": 93,
+      "campo": 8,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Ser especialista en gestión comercial y marketing."
+    },
+    {
+      "id": 94,
+      "campo": 8,
+      "tipo": "AC",
+      "numero_en_campo": 10,
+      "text": "Aplicar los conocimientos técnicos al campo de los seguros."
+    },
+    {
+      "id": 95,
+      "campo": 8,
+      "tipo": "AC",
+      "numero_en_campo": 11,
+      "text": "Aplicar los conocimientos de economía para resolver problemas prácticos en empresas."
+    },
+    {
+      "id": 96,
+      "campo": 8,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Establecer comunidades de propietarios participando en la elaboración de sus estatutos."
+    },
+    {
+      "id": 97,
+      "campo": 9,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Realizar tareas de especialistas en diversos campos de la informática."
+    },
+    {
+      "id": 98,
+      "campo": 9,
+      "tipo": "PR",
+      "numero_en_campo": 2,
+      "text": "Ser ingeniero en informática."
+    },
+    {
+      "id": 99,
+      "campo": 9,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Aplicar los conocimientos informáticos sobre sistemas operativos y tecnología de la información."
+    },
+    {
+      "id": 100,
+      "campo": 9,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Ser ingeniero técnico en informática de gestión."
+    },
+    {
+      "id": 101,
+      "campo": 9,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Trabajar como administrador de sistemas informáticos."
+    },
+    {
+      "id": 102,
+      "campo": 9,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Realizar trabajos de informática aplicada a las comunicaciones."
+    },
+    {
+      "id": 103,
+      "campo": 9,
+      "tipo": "PR",
+      "numero_en_campo": 7,
+      "text": "Ser especialista en telemática."
+    },
+    {
+      "id": 104,
+      "campo": 9,
+      "tipo": "AC",
+      "numero_en_campo": 8,
+      "text": "Trabajar en el desarrollo de aplicaciones informáticas."
+    },
+    {
+      "id": 105,
+      "campo": 9,
+      "tipo": "AC",
+      "numero_en_campo": 9,
+      "text": "Participar en el diseño de aplicaciones informáticas realizando la aplicación de las mismas."
+    },
+    {
+      "id": 106,
+      "campo": 9,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Establecer y manejar los sistemas informáticos."
+    },
+    {
+      "id": 107,
+      "campo": 9,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Trabajar como especialista en multimedia."
+    },
+    {
+      "id": 108,
+      "campo": 9,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Aplicar conocimientos de informática, electrónica y telecomunicaciones para el tratamiento gráfico de datos."
+    },
+    {
+      "id": 109,
+      "campo": 10,
+      "tipo": "PR",
+      "numero_en_campo": 1,
+      "text": "Ser ingeniero forestal."
+    },
+    {
+      "id": 110,
+      "campo": 10,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Organizar explotaciones agrícolas o agropecuarias."
+    },
+    {
+      "id": 111,
+      "campo": 10,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Trabajar en explotaciones ganaderas."
+    },
+    {
+      "id": 112,
+      "campo": 10,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Ser veterinario."
+    },
+    {
+      "id": 113,
+      "campo": 10,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Trabajar como técnico en explotaciones ganaderas."
+    },
+    {
+      "id": 114,
+      "campo": 10,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Potenciar los espacios naturales para la conservación de bosques."
+    },
+    {
+      "id": 115,
+      "campo": 10,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Dirigir fincas para aumentar la productividad de granjas."
+    },
+    {
+      "id": 116,
+      "campo": 10,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Ser ingeniero agrícola."
+    },
+    {
+      "id": 117,
+      "campo": 10,
+      "tipo": "AC",
+      "numero_en_campo": 9,
+      "text": "Realizar tareas de vigilancia y protección del medio ambiente en bosques, jardines o parques."
+    },
+    {
+      "id": 118,
+      "campo": 10,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Trabajar como ingeniero agrónomo."
+    },
+    {
+      "id": 119,
+      "campo": 10,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Prevenir, diagnosticar y tratar las enfermedades que padezcan los animales."
+    },
+    {
+      "id": 120,
+      "campo": 10,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Trabajar como técnico en trabajos forestales y conservación de medio ambiente."
+    },
+    {
+      "id": 121,
+      "campo": 11,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Ser dibujante, ilustrador de publicaciones."
+    },
+    {
+      "id": 122,
+      "campo": 11,
+      "tipo": "PR",
+      "numero_en_campo": 2,
+      "text": "Trabajar como diseñador de interiores."
+    },
+    {
+      "id": 123,
+      "campo": 11,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Trabajar como técnico en artes plásticas y diseño."
+    },
+    {
+      "id": 124,
+      "campo": 11,
+      "tipo": "AC",
+      "numero_en_campo": 4,
+      "text": "Diseñar y elaborar productos relacionados con la moda."
+    },
+    {
+      "id": 125,
+      "campo": 11,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Ser ceramista."
+    },
+    {
+      "id": 126,
+      "campo": 11,
+      "tipo": "PR",
+      "numero_en_campo": 6,
+      "text": "Ser diseñador especialista en moda."
+    },
+    {
+      "id": 127,
+      "campo": 11,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Crear piezas de cerámica e investigar técnicas con respecto a este trabajo."
+    },
+    {
+      "id": 128,
+      "campo": 11,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Crear diseños para la mejora de espacios interiores."
+    },
+    {
+      "id": 129,
+      "campo": 11,
+      "tipo": "AC",
+      "numero_en_campo": 9,
+      "text": "Dibujar o diseñar elementos para la decoración de cerámica."
+    },
+    {
+      "id": 130,
+      "campo": 11,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Conservar y restaurar bienes culturales."
+    },
+    {
+      "id": 131,
+      "campo": 11,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Trabajar como restaurador de bienes naturales."
+    },
+    {
+      "id": 132,
+      "campo": 11,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Emplear técnicas de ilustración gráfica para realizar ilustraciones en libros."
+    },
+    {
+      "id": 133,
+      "campo": 12,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Formar parte de una orquesta o actuar como solista."
+    },
+    {
+      "id": 134,
+      "campo": 12,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Dar recitales o conciertos interpretando canciones clásicas o modernas."
+    },
+    {
+      "id": 135,
+      "campo": 12,
+      "tipo": "PR",
+      "numero_en_campo": 3,
+      "text": "Ser músico o instrumentista."
+    },
+    {
+      "id": 136,
+      "campo": 12,
+      "tipo": "AC",
+      "numero_en_campo": 4,
+      "text": "Ser musicólogo."
+    },
+    {
+      "id": 137,
+      "campo": 12,
+      "tipo": "PR",
+      "numero_en_campo": 5,
+      "text": "Ser cantante."
+    },
+    {
+      "id": 138,
+      "campo": 12,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Bailar en representaciones públicas."
+    },
+    {
+      "id": 139,
+      "campo": 12,
+      "tipo": "PR",
+      "numero_en_campo": 7,
+      "text": "Ser bailarín."
+    },
+    {
+      "id": 140,
+      "campo": 12,
+      "tipo": "AC",
+      "numero_en_campo": 8,
+      "text": "Investigar y analizar la historia de la música."
+    },
+    {
+      "id": 141,
+      "campo": 12,
+      "tipo": "PR",
+      "numero_en_campo": 9,
+      "text": "Ser actor profesional."
+    },
+    {
+      "id": 142,
+      "campo": 12,
+      "tipo": "AC",
+      "numero_en_campo": 10,
+      "text": "Actuar en representaciones teatrales interpretando a un personaje."
+    },
+    {
+      "id": 143,
+      "campo": 12,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Doblar las voces de actores extranjeros para películas de cine o televisión."
+    },
+    {
+      "id": 144,
+      "campo": 12,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Ser actor de doblaje."
+    },
+    {
+      "id": 145,
+      "campo": 13,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Apagar incendios o prevenirlos."
+    },
+    {
+      "id": 146,
+      "campo": 13,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Rescatar a personas que se encuentren en situaciones problemáticas en el mar."
+    },
+    {
+      "id": 147,
+      "campo": 13,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Realizar las tareas necesarias para garantizar la seguridad de los ciudadanos."
+    },
+    {
+      "id": 148,
+      "campo": 13,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Realizar trabajos técnicos, científicos o de mando relacionados con los fines del ejército."
+    },
+    {
+      "id": 149,
+      "campo": 13,
+      "tipo": "PR",
+      "numero_en_campo": 5,
+      "text": "Ser bombero."
+    },
+    {
+      "id": 150,
+      "campo": 13,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Realizar en el ejército trabajos de especialista en mecánica, electricidad, etc."
+    },
+    {
+      "id": 151,
+      "campo": 13,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Trabajar como vigilante."
+    },
+    {
+      "id": 152,
+      "campo": 13,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Ser oficial de carrera del ejército."
+    },
+    {
+      "id": 153,
+      "campo": 13,
+      "tipo": "AC",
+      "numero_en_campo": 9,
+      "text": "Trabajar como técnico en salvamento acuático."
+    },
+    {
+      "id": 154,
+      "campo": 13,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Ser policía."
+    },
+    {
+      "id": 155,
+      "campo": 13,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Custodiar establecimientos u oficinas para evitar robos u otros hechos delictivos."
+    },
+    {
+      "id": 156,
+      "campo": 13,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Ser especialista del ejército."
+    },
+    {
+      "id": 157,
+      "campo": 14,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Trabajar como animador de actividades físicas y deportivas."
+    },
+    {
+      "id": 158,
+      "campo": 14,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Trabajar como conductor de actividades deportivas en el medio natural."
+    },
+    {
+      "id": 159,
+      "campo": 14,
+      "tipo": "PR",
+      "numero_en_campo": 3,
+      "text": "Trabajar como licenciado en ciencias de la actividad física."
+    },
+    {
+      "id": 160,
+      "campo": 14,
+      "tipo": "AC",
+      "numero_en_campo": 4,
+      "text": "Organizar actividades físicas o deportivas."
+    },
+    {
+      "id": 161,
+      "campo": 14,
+      "tipo": "PR",
+      "numero_en_campo": 5,
+      "text": "Trabajar como maestro especialista en educación física."
+    },
+    {
+      "id": 162,
+      "campo": 14,
+      "tipo": "PR",
+      "numero_en_campo": 6,
+      "text": "Ser técnico deportivo."
+    },
+    {
+      "id": 163,
+      "campo": 14,
+      "tipo": "AC",
+      "numero_en_campo": 7,
+      "text": "Entrenar a deportistas o equipos para perfeccionar sus conocimientos y aptitudes."
+    },
+    {
+      "id": 164,
+      "campo": 14,
+      "tipo": "AC",
+      "numero_en_campo": 8,
+      "text": "Asesorar sobre aspectos de la actividad física y el deporte en centros escolares."
+    },
+    {
+      "id": 165,
+      "campo": 14,
+      "tipo": "AC",
+      "numero_en_campo": 9,
+      "text": "Enseñar a realizar un deporte determinado."
+    },
+    {
+      "id": 166,
+      "campo": 14,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Ser entrenador deportivo."
+    },
+    {
+      "id": 167,
+      "campo": 14,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Utilizar los conocimientos sobre masaje y anatomía humana para ayudar a los deportistas a recuperarse de lesiones."
+    },
+    {
+      "id": 168,
+      "campo": 14,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Trabajar como masajista deportivo."
+    },
+    {
+      "id": 169,
+      "campo": 15,
+      "tipo": "AC",
+      "numero_en_campo": 1,
+      "text": "Trabajar como técnico en animación turística."
+    },
+    {
+      "id": 170,
+      "campo": 15,
+      "tipo": "AC",
+      "numero_en_campo": 2,
+      "text": "Trabajar como técnico en turismo."
+    },
+    {
+      "id": 171,
+      "campo": 15,
+      "tipo": "AC",
+      "numero_en_campo": 3,
+      "text": "Trabajar como técnico en información turística."
+    },
+    {
+      "id": 172,
+      "campo": 15,
+      "tipo": "PR",
+      "numero_en_campo": 4,
+      "text": "Trabajar como técnico superior en alojamiento."
+    },
+    {
+      "id": 173,
+      "campo": 15,
+      "tipo": "AC",
+      "numero_en_campo": 5,
+      "text": "Establecer destinos turísticos, atender y guiar a grupos de visitantes."
+    },
+    {
+      "id": 174,
+      "campo": 15,
+      "tipo": "AC",
+      "numero_en_campo": 6,
+      "text": "Dirigir o administrar restaurantes; crear productos gastronómicos para ofrecerlos a los clientes."
+    },
+    {
+      "id": 175,
+      "campo": 15,
+      "tipo": "PR",
+      "numero_en_campo": 7,
+      "text": "Trabajar como tripulante de cabina de pasajeros o auxiliar de barco."
+    },
+    {
+      "id": 176,
+      "campo": 15,
+      "tipo": "PR",
+      "numero_en_campo": 8,
+      "text": "Organizar todo lo necesario para recibir a los clientes del hotel."
+    },
+    {
+      "id": 177,
+      "campo": 15,
+      "tipo": "AC",
+      "numero_en_campo": 9,
+      "text": "Dirigir a personas o grupos en recorridos por sendero o zonas de montaña."
+    },
+    {
+      "id": 178,
+      "campo": 15,
+      "tipo": "PR",
+      "numero_en_campo": 10,
+      "text": "Procurar la mejora del turismo incluyendo actividades culturales."
+    },
+    {
+      "id": 179,
+      "campo": 15,
+      "tipo": "PR",
+      "numero_en_campo": 11,
+      "text": "Atender a los pasajeros en vuelos de líneas aéreas o barcos o cruceros."
+    },
+    {
+      "id": 180,
+      "campo": 15,
+      "tipo": "PR",
+      "numero_en_campo": 12,
+      "text": "Idear, preparar y dirigir programas de animación cultural."
+    }
+  ]
+}

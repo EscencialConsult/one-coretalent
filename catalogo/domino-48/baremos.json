@@ -1,0 +1,17 @@
+{
+  "_fuente": "Test5/script.gs · const BAREMOS — Dominó D-48 (48 ítems)",
+  "_descripcion": "Puntaje crudo = nº de respuestas correctas (0-48). Se asigna el primer rango que contenga el puntaje.",
+  "rangos": [
+    { "min": 44, "max": 48, "percentil": 99, "nivel": "SUPERIOR", "descripcion": "Capacidad excepcional" },
+    { "min": 40, "max": 43, "percentil": 95, "nivel": "SUPERIOR", "descripcion": "Capacidad muy alta" },
+    { "min": 37, "max": 39, "percentil": 90, "nivel": "SUPERIOR AL TÉRMINO MEDIO", "descripcion": "Rendimiento destacado" },
+    { "min": 33, "max": 36, "percentil": 80, "nivel": "SUPERIOR AL TÉRMINO MEDIO", "descripcion": "Por encima del promedio" },
+    { "min": 28, "max": 32, "percentil": 65, "nivel": "SUPERIOR AL TÉRMINO MEDIO", "descripcion": "Buen rendimiento" },
+    { "min": 23, "max": 27, "percentil": 50, "nivel": "TÉRMINO MEDIO", "descripcion": "Capacidad promedio" },
+    { "min": 18, "max": 22, "percentil": 40, "nivel": "TÉRMINO MEDIO", "descripcion": "Dentro del rango esperado" },
+    { "min": 14, "max": 17, "percentil": 30, "nivel": "INFERIOR AL TÉRMINO MEDIO", "descripcion": "Por debajo del promedio" },
+    { "min": 10, "max": 13, "percentil": 15, "nivel": "INFERIOR AL TÉRMINO MEDIO", "descripcion": "Rendimiento bajo" },
+    { "min": 6, "max": 9, "percentil": 6, "nivel": "DEFICIENTE", "descripcion": "Dificultades significativas" },
+    { "min": 0, "max": 5, "percentil": 2, "nivel": "DEFICIENTE", "descripcion": "Requiere evaluación adicional" }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "dat",
+  "nombre": "DAT — Test de Aptitudes Diferenciales",
+  "codigo": "DAT",
+  "descripcion": "Batería DAT de aptitudes: Rapidez/Exactitud Perceptiva (PSA), Razonamiento Verbal (VR), Ortografía (ORT), Razonamiento Numérico (NR), Razonamiento Abstracto (AR) y Relaciones Espaciales (SR). Cada subtest se corrige con clave propia (salvo PSA, que cuenta respuestas) y se reporta como porcentaje de aciertos.",
+  "categoria": "aptitudes",
+  "version": "1.0",
+  "tiempo_limite_min": null,
+  "_tiempo_limite_nota": "El front impone tiempos por subtest (PSA 3+3 min, VR 25 min, ORT 10 min, NR 30 min, AR 25 min, SR 25 min). El scoring no depende del tiempo; se documenta como referencia.",
+  "tipo_respuesta": "opcion_multiple_por_subtest",
+  "subtests": [
+    {
+      "id": "PSA",
+      "nombre": "Rapidez y Exactitud Perceptiva",
+      "col_gs": "RAPIDEZ",
+      "n_items": null,
+      "scoring": "conteo_respuestas",
+      "_nota": "No se corrige por clave: el puntaje es el nº de respuestas dadas (cap 100). Los estímulos se generan dinámicamente en el front (RAW_TEXT_P1/P2) y son aleatorizados, por eso no se incluyen como ítems fijos con clave."
+    },
+    {
+      "id": "VR",
+      "nombre": "Razonamiento Verbal",
+      "col_gs": "VERBAL",
+      "n_items": 50,
+      "n_items_front": 40,
+      "scoring": "clave",
+      "opciones": "A-E"
+    },
+    {
+      "id": "ORT",
+      "nombre": "Ortografía",
+      "col_gs": "ORTOGRAFIA",
+      "n_items": 40,
+      "n_items_front": 40,
+      "scoring": "clave",
+      "opciones": "A-D"
+    },
+    {
+      "id": "NR",
+      "nombre": "Razonamiento Numérico",
+      "col_gs": "NUMERICO",
+      "n_items": 40,
+      "n_items_front": 40,
+      "scoring": "clave",
+      "opciones": "A-E"
+    },
+    {
+      "id": "AR",
+      "nombre": "Razonamiento Abstracto",
+      "col_gs": "ABSTRACTO",
+      "n_items": 50,
+      "n_items_front": 40,
+      "scoring": "clave",
+      "opciones": "A-E",
+      "imagenes": "img/abstracto/p{n}.png"
+    },
+    {
+      "id": "SR",
+      "nombre": "Relaciones Espaciales",
+      "col_gs": "ESPACIAL",
+      "n_items": 50,
+      "n_items_front": 50,
+      "scoring": "clave",
+      "opciones": "A-D",
+      "imagenes": "img/espacial/p{n}.webp"
+    }
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "subtests (PSA/VR/ORT/NR/AR/SR: raw, total, pct, nivel, interpretacion)",
+    "estilo_trabajo (DINAMICO/METICULOSO/EFICIENTE/ESTANDAR)",
+    "roles (areas de maximo potencial)"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "parcial_logica_gs_falta_contenido_original",
+  "_estado_nota": "Scoring portado fiel del .gs (autoridad). Ver ANALISIS.md: discrepancia mayor en clave SR (front vs back) y subtest PSA sin clave.",
+  "disponible": false,
+  "_disponible_nota": "No disponible: en preparacion. No asignable a empresas; en el catalogo aparece deshabilitado al final y sin categoria."
+}

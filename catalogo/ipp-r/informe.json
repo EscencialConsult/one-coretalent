@@ -1,0 +1,73 @@
+{
+  "_descripcion": "Configuración del informe IPP-R. El renderizador consume la salida de scoring.py (puntuaciones + analisis + validez). Replica generarInformeHTML del .gs.",
+  "titulo": "Informe IPP-R — Intereses y Preferencias Profesionales (Revisado)",
+  "subtitulo": "Perfil de intereses vocacionales por campo profesional",
+  "secciones": [
+    {
+      "id": "validez",
+      "tipo": "bloque_validez",
+      "titulo": "Validez de la aplicación",
+      "fuente": "validez",
+      "campos": [
+        { "label": "Estado", "valor": "etiqueta", "color": "color" },
+        { "label": "Ítems respondidos", "valor": "respondidos", "sufijo": "/180 ({pct}%)" },
+        { "label": "Respuestas 'No Conozco'", "valor": "nc", "sufijo": " ({pctNC}%)" },
+        { "label": "Alerta de tiempo", "valor": "alertaTiempo", "opcional": true }
+      ]
+    },
+    {
+      "id": "tipo_perfil",
+      "tipo": "texto",
+      "titulo": "Tipo de perfil",
+      "datos": { "encabezado": "analisis.tipoPerfil", "cuerpo": "analisis.descPerfil" }
+    },
+    {
+      "id": "grafico_barras",
+      "tipo": "grafico_barras_horizontal",
+      "titulo": "Intereses por campo (PD 0-36)",
+      "datos": {
+        "labels": "analisis.ordenados[*].nombre",
+        "valores": "analisis.ordenados[*].pd_total",
+        "colores": "analisis.ordenados[*].color",
+        "eje_x": { "min": 0, "max": 36 }
+      }
+    },
+    {
+      "id": "campos_primarios",
+      "tipo": "bloques_por_campo",
+      "titulo": "Campos de mayor interés (primarios)",
+      "fuente": "analisis.primarios",
+      "bloque": {
+        "encabezado": "{emoji} {nombre} — {nivel} (PD {pd_total}/36, {porcentaje}%)",
+        "campos": [
+          { "label": "Descripción", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Actividades", "tipo": "texto", "valor": "actividades" },
+          { "label": "Profesiones", "tipo": "texto", "valor": "profesiones" },
+          { "label": "Carreras universitarias", "tipo": "lista", "valor": "carreras" },
+          { "label": "AC / PR", "tipo": "texto", "valor": "pd_ac/pd_pr" }
+        ]
+      }
+    },
+    {
+      "id": "campos_secundarios",
+      "tipo": "lista_campos",
+      "titulo": "Campos secundarios (PD ≥ 19)",
+      "fuente": "analisis.secundarios",
+      "item": "{emoji} {nombre} — PD {pd_total}/36 ({nivel})"
+    },
+    {
+      "id": "campos_rechazo",
+      "tipo": "lista_campos",
+      "titulo": "Campos de bajo interés / rechazo (PD ≤ 12)",
+      "fuente": "analisis.rechazos",
+      "item": "{emoji} {nombre} — PD {pd_total}/36 ({nivel})"
+    },
+    {
+      "id": "discrepancias",
+      "tipo": "lista_campos",
+      "titulo": "Discrepancias Actividades/Profesiones (≥ 6 puntos)",
+      "fuente": "analisis.discrepancias",
+      "item": "{nombre}: AC {pd_ac} vs PR {pd_pr} ({tipo})"
+    }
+  ]
+}

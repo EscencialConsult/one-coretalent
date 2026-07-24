@@ -1,0 +1,30 @@
+{
+  "id": "baron-eqi",
+  "nombre": "Bar-On EQ-i (Inteligencia Emocional)",
+  "codigo": "EQ-i",
+  "descripcion": "Inventario de Inteligencia Emocional de Bar-On (versión completa de 133 ítems): 15 subescalas agrupadas en 5 componentes (Intrapersonal, Interpersonal, Adaptabilidad, Manejo del Estrés y Estado de Ánimo General) y un Cociente Emocional Total.",
+  "categoria": "inteligencia_emocional",
+  "version": "1.0",
+  "n_items": 133,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "likert_2_6",
+  "_tipo_respuesta_nota": "Escala Likert de 5 puntos con VALORES 2-6 (Nunca=2, Pocas veces=3, A veces=4, Muchas veces=5, Siempre=6). No hay inversión por valor (no existe reverse 7-x); los ítems 'negativos' se manejan por RESTA a nivel de escala (CEIE.itemsResta y CE Total itemsRestaCETotal).",
+  "subescalas": ["CM", "AS", "AC", "AR", "IN", "RI", "RS", "EN", "SP", "PR", "FL", "TE", "CI", "FE", "OP"],
+  "escalas_compuestas": ["CEIA", "CEIE", "CEAD", "CEME", "CEAG"],
+  "scoring": "scoring.py",
+  "_autoridad_scoring": "Test17/script.gs (la lógica inline de Test17/index.html diverge y queda obsoleta; ver ANALISIS.md).",
+  "salida": [
+    "ceTotal (puntajeBruto, porcentaje, nivel, interpretacion)",
+    "compuestas[*] (puntajeBruto, porcentaje, nivel, subescalas, interpretacion)",
+    "subescalas[*] (puntajeBruto, porcentaje, nivel, numItems)",
+    "fortalezas (top-5 subescalas) / debilidades (bottom-5 subescalas)"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo"
+}

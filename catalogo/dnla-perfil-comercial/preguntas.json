@@ -1,0 +1,39 @@
+{
+  "_fuente": "Test10/script.gs · DIMENSIONES (5 dimensiones × 5 preguntas = 25 ítems).",
+  "_descripcion": "25 ítems Likert 1-5 (1=Nunca ... 5=Siempre). NO hay ítems inversos. Cada dimensión agrupa 5 ítems consecutivos por id. El promedio de la dimensión es la media aritmética de sus 5 ítems.",
+  "_BLOQUEO_textos": "El .gs (autoridad) NO contiene los textos de los reactivos: solo el id->dimensión. Los textos vivían en el formulario/plantilla externa no provista. El index.html legacy contiene 30 ítems de OTRO test (6 dimensiones distintas) y NO sirve como fuente para estos textos. Los 'text' quedan como null hasta recuperar el cuadernillo oficial DNLA Sales.",
+  "escala": {
+    "1": "Nunca",
+    "2": "Rara vez",
+    "3": "A veces",
+    "4": "Frecuentemente",
+    "5": "Siempre"
+  },
+  "items": [
+    { "id": 1, "dimension": "iniciativa_proactividad", "reverse": false, "text": null },
+    { "id": 2, "dimension": "iniciativa_proactividad", "reverse": false, "text": null },
+    { "id": 3, "dimension": "iniciativa_proactividad", "reverse": false, "text": null },
+    { "id": 4, "dimension": "iniciativa_proactividad", "reverse": false, "text": null },
+    { "id": 5, "dimension": "iniciativa_proactividad", "reverse": false, "text": null },
+    { "id": 6, "dimension": "comunicacion_persuasiva", "reverse": false, "text": null },
+    { "id": 7, "dimension": "comunicacion_persuasiva", "reverse": false, "text": null },
+    { "id": 8, "dimension": "comunicacion_persuasiva", "reverse": false, "text": null },
+    { "id": 9, "dimension": "comunicacion_persuasiva", "reverse": false, "text": null },
+    { "id": 10, "dimension": "comunicacion_persuasiva", "reverse": false, "text": null },
+    { "id": 11, "dimension": "escucha_empatia", "reverse": false, "text": null },
+    { "id": 12, "dimension": "escucha_empatia", "reverse": false, "text": null },
+    { "id": 13, "dimension": "escucha_empatia", "reverse": false, "text": null },
+    { "id": 14, "dimension": "escucha_empatia", "reverse": false, "text": null },
+    { "id": 15, "dimension": "escucha_empatia", "reverse": false, "text": null },
+    { "id": 16, "dimension": "orientacion_cliente", "reverse": false, "text": null },
+    { "id": 17, "dimension": "orientacion_cliente", "reverse": false, "text": null },
+    { "id": 18, "dimension": "orientacion_cliente", "reverse": false, "text": null },
+    { "id": 19, "dimension": "orientacion_cliente", "reverse": false, "text": null },
+    { "id": 20, "dimension": "orientacion_cliente", "reverse": false, "text": null },
+    { "id": 21, "dimension": "resiliencia_rechazo", "reverse": false, "text": null },
+    { "id": 22, "dimension": "resiliencia_rechazo", "reverse": false, "text": null },
+    { "id": 23, "dimension": "resiliencia_rechazo", "reverse": false, "text": null },
+    { "id": 24, "dimension": "resiliencia_rechazo", "reverse": false, "text": null },
+    { "id": 25, "dimension": "resiliencia_rechazo", "reverse": false, "text": null }
+  ]
+}

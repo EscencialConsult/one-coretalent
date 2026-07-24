@@ -1,0 +1,50 @@
+{
+  "id": "ipp",
+  "nombre": "IPP — Inventario de Intereses y Preferencias Profesionales",
+  "codigo": "IPP",
+  "descripcion": "Inventario de intereses vocacionales: evalúa la inclinación del evaluado hacia 18 campos profesionales mediante 108 actividades/profesiones valoradas como Agrada (A), Indiferente (I) o Desagrada (D).",
+  "categoria": "vocacional",
+  "version": "1.0",
+  "n_items": 108,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "aid",
+  "_tipo_respuesta_nota": "Cada ítem se responde A (Agrada=2 pts), I (Indiferente=1 pt) o D (Desagrada=0 pts). 18 campos × 6 ítems c/u; máximo 12 puntos por campo.",
+  "dimensiones": [
+    "C",
+    "T",
+    "S",
+    "CS",
+    "L",
+    "AP",
+    "M",
+    "SA",
+    "EE",
+    "PC",
+    "A",
+    "JP",
+    "CI",
+    "E",
+    "SE",
+    "D",
+    "AA",
+    "I"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "campos (puntuacion, porcentaje, nivel, color, detalle A/I/D, descripcion, carreras)",
+    "campos_predominantes (top 3)",
+    "campos_rechazados (bottom 3)",
+    "tipo_perfil + interpretacion_perfil"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo_parcial",
+  "_estado_nota": "Motor de cálculo (puntuación, porcentaje, niveles, ordenamiento, perfil) portado fiel del .gs. El .gs legacy está TRUNCADO tras calcularResultadosIPP: faltan return y generarInformeHTML. Ver ANALISIS.md.",
+  "disponible": false,
+  "_disponible_nota": "No disponible: en preparacion. No asignable a empresas; en el catalogo aparece deshabilitado al final y sin categoria."
+}

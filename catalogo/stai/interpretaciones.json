@@ -1,0 +1,53 @@
+{
+  "_fuente": "Test16/script.gs · TEXTOS_CATEGORIA + TEXTOS_RELACION",
+  "_descripcion": "Textos pre-aprobados seleccionados por categoría (Bajo / Tend. Promedio / Promedio / Sobre promedio / Alto) para cada escala (estado/rasgo) y por configuración de la relación Estado-Rasgo. Contenido curado, no generado por IA.",
+  "por_categoria": {
+    "Bajo": {
+      "estado": "El nivel de ansiedad estado se sitúa en un rango bajo, lo que indica que al momento de la evaluación la persona experimentaba escasa tensión, nerviosismo o aprensión. Esto puede reflejar un estado emocional de calma y bienestar, ausencia de estresores significativos, o una adecuada capacidad de regulación emocional en ese momento.",
+      "rasgo": "El nivel de ansiedad rasgo se encuentra en un rango bajo, lo que sugiere que la persona presenta una baja propensión general a experimentar ansiedad. Tiende a percibir las situaciones cotidianas como poco amenazantes y cuenta con recursos de afrontamiento estables. Esto indica estabilidad emocional y buena tolerancia al estrés.",
+      "color": "#10b981",
+      "icono": "✅"
+    },
+    "Tend. Promedio": {
+      "estado": "El nivel de ansiedad estado se ubica en una tendencia hacia el promedio, indicando que al momento de la evaluación la persona experimentaba niveles moderados-bajos de tensión. Este nivel es funcional y esperable, sugiriendo una leve activación emocional que no interfiere significativamente con el desempeño.",
+      "rasgo": "El nivel de ansiedad rasgo muestra una tendencia hacia el promedio, lo que indica una propensión moderada-baja a experimentar ansiedad de manera general. La persona presenta recursos de afrontamiento adecuados, aunque puede experimentar cierta activación ante situaciones evaluativas o de presión.",
+      "color": "#3b82f6",
+      "icono": "🔵"
+    },
+    "Promedio": {
+      "estado": "El nivel de ansiedad estado se encuentra en el rango promedio, indicando una activación emocional esperable y funcional al momento de la evaluación. Este nivel refleja una respuesta adaptativa normal ante la situación de evaluación, con niveles de tensión y preocupación dentro de lo esperado para la población general.",
+      "rasgo": "El nivel de ansiedad rasgo se sitúa en el promedio poblacional, indicando una propensión normal a experimentar ansiedad. La persona presenta un equilibrio entre la activación emocional y la capacidad de regulación, respondiendo de manera esperable ante situaciones de estrés cotidiano.",
+      "color": "#f59e0b",
+      "icono": "🟡"
+    },
+    "Sobre promedio": {
+      "estado": "El nivel de ansiedad estado se encuentra por encima del promedio, lo que indica que al momento de la evaluación la persona experimentaba niveles elevados de tensión, nerviosismo o preocupación. Esto puede estar relacionado con estresores situacionales específicos, la propia situación de evaluación, o circunstancias vitales actuales que generan malestar emocional.",
+      "rasgo": "El nivel de ansiedad rasgo está por encima del promedio, lo que sugiere una propensión elevada a percibir situaciones como amenazantes y a responder con mayor intensidad emocional. La persona tiende a experimentar preocupación, tensión y nerviosismo con mayor frecuencia que la población general. Esto puede afectar su bienestar y rendimiento en diversas áreas.",
+      "color": "#f97316",
+      "icono": "🟠"
+    },
+    "Alto": {
+      "estado": "El nivel de ansiedad estado se sitúa en un rango alto, indicando que al momento de la evaluación la persona experimentaba niveles significativos de tensión, aprensión y malestar emocional. Este resultado requiere atención, ya que niveles elevados de ansiedad estado pueden interferir con el rendimiento cognitivo, la toma de decisiones y el bienestar general.",
+      "rasgo": "El nivel de ansiedad rasgo se encuentra en un rango alto, lo que indica una marcada predisposición a experimentar ansiedad de manera frecuente e intensa. La persona tiende a percibir un amplio rango de situaciones como amenazantes y presenta dificultades para regular su respuesta emocional de manera efectiva. Este nivel de ansiedad rasgo sugiere vulnerabilidad al estrés y posible necesidad de acompañamiento profesional.",
+      "color": "#ef4444",
+      "icono": "🔴"
+    }
+  },
+  "relacion_estado_rasgo": {
+    "estado_mayor": {
+      "titulo": "⚠️ Alerta: Ansiedad Estado superior a Ansiedad Rasgo",
+      "texto": "El resultado muestra que la puntuación de Ansiedad Estado (A/E) es superior a la de Ansiedad Rasgo (A/R). Esta configuración es clínicamente significativa: la persona está experimentando un nivel de ansiedad actual que SUPERA su tolerancia habitual al estrés. Esto puede indicar que el individuo se encuentra al borde de un colapso emocional, burnout laboral, o sobrecarga situacional que excede sus recursos de afrontamiento habituales. Se recomienda intervención o seguimiento profesional.",
+      "color": "#dc2626"
+    },
+    "estado_igual": {
+      "titulo": "Ansiedad Estado equivalente a Ansiedad Rasgo",
+      "texto": "Las puntuaciones de Ansiedad Estado (A/E) y Ansiedad Rasgo (A/R) son similares, lo que indica que el nivel de ansiedad experimentado al momento de la evaluación es congruente con la predisposición ansiosa habitual de la persona. Esto sugiere un funcionamiento consistente: la persona maneja su ansiedad actual de manera acorde a su patrón general, sin sobrecarga adicional significativa.",
+      "color": "#f59e0b"
+    },
+    "estado_menor": {
+      "titulo": "✅ Ansiedad Estado inferior a Ansiedad Rasgo",
+      "texto": "El resultado muestra que la puntuación de Ansiedad Estado (A/E) es inferior a la de Ansiedad Rasgo (A/R). Esta es la configuración esperable y saludable: aunque la persona tiene una cierta predisposición a la ansiedad (rasgo), al momento de la evaluación no estaba colapsando ni sobrepasando su capacidad de tolerancia. La persona se encuentra dentro de su rango funcional de manejo del estrés.",
+      "color": "#10b981"
+    }
+  }
+}

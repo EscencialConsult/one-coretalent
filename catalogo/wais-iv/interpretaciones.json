@@ -1,0 +1,31 @@
+{
+  "_fuente": "Test4/script.gs · INTERPRETACIONES_INDICES + INDICES_PART1/INDICES_PART2 (nombres). Contenido aprobado; seleccionado por umbral de % (alto>=70, medio>=40, bajo). No generado por IA.",
+  "nombres_indices": {
+    "ICV": "Comprensión Verbal",
+    "IRP": "Razonamiento Perceptivo",
+    "IMT": "Memoria de Trabajo",
+    "IVP": "Velocidad de Procesamiento"
+  },
+  "por_indice": {
+    "ICV": {
+      "alto": "Excelente capacidad para comprender información verbal, razonar con conceptos lingüísticos y expresar ideas verbalmente. Demuestra un conocimiento amplio y bien integrado.",
+      "medio": "Capacidad adecuada para el razonamiento verbal y la comprensión de conceptos. El conocimiento cultural y lingüístico se encuentra dentro de lo esperado.",
+      "bajo": "Se observan dificultades en el procesamiento de información verbal. Podría beneficiarse de estrategias que fortalezcan el vocabulario y la comprensión conceptual."
+    },
+    "IRP": {
+      "alto": "Destacada habilidad para analizar información visual, identificar patrones y resolver problemas no verbales. Muestra flexibilidad cognitiva y pensamiento abstracto bien desarrollado.",
+      "medio": "Capacidad adecuada para el razonamiento visoespacial y la resolución de problemas no verbales. Puede identificar patrones y relaciones con eficiencia normal.",
+      "bajo": "Se evidencian dificultades en el procesamiento visual y el razonamiento abstracto no verbal. Podría beneficiarse de estrategias de apoyo visual estructuradas."
+    },
+    "IMT": {
+      "alto": "Excelente capacidad para mantener y manipular información en la mente. Demuestra buena atención sostenida y control ejecutivo, lo que facilita el aprendizaje y la resolución de problemas complejos.",
+      "medio": "Capacidad de memoria de trabajo dentro del rango esperado. Puede retener y manipular cantidades normales de información para realizar operaciones mentales.",
+      "bajo": "La memoria de trabajo se encuentra por debajo de lo esperado. Esto puede afectar la capacidad de seguir instrucciones complejas y realizar cálculos mentales. Se recomienda evaluar factores atencionales."
+    },
+    "IVP": {
+      "alto": "Velocidad de procesamiento muy eficiente. Demuestra rapidez y precisión en tareas que requieren exploración visual, toma de decisiones rápidas y coordinación visomotora.",
+      "medio": "Velocidad de procesamiento dentro del rango normal. Puede realizar tareas de discriminación visual y codificación a un ritmo adecuado.",
+      "bajo": "La velocidad de procesamiento es más lenta de lo esperado. Esto no refleja la capacidad intelectual general, pero puede afectar el rendimiento en tareas con límite de tiempo."
+    }
+  }
+}

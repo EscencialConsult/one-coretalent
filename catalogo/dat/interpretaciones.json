@@ -1,0 +1,246 @@
+{
+  "_descripcion": "Textos de interpretación pre-aprobados, portados literalmente de LIB_TEXTOS en Test1/script.gs. Seleccionados por nivel (ALTO/MEDIO/BAJO) según el % del subtest, y por estilo de trabajo. PSA y ORT no tienen bloque de interpretación propio en el legacy (ORT alimenta el estilo de trabajo; PSA idem).",
+  "aptitudes": {
+    "VR": {
+      "ALTO": {
+        "titulo": "Competencia Verbal Superior - Comunicador Estratégico Excepcional",
+        "desc": "El evaluado demuestra una competencia verbal excepcional que lo posiciona en el percentil superior de la población. Esta capacidad se manifiesta en múltiples dimensiones cognitivas: comprensión profunda de matices lingüísticos sutiles, estructuración de argumentos complejos con coherencia lógica impecable, y comunicación de ideas abstractas con precisión notable. Su vocabulario no solo es extenso, sino contextualmente apropiado y sofisticado.",
+        "implicancia": "En el ámbito profesional, este perfil verbal superior representa un activo estratégico de alto valor. Destacará naturalmente en roles que requieren comunicación estratégica multinivel: debe poder traducir conceptos técnicos complejos a un lenguaje accesible para la toma de decisiones, pero también debe poder realizar el proceso inverso: conceptualizar visiones estratégicas abstractas y transformarlas en planes de acción concretos.",
+        "fortalezas": [
+          "Capacidad excepcional para la redacción de documentos estratégicos de alto impacto",
+          "Habilidad sobresaliente para la negociación compleja multinivel",
+          "Comprensión rápida y profunda de documentación técnica o legal compleja",
+          "Talento natural para sintetizar información de múltiples fuentes dispersas",
+          "Facilidad notable para el aprendizaje autónomo de nuevos dominios conceptuales",
+          "Excelencia en la facilitación de reuniones estratégicas",
+          "Capacidad para detectar inconsistencias lógicas o brechas argumentativas"
+        ],
+        "tips": "Para maximizar el retorno de este perfil, es imperativo asignarle responsabilidades de liderazgo intelectual y comunicación estratégica. Evite confinarlo exclusivamente a tareas puramente operativas o repetitivas.",
+        "riesgos": "Puede tender a la sobre-complejización del lenguaje cuando la audiencia no requiere ese nivel de sofisticación. Su preferencia por la precisión conceptual puede ser percibida como rigidez por perfiles más pragmáticos."
+      },
+      "MEDIO": {
+        "titulo": "Competencia Verbal Funcional - Comunicador Profesional Efectivo",
+        "desc": "El evaluado presenta un nivel de razonamiento verbal sólido, equilibrado y adecuado para la mayoría de los contextos profesionales. Posee las herramientas lingüísticas fundamentales para desenvolverse con eficacia: comprende instrucciones escritas con claridad, puede redactar documentos funcionales profesionales y mantiene conversaciones fluidas.",
+        "implicancia": "Laboralmente, este perfil representa un ejecutor confiable y apropiado para la gestión operativa y táctica cotidiana. Es capaz de comprender procedimientos, seguir protocolos con fidelidad y comunicar información operativa de manera clara.",
+        "fortalezas": [
+          "Comunicación profesional clara, directa y desprovista de ambigüedades innecesarias",
+          "Capacidad sólida y confiable para comprender y seguir instrucciones escritas",
+          "Redacción funcional y profesionalmente apropiada para documentación estándar",
+          "Facilidad genuina para mantener interacciones verbales fluidas en equipos",
+          "Pragmatismo comunicativo altamente valorado en entornos operativos",
+          "Capacidad para adaptar su estilo comunicativo a diferentes audiencias estándar",
+          "Estabilidad y consistencia en la calidad comunicativa"
+        ],
+        "tips": "Este perfil alcanza su máximo potencial en roles de coordinación operativa, administración general, supervisión de procesos establecidos o atención al cliente.",
+        "riesgos": "Puede requerir apoyo en contextos de alta ambigüedad comunicativa o análisis de textos extremadamente densos. Si se le exigen producciones literarias complejas, puede experimentar fatiga."
+      },
+      "BAJO": {
+        "titulo": "Estilo Comunicativo Concreto - Ejecutor Práctico Orientado a la Acción",
+        "desc": "El evaluado muestra un perfil de procesamiento verbal marcadamente concreto, tangible y pragmático. Su fortaleza radica en el manejo efectivo de información directa, observable y práctica, más que en el procesamiento de conceptos abstractos o lenguaje metafórico.",
+        "implicancia": "Este perfil brilla en la ejecución práctica hands-on, la implementación concreta de procedimientos establecidos y la operación de sistemas siguiendo secuencias definidas. Aprende mejor haciendo y observando que leyendo textos extensos.",
+        "fortalezas": [
+          "Enfoque altamente práctico y orientado a la acción inmediata",
+          "Comunicación sencilla, directa y honesta",
+          "Preferencia marcada por hechos concretos y observables",
+          "Ejecución rápida y precisa de instrucciones claramente comunicadas",
+          "Memoria procedimental sólida",
+          "Capacidad para mantener concentración en tareas prácticas",
+          "Autenticidad comunicativa"
+        ],
+        "tips": "Maximice su potencial en roles técnicos, manuales u operativos donde la consistencia en la ejecución es clave. Proporcione instrucciones con ayudas visuales y demostraciones prácticas.",
+        "riesgos": "Puede experimentar dificultades si se le asigna la redacción de informes conceptuales complejos o el análisis de normativas ambiguas sin apoyo."
+      }
+    },
+    "NR": {
+      "ALTO": {
+        "titulo": "Inteligencia Cuantitativa Excepcional - Analista Estratégico Data-Driven",
+        "desc": "Exhibe una destreza cuantitativa superior. Posee una intuición numérica que le permite detectar patrones en series de datos con rapidez, identificar anomalías estadísticas y estimar resultados complejos con precisión.",
+        "implicancia": "En organizaciones data-driven, este perfil es un activo estratégico. Es el analista experto confiable, capaz de fundamentar decisiones críticas con rigor cuantitativo y modelar escenarios complejos.",
+        "fortalezas": [
+          "Capacidad excepcional para realizar análisis financieros sofisticados",
+          "Detección temprana instintiva de anomalías o errores en datos",
+          "Facilidad notable para el aprendizaje de software analítico complejo",
+          "Toma de decisiones objetiva basada en evidencia cuantitativa",
+          "Habilidad para traducir preguntas de negocio vagas en análisis estructurados",
+          "Comprensión profunda de métricas clave de negocio",
+          "Capacidad para comunicar findings cuantitativos a audiencias mixtas"
+        ],
+        "tips": "Involúcrelo en planificación estratégica, control de gestión, análisis de rentabilidad y evaluación de inversiones. Permítale autonomía para el análisis profundo.",
+        "riesgos": "Puede caer en 'parálisis por análisis' buscando precisión excesiva. Su escepticismo hacia lo cualitativo puede generar fricción con perfiles más intuitivos."
+      },
+      "MEDIO": {
+        "titulo": "Competencia Numérica Funcional",
+        "desc": "Muestra una competencia numérica sólida y apropiada para roles administrativos, comerciales y de supervisión general. Se maneja con soltura en las operaciones matemáticas cotidianas.",
+        "implicancia": "Es un perfil versátil y confiable para funciones que no requieren ingeniería financiera avanzada. Puede llevar presupuestos, gestionar inventarios y analizar reportes de ventas.",
+        "fortalezas": [
+          "Gestión administrativa correcta de transacciones numéricas",
+          "Comprensión funcional de métricas básicas de negocio",
+          "Capacidad para resolver problemas lógicos prácticos",
+          "Balance apropiado entre análisis numérico e intuición",
+          "Facilidad para aprender sistemas contables estándar"
+        ],
+        "tips": "Idóneo para administración general, ventas o logística. Proporcione herramientas pre-estructuradas para análisis recurrentes.",
+        "riesgos": "Puede requerir supervisión en análisis financieros de alta complejidad."
+      },
+      "BAJO": {
+        "titulo": "Enfoque Cualitativo Predominante",
+        "desc": "Su estilo cognitivo es marcadamente cualitativo, prefiriendo la información narrativa y relacional. El procesamiento sostenido de datos numéricos puede generarle fatiga.",
+        "implicancia": "Aporta valor excepcional en áreas donde las soft skills, la empatía o la creatividad son determinantes, como gestión humana o marketing creativo.",
+        "fortalezas": [
+          "Enfoque centrado en aspectos humanos y relacionales",
+          "Toma de decisiones basada en intuición experimentada",
+          "Habilidades sobresalientes en áreas no matemáticas",
+          "Preferencia por soluciones centradas en personas",
+          "Capacidad para conectar emocionalmente"
+        ],
+        "tips": "Maximice su valor en roles cualitativos. Automatice los procesos numéricos que deba realizar.",
+        "riesgos": "Riesgo de errores en tareas contables si no cuenta con soporte tecnológico adecuado."
+      }
+    },
+    "AR": {
+      "ALTO": {
+        "titulo": "Inteligencia Fluida Superior",
+        "desc": "Destaca por una capacidad excepcional para resolver problemas nuevos sin depender de conocimientos previos. Puede desestructurar sistemas complejos y entender su funcionamiento lógico.",
+        "implicancia": "Es un troubleshooter nato, ideal para enfrentar problemas inéditos. Invaluable en entornos de estrategia, innovación o ingeniería de procesos.",
+        "fortalezas": [
+          "Capacidad excepcional para resolver problemas complejos e inéditos",
+          "Pensamiento sistémico avanzado",
+          "Facilidad para dominar nuevas tecnologías",
+          "Innovación en diseño de procesos",
+          "Capacidad para abstraer principios generales",
+          "Diagnóstico rápido de causas raíz"
+        ],
+        "tips": "Asígnelo a roles de arquitectura de sistemas, consultoría estratégica o I+D.",
+        "riesgos": "Puede frustrarse en culturas organizacionales rígidas o excesivamente burocráticas."
+      },
+      "MEDIO": {
+        "titulo": "Capacidad de Abstracción Equilibrada",
+        "desc": "Posee una capacidad de abstracción funcional. Aprende nuevos sistemas y procedimientos lógicos con un periodo de inducción razonable.",
+        "implicancia": "Perfil adaptativo y confiable. Sigue la lógica establecida y aplica sentido común ante situaciones estándar.",
+        "fortalezas": [
+          "Aprendizaje funcional de nuevos métodos",
+          "Aplicación de sentido común lógico",
+          "Adaptabilidad a cambios procedimentales",
+          "Resolución efectiva de problemas estándar",
+          "Balance entre procedimientos y juicio independiente"
+        ],
+        "tips": "Funciona óptimamente en roles operativos o técnicos especializados. Proporcione capacitación práctica.",
+        "riesgos": "Puede experimentar estrés si se le exige innovar sin marcos de referencia claros."
+      },
+      "BAJO": {
+        "titulo": "Estilo Cognitivo Concreto-Secuencial",
+        "desc": "Prefiere trabajar con lo tangible y observable. Los conceptos abstractos le resultan difíciles de procesar sin referencias concretas.",
+        "implicancia": "Excelente ejecutor de tareas rutinarias y estandarizadas. Una vez domina un proceso, lo replica con consistencia.",
+        "fortalezas": [
+          "Apego riguroso a normas y procedimientos",
+          "Ejecución fiel de tareas repetitivas",
+          "Enfoque en el aquí y ahora",
+          "Estabilidad operativa",
+          "Retención precisa de procedimientos"
+        ],
+        "tips": "Ideal para roles altamente estructurados. Proporcione manuales detallados.",
+        "riesgos": "Dificultad para resolver problemas inéditos sin soporte previo."
+      }
+    },
+    "SR": {
+      "ALTO": {
+        "titulo": "Inteligencia Espacial Superior",
+        "desc": "Habilidad excepcional para la visualización tridimensional y manipulación mental de objetos. Puede visualizar resultados finales antes de la ejecución física.",
+        "implicancia": "Crítica en arquitectura, ingeniería, diseño, logística y disciplinas donde la relación espacial es determinante.",
+        "fortalezas": [
+          "Pensamiento visual y capacidad de diseño espacial",
+          "Comprensión profunda de planos técnicos",
+          "Sentido superior de orientación",
+          "Organización eficiente de espacios físicos",
+          "Visualización anticipada de resultados",
+          "Facilidad para herramientas de diseño 3D"
+        ],
+        "tips": "Potencie su talento en roles técnicos o de diseño. Proporcione herramientas visuales.",
+        "riesgos": "Puede frustrarse al comunicar ideas espaciales solo con palabras."
+      },
+      "MEDIO": {
+        "titulo": "Percepción Espacial Funcional",
+        "desc": "Percepción espacial adecuada para tareas laborales estándar. Lee mapas simples e interpreta gráficos básicos correctamente.",
+        "implicancia": "No es su talento dominante, pero no representa una limitación para roles administrativos o de gestión.",
+        "fortalezas": [
+          "Interpretación correcta de gráficos estándar",
+          "Organización funcional de espacios",
+          "Capacidad para seguir instrucciones de ensamblaje",
+          "Orientación espacial suficiente",
+          "Comprensión básica de geometría"
+        ],
+        "tips": "Apropiado para la mayoría de roles que no dependen de diseño complejo.",
+        "riesgos": "Puede cometer errores en diseño de layouts complejos sin soporte."
+      },
+      "BAJO": {
+        "titulo": "Preferencia por Procesamiento No-Espacial",
+        "desc": "Prefiere información en formato textual o listas secuenciales. El procesamiento espacial complejo le resulta desafiante.",
+        "implicancia": "Evite asignarle tareas que dependan críticamente de visualización espacial o diseño físico.",
+        "fortalezas": [
+          "Preferencia por procesamiento verbal/textual",
+          "Enfoque en procesos secuenciales lógicos",
+          "Capacidad para trabajar con datos abstractos no visuales",
+          "Fortalezas en dominios alternativos"
+        ],
+        "tips": "Maximice su valor en roles donde lo espacial sea irrelevante.",
+        "riesgos": "Riesgo de errores en interpretación de planos complejos."
+      }
+    }
+  },
+  "estilo_trabajo": {
+    "DINAMICO": {
+      "titulo": "PERFIL DINÁMICO - Motor de Acción",
+      "subtitulo": "Alta Velocidad + Precisión Variable",
+      "desc": "El evaluado es un motor de acción pura. Prioriza la velocidad de respuesta y el volumen de producción. Ataca las tareas con energía y urgencia.",
+      "riesgo": "Riesgo de tasa de error por precipitación. Puede pasar por alto detalles finos en su impulso por velocidad.",
+      "rol": "Excelente para ventas de volumen, gestión de crisis o roles transaccionales. Requiere control de calidad externo.",
+      "fortalezas_adicionales": [
+        "Capacidad excepcional para multitasking",
+        "Resiliencia ante presión temporal",
+        "Iniciativa proactiva",
+        "Energía sostenida"
+      ]
+    },
+    "METICULOSO": {
+      "titulo": "PERFIL PERFECCIONISTA - Garante de Calidad",
+      "subtitulo": "Baja Velocidad + Alta Precisión",
+      "desc": "El evaluado es un garante de calidad. Su enfoque es deliberado, reflexivo y exhaustivo. Posee un estándar de autoexigencia elevado.",
+      "riesgo": "Puede ser percibido como lento o caer en parálisis por análisis ante urgencias extremas.",
+      "rol": "Ideal para auditoría, control de calidad, legal o investigación. No presionar con plazos irreales.",
+      "fortalezas_adicionales": [
+        "Consistencia en calidad uniforme",
+        "Confiabilidad en tareas críticas",
+        "Pensamiento de largo plazo",
+        "Altos estándares internos"
+      ]
+    },
+    "EFICIENTE": {
+      "titulo": "PERFIL DE ALTA EFICIENCIA - Ejecutor Élite",
+      "subtitulo": "Alta Velocidad + Alta Precisión",
+      "desc": "Posee la combinación ideal de agilidad mental y atención al detalle. Procesa grandes volúmenes de información rápidamente sin sacrificar calidad.",
+      "riesgo": "Puede frustrarse con sistemas lentos o aburrirse si el trabajo no es desafiante.",
+      "rol": "Alto potencial ejecutivo, coordinación de operaciones críticas o gestión de proyectos complejos.",
+      "fortalezas_adicionales": [
+        "Versatilidad y task switching eficiente",
+        "Aprendizaje acelerado",
+        "Juicio ejecutivo balanceado",
+        "Mentalidad de mejora continua",
+        "Resiliencia ante sobrecarga"
+      ]
+    },
+    "ESTANDAR": {
+      "titulo": "PERFIL EQUILIBRADO - Ejecutor Confiable",
+      "subtitulo": "Velocidad Moderada + Precisión Moderada",
+      "desc": "Mantiene un ritmo sostenible con atención al detalle promedio. Se adapta funcionalmente a rutinas y cumple estándares esperados.",
+      "riesgo": "Rendimiento predecible, pero puede cometer errores bajo presión extrema o fatiga.",
+      "rol": "Apropiado para la mayoría de roles operativos y administrativos estándar. Fundamental para la estabilidad.",
+      "fortalezas_adicionales": [
+        "Predecibilidad en la planificación",
+        "Estabilidad emocional laboral",
+        "Adaptabilidad organizacional",
+        "Trabajo en equipo sin conflictos",
+        "Longevidad probable en el rol"
+      ]
+    }
+  }
+}

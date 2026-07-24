@@ -1,0 +1,283 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* White-label por empresa: ThemeProvider pisa estos dos valores en runtime.
+     El resto de la identidad visual (rosa/cian/oro/violeta/tinta) es fija de la marca ONE. */
+  --brand-acento: #4d248f;
+  --brand-secundario: #6be1e3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", -apple-system, Roboto, system-ui, sans-serif;
+  color: #1a181d;
+  background: #fefeff;
+}
+
+/* ── Fondo decorativo (blobs animados) — misma identidad visual que Plataforma ONE ── */
+.fondo-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  pointer-events: none;
+}
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.55;
+  animation: flotar 20s ease-in-out infinite;
+}
+.blob.a { width: 520px; height: 520px; background: radial-gradient(circle, #e17bd7, transparent 68%); top: -160px; left: -120px; }
+.blob.b { width: 480px; height: 480px; background: radial-gradient(circle, #6be1e3, transparent 68%); top: -120px; right: -130px; animation-delay: -7s; }
+.blob.c { width: 460px; height: 460px; background: radial-gradient(circle, #e4c76a, transparent 70%); bottom: -180px; left: 30%; opacity: 0.4; animation-delay: -13s; }
+.blob.d { width: 380px; height: 380px; background: radial-gradient(circle, #e17bd7, transparent 70%); bottom: -140px; right: -80px; opacity: 0.35; animation-delay: -4s; }
+@keyframes flotar {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(70px, 50px) scale(1.12); }
+  66% { transform: translate(-50px, 30px) scale(0.92); }
+}
+.velo {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(180deg, rgba(254, 254, 255, 0.3), rgba(254, 254, 255, 0.62));
+  pointer-events: none;
+}
+
+/* ── Componentes reutilizables ── */
+@layer components {
+  .marca-texto-gradiente {
+    background-image: theme("backgroundImage.gradiente");
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tarjeta {
+    @apply bg-white bg-opacity-90 border border-linea rounded-marca shadow-marca;
+  }
+
+  .boton {
+    @apply border-0 cursor-pointer font-bold text-sm px-6 py-3.5 rounded-chico transition-transform duration-200;
+  }
+  .boton:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+  .boton:disabled {
+    @apply opacity-40 cursor-not-allowed;
+  }
+  .boton-primario {
+    color: #fff;
+    background-image: theme("backgroundImage.gradiente");
+    box-shadow: 0 14px 30px -12px rgba(225, 123, 215, 0.85);
+  }
+  .boton-acento {
+    color: #fff;
+    background-color: var(--brand-acento);
+  }
+  .boton-fantasma {
+    @apply bg-white text-tinta border border-linea;
+  }
+
+  .input-marca {
+    @apply w-full border border-linea rounded-chico px-4 py-3 text-sm outline-none transition-colors;
+  }
+  .input-marca:focus {
+    border-color: var(--brand-acento);
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 text-xs font-semibold bg-white border border-linea px-3 py-2 rounded-chico;
+  }
+
+  .badge-estado {
+    @apply inline-block font-extrabold tracking-wide px-3 py-1 rounded-full uppercase;
+    font-size: 11px;
+  }
+
+  /* ══ Panel (sidebar + topbar) — porteado de sa-app/sa-side/sa-topbar de Plataforma ONE ══ */
+  .panel-shell {
+    @apply flex min-h-screen relative;
+  }
+  .panel-side {
+    @apply w-64 flex-none bg-white bg-opacity-80 border-r border-linea flex flex-col sticky top-0 h-screen px-4 py-5;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .panel-nav-item {
+    @apply flex items-center gap-3 px-3.5 py-3 rounded-chico text-tinta font-semibold no-underline transition-all;
+    font-size: 14px;
+    opacity: 0.78;
+  }
+  .panel-nav-item:hover {
+    background: rgba(77, 36, 143, 0.06);
+    opacity: 1;
+  }
+  .panel-nav-item.activo {
+    color: #fff;
+    opacity: 1;
+    background-image: theme("backgroundImage.gradiente");
+    box-shadow: 0 10px 22px -10px rgba(225, 123, 215, 0.8);
+  }
+  .panel-main {
+    @apply flex-1 min-w-0 flex flex-col;
+  }
+  .panel-topbar {
+    @apply flex items-center justify-between px-7 py-4 sticky top-0 z-20 border-b border-linea border-opacity-50;
+    background: rgba(254, 254, 255, 0.7);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .panel-content {
+    @apply px-7 py-7 pb-12;
+  }
+  .panel-search {
+    @apply flex items-center gap-2 bg-white border border-linea rounded-chico px-3.5 py-2.5;
+    width: 260px;
+  }
+  .panel-search input {
+    @apply border-0 outline-none text-sm w-full bg-transparent;
+  }
+  .panel-iconbtn {
+    @apply w-10 h-10 rounded-chico border border-linea bg-white grid place-items-center cursor-pointer text-tinta relative transition-colors;
+  }
+  .panel-iconbtn:hover {
+    border-color: var(--acento2, var(--brand-secundario));
+  }
+
+  /* ══ KPI cards ══ */
+  .kpi-grid {
+    @apply grid gap-4 mb-6;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .kpi-card {
+    @apply tarjeta p-5;
+  }
+  .kpi-icon {
+    @apply w-11 h-11 rounded-chico grid place-items-center text-white mb-3.5;
+  }
+  .kpi-icon.v { background-image: linear-gradient(135deg, #4d248f, #e17bd7); }
+  .kpi-icon.r { background-image: theme("backgroundImage.gradiente"); }
+  .kpi-icon.c { background-image: linear-gradient(135deg, #6be1e3, #4d248f); }
+  .kpi-icon.o { background-image: linear-gradient(135deg, #e4c76a, #e17bd7); }
+  .kpi-numero {
+    @apply font-extrabold;
+    font-size: 30px;
+    letter-spacing: -0.5px;
+  }
+  .kpi-etiqueta {
+    @apply text-muted font-semibold mt-0.5;
+    font-size: 13px;
+  }
+
+  /* ══ Tabla ══ */
+  .tabla-panel {
+    @apply w-full;
+    border-collapse: collapse;
+  }
+  .tabla-panel thead th {
+    @apply text-left font-bold text-muted uppercase text-left;
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
+    padding: 0 14px 12px;
+  }
+  .tabla-panel tbody td {
+    @apply border-t border-linea align-middle;
+    font-size: 13.5px;
+    padding: 14px;
+  }
+  .tabla-panel tbody tr.clic {
+    @apply cursor-pointer transition-colors;
+  }
+  .tabla-panel tbody tr.clic:hover {
+    background: rgba(77, 36, 143, 0.03);
+  }
+
+  /* ══ Badges de estado ══ */
+  .pastilla {
+    @apply font-extrabold rounded-full;
+    font-size: 11px;
+    padding: 5px 11px;
+  }
+  .pastilla.ok { color: #1b9aa0; background: rgba(107, 225, 227, 0.2); }
+  .pastilla.alerta { color: #9a8330; background: rgba(228, 199, 106, 0.26); }
+  .pastilla.apagado { color: var(--tinta); opacity: 0.55; background: #eef0f3; }
+  .pastilla.rojo { color: #c0392b; background: rgba(192, 57, 43, 0.12); }
+
+  /* ══ Switch ══ */
+  .interruptor {
+    @apply relative border-0 cursor-pointer flex-none rounded-full transition-colors;
+    width: 40px;
+    height: 23px;
+    background: #dfe1ea;
+  }
+  .interruptor::after {
+    content: "";
+    @apply absolute rounded-full bg-white transition-all;
+    top: 2.5px;
+    left: 2.5px;
+    width: 18px;
+    height: 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  .interruptor.on {
+    background-image: theme("backgroundImage.gradiente");
+  }
+  .interruptor.on::after {
+    left: 19.5px;
+  }
+  .interruptor:disabled {
+    @apply opacity-50 cursor-default;
+  }
+
+  /* ══ Fila tipo "lista" (postulaciones, ítems de config) ══ */
+  .fila-lista {
+    @apply flex items-center gap-3.5 border-t border-linea;
+    padding: 15px 20px;
+  }
+  .fila-lista:first-child {
+    border-top: 0;
+  }
+  .fila-icono {
+    @apply w-9 h-9 rounded-chico grid place-items-center flex-none;
+    background: rgba(77, 36, 143, 0.08);
+    color: var(--brand-acento);
+  }
+
+  /* ══ Modal ══ */
+  .modal-overlay {
+    @apply fixed inset-0 flex items-center justify-center p-5;
+    background: rgba(26, 24, 29, 0.45);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    z-index: 60;
+  }
+  .modal-card {
+    @apply bg-white rounded-marca relative overflow-auto;
+    width: 480px;
+    max-width: 100%;
+    max-height: 92vh;
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.5);
+    padding: 28px;
+  }
+
+  /* ══ Volver / backlink ══ */
+  .volver-link {
+    @apply inline-flex items-center gap-1.5 font-bold border-0 bg-transparent cursor-pointer mb-4 no-underline;
+    color: var(--brand-acento);
+    font-size: 13.5px;
+  }
+
+  /* ══ Toolbar de sección ══ */
+  .barra-herramientas {
+    @apply flex items-center justify-between gap-3 flex-wrap mb-4;
+  }
+}

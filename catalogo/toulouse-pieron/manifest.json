@@ -1,0 +1,31 @@
+{
+  "id": "toulouse-pieron",
+  "nombre": "Test de Toulouse-Piéron",
+  "codigo": "TOULOUSE-PIERON",
+  "descripcion": "Test de cancelación de Toulouse-Piéron: evalúa atención sostenida, concentración y rapidez perceptiva mediante la marcación de símbolos que coinciden con dos modelos de referencia sobre una cuadrícula de 1600 cuadrados.",
+  "categoria": "atencion_percepcion",
+  "version": "1.0",
+  "n_items": 1600,
+  "_n_items_nota": "1600 cuadrados (cuadrícula 40x40). El evaluado debe marcar los que coincidan con 2 símbolos de referencia (de 8 tipos posibles). El input al scoring son los índices marcados (0-based).",
+  "tiempo_limite_min": 10,
+  "tipo_respuesta": "cancelacion_indices",
+  "_tipo_respuesta_nota": "El front envía la lista ordenada de índices marcados como string 'idx,idx,...' envuelta en '{<tiempo> - <indices>}'. El scoring limpia el prefijo y parsea los índices.",
+  "dimensiones": ["aciertos", "errores", "omisiones", "indices_atencion", "velocidad", "perfil_desempeno"],
+  "scoring": "scoring.py",
+  "salida": [
+    "totalMarcados", "totalProcesado", "porcentajeCompletado",
+    "aciertos", "errores", "omisiones",
+    "indiceAciertos", "indiceErrores", "indiceProductividad", "coeficienteAptitud",
+    "nivelAtencion", "nivelPrecision", "nivelVelocidad",
+    "perfil", "analisisPorSegmentos"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo",
+  "_estado_nota": "Cálculo VÁLIDO (2026-07-03): el runner (ToulouseRunner.jsx) genera la grilla y los 2 objetivos y los envía junto con las marcas; scoring.calcular compara marca vs objetivo real → aciertos/errores/omisiones exactos. Se conserva la estimación legacy (20%) solo como fallback si no llegan los objetivos. Índices, baremos, perfil y segmentos se mantienen del port original."
+}

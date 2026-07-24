@@ -1,0 +1,35 @@
+{
+  "id": "ebp",
+  "nombre": "Escala de Bienestar Psicológico",
+  "codigo": "EBP",
+  "descripcion": "Escala de Bienestar Psicológico (EBP) de José Sánchez-Cánovas (Universidad de Valencia). Evalúa cuatro subescalas: Bienestar Psicológico Subjetivo (BPS), Bienestar Material (BM), Bienestar Laboral (BL) y Relaciones con la Pareja (RP).",
+  "categoria": "bienestar",
+  "version": "1.0",
+  "n_items": 65,
+  "tiempo_limite_min": null,
+  "_tiempo_nota": "El front cronometra (cuenta ascendente) pero no impone límite -> null. Instrucciones indican 15-20 min estimados.",
+  "tipo_respuesta": "likert_1_5",
+  "_tipo_respuesta_nota": "Escala 1-5. Etiquetas varían por sección en el front (Nunca..Siempre / Nunca..Casi Siempre / Totalmente en desacuerdo..Totalmente de acuerdo). Algunos ítems de BL y RP se invierten (6 - valor).",
+  "subescalas": [
+    "BPS",
+    "BM",
+    "BL",
+    "RP"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "subescalas (pd, percentil, interpretacion, texto)",
+    "pd_total"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "parcial_logica_gs_falta_contenido_original",
+  "_estado_nota": "Scoring portado fiel al .gs (autoridad). Existe una discrepancia de estructura entre el front (script.js) y el back (script.gs) en el reparto de ítems por sección/subescala. Ver ANALISIS.md.",
+  "disponible": false,
+  "_disponible_nota": "No disponible: en preparacion. No asignable a empresas; en el catalogo aparece deshabilitado al final y sin categoria."
+}

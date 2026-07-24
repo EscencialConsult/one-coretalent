@@ -1,0 +1,41 @@
+{
+  "_descripcion": "Configuración del informe CAD. El renderizador consume la salida de scoring.py (escalas + ranking). Port del informe HTML/radar de Test14/script.gs (construirChartUrlRadar + plantilla).",
+  "titulo": "Informe CAD - Cuestionario de Afrontamiento del Dolor",
+  "subtitulo": "Estrategias de afrontamiento del dolor crónico (Soriano y Monsalve)",
+  "nota_interpretacion": "El CAD no establece puntos de corte oficiales. Las comparaciones se realizan entre escalas del mismo perfil. La puntuación normalizada (0 a 4) facilita comparar escalas con distinto número de ítems.",
+  "secciones": [
+    {
+      "id": "grafico_radar",
+      "tipo": "grafico_radar",
+      "titulo": "Perfil de estrategias (promedio 0-4)",
+      "datos": {
+        "labels": "escalas[*].key",
+        "valores": "escalas[*].avg",
+        "eje": { "min": 0, "max": 4, "paso": 1 }
+      }
+    },
+    {
+      "id": "ranking",
+      "tipo": "ranking",
+      "titulo": "Estrategias predominantes y menos utilizadas",
+      "datos": {
+        "top": { "titulo": "Estrategias predominantes", "fuente": "ranking.top", "campos": ["key", "avg"] },
+        "bottom": { "titulo": "Estrategias menos utilizadas", "fuente": "ranking.bottom", "campos": ["key", "avg"] }
+      }
+    },
+    {
+      "id": "detalle_escalas",
+      "tipo": "bloques_por_escala",
+      "titulo": "Detalle por estrategia",
+      "fuente": "escalas",
+      "bloque": {
+        "encabezado": "{icono} {key} — promedio {avg}/4 ({pct}%)",
+        "campos": [
+          { "label": "Puntaje total", "tipo": "texto", "valor": "total" },
+          { "label": "Nº de ítems", "tipo": "texto", "valor": "n" },
+          { "label": "Foco de la estrategia", "tipo": "texto", "valor": "foco" }
+        ]
+      }
+    }
+  ]
+}

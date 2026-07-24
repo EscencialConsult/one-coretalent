@@ -1,0 +1,58 @@
+{
+  "_descripcion": "Casos de regresión para Big Five. 'fill' = todas las respuestas con ese valor. 'respuestas' = dict id->valor; 'fill_resto' completa los ids no listados. Valores esperados derivados del algoritmo del .gs (pendiente validar también contra salidas históricas reales).",
+  "casos": [
+    {
+      "nombre": "Todo 3 (neutral) — sumas 30 por dimensión",
+      "fill": 3,
+      "esperado": {
+        "dimension_dominante": "neuroticism",
+        "dimensiones": {
+          "extraversion": { "puntuacion": 30, "percentil": 39, "nivel": "bajo" },
+          "agreeableness": { "puntuacion": 30, "percentil": 16, "nivel": "muyBajo" },
+          "conscientiousness": { "puntuacion": 30, "percentil": 29, "nivel": "bajo" },
+          "neuroticism": { "puntuacion": 30, "percentil": 57, "nivel": "moderadoAlto" },
+          "openness": { "puntuacion": 30, "percentil": 16, "nivel": "muyBajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 1 — verifica inversión de ítems",
+      "fill": 1,
+      "esperado": {
+        "dimension_dominante": "neuroticism",
+        "dimensiones": {
+          "extraversion": { "puntuacion": 30, "percentil": 39, "nivel": "bajo" },
+          "agreeableness": { "puntuacion": 30, "percentil": 16, "nivel": "muyBajo" },
+          "conscientiousness": { "puntuacion": 30, "percentil": 29, "nivel": "bajo" },
+          "neuroticism": { "puntuacion": 26, "percentil": 43, "nivel": "promedio" },
+          "openness": { "puntuacion": 34, "percentil": 30, "nivel": "bajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 5 — verifica inversión (espejo del caso anterior en N y O)",
+      "fill": 5,
+      "esperado": {
+        "dimension_dominante": "neuroticism",
+        "dimensiones": {
+          "extraversion": { "puntuacion": 30, "percentil": 39, "nivel": "bajo" },
+          "agreeableness": { "puntuacion": 30, "percentil": 16, "nivel": "muyBajo" },
+          "conscientiousness": { "puntuacion": 30, "percentil": 29, "nivel": "bajo" },
+          "neuroticism": { "puntuacion": 34, "percentil": 71, "nivel": "moderadoAlto" },
+          "openness": { "puntuacion": 26, "percentil": 7, "nivel": "muyBajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Extraversión máxima (50) — verifica rama percentil >= p95",
+      "fill_resto": 3,
+      "respuestas": { "1": 5, "11": 5, "21": 5, "31": 5, "41": 5, "6": 1, "16": 1, "26": 1, "36": 1, "46": 1 },
+      "esperado": {
+        "dimension_dominante": "extraversion",
+        "dimensiones": {
+          "extraversion": { "puntuacion": 50, "percentil": 96, "nivel": "muyAlto" }
+        }
+      }
+    }
+  ]
+}

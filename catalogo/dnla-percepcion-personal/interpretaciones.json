@@ -1,0 +1,226 @@
+{
+  "_fuente": "Test11/script.gs · generarAnalisisDetalladoHTML / generarPatronesTransversalesHTML / generarRiesgosHTML / generarRecomendacionesHTML / generarSintesisFinal",
+  "_descripcion": "Todos los textos pre-aprobados, seleccionados de forma determinista por las condiciones (índices de ítem r[] base-0, y promedios de dimensión). Los índices r[] son base-0 (r[0]=ítem 1 ... r[23]=ítem 24).",
+
+  "analisis_dimensiones": {
+    "_descripcion": "Por dimensión: lista de ramas evaluadas EN ORDEN; gana la primera cuya 'condicion' se cumpla; si ninguna, gana 'default'. Cada rama aporta texto + feedback {bien, op, herr, kpi}. Algunas ramas tienen texto/feedback dinámico (ver 'dinamico').",
+    "autopercepcion_autoestima": {
+      "ramas": [
+        {
+          "condicion": "r[0] >= 4 AND r[2] >= 4",
+          "texto": "Presentas un patrón de **Autopercepción Equilibrada**. Esto significa que posees la madurez psicológica para reconocer tus talentos naturales sin caer en la arrogancia, y al mismo tiempo, aceptas tus áreas de mejora sin que esto disminuya tu valor personal. Esta base sólida te permite navegar la crítica externa con resiliencia.",
+          "fb": { "bien": "Capacidad de integrar éxitos y fracasos en una autoimagen coherente.", "op": "Utilizar esta seguridad para asumir riesgos calculados mayores.", "herr": "Mentoring inverso (enseñar a otros para reforzar tu valor).", "kpi": "Nivel de ansiedad ante nuevos desafíos." }
+        },
+        {
+          "condicion": "r[0] <= 2 AND r[1] >= 4",
+          "texto": "Se identifica un patrón **Autoexigente**. Confías plenamente en tus capacidades operativas ('sé que puedo hacerlo'), pero te cuesta enormemente reconocer y celebrar tus logros ('nunca es suficiente'). Esto puede generar un ciclo de insatisfacción crónica donde el éxito no se disfruta, solo se tacha de una lista.",
+          "fb": { "bien": "Alta autoeficacia y confianza en la ejecución.", "op": "Desarrollar la autocompasión y la celebración de hitos.", "herr": "Diario de Logros (anotar 3 éxitos diarios, por pequeños que sean).", "kpi": "Frecuencia de pensamientos autocríticos post-éxito." }
+        },
+        {
+          "condicion": "r[1] <= 2 AND r[3] <= 2",
+          "texto": "Tu perfil muestra indicadores de **Inseguridad Manifiesta**. Existe una desconexión entre tu potencial real y cómo te percibes. Es probable que estés subestimando sistemáticamente tus capacidades, lo que actúa como un freno de mano invisible en tu desarrollo profesional y personal.",
+          "fb": { "bien": "Humildad y apertura a la mejora (ausencia de arrogancia).", "op": "Reconstruir la narrativa interna sobre tu propia valía.", "herr": "Inventario de Fortalezas (feedback externo de 5 personas de confianza).", "kpi": "Número de veces que aceptas un cumplido sin justificarlo." }
+        }
+      ],
+      "default": {
+        "texto": "Tu autopercepción se encuentra en una etapa de **Desarrollo Variable**. En ciertos contextos te sientes seguro/a, mientras que en otros la duda te paraliza. Este patrón situacional sugiere que tu autoestima aún depende en exceso de factores externos o de la validación de terceros.",
+        "fb": { "bien": "Adaptabilidad a diferentes contextos.", "op": "Desarrollar un núcleo de autoestima independiente del entorno.", "herr": "Definición de Valores Personales innegociables.", "kpi": "Estabilidad emocional ante la crítica." }
+      }
+    },
+    "motivacion_proposito": {
+      "ramas": [
+        {
+          "condicion": "r[4] >= 4 AND r[6] >= 4",
+          "texto": "Exhibes una **Motivación Intrínseca Sostenida**. Tu motor no es el aplauso externo ni la recompensa económica inmediata, sino el disfrute genuino del aprendizaje y la conexión con un sentido profundo. Este es el tipo de motivación más resiliente ante las crisis.",
+          "fb": { "bien": "Energía autónoma y curiosidad intelectual.", "op": "Canalizar esta energía hacia proyectos de alto impacto social o personal.", "herr": "Diseño de Misión Personal.", "kpi": "Nivel de 'Flow' experimentado semanalmente." }
+        },
+        {
+          "condicion": "r[5] >= 4 AND r[7] <= 3",
+          "texto": "Tu perfil es **Orientado a Metas pero Vulnerable**. Eres excelente fijando objetivos y visualizando la meta, pero tu motivación es frágil ante los obstáculos. Cuando las cosas se ponen difíciles, tu energía decae rápidamente, lo que sugiere que te mueves más por el resultado que por el propósito.",
+          "fb": { "bien": "Claridad en la definición de objetivos.", "op": "Fortalecer la tolerancia a la frustración y el amor por el proceso.", "herr": "Visualización de obstáculos (WOOP method).", "kpi": "Tiempo de recuperación tras un contratiempo." }
+        }
+      ],
+      "default": {
+        "texto": "Se observa una **Motivación Difusa o Reactiva**. Actúas por inercia o por demanda del entorno, pero falta una brújula interna clara. Es posible que estés cumpliendo expectativas ajenas en lugar de perseguir lo que realmente te vitaliza.",
+        "fb": { "bien": "Capacidad de cumplimiento y responsabilidad.", "op": "Reconectar con tus verdaderos intereses y pasiones.", "herr": "Auditoría de Energía (qué me carga vs qué me drena).", "kpi": "Claridad en la respuesta a '¿Para qué hago esto?'." }
+      }
+    },
+    "adaptabilidad_emocional": {
+      "_nota": "Texto condicional inline; feedback fijo.",
+      "ramas": [
+        {
+          "condicion": "r[8] >= 4",
+          "texto": "Muestras una **Resiliencia Integral**. Tienes la capacidad de mantener la calma bajo presión y adaptarte a cambios imprevistos sin perder tu centro. Eres un ancla emocional para tu entorno.",
+          "fb": { "bien": "Gestión de crisis (si puntaje alto).", "op": "Regulación nerviosa.", "herr": "Respiración 4-7-8.", "kpi": "Tiempo de vuelta a la calma." }
+        }
+      ],
+      "default": {
+        "texto": "Tu perfil indica **Vulnerabilidad al Estrés**. Los cambios imprevistos te generan un costo emocional alto, y te cuesta recuperar la calma una vez que la pierdes.",
+        "fb": { "bien": "Gestión de crisis (si puntaje alto).", "op": "Regulación nerviosa.", "herr": "Respiración 4-7-8.", "kpi": "Tiempo de vuelta a la calma." }
+      }
+    },
+    "relaciones_empatia": {
+      "_nota": "La rama default tiene texto y feedback DINÁMICOS según r[12] (ver 'dinamico').",
+      "ramas": [
+        {
+          "condicion": "r[15] >= 4 AND r[14] <= 2",
+          "texto": "Presentas un patrón de **Empatía Desgastada**. Eres el 'cuidador' del grupo, siempre disponible para otros, pero a menudo a costa de tus propios límites. Esto es noble pero insostenible.",
+          "fb": { "bien": "Generosidad y conexión.", "op": "Poner límites sin culpa.", "herr": "Comunicación Asertiva.", "kpi": "Veces que dices 'no' para cuidarte." }
+        }
+      ],
+      "default": {
+        "dinamico": "relaciones_default",
+        "fb": { "bien": "Funcionalidad social.", "op": "Profundizar vínculos.", "herr": "Escucha Activa.", "kpi": "Calidad de conversaciones." }
+      }
+    },
+    "bienestar_equilibrio": {
+      "_nota": "La rama default tiene texto DINÁMICO según r[16] (ver 'dinamico').",
+      "ramas": [
+        {
+          "condicion": "r[16] <= 1 AND r[19] <= 2",
+          "texto": "⚠️ **ALERTA DE DESGASTE:** Tu perfil muestra indicadores claros de agotamiento o riesgo de burnout. Existe un desequilibrio severo entre tus responsabilidades y tu recuperación. Esto requiere acción inmediata.",
+          "fb": { "bien": "Capacidad de trabajo (actual).", "op": "RECUPERACIÓN URGENTE.", "herr": "Protocolo de Desconexión Total.", "kpi": "Horas de sueño y descanso real." }
+        }
+      ],
+      "default": {
+        "dinamico": "bienestar_default",
+        "fb": { "bien": "Intención de cuidado.", "op": "Hacer del descanso una prioridad no negociable.", "herr": "Bloques de tiempo personal.", "kpi": "Nivel de energía al final del día." }
+      }
+    },
+    "crecimiento_personal": {
+      "_nota": "Texto condicional inline; feedback fijo.",
+      "ramas": [
+        {
+          "condicion": "r[20] >= 4 AND r[22] >= 4",
+          "texto": "Posees una **Mentalidad de Crecimiento (Growth Mindset)**. Ves los errores como datos, no como fracasos, y buscas activamente el feedback.",
+          "fb": { "bien": "Potencial de aprendizaje.", "op": "Perder el miedo al error.", "herr": "Reflexión Semanal Estructurada.", "kpi": "Nuevas habilidades adquiridas." }
+        }
+      ],
+      "default": {
+        "texto": "Tu enfoque actual tiende al **Crecimiento Estático**. Puedes sentirte amenazado por el feedback negativo o evitar desafíos donde podrías fallar.",
+        "fb": { "bien": "Potencial de aprendizaje.", "op": "Perder el miedo al error.", "herr": "Reflexión Semanal Estructurada.", "kpi": "Nuevas habilidades adquiridas." }
+      }
+    }
+  },
+
+  "_dinamico": {
+    "relaciones_default": {
+      "_descripcion": "Estilo relacional dinámico. Si r[12] >= 4 -> 'Empático y Conectado' + 'Tienes facilidad...'; si no -> 'Reservado' + 'Tiendes a priorizar...'.",
+      "alto": { "estilo": "Empático y Conectado", "detalle": "Tienes facilidad para leer las emociones ajenas." },
+      "bajo": { "estilo": "Reservado", "detalle": "Tiendes a priorizar la lógica sobre la conexión emocional." },
+      "plantilla": "Tu estilo relacional es **{estilo}**. {detalle}"
+    },
+    "bienestar_default": {
+      "_descripcion": "Nivel de bienestar dinámico. Si r[16] >= 4 -> 'Bienestar Integral' + 'Has integrado...'; si no -> 'Equilibrio Precario' + 'Reconoces...'.",
+      "alto": { "nivel": "Bienestar Integral", "detalle": "Has integrado el autocuidado como parte de tu productividad." },
+      "bajo": { "nivel": "Equilibrio Precario", "detalle": "Reconoces la necesidad de cuidarte pero a menudo lo pospones." },
+      "plantilla": "Mantienes un nivel de **{nivel}**. {detalle}"
+    }
+  },
+
+  "patrones_transversales": {
+    "_descripcion": "generarPatronesTransversalesHTML. Se evalúan TODAS las condiciones independientes (pueden acumularse varias tarjetas). Si ninguna aplica, se usa 'sin_patrones'. Nota: la conexión autoconfianza-metas tiene 2 ramas mutuamente excluyentes (if/else if).",
+    "tarjetas": [
+      {
+        "id": "triangulo_bienestar",
+        "condicion": "r[16] >= 4 AND r[18] >= 4 AND r[19] >= 4",
+        "titulo": "Triángulo del Bienestar Sólido",
+        "texto": "Existe una coherencia poderosa entre tu Balance (P17), tu Reconocimiento de necesidades (P19) y tu Acción de autocuidado (P20). Esto es la base de la salud mental sostenible."
+      },
+      {
+        "id": "autoconfianza_metas",
+        "_grupo_if_elseif": true,
+        "ramas": [
+          {
+            "condicion": "r[1] >= 4 AND r[5] >= 4",
+            "titulo": "Motor de Logro Activado",
+            "texto": "Tu alta autoconfianza (P2) está alimentando directamente tu capacidad para fijar metas ambiciosas (P6). Eres una persona que 'cree y crea'."
+          },
+          {
+            "condicion": "r[1] <= 2 AND r[5] >= 4",
+            "titulo": "Síndrome del Impostor Potencial",
+            "texto": "Fijas metas altas (P6) pero tu confianza interna es baja (P2). Esto sugiere que logras cosas a costa de una gran ansiedad interna por 'no ser suficiente'."
+          }
+        ]
+      },
+      {
+        "id": "paradoja_cuidador",
+        "condicion": "r[15] >= 4 AND r[19] <= 2",
+        "titulo": "La Paradoja del Cuidador",
+        "texto": "Existe una contradicción crítica: Ofreces un apoyo emocional excepcional a otros (P16) mientras ignoras tus propias necesidades básicas (P20). Estás dando de un vaso vacío."
+      }
+    ],
+    "sin_patrones": {
+      "titulo": "Consistencia General",
+      "texto": "No se han detectado contradicciones psicológicas agudas ni sinergias extremas. Tu perfil muestra una estabilidad moderada entre las diferentes áreas."
+    }
+  },
+
+  "riesgos": {
+    "_descripcion": "generarRiesgosHTML. Lista vacía si no aplica ninguna condición.",
+    "tarjetas": [
+      {
+        "id": "burnout",
+        "condicion": "r[16] <= 1 AND r[19] <= 2 AND r[8] <= 2",
+        "titulo": "🔴 RIESGO DE BURNOUT",
+        "texto": "La combinación de desequilibrio vital extremo, descuido personal y baja regulación emocional sugiere un estado de agotamiento inminente o actual. Se recomienda intervención profesional."
+      }
+    ]
+  },
+
+  "recomendaciones": {
+    "_descripcion": "generarRecomendacionesHTML. Se evalúan condiciones por promedio de dimensión; si NINGUNA de las dos primeras aplica, se añaden las dos de 'sin_deficits'. SIEMPRE se añade al final 'revision_trimestral'.",
+    "condicionales": [
+      {
+        "id": "protocolo_recarga",
+        "condicion": "dim['bienestar_equilibrio'] < 3",
+        "icon": "🔋",
+        "titulo": "Protocolo de Recarga",
+        "texto": "Tu sistema nervioso necesita señales de seguridad. Implementa 'micro-descansos' de 5 minutos cada 90 minutos de trabajo."
+      },
+      {
+        "id": "reescritura_narrativa",
+        "condicion": "dim['autopercepcion_autoestima'] < 3",
+        "icon": "🪞",
+        "titulo": "Reescritura Narrativa",
+        "texto": "Dedica 10 minutos semanales a documentar evidencias de tu competencia. Combate el sesgo de negatividad con datos."
+      }
+    ],
+    "sin_deficits": [
+      {
+        "id": "proyecto_reto",
+        "icon": "🚀",
+        "titulo": "Proyecto Reto",
+        "texto": "Dado tu buen equilibrio, es momento de buscar un desafío que te saque de la zona de confort (Zona de Aprendizaje)."
+      },
+      {
+        "id": "mentoring",
+        "icon": "👥",
+        "titulo": "Mentoring",
+        "texto": "Tus fortalezas te posicionan para guiar a otros. Buscar un 'mentee' reforzará tu propia autoconfianza."
+      }
+    ],
+    "siempre": [
+      {
+        "id": "revision_trimestral",
+        "icon": "📅",
+        "titulo": "Revisión Trimestral",
+        "texto": "El crecimiento no es lineal. Agenda una revisión de este informe en 3 meses para medir tu evolución."
+      }
+    ]
+  },
+
+  "sintesis_final": {
+    "_descripcion": "generarSintesisFinal(nombre, perfil). Si el título del perfil contiene 'Riesgo' -> mensaje_riesgo; si no -> mensaje_general. {nombre} se reemplaza por el nombre del evaluado.",
+    "mensaje_riesgo": "{nombre}, este informe es una llamada a la acción amable pero firme. Tu bienestar no es un lujo, es la base de todo lo demás. Priorízate.",
+    "mensaje_general": "{nombre}, tienes una base sólida y herramientas poderosas. Este informe no es un diagnóstico, es un mapa. Úsalo para navegar tu siguiente etapa de crecimiento con intención."
+  },
+
+  "resumen_ejecutivo": {
+    "_descripcion": "generarResumenEjecutivoHTML. Texto compuesto: intro con perfil + pilares (dim >= 4) + atención (dim <= 2.5) o, si no hay debilidades, mensaje sin_riesgo.",
+    "intro_plantilla": "El análisis de tu perfil DNLA revela un {perfil_titulo}. {perfil_descripcion}",
+    "pilares_plantilla": "Tus pilares más sólidos son: {lista}. Estas áreas representan recursos psicológicos ya consolidados que utilizas de manera natural para navegar desafíos.",
+    "atencion_plantilla": "Se recomienda prestar atención prioritaria a: {lista}. En estas dimensiones, el análisis detecta fricciones que podrían estar limitando tu potencial de bienestar actual.",
+    "sin_riesgo": "No se detectan áreas críticas de riesgo, lo que te permite enfocarte en la optimización y la excelencia en lugar de la corrección de déficits."
+  }
+}

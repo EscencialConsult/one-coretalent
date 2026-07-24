@@ -1,0 +1,138 @@
+{
+  "_descripcion": "Casos de regresión para STAI. 'fill' = todas las respuestas (ids 1-40) con ese valor crudo 0-3. 'respuestas' = dict id->valor; 'fill_resto' completa los ids no listados. 'ya_invertidas'=true => los valores se interpretan ya en dirección-ansiedad (formato hoja .gs). Valores esperados derivados del algoritmo de Test16 (index.html calcularPuntuaciones + script.gs calcularResultadosSTAI). Pendiente validar también contra salidas históricas reales.",
+  "casos": [
+    {
+      "nombre": "Crudo todo 0 (primera opción en los 40) — verifica inversión de ítems inversos",
+      "fill": 0,
+      "esperado": {
+        "pd_estado": 30,
+        "pd_rasgo": 21,
+        "relacion_estado_rasgo": "estado_mayor",
+        "escalas": {
+          "estado": { "categoria_varon": "Alto", "categoria_mujer": "Sobre promedio", "percentil_varon": 80, "percentil_mujer": 70 },
+          "rasgo": { "categoria_varon": "Sobre promedio", "categoria_mujer": "Tend. Promedio", "percentil_varon": 60, "percentil_mujer": 40 }
+        },
+        "factores": {
+          "EA": { "suma": 0, "porcentaje": 0 },
+          "EN": { "suma": 0, "porcentaje": 0 },
+          "RA": { "suma": 0, "porcentaje": 0 },
+          "RN": { "suma": 0, "porcentaje": 0 }
+        }
+      }
+    },
+    {
+      "nombre": "Crudo todo 3 (última opción en los 40) — espejo de todo 0",
+      "fill": 3,
+      "esperado": {
+        "pd_estado": 30,
+        "pd_rasgo": 39,
+        "relacion_estado_rasgo": "estado_menor",
+        "escalas": {
+          "estado": { "categoria_varon": "Alto", "categoria_mujer": "Sobre promedio", "percentil_varon": 80, "percentil_mujer": 70 },
+          "rasgo": { "categoria_varon": "Alto", "categoria_mujer": "Alto", "percentil_varon": 97, "percentil_mujer": 85 }
+        },
+        "factores": {
+          "EA": { "suma": 30, "porcentaje": 100 },
+          "EN": { "suma": 30, "porcentaje": 100 },
+          "RA": { "suma": 39, "porcentaje": 100 },
+          "RN": { "suma": 21, "porcentaje": 100 }
+        }
+      }
+    },
+    {
+      "nombre": "Crudo todo 1 — relación estado_igual (diferencia <= 3)",
+      "fill": 1,
+      "esperado": {
+        "pd_estado": 30,
+        "pd_rasgo": 27,
+        "relacion_estado_rasgo": "estado_igual",
+        "escalas": {
+          "estado": { "categoria_varon": "Alto", "percentil_varon": 80 },
+          "rasgo": { "categoria_varon": "Sobre promedio", "categoria_mujer": "Sobre promedio", "percentil_varon": 80, "percentil_mujer": 60 }
+        },
+        "factores": {
+          "EA": { "suma": 10, "porcentaje": 33 },
+          "RA": { "suma": 13, "porcentaje": 33 }
+        }
+      }
+    },
+    {
+      "nombre": "Máxima ansiedad (ya_invertidas todo 3) — PD=60 ambas escalas, percentil tope",
+      "fill": 3,
+      "ya_invertidas": true,
+      "esperado": {
+        "pd_estado": 60,
+        "pd_rasgo": 60,
+        "relacion_estado_rasgo": "estado_igual",
+        "escalas": {
+          "estado": { "categoria_varon": "Alto", "categoria_mujer": "Alto", "percentil_varon": 99, "percentil_mujer": 99 },
+          "rasgo": { "categoria_varon": "Alto", "categoria_mujer": "Alto", "percentil_varon": 99, "percentil_mujer": 99 }
+        },
+        "factores": {
+          "EA": { "suma": 30, "porcentaje": 100 },
+          "EN": { "suma": 0, "porcentaje": 0 },
+          "RA": { "suma": 39, "porcentaje": 100 },
+          "RN": { "suma": 0, "porcentaje": 0 }
+        }
+      }
+    },
+    {
+      "nombre": "Mínima ansiedad (ya_invertidas todo 0) — PD=0 ambas escalas, percentil mínimo",
+      "fill": 0,
+      "ya_invertidas": true,
+      "esperado": {
+        "pd_estado": 0,
+        "pd_rasgo": 0,
+        "relacion_estado_rasgo": "estado_igual",
+        "escalas": {
+          "estado": { "categoria_varon": "Bajo", "categoria_mujer": "Bajo", "percentil_varon": 1, "percentil_mujer": 1 },
+          "rasgo": { "categoria_varon": "Bajo", "categoria_mujer": "Bajo", "percentil_varon": 1, "percentil_mujer": 1 }
+        },
+        "factores": {
+          "EN": { "suma": 30, "porcentaje": 100 },
+          "RN": { "suma": 21, "porcentaje": 100 }
+        }
+      }
+    },
+    {
+      "nombre": "Prorrateo: 19 ítems Estado respondidos (ya_invertidas) — round(38/19*20)=40",
+      "ya_invertidas": true,
+      "fill_resto": null,
+      "respuestas": {
+        "1": 2, "2": 2, "3": 2, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2, "9": 2, "10": 2,
+        "11": 2, "12": 2, "13": 2, "14": 2, "15": 2, "16": 2, "17": 2, "18": 2, "19": 2,
+        "21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "27": 1, "28": 1, "29": 1, "30": 1,
+        "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1
+      },
+      "esperado": {
+        "pd_estado": 40,
+        "pd_rasgo": 20,
+        "relacion_estado_rasgo": "estado_mayor",
+        "escalas": {
+          "estado": { "items_respondidos": 19, "categoria_varon": "Alto", "percentil_varon": 95 },
+          "rasgo": { "items_respondidos": 20, "categoria_varon": "Sobre promedio" }
+        }
+      }
+    },
+    {
+      "nombre": "Mixto realista (ya_invertidas: Estado bajo, Rasgo alto) — relación estado_menor",
+      "ya_invertidas": true,
+      "fill_resto": null,
+      "respuestas": {
+        "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1,
+        "11": 1, "12": 1, "13": 1, "14": 1, "15": 1, "16": 1, "17": 1, "18": 1, "19": 1, "20": 1,
+        "21": 2, "22": 2, "23": 2, "24": 2, "25": 2, "26": 2, "27": 2, "28": 2, "29": 2, "30": 2,
+        "31": 2, "32": 2, "33": 2, "34": 2, "35": 2, "36": 2, "37": 2, "38": 2, "39": 2, "40": 2
+      },
+      "esperado": {
+        "pd_estado": 20,
+        "pd_rasgo": 40,
+        "relacion_estado_rasgo": "estado_menor",
+        "escalas": {
+          "estado": { "categoria_varon": "Sobre promedio", "percentil_varon": 55 },
+          "rasgo": { "categoria_varon": "Alto", "categoria_mujer": "Alto", "percentil_varon": 97, "percentil_mujer": 90 }
+        }
+      }
+    }
+  ]
+}

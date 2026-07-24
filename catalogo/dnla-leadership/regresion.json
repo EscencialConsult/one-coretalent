@@ -1,0 +1,86 @@
+{
+  "_descripcion": "Casos de regresión para DNLA Leadership. 'fill' = todas las respuestas con ese valor. 'respuestas' = dict id->valor; 'fill_resto' completa los ids no listados. Valores esperados derivados del algoritmo inline del index.html legacy (promedio por dimensión + promedio global + umbrales fijos).",
+  "casos": [
+    {
+      "nombre": "Todo 3 (A veces) — todas las dimensiones en 3.0 / Potencial Medio",
+      "fill": 3,
+      "esperado": {
+        "global": { "puntuacion": 3.0, "label": "POTENCIAL MEDIO - OPORTUNIDAD DE DESARROLLO" },
+        "sintesis": { "fortalezas": [], "debilidades": [] },
+        "dimensiones": {
+          "vision_estrategica": { "puntuacion": 3.0, "nivel": "medio", "label": "Potencial Medio" },
+          "comunicacion": { "puntuacion": 3.0, "nivel": "medio" },
+          "autogestion": { "puntuacion": 3.0, "nivel": "medio" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 5 (Siempre) — liderazgo sobresaliente, todas fortalezas",
+      "fill": 5,
+      "esperado": {
+        "global": { "puntuacion": 5.0, "label": "LIDERAZGO SOBRESALIENTE" },
+        "sintesis": {
+          "fortalezas": ["Visión Estratégica", "Comunicación", "Decisión", "Motivación", "Conflictos", "Resiliencia", "Innovación", "Autogestión"],
+          "debilidades": []
+        },
+        "dimensiones": {
+          "vision_estrategica": { "puntuacion": 5.0, "nivel": "sobresaliente", "label": "Sobresaliente" },
+          "autogestion": { "puntuacion": 5.0, "nivel": "sobresaliente" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 1 (Nunca) — bajo nivel, todas debilidades",
+      "fill": 1,
+      "esperado": {
+        "global": { "puntuacion": 1.0, "label": "BAJO NIVEL DE INFLUENCIA O DIRECCIÓN" },
+        "sintesis": {
+          "fortalezas": [],
+          "debilidades": ["Visión Estratégica", "Comunicación", "Decisión", "Motivación", "Conflictos", "Resiliencia", "Innovación", "Autogestión"]
+        },
+        "dimensiones": {
+          "vision_estrategica": { "puntuacion": 1.0, "nivel": "bajo", "label": "Bajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Mixto A — visión 5 (fortaleza), comunicación 1 (debilidad), resto 3",
+      "fill_resto": 3,
+      "respuestas": { "1": 5, "2": 5, "3": 5, "4": 5, "5": 5, "6": 1, "7": 1, "8": 1, "9": 1, "10": 1 },
+      "esperado": {
+        "global": { "puntuacion": 3.0, "label": "POTENCIAL MEDIO - OPORTUNIDAD DE DESARROLLO" },
+        "sintesis": { "fortalezas": ["Visión Estratégica"], "debilidades": ["Comunicación"] },
+        "dimensiones": {
+          "vision_estrategica": { "puntuacion": 5.0, "nivel": "sobresaliente" },
+          "comunicacion": { "puntuacion": 1.0, "nivel": "bajo" },
+          "decision": { "puntuacion": 3.0, "nivel": "medio" }
+        }
+      }
+    },
+    {
+      "nombre": "Mixto B — promedios fraccionarios (visión 3.6, comunicación 4.0)",
+      "fill_resto": 3,
+      "respuestas": { "1": 5, "2": 4, "6": 4, "7": 4, "8": 4, "9": 4, "10": 4 },
+      "esperado": {
+        "global": { "puntuacion": 3.2, "label": "POTENCIAL MEDIO - OPORTUNIDAD DE DESARROLLO" },
+        "sintesis": { "fortalezas": ["Comunicación"], "debilidades": [] },
+        "dimensiones": {
+          "vision_estrategica": { "puntuacion": 3.6, "nivel": "medio" },
+          "comunicacion": { "puntuacion": 4.0, "nivel": "fortaleza", "label": "Efectivo" }
+        }
+      }
+    },
+    {
+      "nombre": "Redondeo half-up del global (3.375 -> 3.38)",
+      "fill_resto": 3,
+      "respuestas": { "1": 5, "2": 5, "3": 5, "4": 5, "5": 5, "6": 4, "7": 4, "8": 4, "9": 4, "10": 4 },
+      "esperado": {
+        "global": { "puntuacion": 3.38, "label": "POTENCIAL MEDIO - OPORTUNIDAD DE DESARROLLO" },
+        "dimensiones": {
+          "vision_estrategica": { "puntuacion": 5.0, "nivel": "sobresaliente" },
+          "comunicacion": { "puntuacion": 4.0, "nivel": "fortaleza" }
+        }
+      }
+    }
+  ]
+}

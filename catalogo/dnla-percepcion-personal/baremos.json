@@ -1,0 +1,65 @@
+{
+  "_fuente": "Test11/script.gs · generarBadgeGlobalHTML + identificarPerfilGlobal + obtenerInterpretacionGlobal + generarBadgeDimension (umbral por promedio)",
+  "_descripcion": "Este test NO usa percentiles ni baremos poblacionales. La clasificación es por umbrales sobre promedios (1.0-5.0). Se incluyen: badge global, perfil global, interpretación global y badge por dimensión. Todos los umbrales son '>=' evaluados de mayor a menor (half-open descendente).",
+  "nombres_dimension": {
+    "autopercepcion_autoestima": "Autopercepción y Autoestima",
+    "motivacion_proposito": "Motivación y Propósito",
+    "adaptabilidad_emocional": "Adaptabilidad Emocional",
+    "relaciones_empatia": "Relaciones y Empatía",
+    "bienestar_equilibrio": "Bienestar y Equilibrio",
+    "crecimiento_personal": "Crecimiento Personal"
+  },
+  "_orden_dimensiones": [
+    "autopercepcion_autoestima",
+    "motivacion_proposito",
+    "adaptabilidad_emocional",
+    "relaciones_empatia",
+    "bienestar_equilibrio",
+    "crecimiento_personal"
+  ],
+  "badge_global": {
+    "_descripcion": "generarBadgeGlobalHTML(promedioGlobal). Umbral descendente sobre promedio global.",
+    "umbral_descendente": [
+      { "min_promedio": 4.6, "clase": "badge-sobresaliente", "texto": "SOBRESALIENTE" },
+      { "min_promedio": 3.8, "clase": "badge-solido", "texto": "SÓLIDO" },
+      { "min_promedio": 3.0, "clase": "badge-medio", "texto": "EN DESARROLLO" },
+      { "min_promedio": 2.0, "clase": "badge-desarrollo", "texto": "ATENCIÓN" },
+      { "min_promedio": 0.0, "clase": "badge-riesgo", "texto": "RIESGO" }
+    ]
+  },
+  "perfil_global": {
+    "_descripcion": "identificarPerfilGlobal(promedio, dim, r). Umbral descendente sobre promedio global; los dos últimos perfiles dependen de ítems específicos (r[16] e r[19], 1-based P17 y P20).",
+    "umbral_descendente": [
+      { "min_promedio": 4.6, "titulo": "Perfil Sobresaliente", "descripcion": "Exhibes un nivel de desarrollo personal y bienestar excepcional. Tus recursos psicológicos son robustos y consistentes." },
+      { "min_promedio": 3.8, "titulo": "Perfil Sólido", "descripcion": "Cuentas con fortalezas claras y un buen nivel de funcionamiento general, con áreas específicas para pulir." },
+      { "min_promedio": 3.0, "titulo": "Perfil en Desarrollo", "descripcion": "Estás en una fase de construcción activa. Tienes conciencia de tus desafíos y la capacidad para superarlos." }
+    ],
+    "_ramas_inferiores": {
+      "_descripcion": "Si promedio < 3.0: si r[16] <= 2 Y r[19] <= 2 -> Riesgo de Desgaste; en otro caso -> Atención Requerida.",
+      "riesgo_desgaste": {
+        "condicion": "r[16] <= 2 AND r[19] <= 2",
+        "titulo": "Perfil con Riesgo de Desgaste",
+        "descripcion": "Tu enfoque actual no es sostenible. El costo energético de tu funcionamiento es mayor que tu capacidad de recarga."
+      },
+      "atencion_requerida": {
+        "titulo": "Perfil de Atención Requerida",
+        "descripcion": "Existen múltiples áreas que requieren trabajo consciente para recuperar el equilibrio y el bienestar."
+      }
+    }
+  },
+  "interpretacion_global": {
+    "_descripcion": "obtenerInterpretacionGlobal(promedioGlobal). Umbral descendente sobre promedio global.",
+    "umbral_descendente": [
+      { "min_promedio": 4.0, "texto": "Tu perfil indica un alto nivel de recursos personales y bienestar." },
+      { "min_promedio": 3.0, "texto": "Tienes un perfil equilibrado con áreas específicas de mejora." },
+      { "min_promedio": 0.0, "texto": "Se recomienda prestar atención prioritaria a tu bienestar emocional." }
+    ]
+  },
+  "fortalezas_debilidades": {
+    "_descripcion": "generarResumenEjecutivoHTML. Una dimensión es 'pilar/fortaleza' si promedio >= 4 (máx 3 mostradas); es 'debilidad' si promedio <= 2.5 (máx 2 mostradas). El orden es el de iteración del objeto dim (orden de definición de dimensiones).",
+    "umbral_fortaleza_min": 4.0,
+    "max_fortalezas": 3,
+    "umbral_debilidad_max": 2.5,
+    "max_debilidades": 2
+  }
+}

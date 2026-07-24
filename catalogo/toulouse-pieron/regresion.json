@@ -1,0 +1,99 @@
+{
+  "_descripcion": "Casos de regresion para Toulouse-Pieron. 'input' = lo que recibe scoring.calcular (string formato front, string crudo, o lista de indices). Valores esperados VERIFICADOS contra una reimplementacion en Node.js de la logica EXACTA de Test13/script.gs (analizarRespuestas + clasificaciones + perfil + segmentos). Idénticos al original. Las tolerancias de float se comparan por valor.",
+  "casos": [
+    {
+      "nombre": "5 marcas (formato front con prefijo de tiempo) — atencion MUY BAJO, perfil LENTO_PRECISO",
+      "input": "{0m 45s - 0,1,2,3,4}",
+      "esperado": {
+        "totalMarcados": 5,
+        "totalProcesado": 5,
+        "porcentajeCompletado": 0.3125,
+        "aciertos": 1,
+        "errores": 4,
+        "omisiones": 319,
+        "indiceAciertos": 20.0,
+        "indiceErrores": 80.0,
+        "indiceProductividad": -3,
+        "coeficienteAptitud": -1.0,
+        "nivelAtencion": "MUY BAJO",
+        "nivelPrecision": "BUENA",
+        "nivelVelocidad": "MUY LENTO",
+        "perfil": "LENTO_PRECISO",
+        "segmento_1_densidad": "3.13"
+      }
+    },
+    {
+      "nombre": "10 marcas (string crudo sin llaves) — maxIndex=10 => totalProcesado=11",
+      "input": "1,2,3,4,5,6,7,8,9,10",
+      "esperado": {
+        "totalMarcados": 10,
+        "totalProcesado": 11,
+        "porcentajeCompletado": 0.6875,
+        "aciertos": 2,
+        "errores": 8,
+        "omisiones": 318,
+        "indiceProductividad": -6,
+        "coeficienteAptitud": -2.0,
+        "nivelAtencion": "MUY BAJO",
+        "nivelPrecision": "BUENA",
+        "nivelVelocidad": "MUY LENTO",
+        "perfil": "LENTO_PRECISO"
+      }
+    },
+    {
+      "nombre": "1200 marcas contiguas (0..1199) — atencion MUY ALTO, velocidad MUY RAPIDO, perfil RAPIDO_IMPULSIVO",
+      "input_rango": [0, 1200],
+      "esperado": {
+        "totalMarcados": 1200,
+        "totalProcesado": 1200,
+        "porcentajeCompletado": 75.0,
+        "aciertos": 240,
+        "errores": 960,
+        "omisiones": 80,
+        "indiceAciertos": 20.0,
+        "indiceErrores": 80.0,
+        "indiceProductividad": -720,
+        "coeficienteAptitud": -240.0,
+        "nivelAtencion": "MUY ALTO",
+        "nivelPrecision": "MUY BAJA",
+        "nivelVelocidad": "MUY RÁPIDO",
+        "perfil": "RAPIDO_IMPULSIVO",
+        "segmento_1_densidad": "100.00",
+        "segmento_8_densidad": "50.00"
+      }
+    },
+    {
+      "nombre": "560 marcas contiguas (0..559) — velocidad LENTO, perfil INTERMEDIO (catch-all)",
+      "input_rango": [0, 560],
+      "esperado": {
+        "totalMarcados": 560,
+        "totalProcesado": 560,
+        "porcentajeCompletado": 35.0,
+        "aciertos": 112,
+        "errores": 448,
+        "omisiones": 208,
+        "indiceProductividad": -336,
+        "coeficienteAptitud": -112.0,
+        "nivelAtencion": "MUY ALTO",
+        "nivelPrecision": "MUY BAJA",
+        "nivelVelocidad": "LENTO",
+        "perfil": "INTERMEDIO"
+      }
+    },
+    {
+      "nombre": "Lista de indices (no string) con tipos mezclados — verifica parseo de lista",
+      "input_list": [12, 45, 300, 899, 1500],
+      "esperado": {
+        "totalMarcados": 5,
+        "totalProcesado": 1501,
+        "aciertos": 1,
+        "errores": 4,
+        "omisiones": 319,
+        "nivelAtencion": "MUY BAJO",
+        "nivelPrecision": "BUENA",
+        "nivelVelocidad": "MUY RÁPIDO",
+        "perfil": "INTERMEDIO"
+      }
+    }
+  ]
+}

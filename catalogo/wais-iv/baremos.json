@@ -1,0 +1,33 @@
+{
+  "_fuente": "Test4/script.gs · BAREMOS_INDICE + BAREMOS_CI. Tablas portadas TAL CUAL (no son baremos normativos oficiales WAIS-IV; son una conversión simplificada por % de aciertos aprobada en el legacy).",
+  "_advertencia": "Estas NO son las tablas normativas reales de la WAIS-IV (puntuación escalar por edad ni conversión índice→CI estándar). Son la lógica simplificada del legacy: % de aciertos por índice -> PE fija; CI = round(40 + sumaPE*1.5). Ver ANALISIS.md (BLOQUEO: tablas normativas oficiales ausentes).",
+  "indice": {
+    "_descripcion": "Cada índice (ICV/IRP/IMT/IVP) tiene 25 ítems. porcentaje = round(correctas/25*100). Se asigna el primer tramo donde min <= porcentaje <= max (orden descendente). 'pe' = puntuación escalar fija del tramo.",
+    "tramos": [
+      { "min": 90, "max": 100, "pe": 19, "rango": "Muy Superior", "color": "#059669" },
+      { "min": 80, "max": 89,  "pe": 16, "rango": "Superior", "color": "#10b981" },
+      { "min": 70, "max": 79,  "pe": 13, "rango": "Promedio Alto", "color": "#3b82f6" },
+      { "min": 50, "max": 69,  "pe": 10, "rango": "Promedio", "color": "#0b4a6e" },
+      { "min": 35, "max": 49,  "pe": 7,  "rango": "Promedio Bajo", "color": "#f59e0b" },
+      { "min": 20, "max": 34,  "pe": 4,  "rango": "Límite", "color": "#ef4444" },
+      { "min": 0,  "max": 19,  "pe": 1,  "rango": "Muy Bajo", "color": "#dc2626" }
+    ]
+  },
+  "ci": {
+    "_descripcion": "CI Total = round(40 + sumaPE*1.5), donde sumaPE = pe(ICV)+pe(IRP)+pe(IMT)+pe(IVP). Se asigna el primer tramo donde min <= ciTotal <= max (orden descendente). Si no cae en ninguno, se usa el último tramo (Muy Bajo).",
+    "tramos": [
+      { "min": 130, "max": 160, "nivel": "Muy Superior", "descripcion": "Capacidad intelectual excepcional" },
+      { "min": 120, "max": 129, "nivel": "Superior", "descripcion": "Capacidad intelectual muy alta" },
+      { "min": 110, "max": 119, "nivel": "Promedio Alto", "descripcion": "Capacidad intelectual por encima del promedio" },
+      { "min": 90,  "max": 109, "nivel": "Promedio", "descripcion": "Capacidad intelectual dentro del rango esperado" },
+      { "min": 80,  "max": 89,  "nivel": "Promedio Bajo", "descripcion": "Capacidad intelectual ligeramente por debajo del promedio" },
+      { "min": 70,  "max": 79,  "nivel": "Límite", "descripcion": "Funcionamiento intelectual límite" },
+      { "min": 0,   "max": 69,  "nivel": "Muy Bajo", "descripcion": "Dificultades intelectuales significativas" }
+    ]
+  },
+  "interpretacion_umbral": {
+    "_descripcion": "Selección de texto interpretativo por índice según porcentaje de aciertos: >=70 'alto', >=40 'medio', resto 'bajo'.",
+    "alto": 70,
+    "medio": 40
+  }
+}

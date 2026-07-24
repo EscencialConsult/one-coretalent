@@ -1,0 +1,89 @@
+{
+  "_descripcion": "Casos de regresión para EBP. La entrada replica el JSON que el front (script.js) envía: {section1, section2, section3}. 'fill_section1/2/3' rellena toda la sección con ese valor (section1=ids 1..40, section2=ids 1..10, section3=ids 1..25). 'section3' explícito permite probar el split BL(1..10)/RP(11..25). Valores esperados derivados del algoritmo del .gs (autoridad); pendiente validar también contra salidas históricas reales.",
+  "casos": [
+    {
+      "nombre": "Todo 3 (neutral)",
+      "fill_section1": 3, "fill_section2": 3, "fill_section3": 3,
+      "esperado": {
+        "pd_total": 195,
+        "subescalas": {
+          "BPS": { "pd": 90, "percentil": 45, "interpretacion": "Medio-Bajo" },
+          "BM": { "pd": 30, "percentil": 55, "interpretacion": "Medio-Alto" },
+          "BL": { "pd": 30, "percentil": 55, "interpretacion": "Medio-Alto" },
+          "RP": { "pd": 45, "percentil": 55, "interpretacion": "Medio-Alto" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 1 — verifica inversión BL [5,8] y RP [5,6,7,10,11,12]",
+      "fill_section1": 1, "fill_section2": 1, "fill_section3": 1,
+      "esperado": {
+        "pd_total": 97,
+        "subescalas": {
+          "BPS": { "pd": 30, "percentil": 1, "interpretacion": "Muy Bajo" },
+          "BM": { "pd": 10, "percentil": 5, "interpretacion": "Muy Bajo" },
+          "BL": { "pd": 18, "percentil": 25, "interpretacion": "Medio-Bajo" },
+          "RP": { "pd": 39, "percentil": 45, "interpretacion": "Medio-Bajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 5 — máximos y nivel Excepcional (percentil 99)",
+      "fill_section1": 5, "fill_section2": 5, "fill_section3": 5,
+      "esperado": {
+        "pd_total": 293,
+        "subescalas": {
+          "BPS": { "pd": 150, "percentil": 99, "interpretacion": "Excepcional" },
+          "BM": { "pd": 50, "percentil": 99, "interpretacion": "Excepcional" },
+          "BL": { "pd": 42, "percentil": 85, "interpretacion": "Alto" },
+          "RP": { "pd": 51, "percentil": 65, "interpretacion": "Medio-Alto" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 2",
+      "fill_section1": 2, "fill_section2": 2, "fill_section3": 2,
+      "esperado": {
+        "pd_total": 146,
+        "subescalas": {
+          "BPS": { "pd": 60, "percentil": 15, "interpretacion": "Bajo" },
+          "BM": { "pd": 20, "percentil": 30, "interpretacion": "Medio-Bajo" },
+          "BL": { "pd": 24, "percentil": 40, "interpretacion": "Medio-Bajo" },
+          "RP": { "pd": 42, "percentil": 50, "interpretacion": "Medio-Alto" }
+        }
+      }
+    },
+    {
+      "nombre": "Split section3: BL (ids 1..10) vs RP (ids 11..25) con valores distintos",
+      "fill_section1": 4, "fill_section2": 3,
+      "section3": {
+        "1": 4, "2": 4, "3": 4, "4": 4, "5": 4, "6": 4, "7": 4, "8": 4, "9": 4, "10": 4,
+        "11": 2, "12": 2, "13": 2, "14": 2, "15": 2, "16": 2, "17": 2, "18": 2, "19": 2, "20": 2, "21": 2, "22": 2, "23": 2, "24": 2, "25": 2
+      },
+      "esperado": {
+        "pd_total": 228,
+        "subescalas": {
+          "BPS": { "pd": 120, "percentil": 75, "interpretacion": "Alto" },
+          "BM": { "pd": 30, "percentil": 55, "interpretacion": "Medio-Alto" },
+          "BL": { "pd": 36, "percentil": 70, "interpretacion": "Medio-Alto" },
+          "RP": { "pd": 42, "percentil": 50, "interpretacion": "Medio-Alto" }
+        }
+      }
+    },
+    {
+      "nombre": "Respuestas incompletas — ítems faltantes cuentan como 0 (6 - 0 en invertidos)",
+      "section1": { "1": 5, "2": 5 },
+      "section2": { "1": 5 },
+      "section3": { "1": 5, "11": 5 },
+      "esperado": {
+        "pd_total": 73,
+        "subescalas": {
+          "BPS": { "pd": 10, "percentil": 1, "interpretacion": "Muy Bajo" },
+          "BM": { "pd": 5, "percentil": 1, "interpretacion": "Muy Bajo" },
+          "BL": { "pd": 17, "percentil": 20, "interpretacion": "Bajo" },
+          "RP": { "pd": 41, "percentil": 45, "interpretacion": "Medio-Bajo" }
+        }
+      }
+    }
+  ]
+}

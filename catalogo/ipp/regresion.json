@@ -1,0 +1,112 @@
+{
+  "_descripcion": "Casos de regresión para IPP. 'fill' = todas las respuestas con ese valor ('A'|'I'|'D'). 'respuestas' = dict id->valor; 'fill_resto' completa los ids no listados (omitir fill_resto deja esos ítems SIN responder, que no suman). Valores esperados derivados del algoritmo del .gs (calcularResultadosIPP). Pendiente validar también contra salidas históricas reales del sistema.",
+  "casos": [
+    {
+      "nombre": "Todo I (indiferente) — 1 pto por ítem, 6 por campo, perfil plano",
+      "fill": "I",
+      "esperado": {
+        "tipo_perfil": "plano",
+        "rango": 0,
+        "campos_predominantes": ["C", "T", "S"],
+        "campos_rechazados": ["I", "AA", "D"],
+        "campos": {
+          "C": { "puntuacion": 6, "porcentaje": 50, "nivel": "Medio", "detalle": { "agrada": 0, "indiferente": 6, "desagrada": 0 } }
+        }
+      }
+    },
+    {
+      "nombre": "Todo A (agrada) — 12 por campo, todos Muy Alto, perfil plano",
+      "fill": "A",
+      "esperado": {
+        "tipo_perfil": "plano",
+        "rango": 0,
+        "campos_predominantes": ["C", "T", "S"],
+        "campos_rechazados": ["I", "AA", "D"],
+        "campos": {
+          "I": { "puntuacion": 12, "porcentaje": 100, "nivel": "Muy Alto", "detalle": { "agrada": 6, "indiferente": 0, "desagrada": 0 } }
+        }
+      }
+    },
+    {
+      "nombre": "Todo D (desagrada) — 0 por campo, todos Muy Bajo, perfil plano",
+      "fill": "D",
+      "esperado": {
+        "tipo_perfil": "plano",
+        "rango": 0,
+        "campos": {
+          "C": { "puntuacion": 0, "porcentaje": 0, "nivel": "Muy Bajo", "detalle": { "agrada": 0, "indiferente": 0, "desagrada": 6 } }
+        }
+      }
+    },
+    {
+      "nombre": "Perfil definido — Informático y Técnico altos sobre base de rechazo",
+      "fill_resto": "D",
+      "respuestas": {
+        "103": "A", "104": "A", "105": "A", "106": "A", "107": "A", "108": "A",
+        "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "I",
+        "1": "A", "2": "A", "3": "A"
+      },
+      "esperado": {
+        "tipo_perfil": "definido",
+        "rango": 12,
+        "campos_predominantes": ["I", "T", "C"],
+        "campos_rechazados": ["AA", "D", "SE"],
+        "campos": {
+          "I": { "puntuacion": 12, "porcentaje": 100, "nivel": "Muy Alto" },
+          "T": { "puntuacion": 11, "porcentaje": 92, "nivel": "Muy Alto", "detalle": { "agrada": 5, "indiferente": 1, "desagrada": 0 } },
+          "C": { "puntuacion": 6, "porcentaje": 50, "nivel": "Medio" }
+        }
+      }
+    },
+    {
+      "nombre": "Half-up: puntuación 5 -> 5/12*100 = 41.67 -> 42 (Math.round half-up)",
+      "fill_resto": "D",
+      "respuestas": { "1": "A", "2": "A", "3": "I" },
+      "esperado": {
+        "campos": {
+          "C": { "puntuacion": 5, "porcentaje": 42, "nivel": "Medio" }
+        }
+      }
+    },
+    {
+      "nombre": "Frontera perfil: rango exactamente 4 -> plano",
+      "fill_resto": "D",
+      "respuestas": { "1": "A", "2": "A" },
+      "esperado": {
+        "tipo_perfil": "plano",
+        "rango": 4,
+        "campos": {
+          "C": { "puntuacion": 4, "nivel": "Medio" }
+        }
+      }
+    },
+    {
+      "nombre": "Frontera perfil: rango 5 -> definido",
+      "fill_resto": "D",
+      "respuestas": { "1": "A", "2": "A", "3": "I" },
+      "esperado": {
+        "tipo_perfil": "definido",
+        "rango": 5
+      }
+    },
+    {
+      "nombre": "Respuestas parciales — ítems sin responder no suman",
+      "respuestas": {
+        "1": "A", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A",
+        "7": "I", "8": "I",
+        "13": "A", "14": "A", "15": "A"
+      },
+      "esperado": {
+        "tipo_perfil": "definido",
+        "rango": 12,
+        "campos_predominantes": ["C", "S", "T"],
+        "campos": {
+          "C": { "puntuacion": 12, "nivel": "Muy Alto", "detalle": { "agrada": 6, "indiferente": 0, "desagrada": 0 } },
+          "T": { "puntuacion": 2, "nivel": "Bajo", "detalle": { "agrada": 0, "indiferente": 2, "desagrada": 0 } },
+          "S": { "puntuacion": 6, "nivel": "Medio", "detalle": { "agrada": 3, "indiferente": 0, "desagrada": 0 } },
+          "CS": { "puntuacion": 0, "nivel": "Muy Bajo", "detalle": { "agrada": 0, "indiferente": 0, "desagrada": 0 } }
+        }
+      }
+    }
+  ]
+}

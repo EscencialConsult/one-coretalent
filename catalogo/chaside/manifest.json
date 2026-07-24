@@ -1,0 +1,32 @@
+{
+  "id": "chaside",
+  "nombre": "CHASIDE — Orientación Vocacional",
+  "codigo": "CHASIDE",
+  "descripcion": "Test de orientación vocacional CHASIDE: 98 ítems dicotómicos (SI/NO) que miden el interés en 7 áreas vocacionales — Administrativas y Contables (C), Humanísticas y Sociales (H), Artísticas (A), Medicina y Ciencias de la Salud (S), Ingeniería y Computación (I), Defensa y Seguridad (D), Ciencias Exactas y Agrarias (E).",
+  "categoria": "orientacion_vocacional",
+  "version": "1.0",
+  "n_items": 98,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "dicotomica_si_no",
+  "_tipo_respuesta_nota": "Cada ítem se responde SI o NO. Se suma 1 punto al área del ítem por cada 'SI'. 14 ítems por área => puntaje directo 0-14.",
+  "dimensiones": ["C", "H", "A", "S", "I", "D", "E"],
+  "_dimensiones_nota": "7 áreas vocacionales. Cada área tiene además sub-escalas de intereses y aptitudes (sub-conjuntos de sus ítems).",
+  "scoring": "scoring.py",
+  "salida": [
+    "areasResultado (puntajeDirecto, intereses, aptitudes, percentil, nivel, interpretacion)",
+    "areasOrdenadas",
+    "top2",
+    "codigoPerfil (2 letras ordenadas alfabéticamente)",
+    "profesionesCombinadas",
+    "areasAltas / areasBajas",
+    "totalSI / totalNO"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo"
+}

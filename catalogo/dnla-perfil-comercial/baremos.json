@@ -1,0 +1,46 @@
+{
+  "_fuente": "Test10/script.gs · BAREMOS + DIMENSIONES + clasificarNivel.",
+  "_descripcion": "Clasificación por NIVEL a partir del promedio (1.0-5.0). La clasificación usa SOLO el umbral 'min' con comparación >= descendente (clasificarNivel). Los 'max' del .gs son informativos/de presentación y NO se evalúan en el algoritmo.",
+  "niveles": {
+    "_descripcion": "umbral_descendente: se devuelve el primer nivel cuyo min <= promedio (recorriendo de mayor a menor).",
+    "umbral_descendente": [
+      { "min": 4.6, "max": 5.0, "nivel": "SOBRESALIENTE", "badge": "SOBRESALIENTE", "emoji": "⭐⭐⭐⭐⭐", "color": "#10b981" },
+      { "min": 3.8, "max": 4.59, "nivel": "SOLIDO", "badge": "SÓLIDO", "emoji": "⭐⭐⭐⭐", "color": "#3b82f6" },
+      { "min": 3.0, "max": 3.79, "nivel": "POTENCIAL_MEDIO", "badge": "POTENCIAL MEDIO", "emoji": "⭐⭐⭐", "color": "#f59e0b" },
+      { "min": 2.0, "max": 2.99, "nivel": "NECESITA_DESARROLLO", "badge": "NECESITA DESARROLLO", "emoji": "⭐⭐", "color": "#f97316" },
+      { "min": 1.0, "max": 1.99, "nivel": "BAJO", "badge": "BAJO", "emoji": "⭐", "color": "#ef4444" }
+    ]
+  },
+  "dimensiones": {
+    "iniciativa_proactividad": {
+      "numero": 1,
+      "nombre": "Iniciativa y Proactividad",
+      "preguntas": [1, 2, 3, 4, 5],
+      "descripcion": "Capacidad de identificar oportunidades y actuar sin esperar indicaciones"
+    },
+    "comunicacion_persuasiva": {
+      "numero": 2,
+      "nombre": "Comunicación Persuasiva",
+      "preguntas": [6, 7, 8, 9, 10],
+      "descripcion": "Habilidad para transmitir valor y generar convicción en el cliente"
+    },
+    "escucha_empatia": {
+      "numero": 3,
+      "nombre": "Escucha Activa y Empatía",
+      "preguntas": [11, 12, 13, 14, 15],
+      "descripcion": "Capacidad de comprender necesidades reales del cliente"
+    },
+    "orientacion_cliente": {
+      "numero": 4,
+      "nombre": "Orientación al Cliente",
+      "preguntas": [16, 17, 18, 19, 20],
+      "descripcion": "Enfoque en satisfacción y relaciones de largo plazo"
+    },
+    "resiliencia_rechazo": {
+      "numero": 5,
+      "nombre": "Resiliencia y Gestión del Rechazo",
+      "preguntas": [21, 22, 23, 24, 25],
+      "descripcion": "Capacidad de mantener motivación ante obstáculos y rechazos"
+    }
+  }
+}

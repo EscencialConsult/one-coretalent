@@ -1,0 +1,24 @@
+{
+  "id": "cad",
+  "nombre": "CAD - Cuestionario de Afrontamiento del Dolor",
+  "codigo": "CAD",
+  "descripcion": "Cuestionario de Afrontamiento del Dolor (Soriano y Monsalve). Instrumento autoadministrado de 31 ítems (escala Likert 0-4) para detectar seis estrategias de afrontamiento del dolor crónico: Religión, Catarsis, Distracción, Autocontrol mental, Autoafirmación y Búsqueda de información.",
+  "categoria": "salud / afrontamiento del dolor",
+  "version": "1.0",
+  "n_items": 31,
+  "tiempo_limite_min": null,
+  "_tiempo_nota": "El front muestra un cronómetro informativo (10-15 min estimados) pero no impone límite de tiempo.",
+  "tipo_respuesta": "likert_0_4",
+  "_tipo_respuesta_nota": "5 opciones: A=4 (Totalmente de acuerdo), B=3 (Ligeramente de acuerdo), C=2 (Ni Sí ni No), D=1 (Ligeramente en desacuerdo), E=0 (Totalmente en desacuerdo). No hay ítems inversos.",
+  "dimensiones": ["Religión", "Catarsis", "Distracción", "Autocontrol mental", "Autoafirmación", "Búsqueda de información"],
+  "scoring": "scoring.py",
+  "salida": ["escalas (total, n, max, avg, pct)", "ranking (top 2 / bottom 2 por avg)"],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo (sin baremos oficiales: el CAD no define puntos de corte)"
+}

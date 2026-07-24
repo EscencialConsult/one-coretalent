@@ -1,0 +1,36 @@
+{
+  "id": "dnla-leadership",
+  "nombre": "DNLA — Leadership & Middle Management",
+  "codigo": "DNLA-LMM",
+  "descripcion": "Autoevaluación de estilo de liderazgo y mandos medios: capacidad para guiar, motivar y desarrollar personas, evaluada en 8 dimensiones con 40 ítems de frecuencia (1-5).",
+  "categoria": "liderazgo",
+  "version": "1.0",
+  "n_items": 40,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "frecuencia_1_5",
+  "_tipo_respuesta_nota": "Escala de frecuencia 5 (Siempre) a 1 (Nunca). No hay ítems inversos: todos puntúan en sentido directo.",
+  "dimensiones": [
+    "vision_estrategica",
+    "comunicacion",
+    "decision",
+    "motivacion",
+    "conflictos",
+    "resiliencia",
+    "innovacion",
+    "autogestion"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "dimensiones (puntuacion 1-5, nivel, label, descripcion)",
+    "global (puntuacion, label, color, interpretation, recomendacion)",
+    "sintesis (fortalezas, debilidades)"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo",
+  "_nota_estado": "Scoring inline del index.html portado fielmente. El script.gs legacy estaba vacío (0 bytes); no era un bloqueo. Sin baremos/percentiles: el instrumento usa umbrales fijos sobre promedios 1-5, no normas poblacionales."
+}

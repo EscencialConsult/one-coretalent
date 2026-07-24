@@ -1,0 +1,22 @@
+{
+  "_fuente": "Test19/index.html · QUESTIONS_GDS (lógica inline; script.gs vacío 0 bytes)",
+  "_descripcion": "15 ítems Sí/No. 'respuesta_sintomatica' es la respuesta que indica presencia de síntoma depresivo (campo depressionAnswer del legacy). Se suma 1 punto por cada ítem cuya respuesta del evaluado coincida con respuesta_sintomatica.",
+  "escala": { "si": "Sí", "no": "No" },
+  "items": [
+    { "id": 1,  "respuesta_sintomatica": "no", "text": "¿En general, está satisfecho/a con su vida?" },
+    { "id": 2,  "respuesta_sintomatica": "si", "text": "¿Ha abandonado muchas de sus tareas habituales y aficiones?" },
+    { "id": 3,  "respuesta_sintomatica": "si", "text": "¿Siente que su vida está vacía?" },
+    { "id": 4,  "respuesta_sintomatica": "si", "text": "¿Se siente con frecuencia aburrido/a?" },
+    { "id": 5,  "respuesta_sintomatica": "no", "text": "¿Se encuentra de buen humor la mayor parte del tiempo?" },
+    { "id": 6,  "respuesta_sintomatica": "si", "text": "¿Teme que algo malo pueda ocurrirle?" },
+    { "id": 7,  "respuesta_sintomatica": "no", "text": "¿Se siente feliz la mayor parte del tiempo?" },
+    { "id": 8,  "respuesta_sintomatica": "si", "text": "¿Con frecuencia se siente desamparado/a, desprotegido/a?" },
+    { "id": 9,  "respuesta_sintomatica": "si", "text": "¿Prefiere usted quedarse en casa, más que salir y hacer cosas nuevas?" },
+    { "id": 10, "respuesta_sintomatica": "si", "text": "¿Cree que tiene más problemas de memoria que la mayoría de la gente?" },
+    { "id": 11, "respuesta_sintomatica": "no", "text": "¿En estos momentos, piensa que es estupendo estar vivo?" },
+    { "id": 12, "respuesta_sintomatica": "si", "text": "¿Actualmente se siente un/a inútil?" },
+    { "id": 13, "respuesta_sintomatica": "no", "text": "¿Se siente lleno/a de energía?" },
+    { "id": 14, "respuesta_sintomatica": "si", "text": "¿Se siente sin esperanza en este momento?" },
+    { "id": 15, "respuesta_sintomatica": "si", "text": "¿Piensa que la mayoría de la gente está en mejor situación que usted?" }
+  ]
+}

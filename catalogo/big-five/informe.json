@@ -1,0 +1,45 @@
+{
+  "_descripcion": "Configuración del informe Big Five. El renderizador consume la salida de scoring.py (dimensiones + dimension_dominante).",
+  "titulo": "Informe Profesional Big Five (IPIP-50)",
+  "subtitulo": "Perfil de personalidad — Cinco Grandes",
+  "secciones": [
+    {
+      "id": "grafico_radar",
+      "tipo": "grafico_radar",
+      "titulo": "Tu perfil en las 5 dimensiones",
+      "datos": {
+        "labels": "dimensiones[*].nombre",
+        "valores": "dimensiones[*].puntuacion",
+        "eje": { "min": 0, "max": 50, "paso": 10 }
+      }
+    },
+    {
+      "id": "grafico_barras",
+      "tipo": "grafico_barras",
+      "titulo": "Tu puntuación vs. promedio poblacional",
+      "datos": {
+        "labels": "dimensiones[*].nombre",
+        "series": [
+          { "label": "Tu Puntuación", "valores": "dimensiones[*].puntuacion" },
+          { "label": "Promedio Poblacional", "valores": "dimensiones[*].promedio_poblacional" }
+        ],
+        "eje_y": { "min": 0, "max": 50, "paso": 10 }
+      }
+    },
+    {
+      "id": "detalle_dimensiones",
+      "tipo": "bloques_por_dimension",
+      "titulo": "Análisis por dimensión",
+      "fuente": "dimensiones",
+      "bloque": {
+        "encabezado": "{nombre} — {nombre_nivel} (percentil {percentil}, puntuación {puntuacion}/50)",
+        "campos": [
+          { "label": "Descripción", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Fortalezas", "tipo": "lista", "valor": "fortalezas" },
+          { "label": "Áreas de desarrollo", "tipo": "lista", "valor": "areas" },
+          { "label": "Orientación profesional", "tipo": "texto", "valor": "profesional" }
+        ]
+      }
+    }
+  ]
+}

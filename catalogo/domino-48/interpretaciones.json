@@ -1,0 +1,51 @@
+{
+  "_fuente": "Test5/script.gs · const TEXTOS_INTERPRETACION — Dominó D-48",
+  "_descripcion": "Textos de interpretación seleccionados por el 'nivel' del baremo. Contenido aprobado; no se genera por IA.",
+  "por_nivel": {
+    "SUPERIOR": {
+      "general": "Tu desempeño se sitúa en el rango superior, evidenciando una capacidad excepcional de razonamiento abstracto y comprensión de patrones lógicos complejos. Este nivel de rendimiento es característico de individuos con alto Factor G de inteligencia según la teoría de Spearman.",
+      "fortalezas": [
+        "Excelente capacidad para identificar y comprender patrones complejos",
+        "Razonamiento lógico-deductivo altamente desarrollado",
+        "Habilidad superior para abstraer y generalizar conceptos",
+        "Procesamiento eficiente de información nueva",
+        "Capacidad destacada para resolver problemas no verbales"
+      ]
+    },
+    "SUPERIOR AL TÉRMINO MEDIO": {
+      "general": "Tu rendimiento está por encima del promedio poblacional, demostrando buena capacidad de razonamiento abstracto y análisis de patrones. Posees recursos cognitivos sólidos para abordar tareas que requieren pensamiento lógico.",
+      "fortalezas": [
+        "Buena capacidad para detectar relaciones lógicas",
+        "Razonamiento abstracto bien desarrollado",
+        "Habilidad adecuada para resolver problemas complejos",
+        "Procesamiento eficiente de información estructurada",
+        "Competencia para análisis sistemático"
+      ]
+    },
+    "TÉRMINO MEDIO": {
+      "general": "Tu desempeño se encuentra en el rango promedio, indicando capacidades cognitivas estándar para el razonamiento abstracto. Este nivel es característico de la mayoría de la población y refleja competencia adecuada para tareas cotidianas.",
+      "fortalezas": [
+        "Capacidad estándar para identificar patrones básicos",
+        "Razonamiento lógico funcional",
+        "Habilidad para resolver problemas estructurados",
+        "Procesamiento adecuado de información",
+        "Potencial de desarrollo con entrenamiento"
+      ]
+    },
+    "INFERIOR AL TÉRMINO MEDIO": {
+      "general": "Tu rendimiento está ligeramente por debajo del promedio poblacional. Esto puede indicar dificultades con el razonamiento abstracto complejo o puede estar influenciado por factores contextuales como tiempo, comprensión de instrucciones o estado emocional durante la evaluación.",
+      "fortalezas": [
+        "Capacidad básica de reconocimiento de patrones simples",
+        "Potencial para mejorar con práctica específica",
+        "Habilidad para tareas concretas y estructuradas"
+      ]
+    },
+    "DEFICIENTE": {
+      "general": "Tu resultado sugiere dificultades significativas con el tipo de razonamiento evaluado. Es importante considerar factores como comprensión de instrucciones, tiempo disponible, estado emocional y contexto de la evaluación. Se recomienda una evaluación complementaria más detallada.",
+      "fortalezas": [
+        "Capacidad para mejorar con entrenamiento dirigido",
+        "Potencial en otras áreas cognitivas no evaluadas aquí"
+      ]
+    }
+  }
+}

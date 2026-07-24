@@ -1,0 +1,11 @@
+{
+  "_fuente": "Test19/index.html · finishTest() (puntos de corte inline)",
+  "_descripcion": "Puntos de corte sobre la puntuación total (0-15). Se clasifica por el primer rango cuyo 'max' es >= puntuacion, evaluando de menor a mayor. Replica fielmente los if/else del legacy: score<=4 normal, score<=8 leve, score<=11 moderada, resto grave.",
+  "rango_total": { "min": 0, "max": 15 },
+  "niveles": [
+    { "nivel": "normal",   "nombre": "Normal",             "min": 0,  "max": 4,  "interp_class": "interp-normal" },
+    { "nivel": "leve",     "nombre": "Depresión leve",     "min": 5,  "max": 8,  "interp_class": "interp-mild"   },
+    { "nivel": "moderada", "nombre": "Depresión moderada", "min": 9,  "max": 11, "interp_class": "interp-mild"   },
+    { "nivel": "grave",    "nombre": "Depresión grave",    "min": 12, "max": 15, "interp_class": "interp-severe" }
+  ]
+}

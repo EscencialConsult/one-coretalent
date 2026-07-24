@@ -1,0 +1,82 @@
+{
+  "_descripcion": "Configuración del informe DNLA Percepción Personal. El renderizador consume la salida de scoring.py. Estructura espejo de la plantilla HTML del .gs (badge + resumen + barras + análisis + patrones + riesgos + recomendaciones + síntesis).",
+  "titulo": "Informe Personal Insight Profile",
+  "subtitulo": "Evaluación de Bienestar y Desarrollo Personal — DNLA Percepción Personal",
+  "secciones": [
+    {
+      "id": "encabezado_global",
+      "tipo": "badge_resumen",
+      "titulo": "Tu perfil global",
+      "datos": {
+        "badge": "badge_global.texto",
+        "badge_clase": "badge_global.clase",
+        "promedio": "promedio_global_texto",
+        "perfil_titulo": "perfil_global.titulo",
+        "perfil_descripcion": "perfil_global.descripcion",
+        "mensaje": "interpretacion_global"
+      }
+    },
+    {
+      "id": "resumen_ejecutivo",
+      "tipo": "texto_parrafos",
+      "titulo": "Resumen ejecutivo",
+      "fuente": "resumen_ejecutivo.parrafos"
+    },
+    {
+      "id": "grafico_barras",
+      "tipo": "grafico_barras",
+      "titulo": "Tus 6 dimensiones (promedio 1.0 - 5.0)",
+      "datos": {
+        "labels": "dimensiones[*].nombre",
+        "series": [
+          { "label": "Tu Promedio", "valores": "dimensiones[*].promedio" }
+        ],
+        "eje_y": { "min": 0, "max": 5, "paso": 1 }
+      }
+    },
+    {
+      "id": "analisis_dimensiones",
+      "tipo": "bloques_por_dimension",
+      "titulo": "Análisis por dimensión",
+      "fuente": "analisis_dimensiones",
+      "bloque": {
+        "encabezado": "{nombre} — {promedio_texto}/5.0",
+        "campos": [
+          { "label": "Análisis", "tipo": "texto", "valor": "texto" },
+          { "label": "✅ Lo que funciona", "tipo": "texto", "valor": "feedback.bien" },
+          { "label": "🎯 Oportunidad", "tipo": "texto", "valor": "feedback.op" },
+          { "label": "🛠️ Herramienta", "tipo": "texto", "valor": "feedback.herr" },
+          { "label": "📈 Indicador", "tipo": "texto", "valor": "feedback.kpi" }
+        ]
+      }
+    },
+    {
+      "id": "patrones_transversales",
+      "tipo": "tarjetas",
+      "titulo": "Patrones transversales",
+      "fuente": "patrones_transversales",
+      "tarjeta": { "titulo": "titulo", "texto": "texto" }
+    },
+    {
+      "id": "riesgos",
+      "tipo": "tarjetas",
+      "titulo": "Riesgos detectados",
+      "fuente": "riesgos",
+      "ocultar_si_vacio": true,
+      "tarjeta": { "titulo": "titulo", "texto": "texto" }
+    },
+    {
+      "id": "recomendaciones",
+      "tipo": "tarjetas",
+      "titulo": "Recomendaciones",
+      "fuente": "recomendaciones",
+      "tarjeta": { "icono": "icon", "titulo": "titulo", "texto": "texto" }
+    },
+    {
+      "id": "sintesis_final",
+      "tipo": "texto",
+      "titulo": "Síntesis final",
+      "fuente": "sintesis_final"
+    }
+  ]
+}

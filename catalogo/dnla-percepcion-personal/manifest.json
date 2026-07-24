@@ -1,0 +1,42 @@
+{
+  "id": "dnla-percepcion-personal",
+  "nombre": "DNLA — Percepción Personal",
+  "codigo": "Personal Insight Profile",
+  "descripcion": "Evaluación de Bienestar y Desarrollo Personal (Personal Insight Profile). 24 ítems en escala de frecuencia 1-5, agrupados en 6 dimensiones de autopercepción y bienestar.",
+  "categoria": "bienestar",
+  "version": "1.0",
+  "n_items": 24,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "frecuencia_1_5",
+  "_tipo_respuesta_nota": "Escala 1 (Nunca) a 5 (Siempre). NO hay ítems inversos: todas las respuestas se promedian crudas.",
+  "dimensiones": [
+    "autopercepcion_autoestima",
+    "motivacion_proposito",
+    "adaptabilidad_emocional",
+    "relaciones_empatia",
+    "bienestar_equilibrio",
+    "crecimiento_personal"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "dimensiones (promedio, badge_dimension)",
+    "promedio_global",
+    "perfil_global (titulo, descripcion)",
+    "badge_global (clase, texto)",
+    "interpretacion_global",
+    "analisis_dimensiones (texto + feedback)",
+    "patrones_transversales",
+    "riesgos",
+    "recomendaciones",
+    "resumen_ejecutivo",
+    "sintesis_final"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo"
+}

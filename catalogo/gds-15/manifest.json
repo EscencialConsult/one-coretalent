@@ -1,0 +1,23 @@
+{
+  "id": "gds-15",
+  "nombre": "Escala de Depresión Geriátrica (GDS-15)",
+  "codigo": "GDS-15",
+  "descripcion": "Short Geriatric Depression Scale (Yesavage, versión breve de 15 ítems): cribado de sintomatología depresiva en personas mayores mediante respuestas Sí/No referidas a la última semana.",
+  "categoria": "clinica",
+  "version": "1.0",
+  "n_items": 15,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "si_no",
+  "_tipo_respuesta_nota": "Cada ítem se responde 'si' o 'no'. Se otorga 1 punto cuando la respuesta coincide con la 'respuesta sintomática' del ítem (campo depressionAnswer en el legacy). Rango total 0-15.",
+  "dimensiones": ["depresion"],
+  "scoring": "scoring.py",
+  "salida": ["puntuacion_total (0-15)", "nivel", "interpretacion", "desglose (respondidas, sin_responder, sintomaticas)"],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo"
+}

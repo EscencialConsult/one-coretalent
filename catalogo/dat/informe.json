@@ -1,0 +1,71 @@
+{
+  "_descripcion": "Configuración del informe DAT. El renderizador consume la salida de scoring.py (subtests + estilo_trabajo + roles). Refleja la estructura del informe/PDF del legacy Test1/script.gs (radar de 6 ejes, análisis de competencias VR/NR/AR/SR, estilo de trabajo y áreas de potencial).",
+  "titulo": "Informe de Evaluación Vocacional DAT",
+  "subtitulo": "Perfil de Aptitudes Diferenciales",
+  "secciones": [
+    {
+      "id": "resumen_puntuaciones",
+      "tipo": "resumen",
+      "titulo": "Resumen de Puntuaciones",
+      "datos": {
+        "items": [
+          { "label": "Verbal", "valor": "subtests.VR.pct", "sufijo": "%" },
+          { "label": "Numérico", "valor": "subtests.NR.pct", "sufijo": "%" },
+          { "label": "Abstracto", "valor": "subtests.AR.pct", "sufijo": "%" },
+          { "label": "Espacial", "valor": "subtests.SR.pct", "sufijo": "%" },
+          { "label": "Rapidez", "valor": "subtests.PSA.pct", "sufijo": "%" },
+          { "label": "Precisión", "valor": "subtests.ORT.pct", "sufijo": "%" }
+        ]
+      }
+    },
+    {
+      "id": "grafico_radar",
+      "tipo": "grafico_radar",
+      "titulo": "Perfil de aptitudes",
+      "datos": {
+        "labels": ["Verbal", "Numérico", "Abstracto", "Espacial", "Rapidez", "Precisión"],
+        "valores": ["subtests.VR.pct", "subtests.NR.pct", "subtests.AR.pct", "subtests.SR.pct", "subtests.PSA.pct", "subtests.ORT.pct"],
+        "eje": { "min": 0, "max": 100, "paso": 20 }
+      }
+    },
+    {
+      "id": "analisis_competencias",
+      "tipo": "bloques_por_subtest",
+      "titulo": "Análisis de Competencias",
+      "fuente": "subtests",
+      "subtests_incluidos": ["VR", "NR", "AR", "SR"],
+      "bloque": {
+        "encabezado": "{nombre} — {pct}% ({interpretacion.titulo})",
+        "campos": [
+          { "label": "Descripción", "tipo": "texto", "valor": "interpretacion.desc" },
+          { "label": "Implicancia Laboral", "tipo": "texto", "valor": "interpretacion.implicancia" },
+          { "label": "Fortalezas", "tipo": "lista", "valor": "interpretacion.fortalezas" },
+          { "label": "Recomendación", "tipo": "destacado", "valor": "interpretacion.tips" },
+          { "label": "Riesgos", "tipo": "texto", "valor": "interpretacion.riesgos" }
+        ]
+      }
+    },
+    {
+      "id": "estilo_trabajo",
+      "tipo": "bloque_unico",
+      "titulo": "Estilo de Trabajo",
+      "fuente": "estilo_trabajo.interpretacion",
+      "bloque": {
+        "encabezado": "{titulo}",
+        "campos": [
+          { "label": "Subtítulo", "tipo": "texto", "valor": "subtitulo" },
+          { "label": "Descripción", "tipo": "texto", "valor": "desc" },
+          { "label": "Riesgo", "tipo": "texto", "valor": "riesgo" },
+          { "label": "Rol Ideal", "tipo": "texto", "valor": "rol" },
+          { "label": "Fortalezas Adicionales", "tipo": "lista", "valor": "fortalezas_adicionales" }
+        ]
+      }
+    },
+    {
+      "id": "areas_potencial",
+      "tipo": "lista_simple",
+      "titulo": "Áreas de Máximo Potencial",
+      "fuente": "roles"
+    }
+  ]
+}

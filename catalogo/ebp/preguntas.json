@@ -1,0 +1,144 @@
+{
+  "_fuente": "Test15/script.gs (ITEMS_EBP, calcularResultadosEBP, parsearRespuestasEBP) = AUTORIDAD del cálculo. Textos de ítems tomados de Test15/script.js (ITEMS_SECTION1/2/3).",
+  "_descripcion": "EBP estructurado según el SCORING del .gs. El .gs define 4 subescalas: BPS(30), BM(10), BL(10), RP(15). El front (script.js) presenta secciones distintas (section1=40, section2=10, section3=15) y el .gs las re-mapea en parsearRespuestasEBP. Ver ANALISIS.md (DISCREPANCIA front<->back).",
+  "_formato_entrada_gs": {
+    "section1": "dict {1..N: valor} -> seccion1_BPS (el .gs solo usa ids 1..30)",
+    "section2": "dict {1..10: valor} -> seccion2_BM (BM)",
+    "section3": "dict {1..25: valor}: ids 1..10 -> BL; ids 11..25 -> RP (remapeados a 1..15)"
+  },
+  "escala": {
+    "1": "1 (mínimo)",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5 (máximo)"
+  },
+  "_escala_etiquetas_front": {
+    "section1": ["Nunca", "Algunas veces", "Bastantes veces", "Casi siempre", "Siempre"],
+    "section2": ["Nunca", "Raras Veces", "Algunas veces", "Con Frecuencia", "Casi Siempre"],
+    "section3": ["Totalmente en desacuerdo", "Moderadamente en desacuerdo", "En parte de acuerdo y en parte en desacuerdo", "Moderadamente de acuerdo", "Totalmente de acuerdo"]
+  },
+  "subescalas": {
+    "BPS": {
+      "nombre": "Bienestar Psicológico Subjetivo",
+      "n_items": 30,
+      "max_puntos": 150,
+      "invertidos": [],
+      "_origen_entrada": "section1 ids 1..30"
+    },
+    "BM": {
+      "nombre": "Bienestar Material",
+      "n_items": 10,
+      "max_puntos": 50,
+      "invertidos": [],
+      "_origen_entrada": "section2 ids 1..10"
+    },
+    "BL": {
+      "nombre": "Bienestar Laboral",
+      "n_items": 10,
+      "max_puntos": 50,
+      "invertidos": [5, 8],
+      "_origen_entrada": "section3 ids 1..10"
+    },
+    "RP": {
+      "nombre": "Relaciones con la Pareja",
+      "n_items": 15,
+      "max_puntos": 75,
+      "invertidos": [5, 6, 7, 10, 11, 12],
+      "_origen_entrada": "section3 ids 11..25 remapeados a 1..15"
+    }
+  },
+  "items": {
+    "BPS": [
+      { "id": 1, "text": "Acostumbro a ver el lado favorable de las cosas." },
+      { "id": 2, "text": "Me gusta transmitir mi felicidad a los demás." },
+      { "id": 3, "text": "Me siento bien conmigo mismo." },
+      { "id": 4, "text": "Todo me parece interesante." },
+      { "id": 5, "text": "Me gusta divertirme." },
+      { "id": 6, "text": "Me siento jovial." },
+      { "id": 7, "text": "Busco momentos de distracción y descanso." },
+      { "id": 8, "text": "Tengo buena suerte." },
+      { "id": 9, "text": "Estoy ilusionado/a." },
+      { "id": 10, "text": "Se me han abierto muchas puertas en mi vida." },
+      { "id": 11, "text": "Me siento optimista." },
+      { "id": 12, "text": "Me siento capaz de realizar mi trabajo." },
+      { "id": 13, "text": "Creo que tengo buena salud." },
+      { "id": 14, "text": "Duermo bien y de forma tranquila." },
+      { "id": 15, "text": "Me creo útil y necesario/a para la gente." },
+      { "id": 16, "text": "Creo que me sucederán cosas agradables." },
+      { "id": 17, "text": "Creo que como persona (madre/padre, esposa/esposo, trabajador/trabajadora) he logrado lo que quería." },
+      { "id": 18, "text": "Creo que valgo tanto como cualquier otra persona." },
+      { "id": 19, "text": "Creo que puedo superar mis errores y debilidades." },
+      { "id": 20, "text": "Creo que mi familia me quiere." },
+      { "id": 21, "text": "Me siento «en forma»." },
+      { "id": 22, "text": "Tengo muchas ganas de vivir." },
+      { "id": 23, "text": "Me enfrento a mi trabajo y a mis tareas con buen ánimo." },
+      { "id": 24, "text": "Me gusta lo que hago." },
+      { "id": 25, "text": "Disfruto de las comidas." },
+      { "id": 26, "text": "Me gusta salir y ver a la gente." },
+      { "id": 27, "text": "Me concentro con facilidad en lo que estoy haciendo." },
+      { "id": 28, "text": "Creo que, generalmente, tengo buen humor." },
+      { "id": 29, "text": "Siento que todo me va bien." },
+      { "id": 30, "text": "Tengo confianza en mí mismo/a." }
+    ],
+    "_BPS_no_puntuados": {
+      "_nota": "El front recoge 40 ítems en section1, pero el .gs solo suma ids 1..30 para BPS. Los ids 31..40 (abajo) se reciben pero NO se puntúan en el .gs. Se conservan por trazabilidad.",
+      "items": [
+        { "id": 31, "text": "Vivo con cierto desahogo y bienestar." },
+        { "id": 32, "text": "Puedo decir que soy afortunado/a." },
+        { "id": 33, "text": "Tengo una vida tranquila." },
+        { "id": 34, "text": "Tengo lo necesario para vivir." },
+        { "id": 35, "text": "La vida me ha sido favorable." },
+        { "id": 36, "text": "Creo que tengo una vida asegurada, sin grandes riesgos." },
+        { "id": 37, "text": "Creo que tengo lo necesario para vivir cómodamente." },
+        { "id": 38, "text": "Las condiciones en que vivo son cómodas." },
+        { "id": 39, "text": "Mi situación es relativamente próspera." },
+        { "id": 40, "text": "Estoy tranquilo/a sobre mi futuro económico." }
+      ]
+    },
+    "BM": [
+      { "id": 1, "text": "Mi trabajo es creativo, variado, estimulante." },
+      { "id": 2, "text": "Mi trabajo da sentido a mi vida." },
+      { "id": 3, "text": "Mi trabajo me exige aprender cosas nuevas." },
+      { "id": 4, "text": "Mi trabajo es interesante." },
+      { "id": 5, "text": "Mi trabajo es monótono, rutinario, aburrido." },
+      { "id": 6, "text": "En mi trabajo he encontrado apoyo y afecto." },
+      { "id": 7, "text": "Mi trabajo me ha proporcionado independencia." },
+      { "id": 8, "text": "Estoy discriminado/a en mi trabajo." },
+      { "id": 9, "text": "Mi trabajo es lo más importante para mí." },
+      { "id": 10, "text": "Disfruto con mi trabajo." },
+      { "_nota_textos": "El .gs nombra esta subescala 'Bienestar Material' (BM) pero los textos del front (section2) corresponden a contenido LABORAL. Ver ANALISIS.md (discrepancia de etiqueta BM vs textos laborales)." }
+    ],
+    "BL": [
+      { "id": 1, "reverse": false, "text": "(BL ítem 1 — el front no entrega un section3 de 25 ítems; ver ANALISIS.md)" },
+      { "id": 2, "reverse": false, "text": "(BL ítem 2)" },
+      { "id": 3, "reverse": false, "text": "(BL ítem 3)" },
+      { "id": 4, "reverse": false, "text": "(BL ítem 4)" },
+      { "id": 5, "reverse": true, "text": "(BL ítem 5 — invertido)" },
+      { "id": 6, "reverse": false, "text": "(BL ítem 6)" },
+      { "id": 7, "reverse": false, "text": "(BL ítem 7)" },
+      { "id": 8, "reverse": true, "text": "(BL ítem 8 — invertido)" },
+      { "id": 9, "reverse": false, "text": "(BL ítem 9)" },
+      { "id": 10, "reverse": false, "text": "(BL ítem 10)" },
+      { "_nota_textos": "BLOQUEO PARCIAL: el .gs espera section3 con ids 1..10 para BL, pero el front solo envía 15 ítems en section3 (relaciones de pareja). No hay textos legacy para los 10 ítems de BL tal como los espera el .gs. Ver ANALISIS.md." }
+    ],
+    "RP": [
+      { "id": 1, "reverse": false, "text": "Atiendo al deseo sexual de mi esposo/a." },
+      { "id": 2, "reverse": false, "text": "Disfruto y me relajo con las relaciones sexuales." },
+      { "id": 3, "reverse": false, "text": "Me siento feliz como esposo/a." },
+      { "id": 4, "reverse": false, "text": "La sexualidad sigue ocupando un lugar importante en mi vida." },
+      { "id": 5, "reverse": true, "text": "Mi marido/mujer manifiesta cada vez menos deseo de realizar el acto sexual." },
+      { "id": 6, "reverse": true, "text": "Cuando estoy en casa no aguanto a mi marido/mujer en ella todo el día." },
+      { "id": 7, "reverse": true, "text": "Mis relaciones sexuales son ahora poco frecuentes." },
+      { "id": 8, "reverse": false, "text": "Mi pareja y yo tenemos una vida sexual activa." },
+      { "id": 9, "reverse": false, "text": "No temo expresar a mi marido/mujer mi deseo sexual." },
+      { "id": 10, "reverse": true, "text": "A mi marido/mujer le cuesta conseguir la erección." },
+      { "id": 11, "reverse": true, "text": "Mi interés sexual ha descendido." },
+      { "id": 12, "reverse": true, "text": "El acto sexual me produce dolores físicos, cosa que antes no me ocurría." },
+      { "id": 13, "reverse": false, "text": "Mi esposo/a y yo estamos de acuerdo en muchas cosas." },
+      { "id": 14, "reverse": false, "text": "Hago con frecuencia el acto sexual." },
+      { "id": 15, "reverse": false, "text": "El acto sexual me proporciona placer." },
+      { "_nota_textos": "Textos del front (ITEMS_SECTION3, 15 ítems). En el front estos son los ids 1..15 de section3; el .gs los re-mapea desde ids 11..25 de section3. La inversión [5,6,7,10,11,12] (en índice RP 1..15) coincide con script.gs." }
+    ]
+  }
+}

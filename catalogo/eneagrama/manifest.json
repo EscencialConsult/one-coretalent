@@ -1,0 +1,30 @@
+{
+  "id": "eneagrama",
+  "nombre": "Eneagrama",
+  "codigo": "ENEA-90",
+  "descripcion": "Test de Eneagrama de 90 ítems Likert 1-5 (10 por eneatipo) que perfila los 9 tipos (Reformador, Ayudador, Triunfador, Individualista, Investigador, Leal, Entusiasta, Desafiador, Pacificador). Determina el tipo base, sus dos alas, y las flechas de integración y desintegración, con interpretación por eneatipo (motivación, miedo, virtud, fortalezas, áreas, en el trabajo y en equipo, niveles y camino de crecimiento).",
+  "categoria": "personalidad",
+  "version": "2.0",
+  "n_items": 90,
+  "tiempo_limite_min": null,
+  "_tiempo_nota": "Sin límite; tiempo estimado 15-20 minutos (informativo).",
+  "tipo_respuesta": "likert_1_5",
+  "_tipo_respuesta_nota": "Escala 1 (Nunca) a 5 (Siempre). NO hay ítems inversos: todos suman directo a su eneatipo. Normalización absoluta por tipo (todo 1 = 0%, todo 5 = 100%).",
+  "eneatipos": [
+    "1_reformador", "2_ayudador", "3_triunfador", "4_individualista",
+    "5_investigador", "6_leal", "7_entusiasta", "8_desafiador", "9_pacificador"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "base (tipo dominante) + notación (ej. 5w4)",
+    "alas (ala1 dominante, ala2)",
+    "flechas (integración / desintegración)",
+    "scores 0-100 por eneatipo + ranking",
+    "interpretación completa del tipo base"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "interpretaciones": "interpretaciones.json"
+  },
+  "estado": "completo"
+}

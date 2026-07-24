@@ -1,0 +1,70 @@
+{
+  "_descripcion": "Configuración del informe STAI. El renderizador consume la salida de scoring.py (escalas + factores + relacion_estado_rasgo). Réplica de los gráficos generados en Test16/script.gs (barras A/E vs A/R y radar factorial).",
+  "titulo": "Informe Profesional STAI",
+  "subtitulo": "Cuestionario de Ansiedad Estado-Rasgo",
+  "secciones": [
+    {
+      "id": "grafico_barras_escalas",
+      "tipo": "grafico_barras",
+      "titulo": "Puntuación Directa: Ansiedad Estado vs. Ansiedad Rasgo",
+      "datos": {
+        "labels": ["Ansiedad Estado (A/E)", "Ansiedad Rasgo (A/R)"],
+        "series": [
+          { "label": "Puntuación Directa", "valores": ["pd_estado", "pd_rasgo"] }
+        ],
+        "eje_y": { "min": 0, "max": 60, "paso": 10 },
+        "colores": ["#0b4a6e", "#c2d534"]
+      }
+    },
+    {
+      "id": "grafico_radar_factorial",
+      "tipo": "grafico_radar",
+      "titulo": "Perfil factorial (Tablas 7 y 8 del Manual)",
+      "datos": {
+        "labels": ["Estado Afirmativo", "Estado Negativo", "Rasgo Afirmativo", "Rasgo Negativo"],
+        "valores": ["factores.EA.porcentaje", "factores.EN.porcentaje", "factores.RA.porcentaje", "factores.RN.porcentaje"],
+        "eje": { "min": 0, "max": 100, "paso": 20 }
+      }
+    },
+    {
+      "id": "relacion_estado_rasgo",
+      "tipo": "alerta_destacada",
+      "titulo": "Relación Estado-Rasgo",
+      "fuente": "texto_relacion",
+      "campos": [
+        { "label": "Título", "tipo": "texto", "valor": "titulo" },
+        { "label": "Análisis", "tipo": "texto", "valor": "texto" }
+      ]
+    },
+    {
+      "id": "detalle_escalas",
+      "tipo": "bloques_por_escala",
+      "titulo": "Análisis por escala (baremos de adultos por sexo)",
+      "fuente": "escalas",
+      "bloque": {
+        "encabezado": "{nombre} — PD {pd}/60",
+        "campos": [
+          { "label": "Categoría (varón)", "tipo": "texto", "valor": "categoria_varon" },
+          { "label": "Percentil (varón)", "tipo": "texto", "valor": "percentil_varon" },
+          { "label": "Categoría (mujer)", "tipo": "texto", "valor": "categoria_mujer" },
+          { "label": "Percentil (mujer)", "tipo": "texto", "valor": "percentil_mujer" },
+          { "label": "Interpretación (varón)", "tipo": "texto", "valor": "interpretacion_varon" },
+          { "label": "Interpretación (mujer)", "tipo": "texto", "valor": "interpretacion_mujer" }
+        ]
+      }
+    },
+    {
+      "id": "analisis_items",
+      "tipo": "tabla_items",
+      "titulo": "Análisis ítem por ítem",
+      "fuente": "analisis_items",
+      "columnas": [
+        { "label": "#", "valor": "id" },
+        { "label": "Ítem", "valor": "texto" },
+        { "label": "Escala", "valor": "tipo" },
+        { "label": "Respuesta", "valor": "respuesta_texto" },
+        { "label": "Valor ansiedad", "valor": "valor_ansiedad" }
+      ]
+    }
+  ]
+}

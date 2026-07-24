@@ -1,0 +1,122 @@
+{
+  "_descripcion": "Casos de regresión para DNLA Percepción Personal (Test11). 'fill' = todas las respuestas con ese valor. 'respuestas' = dict id(1-24)->valor; 'fill_resto' completa los no listados. 'nombre_evaluado' alimenta la síntesis final. Las rutas de 'esperado' usan notación punto: claves de dict e índices de lista (p.ej. 'analisis_dimensiones.0.texto'). Valores derivados del algoritmo del .gs.",
+  "casos": [
+    {
+      "nombre": "Todo 3 (neutral) — promedio global 3.00, Perfil en Desarrollo",
+      "fill": 3,
+      "esperado": {
+        "promedio_global": 3.0,
+        "badge_global.texto": "EN DESARROLLO",
+        "badge_global.clase": "badge-medio",
+        "perfil_global.titulo": "Perfil en Desarrollo",
+        "interpretacion_global": "Tienes un perfil equilibrado con áreas específicas de mejora.",
+        "dimensiones.autopercepcion_autoestima.promedio": 3.0,
+        "dimensiones.bienestar_equilibrio.promedio": 3.0,
+        "patrones_transversales.0.titulo": "Consistencia General",
+        "riesgos": [],
+        "recomendaciones.0.titulo": "Proyecto Reto",
+        "recomendaciones.1.titulo": "Mentoring",
+        "recomendaciones.2.titulo": "Revisión Trimestral",
+        "analisis_dimensiones.0.texto": "Tu autopercepción se encuentra en una etapa de **Desarrollo Variable**. En ciertos contextos te sientes seguro/a, mientras que en otros la duda te paraliza. Este patrón situacional sugiere que tu autoestima aún depende en exceso de factores externos o de la validación de terceros.",
+        "analisis_dimensiones.3.texto": "Tu estilo relacional es **Reservado**. Tiendes a priorizar la lógica sobre la conexión emocional.",
+        "analisis_dimensiones.4.texto": "Mantienes un nivel de **Equilibrio Precario**. Reconoces la necesidad de cuidarte pero a menudo lo pospones."
+      }
+    },
+    {
+      "nombre": "Todo 5 (máximo) — promedio global 5.00, Perfil Sobresaliente",
+      "fill": 5,
+      "nombre_evaluado": "Ana",
+      "esperado": {
+        "promedio_global": 5.0,
+        "badge_global.texto": "SOBRESALIENTE",
+        "badge_global.clase": "badge-sobresaliente",
+        "perfil_global.titulo": "Perfil Sobresaliente",
+        "interpretacion_global": "Tu perfil indica un alto nivel de recursos personales y bienestar.",
+        "patrones_transversales.0.titulo": "Triángulo del Bienestar Sólido",
+        "patrones_transversales.1.titulo": "Motor de Logro Activado",
+        "riesgos": [],
+        "recomendaciones.0.titulo": "Proyecto Reto",
+        "sintesis_final": "Ana, tienes una base sólida y herramientas poderosas. Este informe no es un diagnóstico, es un mapa. Úsalo para navegar tu siguiente etapa de crecimiento con intención.",
+        "resumen_ejecutivo.pilares": ["Autopercepción y Autoestima", "Motivación y Propósito", "Adaptabilidad Emocional", "Relaciones y Empatía", "Bienestar y Equilibrio", "Crecimiento Personal"],
+        "resumen_ejecutivo.areas_atencion": []
+      }
+    },
+    {
+      "nombre": "Todo 1 (mínimo) — RIESGO + burnout + Riesgo de Desgaste",
+      "fill": 1,
+      "nombre_evaluado": "Ana",
+      "esperado": {
+        "promedio_global": 1.0,
+        "badge_global.texto": "RIESGO",
+        "badge_global.clase": "badge-riesgo",
+        "perfil_global.titulo": "Perfil con Riesgo de Desgaste",
+        "interpretacion_global": "Se recomienda prestar atención prioritaria a tu bienestar emocional.",
+        "riesgos.0.titulo": "🔴 RIESGO DE BURNOUT",
+        "recomendaciones.0.titulo": "Protocolo de Recarga",
+        "recomendaciones.1.titulo": "Reescritura Narrativa",
+        "recomendaciones.2.titulo": "Revisión Trimestral",
+        "sintesis_final": "Ana, este informe es una llamada a la acción amable pero firme. Tu bienestar no es un lujo, es la base de todo lo demás. Priorízate.",
+        "resumen_ejecutivo.areas_atencion": ["Autopercepción y Autoestima", "Motivación y Propósito", "Adaptabilidad Emocional", "Relaciones y Empatía", "Bienestar y Equilibrio", "Crecimiento Personal"]
+      }
+    },
+    {
+      "nombre": "Todo 2 — promedio global 2.00, badge ATENCIÓN pero Perfil Riesgo de Desgaste (r16=r19=2)",
+      "fill": 2,
+      "esperado": {
+        "promedio_global": 2.0,
+        "badge_global.texto": "ATENCIÓN",
+        "badge_global.clase": "badge-desarrollo",
+        "perfil_global.titulo": "Perfil con Riesgo de Desgaste",
+        "riesgos": []
+      }
+    },
+    {
+      "nombre": "Todo 4 — promedio global 4.00, SÓLIDO, alto nivel de recursos",
+      "fill": 4,
+      "esperado": {
+        "promedio_global": 4.0,
+        "badge_global.texto": "SÓLIDO",
+        "badge_global.clase": "badge-solido",
+        "perfil_global.titulo": "Perfil Sólido",
+        "interpretacion_global": "Tu perfil indica un alto nivel de recursos personales y bienestar.",
+        "patrones_transversales.0.titulo": "Triángulo del Bienestar Sólido",
+        "patrones_transversales.1.titulo": "Motor de Logro Activado"
+      }
+    },
+    {
+      "nombre": "Mixto — dispara Autoexigente / Orientado-Vulnerable / Empatía Desgastada / Growth Mindset",
+      "fill_resto": 3,
+      "respuestas": { "1": 2, "2": 5, "3": 2, "4": 3, "5": 5, "6": 5, "7": 2, "8": 2, "9": 2, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3, "15": 2, "16": 5, "17": 4, "18": 2, "19": 4, "20": 4, "21": 5, "22": 3, "23": 5, "24": 3 },
+      "esperado": {
+        "promedio_global": 3.33,
+        "badge_global.texto": "EN DESARROLLO",
+        "perfil_global.titulo": "Perfil en Desarrollo",
+        "dimensiones.autopercepcion_autoestima.promedio": 3.0,
+        "dimensiones.motivacion_proposito.promedio": 3.5,
+        "dimensiones.adaptabilidad_emocional.promedio": 2.75,
+        "dimensiones.relaciones_empatia.promedio": 3.25,
+        "dimensiones.bienestar_equilibrio.promedio": 3.5,
+        "dimensiones.crecimiento_personal.promedio": 4.0,
+        "analisis_dimensiones.0.texto": "Se identifica un patrón **Autoexigente**. Confías plenamente en tus capacidades operativas ('sé que puedo hacerlo'), pero te cuesta enormemente reconocer y celebrar tus logros ('nunca es suficiente'). Esto puede generar un ciclo de insatisfacción crónica donde el éxito no se disfruta, solo se tacha de una lista.",
+        "analisis_dimensiones.1.texto": "Tu perfil es **Orientado a Metas pero Vulnerable**. Eres excelente fijando objetivos y visualizando la meta, pero tu motivación es frágil ante los obstáculos. Cuando las cosas se ponen difíciles, tu energía decae rápidamente, lo que sugiere que te mueves más por el resultado que por el propósito.",
+        "analisis_dimensiones.2.texto": "Tu perfil indica **Vulnerabilidad al Estrés**. Los cambios imprevistos te generan un costo emocional alto, y te cuesta recuperar la calma una vez que la pierdes.",
+        "analisis_dimensiones.3.texto": "Presentas un patrón de **Empatía Desgastada**. Eres el 'cuidador' del grupo, siempre disponible para otros, pero a menudo a costa de tus propios límites. Esto es noble pero insostenible.",
+        "analisis_dimensiones.4.texto": "Mantienes un nivel de **Bienestar Integral**. Has integrado el autocuidado como parte de tu productividad.",
+        "analisis_dimensiones.5.texto": "Posees una **Mentalidad de Crecimiento (Growth Mindset)**. Ves los errores como datos, no como fracasos, y buscas activamente el feedback.",
+        "patrones_transversales.0.titulo": "Triángulo del Bienestar Sólido",
+        "patrones_transversales.1.titulo": "Motor de Logro Activado",
+        "riesgos": [],
+        "recomendaciones.0.titulo": "Proyecto Reto"
+      }
+    },
+    {
+      "nombre": "Síndrome del Impostor + Paradoja del Cuidador (r2<=2 & r6>=4; r16>=4 & r20<=2)",
+      "fill_resto": 3,
+      "respuestas": { "2": 2, "6": 5, "16": 5, "20": 2 },
+      "esperado": {
+        "patrones_transversales.0.titulo": "Síndrome del Impostor Potencial",
+        "patrones_transversales.1.titulo": "La Paradoja del Cuidador"
+      }
+    }
+  ]
+}

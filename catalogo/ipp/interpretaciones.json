@@ -1,0 +1,33 @@
+{
+  "_fuente": "Test3/script.gs · CAMPOS_PROFESIONALES (descripcion + carreras) + TEXTOS_INTERPRETACION",
+  "_descripcion": "Textos pre-aprobados. Por campo: descripción y carreras asociadas (se anexan a cada campo en el resultado). Por tipo de perfil: texto interpretativo. Contenido seleccionado por el resultado calculado, nunca generado por IA.",
+  "por_campo": {
+    "C":  { "descripcion": "Interés por la investigación, experimentación y comprensión de fenómenos naturales y científicos.", "carreras": ["Biología", "Química", "Física", "Medicina", "Farmacia", "Investigación científica"] },
+    "T":  { "descripcion": "Atracción por el trabajo con máquinas, herramientas, diseño técnico y procesos industriales.", "carreras": ["Ingeniería Mecánica", "Ingeniería Industrial", "Electrónica", "Mecatrónica", "Técnico en mantenimiento"] },
+    "S":  { "descripcion": "Inclinación hacia el cuidado de la salud, atención a pacientes y actividades médico-asistenciales.", "carreras": ["Medicina", "Enfermería", "Fisioterapia", "Nutrición", "Odontología", "Paramédico"] },
+    "CS": { "descripcion": "Interés por comprender el comportamiento humano, los fenómenos sociales y la investigación social.", "carreras": ["Psicología", "Sociología", "Antropología", "Trabajo Social", "Ciencias Políticas", "Economía"] },
+    "L":  { "descripcion": "Atracción por la escritura, lectura, idiomas y expresión a través de la palabra escrita.", "carreras": ["Periodismo", "Literatura", "Comunicación", "Traducción", "Edición", "Guionismo"] },
+    "AP": { "descripcion": "Inclinación hacia las artes visuales, diseño, creatividad plástica y expresión artística.", "carreras": ["Diseño Gráfico", "Arquitectura", "Bellas Artes", "Fotografía", "Diseño de Interiores", "Animación"] },
+    "M":  { "descripcion": "Interés por la música, composición, interpretación y producción musical.", "carreras": ["Música", "Producción Musical", "Dirección de Orquesta", "Canto", "Ingeniería de Sonido", "Musicoterapia"] },
+    "SA": { "descripcion": "Atracción por ayudar a otros, trabajo comunitario y actividades de servicio social.", "carreras": ["Trabajo Social", "Educación Social", "Cooperación Internacional", "ONG", "Orientación Familiar", "Voluntariado"] },
+    "EE": { "descripcion": "Interés por los negocios, finanzas, administración y gestión empresarial.", "carreras": ["Administración de Empresas", "Contaduría", "Finanzas", "Economía", "MBA", "Consultoría"] },
+    "PC": { "descripcion": "Atracción por las ventas, negociación, marketing y actividades comerciales.", "carreras": ["Marketing", "Ventas", "Publicidad", "Relaciones Públicas", "Comercio Internacional", "Negocios"] },
+    "A":  { "descripcion": "Inclinación hacia tareas de organización, gestión documental y trabajo de oficina.", "carreras": ["Secretariado Ejecutivo", "Administración", "Gestión Administrativa", "Recursos Humanos", "Asistente de Dirección"] },
+    "JP": { "descripcion": "Interés por las leyes, la política, la justicia y los asuntos legales.", "carreras": ["Derecho", "Ciencias Políticas", "Relaciones Internacionales", "Diplomacia", "Notariado", "Judicatura"] },
+    "CI": { "descripcion": "Atracción por los medios de comunicación, periodismo y gestión de información.", "carreras": ["Periodismo", "Comunicación Audiovisual", "Producción de TV", "Radio", "Community Manager", "Marketing Digital"] },
+    "E":  { "descripcion": "Inclinación hacia la docencia, formación y transmisión de conocimientos.", "carreras": ["Pedagogía", "Magisterio", "Profesorado", "Educación Especial", "Formación de Adultos", "Capacitación"] },
+    "SE": { "descripcion": "Interés por la protección, orden público, defensa y actividades de seguridad.", "carreras": ["Policía", "Fuerzas Armadas", "Bomberos", "Seguridad Privada", "Criminalística", "Protección Civil"] },
+    "D":  { "descripcion": "Atracción por el deporte, actividad física, entrenamiento y gestión deportiva.", "carreras": ["Educación Física", "Entrenamiento Deportivo", "Fisioterapia Deportiva", "Gestión Deportiva", "Nutrición Deportiva"] },
+    "AA": { "descripcion": "Inclinación hacia la naturaleza, agricultura, medio ambiente y recursos naturales.", "carreras": ["Agronomía", "Veterinaria", "Ingeniería Ambiental", "Biología", "Ecología", "Gestión Ambiental"] },
+    "I":  { "descripcion": "Interés por la tecnología, programación, sistemas informáticos y desarrollo de software.", "carreras": ["Ingeniería en Sistemas", "Desarrollo de Software", "Ciberseguridad", "Data Science", "Diseño Web", "IA"] }
+  },
+  "textos_generales": {
+    "intro": "El Inventario de Intereses y Preferencias Profesionales (IPP) evalúa tus inclinaciones hacia distintos campos ocupacionales. Los resultados reflejan tus preferencias actuales y pueden servir como guía para tu desarrollo vocacional.",
+    "recomendacion": "Recuerda que los intereses pueden evolucionar con el tiempo y la experiencia. Este resultado es una fotografía de tus preferencias actuales, no una determinación de tu futuro profesional."
+  },
+  "por_tipo_perfil": {
+    "definido": "Tu perfil muestra intereses claramente definidos, lo que facilita la orientación vocacional. Las áreas con mayor puntuación representan campos donde probablemente encontrarás mayor satisfacción profesional.",
+    "disperso": "Tu perfil muestra intereses distribuidos en varias áreas, lo que indica versatilidad y apertura a distintas opciones profesionales. Esto puede ser una fortaleza para carreras interdisciplinarias.",
+    "plano": "Tu perfil no muestra preferencias muy marcadas, lo cual es normal en etapas de exploración vocacional. Te recomendamos buscar experiencias prácticas en distintos campos para clarificar tus intereses."
+  }
+}

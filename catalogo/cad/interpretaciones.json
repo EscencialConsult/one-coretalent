@@ -1,0 +1,37 @@
+{
+  "_fuente": "Test14/script.gs · CAD_INFO.escalas (foco/color/icono) + CAD_INFO.notaInterpretacion.",
+  "_descripcion": "Contenido curado por escala (descripción del foco de cada estrategia). El CAD no define niveles ni interpretaciones por puntaje de corte, así que NO hay textos por nivel; la única interpretación aprobada es la descripción del foco de cada escala y la nota general de comparación ipsativa.",
+  "nota_general": "El CAD no establece puntos de corte oficiales. Las comparaciones se realizan entre escalas del mismo perfil. La puntuación normalizada (0 a 4) facilita comparar escalas con distinto número de ítems.",
+  "por_escala": {
+    "Religión": {
+      "icono": "🙏",
+      "color": "#8b5cf6",
+      "foco": "Estrategia centrada en la emoción; asociada a emociones de furia y preocupación."
+    },
+    "Catarsis": {
+      "icono": "🗣️",
+      "color": "#0ea5e9",
+      "foco": "Búsqueda de apoyo socio-emocional; compartir y desahogo."
+    },
+    "Distracción": {
+      "icono": "🎯",
+      "color": "#22c55e",
+      "foco": "Estrategia centrada en emoción; se asocia a emociones positivas."
+    },
+    "Autocontrol mental": {
+      "icono": "🧠",
+      "color": "#f59e0b",
+      "foco": "Regulación cognitiva enfocada en el dolor; relación positiva con emociones, menor intensidad."
+    },
+    "Autoafirmación": {
+      "icono": "💪",
+      "color": "#10b981",
+      "foco": "Resiliencia y auto-motivación; asociada a emociones positivas."
+    },
+    "Búsqueda de información": {
+      "icono": "🔎",
+      "color": "#ef4444",
+      "foco": "Más centrada en el problema (apoyo instrumental), aunque no acciones directas."
+    }
+  }
+}

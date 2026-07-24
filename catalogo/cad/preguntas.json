@@ -1,0 +1,61 @@
+{
+  "_fuente": "Test14/script.js · ITEMS_CAD + ESCALAS + OPCIONES (autoridad del cálculo). El Test14/script.gs NO calcula: recibe el JSON de escalas ya computado por el front.",
+  "_descripcion": "31 ítems Likert 0-4. Cada ítem pertenece a exactamente una de las 6 escalas (sin solapamiento, sin ítems inversos). El puntaje de cada escala es la suma directa de los valores de sus ítems.",
+  "escala_respuesta": {
+    "_orden_mostrado": ["A", "B", "C", "D", "E"],
+    "A": { "valor": 4, "label": "Totalmente de acuerdo" },
+    "B": { "valor": 3, "label": "Ligeramente de acuerdo" },
+    "C": { "valor": 2, "label": "Ni Sí ni No" },
+    "D": { "valor": 1, "label": "Ligeramente en desacuerdo" },
+    "E": { "valor": 0, "label": "Totalmente en desacuerdo" }
+  },
+  "_escala_nota": "Mapa plano {valor: label} que consume la plataforma (el endpoint sirve 'escala'; el front envía la clave numérica 0-4). Orden mostrado: de acuerdo → en desacuerdo.",
+  "escala": {
+    "4": "Totalmente de acuerdo",
+    "3": "Ligeramente de acuerdo",
+    "2": "Ni sí ni no",
+    "1": "Ligeramente en desacuerdo",
+    "0": "Totalmente en desacuerdo"
+  },
+  "escalas": {
+    "Religión": { "items": [3, 8, 17, 22, 25] },
+    "Catarsis": { "items": [7, 9, 13, 16, 29] },
+    "Distracción": { "items": [1, 10, 15, 18, 23, 28] },
+    "Autocontrol mental": { "items": [4, 12, 19, 20, 24] },
+    "Autoafirmación": { "items": [5, 11, 14, 26, 30] },
+    "Búsqueda de información": { "items": [2, 6, 21, 27, 31] }
+  },
+  "items": [
+    { "id": 1,  "escala": "Distracción",            "text": "Ignoro el dolor pensando en otra cosa." },
+    { "id": 2,  "escala": "Búsqueda de información", "text": "Intento saber más sobre mi dolor para así poder hacerle frente." },
+    { "id": 3,  "escala": "Religión",               "text": "Rezo para curarme." },
+    { "id": 4,  "escala": "Autocontrol mental",     "text": "Me olvido de todo y me concentro en mi dolor intentando que desaparezca." },
+    { "id": 5,  "escala": "Autoafirmación",         "text": "Cuando tengo dolor no me rindo, peleo." },
+    { "id": 6,  "escala": "Búsqueda de información", "text": "Hablo con un profesional (médico, psicólogo, sacerdote, etc) del problema para que me ayude a hacerle frente." },
+    { "id": 7,  "escala": "Catarsis",               "text": "Busco algún amigo o allegado que me comprenda y me ayude a sentirme mejor con el dolor." },
+    { "id": 8,  "escala": "Religión",               "text": "Rezo para conseguir fuerza y guía sobre el problema." },
+    { "id": 9,  "escala": "Catarsis",               "text": "Cuento a la gente la situación porque ello me ayuda a encontrar soluciones." },
+    { "id": 10, "escala": "Distracción",            "text": "Cuando tengo dolor pienso en otra cosa." },
+    { "id": 11, "escala": "Autoafirmación",         "text": "Me doy ánimos por aguantar el dolor." },
+    { "id": 12, "escala": "Autocontrol mental",     "text": "Cuando tengo dolor me concentro en él e intento disminuirlo mentalmente." },
+    { "id": 13, "escala": "Catarsis",               "text": "Cuando tengo dolor les digo a los demás lo mucho que me duele, pues el compartir mis sentimientos me hace encontrarme mejor." },
+    { "id": 14, "escala": "Autoafirmación",         "text": "Me digo a mí mismo que tengo que ser fuerte." },
+    { "id": 15, "escala": "Distracción",            "text": "Cuando tengo dolor me esfuerzo en distraerme con algún pasatiempo." },
+    { "id": 16, "escala": "Catarsis",               "text": "Cuando tengo dolor intento hablar con alguien y contarle lo que me pasa. Esto me ayuda a soportarlo." },
+    { "id": 17, "escala": "Religión",               "text": "Utilizo la fe para aliviar mis dolores." },
+    { "id": 18, "escala": "Distracción",            "text": "Busco algo en qué pensar para distraerme." },
+    { "id": 19, "escala": "Autocontrol mental",     "text": "Cuando tengo dolor me concentro en su localización e intensidad para intentar controlarlo." },
+    { "id": 20, "escala": "Autocontrol mental",     "text": "Trato de dejar la mente en blanco." },
+    { "id": 21, "escala": "Búsqueda de información", "text": "Hablo con alguien que puede hacer algo concreto sobre mi dolor." },
+    { "id": 22, "escala": "Religión",               "text": "Pido a Dios que me alivie de mis dolores." },
+    { "id": 23, "escala": "Distracción",            "text": "Intento recrear mentalmente un paisaje." },
+    { "id": 24, "escala": "Autocontrol mental",     "text": "Me concentro en el punto en que más me duele intentando disminuir el dolor." },
+    { "id": 25, "escala": "Religión",               "text": "Rezo para que mis dolores desaparezcan." },
+    { "id": 26, "escala": "Autoafirmación",         "text": "Aunque me duele me contengo y procuro que no se me note." },
+    { "id": 27, "escala": "Búsqueda de información", "text": "Intento que me expliquen qué puedo hacer para disminuir el dolor." },
+    { "id": 28, "escala": "Distracción",            "text": "Cuando tengo dolor imagino situaciones placenteras." },
+    { "id": 29, "escala": "Catarsis",               "text": "Hablo con la gente de mi dolor, porque el hablar me ayuda a sentirme mejor." },
+    { "id": 30, "escala": "Autoafirmación",         "text": "Pienso que he de tener fuerzas y no desfallecer." },
+    { "id": 31, "escala": "Búsqueda de información", "text": "Busco a algún amigo, familiar o profesional para que me aconseje cómo superar la situación." }
+  ]
+}

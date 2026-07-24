@@ -1,0 +1,52 @@
+{
+  "_descripcion": "Configuración del informe DNLA Leadership. El renderizador consume la salida de scoring.py (dimensiones + global + sintesis). Replica las secciones del index.html legacy.",
+  "titulo": "DNLA Leadership & Middle Management - Informe de Resultados",
+  "subtitulo": "Perfil de Liderazgo Y Mandos Medios",
+  "secciones": [
+    {
+      "id": "grafico_radar",
+      "tipo": "grafico_radar",
+      "titulo": "Perfil de Liderazgo",
+      "datos": {
+        "labels": "dimensiones[*].nombre",
+        "valores": "dimensiones[*].puntuacion",
+        "eje": { "min": 0, "max": 5, "paso": 1 }
+      }
+    },
+    {
+      "id": "detalle_dimensiones",
+      "tipo": "bloques_por_dimension",
+      "titulo": "Análisis por dimensión",
+      "fuente": "dimensiones",
+      "bloque": {
+        "encabezado": "{nombre} — {label} ({puntuacion}/5)",
+        "campos": [
+          { "label": "Nivel", "tipo": "badge", "valor": "label", "clase": "badge" },
+          { "label": "Descripción", "tipo": "texto", "valor": "descripcion" }
+        ]
+      }
+    },
+    {
+      "id": "interpretacion_global",
+      "tipo": "bloque_global",
+      "titulo": "Interpretación global",
+      "fuente": "global",
+      "campos": [
+        { "label": "Puntuación global", "tipo": "numero", "valor": "puntuacion" },
+        { "label": "Nivel", "tipo": "texto", "valor": "label" },
+        { "label": "Interpretación", "tipo": "texto", "valor": "interpretation" }
+      ]
+    },
+    {
+      "id": "sintesis_perfil",
+      "tipo": "sintesis",
+      "titulo": "📋 Síntesis del Perfil de Liderazgo Y Mandos Medios",
+      "fuente": "sintesis",
+      "campos": [
+        { "label": "💪 Fortalezas de Liderazgo Detectadas", "tipo": "lista", "valor": "fortalezas", "vacio": "No se identificaron competencias en nivel sobresaliente." },
+        { "label": "🎯 Áreas de Desarrollo Prioritarias", "tipo": "lista", "valor": "debilidades", "vacio": "No se identificaron competencias en nivel crítico." },
+        { "label": "💡 Recomendación", "tipo": "texto", "valor": "global.recomendacion" }
+      ]
+    }
+  ]
+}

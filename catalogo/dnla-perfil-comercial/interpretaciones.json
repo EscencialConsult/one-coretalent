@@ -1,0 +1,406 @@
+{
+  "_fuente": "Test10/script.gs · INTERPRETACIONES + generarRecomendacionesGlobales.",
+  "_descripcion": "Por dimensión y nivel: descripcion, fortalezas, recomendaciones, riesgos. Contenido aprobado; seleccionado por el nivel calculado, no generado por IA. Las claves de dimensión coinciden con baremos.json/preguntas.json.",
+  "por_dimension": {
+    "iniciativa_proactividad": {
+      "SOBRESALIENTE": {
+        "descripcion": "Hunter natural con excelente capacidad de identificar oportunidades. No espera indicaciones para actuar y toma decisiones comerciales con seguridad y rapidez. Anticipa necesidades del cliente con 2-3 pasos de adelanto.",
+        "fortalezas": [
+          "Identifica oportunidades antes que sean evidentes",
+          "Genera ideas comerciales innovadoras sin ser solicitado",
+          "Alto sentido de urgencia comercial",
+          "Locus de control interno muy fuerte"
+        ],
+        "recomendaciones": [
+          "Asignar territorios o cuentas de alta complejidad",
+          "Ideal para prospección y apertura de mercados",
+          "Mentor de equipos comerciales",
+          "Proyectos de expansión o lanzamiento de productos"
+        ],
+        "riesgos": "Puede sobre-comprometerse. Necesita límites claros de autonomía y balance entre acción y estrategia."
+      },
+      "SOLIDO": {
+        "descripcion": "Vendedor proactivo confiable. Busca oportunidades regularmente y propone ideas comerciales. Toma decisiones el mismo día ante oportunidades. Buen balance entre proactividad y seguimiento de procesos.",
+        "fortalezas": [
+          "Busca oportunidades de forma consistente",
+          "Propone ideas comerciales en reuniones",
+          "Responde bien a incentivos y metas",
+          "Anticipa algunas necesidades del cliente"
+        ],
+        "recomendaciones": [
+          "Fortalecer confianza en toma de decisiones autónomas",
+          "Training en metodologías de prospección avanzada",
+          "Asignar mini-proyectos de exploración comercial",
+          "Role-playing sobre anticipación de necesidades"
+        ],
+        "riesgos": "Puede necesitar validación ocasional. Requiere desarrollo en autonomía decisional."
+      },
+      "POTENCIAL_MEDIO": {
+        "descripcion": "Vendedor reactivo con potencial de desarrollo. Espera indicaciones en 50% de casos. Ideas comerciales esporádicas. Reacciona a necesidades expresadas pero no anticipa. Se mantiene en zona de confort.",
+        "fortalezas": [
+          "Ejecuta bien cuando tiene dirección clara",
+          "Potencial latente que requiere activación"
+        ],
+        "recomendaciones": [
+          "Capacitación en mindset proactivo (Growth Mindset)",
+          "Rutina de prospección obligatoria diaria",
+          "Asignar mentor que modele conductas proactivas",
+          "Objetivos específicos medibles de iniciativa",
+          "Acompañamiento con vendedor top (shadowing)"
+        ],
+        "riesgos": "Requiere estructura y supervisión. Puede estancarse sin impulso externo. Necesita desarrollo urgente."
+      },
+      "NECESITA_DESARROLLO": {
+        "descripcion": "Order taker (tomador de pedidos). Totalmente reactivo, espera instrucciones constantes. No propone ideas comerciales ni anticipa necesidades. Enfoque transaccional puro. Puede tener creencias limitantes sobre ventas.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "Evaluación de ajuste persona-puesto comercial",
+          "Coaching intensivo 1:1 semanal obligatorio",
+          "PIP (Plan de Mejora) de 90 días con métricas claras",
+          "Capacitación fundamental en ventas consultivas",
+          "Actividad mínima obligatoria: 10 contactos proactivos/día"
+        ],
+        "riesgos": "Desajuste con rol comercial. Puede generar frustración en equipo y bajo rendimiento. Evaluar continuidad."
+      },
+      "BAJO": {
+        "descripcion": "Desajuste severo con rol comercial. Pasividad total, espera que cliente lo busque. No reconoce oportunidades evidentes. Paralizado en toma de decisiones. Resistencia activa a salir de rutina.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "Reposicionamiento urgente a rol no comercial",
+          "Si hay interés genuino: Programa de rescate con coaching diario",
+          "Evaluar factores motivacionales o personales",
+          "Decisión en 30 días: si no hay cambio visible → reubicar"
+        ],
+        "riesgos": "Crítico. No apto para rol comercial de contacto con cliente. Acción inmediata requerida."
+      }
+    },
+    "comunicacion_persuasiva": {
+      "SOBRESALIENTE": {
+        "descripcion": "Comunicador estratégico natural con alto carisma comercial. Articula beneficios en lenguaje del cliente, no en características técnicas. Adapta comunicación en tiempo real según señales verbales y no verbales. Storytelling efectivo.",
+        "fortalezas": [
+          "Capta atención en primeros 30 segundos",
+          "Persuade sin generar resistencia",
+          "Manejo de lenguaje emocional + racional",
+          "Lectura de comunicación no verbal"
+        ],
+        "recomendaciones": [
+          "Presentaciones a alto nivel ejecutivo",
+          "Negociaciones complejas y cierre de grandes cuentas",
+          "Capacitador interno de comunicación comercial",
+          "Casos de estudio de mejores prácticas"
+        ],
+        "riesgos": "Puede confiar excesivamente en carisma. Mantener preparación y estructura."
+      },
+      "SOLIDO": {
+        "descripcion": "Explica beneficios claramente con 80% de efectividad. Adapta lenguaje con preparación previa. Usa ejemplos de forma planificada. Persuade con fórmulas probadas.",
+        "fortalezas": [
+          "Comunicación clara y efectiva",
+          "Capta atención en primer minuto",
+          "Sigue metodologías probadas"
+        ],
+        "recomendaciones": [
+          "Workshop de storytelling avanzado",
+          "Training en comunicación adaptativa",
+          "Práctica de improvisación comercial",
+          "Grabación y análisis de llamadas propias",
+          "Elevator pitch de 30 segundos (5 versiones diferentes)"
+        ],
+        "riesgos": "Puede depender de scripts. Necesita mayor espontaneidad y diversidad de recursos persuasivos."
+      },
+      "POTENCIAL_MEDIO": {
+        "descripcion": "Comunicación técnica pero poco persuasiva. Dificultad para adaptar mensaje según cliente. Ejemplos genéricos. Pierde atención del cliente rápidamente. Argumentación racional pura sin conexión emocional.",
+        "fortalezas": [
+          "Conoce el producto técnicamente",
+          "Puede comunicarse con estructura"
+        ],
+        "recomendaciones": [
+          "Capacitación en 'Características → Beneficios → Valor'",
+          "Matriz de perfiles de cliente y lenguajes",
+          "Banco de historias de éxito por industria",
+          "Training en escucha activa (pre-requisito)",
+          "Desarrollar 10 historias de éxito personales"
+        ],
+        "riesgos": "No conecta con cliente emocionalmente. Pierde ventas por comunicación técnica. Requiere desarrollo urgente."
+      },
+      "NECESITA_DESARROLLO": {
+        "descripcion": "Comunicación confusa o dispersa. Discurso único sin adaptación. Cliente pierde interés en primeros 2 minutos. Suena insistente/agresivo o demasiado pasivo. No domina propuesta de valor.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "Dominio total del producto (certificación interna)",
+          "Construcción de script base flexible",
+          "Role-play intensivo 3 veces por semana con feedback",
+          "Acompañamiento en campo 100% de reuniones",
+          "Video auto-evaluación semanal obligatoria"
+        ],
+        "riesgos": "Genera rechazo o confusión. Pérdida de oportunidades en primera interacción. Posible ansiedad social."
+      },
+      "BAJO": {
+        "descripcion": "Incapacidad de explicar claramente la oferta. Cliente confundido después de interacción. Genera rechazo o incomodidad. Clientes piden hablar con otra persona.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "NO asignar a rol comercial de contacto directo",
+          "Programa intensivo 60 días con coach especializado",
+          "Alternativas: Inside sales con script cerrado, back office",
+          "Si no mejora: reposicionar a rol de soporte no comercial"
+        ],
+        "riesgos": "Crítico. Daña imagen de marca. No apto para contacto con clientes. Acción inmediata."
+      }
+    },
+    "escucha_empatia": {
+      "SOBRESALIENTE": {
+        "descripcion": "Consultor de confianza natural. Escucha más del 60% del tiempo de conversación. Hace mínimo 5 preguntas de profundización por reunión. Detecta necesidades no verbalizadas. Cliente se abre emocionalmente.",
+        "fortalezas": [
+          "Escucha en 3 niveles: contenido, emociones, intenciones",
+          "Empatía cognitiva + emocional desarrollada",
+          "Silencio activo y pausas estratégicas",
+          "Construcción de rapport profundo"
+        ],
+        "recomendaciones": [
+          "Asignar cuentas estratégicas de alta complejidad",
+          "Negociaciones de largo ciclo",
+          "Recovery de clientes insatisfechos",
+          "Mentor en habilidades de relación"
+        ],
+        "riesgos": "Puede absorber emocionalmente problemas del cliente. Monitorear balance y autocuidado."
+      },
+      "SOLIDO": {
+        "descripcion": "Escucha 40-50% del tiempo. Hace 3-4 preguntas por reunión. Parafrasea cuando es necesario. Cliente comparte necesidades básicas. Detecta algunas señales emocionales.",
+        "fortalezas": [
+          "Buenas habilidades de escucha",
+          "Comprensión adecuada del cliente",
+          "Balance conversacional apropiado"
+        ],
+        "recomendaciones": [
+          "Training en técnicas de preguntas (SPIN, Sandler)",
+          "Ejercicios de escucha profunda",
+          "Análisis de lenguaje corporal",
+          "Practicar ratio 70/30 (cliente habla 70%)",
+          "Auto-evaluación post-reunión"
+        ],
+        "riesgos": "Puede quedarse en superficie. Necesita profundizar más en preguntas y señales sutiles."
+      },
+      "POTENCIAL_MEDIO": {
+        "descripcion": "Escucha solo 30-40% del tiempo. Preguntas cerradas o de confirmación. No parafrasea. Cliente solo comparte información superficial. Pierde señales emocionales importantes. Pitch inmediato sin exploración.",
+        "fortalezas": [
+          "Tiene estructura de venta",
+          "Intenta comunicarse con cliente"
+        ],
+        "recomendaciones": [
+          "Capacitación fundamental en venta consultiva",
+          "Ejercicio: Reunión completa solo con preguntas (0 pitch)",
+          "Grabación de audio y cálculo de ratio habla/escucha",
+          "Desafío 70/30: Cliente habla 70%, vendedor 30%",
+          "Parafraseo forzado después de cada respuesta del cliente"
+        ],
+        "riesgos": "Enfoque transaccional. No descubre necesidades reales. Pierde ventas por no escuchar. Desarrollo urgente."
+      },
+      "NECESITA_DESARROLLO": {
+        "descripcion": "Habla 70%+ del tiempo. Preguntas mínimas o solo de cierre. Nunca parafrasea. Cliente no se abre. Cero lectura emocional. Mentalidad de 'vender producto' vs 'resolver problema'.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "Inmersión en filosofía consultiva",
+          "Training intensivo en preguntas SPIN",
+          "Prohibido presentar antes de 5 preguntas mínimo",
+          "Ratio obligatorio: cliente 60%, vendedor 40%",
+          "Acompañamiento permanente con coach"
+        ],
+        "riesgos": "Objeciones constantes de precio. Cliente dice 'déjame pensarlo' frecuentemente. No es consultivo. KPI crítico: 60 días para cambio."
+      },
+      "BAJO": {
+        "descripcion": "Monólogo permanente (90%+ habla). Sin preguntas o solo retóricas. Ignora lo que cliente dice. Cliente frustrado o disociado. Empatía nula. Conversión bajísima.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "Evaluar si es problema de habilidad o actitud",
+          "Última oportunidad: 30 días con evaluación estricta",
+          "Sesión de sensibilización intensiva",
+          "Role-play con cliente actor + feedback brutal",
+          "Si no mejora: no apto para rol comercial"
+        ],
+        "riesgos": "Crítico. Daño a reputación de marca. Clientes piden no ser contactados. Desvinculación del área comercial."
+      }
+    },
+    "orientacion_cliente": {
+      "SOBRESALIENTE": {
+        "descripcion": "Filosofía de 'Cliente para toda la vida'. Cada interacción deja impresión positiva memorable. Satisfacción del cliente es motivador intrínseco principal. Cumple promesas incluso con costo personal. Integridad comercial absoluta.",
+        "fortalezas": [
+          "NPS personal esperado: 50+",
+          "Tasa de recompra: 70%+",
+          "Referidos: 30%+ de pipeline",
+          "Piensa en relación 3-5 años"
+        ],
+        "recomendaciones": [
+          "Gestión de Key Accounts",
+          "Clientes de alto valor de vida (LTV)",
+          "Embajador de marca",
+          "Autonomía para decisiones en beneficio del cliente"
+        ],
+        "riesgos": "Proteger de presión de corto plazo extrema. Puede priorizar relación sobre números ocasionalmente."
+      },
+      "SOLIDO": {
+        "descripcion": "Mayoría de interacciones positivas. Satisfacción del cliente es motivador importante. Cumple lo prometido salvo excepciones justificadas. Balance relación largo plazo y resultados corto plazo.",
+        "fortalezas": [
+          "Confiable y profesional",
+          "Entiende valor de relación",
+          "Seguimiento consistente"
+        ],
+        "recomendaciones": [
+          "Reforzar casos donde priorizar cliente generó más venta LP",
+          "Autonomía para 'inversión' en cliente",
+          "Métricas balanceadas: Ventas + Satisfacción + Retención",
+          "Análisis de LTV vs CAC por cliente"
+        ],
+        "riesgos": "Puede sentir tensión entre presión de números y servicio. Requiere apoyo en momentos de presión."
+      },
+      "POTENCIAL_MEDIO": {
+        "descripcion": "Servicio básico correcto. Satisfacción del cliente es secundaria (números primero). Cumple lo mínimo prometido. Foco en venta inmediata. Seguimiento irregular o solo para cerrar nueva venta.",
+        "fortalezas": [
+          "Cumple compromisos básicos",
+          "Ejecuta procesos estándar"
+        ],
+        "recomendaciones": [
+          "Visibilizar costo de adquisición vs retención",
+          "Cambiar compensación: incluir retención/satisfacción",
+          "Caso de estudio: Cliente perdido por mal servicio",
+          "Implementar plan de seguimiento estructurado post-venta",
+          "Calcular cuánto pierde por no generar recompra/referidos"
+        ],
+        "riesgos": "Venta agresiva que daña relación. Sobre-prometer para cerrar. Rotación alta de cartera. Desarrollo urgente."
+      },
+      "NECESITA_DESARROLLO": {
+        "descripcion": "Servicio mínimo o descuidado. Satisfacción del cliente no es prioridad. Incumplimiento frecuente de promesas. Solo importa cerrar esta venta. Sin seguimiento post-venta. NPS negativo.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "Diagnóstico: ¿Sistema mal diseñado o problema del vendedor?",
+          "Rediseñar esquema de compensación si es necesario",
+          "PIP de 60 días con métricas de servicio",
+          "Rotación a productos transaccionales (no estratégicos)",
+          "Criterio mínimo: Reducir reclamos a <5%, NPS mínimo 0"
+        ],
+        "riesgos": "Reclamos frecuentes. Posible daño reputacional. Tasa de recompra <20%. Evaluar idoneidad en rol."
+      },
+      "BAJO": {
+        "descripcion": "Experiencia negativa frecuente. Satisfacción del cliente es irrelevante. Incumplimiento sistemático. Posible estafa o engaño para cerrar. Abandono total post-venta. Daño reputacional activo.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "SUSPENDER actividad comercial de contacto con cliente",
+          "Auditoría de promesas y compromisos pendientes",
+          "Plan de recuperación de clientes afectados",
+          "Evaluación disciplinaria inmediata",
+          "DESVINCULACIÓN DEL ROL COMERCIAL"
+        ],
+        "riesgos": "ALERTA ROJA. Daño a marca. Posibles implicaciones legales. Reviews negativos públicos. Acción inmediata."
+      }
+    },
+    "resiliencia_rechazo": {
+      "SOBRESALIENTE": {
+        "descripcion": "Mentalidad de Growth Mindset absoluto. Rechazos no afectan estado emocional. Análisis objetivo post-rechazo sin culpa ni auto-castigo. Recuperación motivacional inmediata. Cada error es experimento que da información.",
+        "fortalezas": [
+          "Locus de control interno muy fuerte",
+          "Autoestima independiente de resultados externos",
+          "Tolerancia a frustración excepcional",
+          "'No' significa 'no por ahora' o 'no entendí la necesidad'"
+        ],
+        "recomendaciones": [
+          "Prospección en frío (cold calling, cold emailing)",
+          "Nuevos mercados con alta tasa de rechazo inicial",
+          "Productos disruptivos con resistencia al cambio",
+          "Recuperación de clientes perdidos",
+          "Mentor de resiliencia para equipo"
+        ],
+        "riesgos": "Proteger de rutina (se aburren). Asignar desafíos de alta dificultad constantemente."
+      },
+      "SOLIDO": {
+        "descripcion": "Resiliencia bien desarrollada. Rechazos afectan brevemente (horas, no días). Analiza rechazos con reflexión. Actitud positiva general con bajones ocasionales. Recuperación en mismo día.",
+        "fortalezas": [
+          "No abandona ante dificultades",
+          "Aprende de mayoría de errores",
+          "Persistencia adecuada"
+        ],
+        "recomendaciones": [
+          "Rutina de cierre mental de día (journaling)",
+          "Celebración de pequeños logros",
+          "Red de apoyo de pares",
+          "Técnicas de re-frame cognitivo",
+          "Casos de éxito después de múltiples rechazos"
+        ],
+        "riesgos": "Puede tener días difíciles. Necesita validación ocasional y apoyo emocional."
+      },
+      "POTENCIAL_MEDIO": {
+        "descripcion": "Rechazos afectan estado de ánimo por días. Auto-crítica excesiva o culpa externa. Actitud positiva intermitente. Aprende de errores pero requiere ayuda. Recuperación lenta (2-3 días).",
+        "fortalezas": [
+          "Reconoce importancia de persistir",
+          "Con apoyo puede recuperarse"
+        ],
+        "recomendaciones": [
+          "Capacitación en mindset de crecimiento",
+          "Técnicas de gestión emocional (CBT básico)",
+          "Sistema de buddy/accountability partner",
+          "Análisis de métricas: rechazos son parte del proceso",
+          "Celebración de actividad (no solo de resultados)"
+        ],
+        "riesgos": "Puede caer en espiral negativa. Necesita apoyo constante. Posible abandono ante rachas malas prolongadas."
+      },
+      "NECESITA_DESARROLLO": {
+        "descripcion": "Rechazos generan bloqueo emocional significativo. Se paraliza por días o semanas. Auto-crítica destructiva o victimización. Actitud negativa generalizada. Repite errores. Demora semanas en recuperarse.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "Evaluación de salud mental/emocional",
+          "Coaching intensivo en gestión emocional",
+          "No asignar a prospección o cold calling",
+          "Rol con menor tasa de rechazo (inbound, cuentas existentes)",
+          "Terapia cognitivo-conductual si es necesario",
+          "Plan de 90 días con metas micro-comportamentales"
+        ],
+        "riesgos": "Alto riesgo de burnout. Puede afectar negativamente a equipo. Evaluar fit en rol comercial."
+      },
+      "BAJO": {
+        "descripcion": "Colapso emocional ante rechazo. Abandona ante primer obstáculo. Auto-crítica devastadora o externalización total. Actitud derrotista permanente. No aprende de errores. No se recupera sin intervención externa.",
+        "fortalezas": [],
+        "recomendaciones": [
+          "INTERVENCIÓN INMEDIATA de salud ocupacional",
+          "Evaluación psicológica profesional",
+          "NO APTO para rol comercial de alto rechazo",
+          "Considerar licencia o cambio de área",
+          "Proteger salud mental del colaborador"
+        ],
+        "riesgos": "CRÍTICO para salud mental. Riesgo de descompensación. No debe estar en rol comercial. Acción urgente."
+      }
+    }
+  },
+  "globales": {
+    "_fuente": "generarRecomendacionesGlobales (por nivelGlobal).",
+    "SOBRESALIENTE": [
+      "Perfil comercial de alto rendimiento, listo para cuentas estratégicas",
+      "Considerar para programa de alto potencial en ventas",
+      "Ideal para prospección, apertura de mercados y grandes cuentas",
+      "Aprovechar como mentor y capacitador de equipo comercial"
+    ],
+    "SOLIDO": [
+      "Perfil comercial confiable con potencial de crecimiento",
+      "Recomendado para capacitaciones de especialización en ventas",
+      "Potencial para roles de coordinación o supervisión comercial",
+      "Continuar desarrollo con programas avanzados"
+    ],
+    "POTENCIAL_MEDIO": [
+      "Requiere plan de desarrollo comercial estructurado",
+      "Capacitación intensiva en metodologías de venta consultiva",
+      "Necesita coaching individual y supervisión cercana",
+      "Asignar mentor comercial experimentado",
+      "Evaluar fit en rol actual vs otras posiciones comerciales"
+    ],
+    "NECESITA_DESARROLLO": [
+      "Requiere plan de mejora urgente de 60-90 días",
+      "Capacitación intensiva obligatoria en fundamentos de venta",
+      "Supervisión diaria/semanal de actividad comercial",
+      "Evaluar reubicación a rol comercial de menor complejidad",
+      "Considerar intervención de RRHH y coaching especializado"
+    ],
+    "BAJO": [
+      "Requiere intervención inmediata",
+      "Evaluar continuidad en puesto comercial actual",
+      "Reunión tripartita urgente (Vendedor-Gerente-RRHH)",
+      "Considerar reposicionamiento a rol no comercial",
+      "Proteger resultados del equipo y experiencia del cliente"
+    ]
+  }
+}

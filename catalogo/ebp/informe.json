@@ -1,0 +1,46 @@
+{
+  "_descripcion": "Configuración del informe EBP. El renderizador consume la salida de scoring.py (subescalas + pd_total). Estructura derivada de generarInformeHTML (Test15/script.gs): gráfico de barras de percentiles + bloque por subescala con texto/color/icono.",
+  "titulo": "Informe del EBP — Escala de Bienestar Psicológico",
+  "subtitulo": "Escala de Bienestar Psicológico (Sánchez-Cánovas)",
+  "secciones": [
+    {
+      "id": "grafico_barras_percentiles",
+      "tipo": "grafico_barras",
+      "titulo": "Percentiles por subescala",
+      "_fuente_legacy": "chartConfig (quickchart.io) en generarInformeHTML",
+      "datos": {
+        "labels": ["BPS", "BM", "BL", "RP"],
+        "series": [
+          { "label": "Percentil", "valores": "subescalas[BPS|BM|BL|RP].percentil" }
+        ],
+        "colores": ["#0b4a6e", "#c2d534", "#f97316", "#8b5cf6"],
+        "eje_y": { "min": 0, "max": 100, "paso": 20 }
+      }
+    },
+    {
+      "id": "resumen_pd",
+      "tipo": "tabla_resumen",
+      "titulo": "Puntuaciones directas",
+      "filas": [
+        { "label": "Bienestar Psicológico Subjetivo (BPS)", "valor": "subescalas.BPS.pd", "max": 150 },
+        { "label": "Bienestar Material (BM)", "valor": "subescalas.BM.pd", "max": 50 },
+        { "label": "Bienestar Laboral (BL)", "valor": "subescalas.BL.pd", "max": 50 },
+        { "label": "Relaciones con la Pareja (RP)", "valor": "subescalas.RP.pd", "max": 75 },
+        { "label": "Total", "valor": "pd_total" }
+      ]
+    },
+    {
+      "id": "detalle_subescalas",
+      "tipo": "bloques_por_subescala",
+      "titulo": "Análisis por subescala",
+      "fuente": "subescalas",
+      "bloque": {
+        "encabezado": "{icono} {nombre} — {interpretacion} (percentil {percentil}, PD {pd}/{max_puntos})",
+        "color_acento": "color",
+        "campos": [
+          { "label": "Interpretación", "tipo": "texto", "valor": "texto" }
+        ]
+      }
+    }
+  ]
+}

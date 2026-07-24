@@ -1,0 +1,61 @@
+{
+  "_descripcion": "Configuración del informe WAIS-IV. El renderizador consume la salida de scoring.py (indices + ciTotal + nivelCI + fortaleza/debilidad). Replica los gráficos del legacy (Test4/script.gs generarInformeHTML).",
+  "titulo": "Informe Profesional WAIS-IV",
+  "subtitulo": "Escala de Inteligencia para Adultos de Wechsler — Cuarta Edición",
+  "secciones": [
+    {
+      "id": "resumen_ci",
+      "tipo": "resumen",
+      "titulo": "CI Total Estimado",
+      "campos": [
+        { "label": "CI Total", "valor": "ciTotal" },
+        { "label": "Nivel", "valor": "nivelCI.nivel" },
+        { "label": "Descripción", "valor": "nivelCI.descripcion" },
+        { "label": "Aciertos totales", "valor": "totalCorrectas/totalPreguntas (porcentajeTotal%)" }
+      ]
+    },
+    {
+      "id": "grafico_barras_pe",
+      "tipo": "grafico_barras",
+      "titulo": "Puntuación Escalar por índice",
+      "datos": {
+        "labels": ["Comprensión Verbal", "Razonamiento Perceptivo", "Memoria de Trabajo", "Velocidad de Procesamiento"],
+        "series": [{ "label": "Puntuación Escalar", "valores": "indices[ICV,IRP,IMT,IVP].pe" }],
+        "colores": "indices[*].color",
+        "eje_y": { "min": 0, "max": 19, "paso": 3 }
+      }
+    },
+    {
+      "id": "grafico_barras_porcentaje",
+      "tipo": "grafico_barras_horizontal",
+      "titulo": "% de aciertos por índice",
+      "datos": {
+        "labels": ["ICV", "IRP", "IMT", "IVP"],
+        "series": [{ "label": "% Aciertos", "valores": "indices[ICV,IRP,IMT,IVP].porcentaje" }],
+        "colores": ["#1e40af", "#166534", "#92400e", "#9d174d"],
+        "eje_x": { "min": 0, "max": 100 }
+      }
+    },
+    {
+      "id": "detalle_indices",
+      "tipo": "bloques_por_indice",
+      "titulo": "Análisis por índice cognitivo",
+      "fuente": "indices",
+      "bloque": {
+        "encabezado": "{nombre} ({codigo}) — {rango} (PE {pe}, {correctas}/{total} aciertos, {porcentaje}%)",
+        "campos": [
+          { "label": "Interpretación", "tipo": "texto", "valor": "interpretacion" }
+        ]
+      }
+    },
+    {
+      "id": "fortaleza_debilidad",
+      "tipo": "destacados",
+      "titulo": "Fortaleza y área a desarrollar",
+      "campos": [
+        { "label": "Fortaleza", "valor": "fortaleza.nombre" },
+        { "label": "Área a desarrollar", "valor": "debilidad.nombre" }
+      ]
+    }
+  ]
+}

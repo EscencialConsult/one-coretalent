@@ -1,0 +1,45 @@
+# Blueprint de Render: PostgreSQL + API (FastAPI).
+# El FRONTEND va en Netlify (ver netlify.toml en la raíz) — NO se despliega acá.
+# Render detecta este archivo y crea ambos recursos con un click ("Blueprint").
+#
+# Nota plan free: el Postgres gratuito caduca a los ~90 días y no tiene backups;
+# el web service se duerme tras ~15 min de inactividad (cold start ~40-50s).
+
+databases:
+  - name: plataforma-one-db
+    databaseName: plataforma_one
+    user: plataforma_one
+    plan: free
+
+services:
+  - type: web
+    name: plataforma-one-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    # Instala dependencias y aplica las migraciones en cada deploy.
+    buildCommand: "pip install -r requirements.txt && alembic upgrade head"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    # Render monitorea este endpoint para saber si el servicio está vivo.
+    healthCheckPath: /api/health
+    envVars:
+      # Connection string INTERNA del Postgres (misma red de Render).
+      - key: DATABASE_URL
+        fromDatabase:
+          name: plataforma-one-db
+          property: connectionString
+      # La conexión interna de Render NO usa SSL → DB_SSL=false.
+      # (Si conectaras a la DB desde FUERA de Render, con la URL externa, poné true.)
+      - key: DB_SSL
+        value: "false"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ENV
+        value: prod
+      - key: PYTHON_VERSION
+        value: "3.12.4"
+      # Con el proxy de Netlify (/api/* → esta API) NO hace falta CORS: el navegador
+      # solo ve el dominio de Netlify. Dejá esto salvo que llames a la API con URL
+      # absoluta desde el front; en ese caso agregá aquí tu dominio .netlify.app.
+      - key: CORS_ORIGINS
+        value: "http://localhost:5173"

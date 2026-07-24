@@ -1,0 +1,43 @@
+{
+  "id": "kuder",
+  "nombre": "Test de Kuder",
+  "codigo": "Kuder-C",
+  "descripcion": "Registro de Preferencias Vocacionales de Kuder (Forma C): mide el interés del evaluado en 10 áreas vocacionales mediante elección forzada por tríadas (la actividad que MÁS y la que MENOS le gusta).",
+  "categoria": "intereses_vocacionales",
+  "version": "1.0",
+  "n_items": 165,
+  "_n_items_nota": "El .gs (autoridad del cálculo) define y puntúa 165 tríadas. El front-end (script.js) presenta 168. Ver ANALISIS.md (BLOQUEO).",
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "triada_eleccion_forzada",
+  "_tipo_respuesta_nota": "Por tríada se marca una actividad como '+' (la que MÁS gusta) y otra como '−' (la que MENOS gusta). Se suma +1 al área del '+' y +1 al área del '−'.",
+  "dimensiones": [
+    "aire_libre",
+    "mecanico",
+    "calculo",
+    "cientifico",
+    "persuasivo",
+    "artistico",
+    "literario",
+    "musical",
+    "asistencial",
+    "administrativo"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "puntajesDirectos (PD por área 0-9)",
+    "percentiles (PD->percentil por baremo, + nivel)",
+    "areasOrdenadas",
+    "codigoPerfil (2 áreas más altas)",
+    "areasAltas / areasBajas",
+    "verificacion + estadoValidez (escala V)",
+    "profesionesCombinadas"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo_con_bloqueos"
+}

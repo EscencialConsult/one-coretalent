@@ -1,0 +1,79 @@
+{
+  "_descripcion": "Casos de regresión para CHASIDE. Construcción del input en test_scoring.py: 'fill' = todas SI/NO; 'si' = lista de ids con SI (resto NO); 'respuestas' = dict id->valor con 'fill_resto'. Valores esperados derivados del algoritmo portado del .gs (pendiente validar contra salidas históricas reales). El caso 'I+A' verifica además la corrección de la clave de combinación A-I (ver ANALISIS.md).",
+  "casos": [
+    {
+      "nombre": "Todas NO — todos los puntajes 0, empate -> orden canónico, perfil C-H",
+      "fill": "NO",
+      "esperado": {
+        "codigoPerfil": "C-H",
+        "top2": ["C", "H"],
+        "totalSI": 0,
+        "totalNO": 98,
+        "areasOrdenadas": ["C", "H", "A", "S", "I", "D", "E"],
+        "areas": {
+          "C": { "puntajeDirecto": 0, "percentil": 5, "nivel": "MUY_BAJO" },
+          "E": { "puntajeDirecto": 0, "percentil": 5, "nivel": "MUY_BAJO" }
+        }
+      }
+    },
+    {
+      "nombre": "Todas SI — todos 14, percentil 99, MUY_ALTO; intereses 2 y aptitudes 4 por área",
+      "fill": "SI",
+      "esperado": {
+        "codigoPerfil": "C-H",
+        "top2": ["C", "H"],
+        "totalSI": 98,
+        "totalNO": 0,
+        "areas": {
+          "C": { "puntajeDirecto": 14, "percentil": 99, "nivel": "MUY_ALTO", "puntajeIntereses": 2, "puntajeAptitudes": 4 },
+          "I": { "puntajeDirecto": 14, "percentil": 99, "nivel": "MUY_ALTO", "puntajeIntereses": 2, "puntajeAptitudes": 4 }
+        }
+      }
+    },
+    {
+      "nombre": "Áreas I y A al máximo — perfil A-I, combinación corregida resuelve profesiones",
+      "si": [3, 11, 21, 22, 28, 36, 39, 45, 50, 57, 76, 81, 82, 96, 6, 10, 19, 26, 27, 38, 47, 54, 59, 60, 75, 83, 90, 97],
+      "esperado": {
+        "codigoPerfil": "A-I",
+        "top2": ["A", "I"],
+        "totalSI": 28,
+        "totalNO": 70,
+        "profesionesCombinadas": ["Diseñador UX/UI", "Arquitecto de Software", "Animador 3D", "Diseñador Industrial", "Desarrollador de Videojuegos"],
+        "areas": {
+          "A": { "puntajeDirecto": 14, "percentil": 99, "nivel": "MUY_ALTO" },
+          "I": { "puntajeDirecto": 14, "percentil": 99, "nivel": "MUY_ALTO" },
+          "C": { "puntajeDirecto": 0, "percentil": 5, "nivel": "MUY_BAJO" }
+        }
+      }
+    },
+    {
+      "nombre": "6 'SI' por área — todos PD 6, percentil 45, PROMEDIO",
+      "si": [1, 2, 12, 15, 20, 46, 9, 25, 30, 34, 41, 56, 3, 11, 21, 22, 28, 36, 4, 8, 16, 23, 29, 33, 6, 10, 19, 26, 27, 38, 5, 13, 14, 18, 24, 31, 7, 17, 32, 35, 42, 49],
+      "esperado": {
+        "codigoPerfil": "C-H",
+        "totalSI": 42,
+        "totalNO": 56,
+        "areas": {
+          "C": { "puntajeDirecto": 6, "percentil": 45, "nivel": "PROMEDIO" },
+          "I": { "puntajeDirecto": 6, "percentil": 45, "nivel": "PROMEDIO", "puntajeAptitudes": 3 },
+          "E": { "puntajeDirecto": 6, "percentil": 45, "nivel": "PROMEDIO" }
+        }
+      }
+    },
+    {
+      "nombre": "Perfil C-H — C=14 (MUY_ALTO), H=12 (MUY_ALTO, pct 90), resto 0",
+      "si": [1, 2, 12, 15, 20, 46, 51, 53, 64, 71, 78, 85, 91, 98, 9, 25, 30, 34, 41, 56, 63, 67, 72, 74, 80, 86],
+      "esperado": {
+        "codigoPerfil": "C-H",
+        "top2": ["C", "H"],
+        "totalSI": 26,
+        "totalNO": 72,
+        "profesionesCombinadas": ["Abogado Corporativo", "Licenciado en Relaciones Laborales", "Mediador", "Asesor de Política Económica", "Consultor en Gestión Pública"],
+        "areas": {
+          "C": { "puntajeDirecto": 14, "percentil": 99, "nivel": "MUY_ALTO" },
+          "H": { "puntajeDirecto": 12, "percentil": 90, "nivel": "MUY_ALTO" }
+        }
+      }
+    }
+  ]
+}

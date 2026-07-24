@@ -1,0 +1,73 @@
+{
+  "_descripcion": "Configuración del informe IPP. El renderizador consume la salida de scoring.py (campos, campos_ordenados, campos_predominantes, campos_rechazados, tipo_perfil, interpretacion_perfil). Estructura inferida del flujo del .gs; el .gs legacy está truncado y no incluye generarInformeHTML, ver ANALISIS.md.",
+  "titulo": "Informe del Test IPP — Inventario de Intereses y Preferencias Profesionales",
+  "subtitulo": "Perfil de intereses vocacionales — 18 campos profesionales",
+  "secciones": [
+    {
+      "id": "intro",
+      "tipo": "texto",
+      "titulo": "Introducción",
+      "valor": "interpretaciones.textos_generales.intro"
+    },
+    {
+      "id": "grafico_barras",
+      "tipo": "grafico_barras",
+      "titulo": "Tu interés por campo profesional",
+      "datos": {
+        "labels": "campos_ordenados[*].nombre",
+        "series": [
+          { "label": "Puntuación (0-12)", "valores": "campos_ordenados[*].puntuacion" }
+        ],
+        "eje_y": { "min": 0, "max": 12, "paso": 2 }
+      }
+    },
+    {
+      "id": "predominantes",
+      "tipo": "bloques_por_campo",
+      "titulo": "Campos predominantes (top 3)",
+      "fuente": "campos_predominantes",
+      "bloque": {
+        "encabezado": "{nombre} — {nivel} (puntuación {puntuacion}/12, {porcentaje}%)",
+        "campos": [
+          { "label": "Descripción", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Carreras relacionadas", "tipo": "lista", "valor": "carreras" },
+          { "label": "Detalle de respuestas", "tipo": "detalle_aid", "valor": "detalle" }
+        ]
+      }
+    },
+    {
+      "id": "rechazados",
+      "tipo": "bloques_por_campo",
+      "titulo": "Campos de menor interés (bottom 3)",
+      "fuente": "campos_rechazados",
+      "bloque": {
+        "encabezado": "{nombre} — {nivel} (puntuación {puntuacion}/12, {porcentaje}%)"
+      }
+    },
+    {
+      "id": "perfil",
+      "tipo": "texto_dinamico",
+      "titulo": "Tipo de perfil",
+      "valor": "interpretacion_perfil"
+    },
+    {
+      "id": "detalle_todos",
+      "tipo": "tabla_campos",
+      "titulo": "Resumen de los 18 campos",
+      "fuente": "campos_ordenados",
+      "columnas": [
+        { "label": "Campo", "valor": "nombre" },
+        { "label": "Código", "valor": "codigo" },
+        { "label": "Puntuación", "valor": "puntuacion" },
+        { "label": "%", "valor": "porcentaje" },
+        { "label": "Nivel", "valor": "nivel" }
+      ]
+    },
+    {
+      "id": "recomendacion",
+      "tipo": "texto",
+      "titulo": "Recomendación",
+      "valor": "interpretaciones.textos_generales.recomendacion"
+    }
+  ]
+}

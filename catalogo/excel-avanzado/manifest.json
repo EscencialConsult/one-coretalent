@@ -1,0 +1,14 @@
+{
+  "id": "excel-avanzado",
+  "nombre": "Excel Integral — Nivel Avanzado",
+  "codigo": "EXCEL-AVA",
+  "descripcion": "Test de conocimientos de Microsoft Excel, nivel Avanzado: Power Query, DAX/Power Pivot, fórmulas matriciales y arrays dinámicos, macros/VBA y dashboards. 20 preguntas de opción múltiple seleccionadas al azar; se puntúa por % de aciertos con desglose por categoría.",
+  "categoria": "conocimiento",
+  "version": "1.0",
+  "n_items": 20,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "opcion_multiple",
+  "scoring": "scoring.py",
+  "archivos": { "preguntas": "preguntas.json" },
+  "estado": "completo"
+}

@@ -1,0 +1,52 @@
+{
+  "_descripcion": "Configuración del informe del Dominó 48: qué secciones y gráficos se arman a partir de la salida de scoring.py. El renderizador (PDF/web) consume este esquema.",
+  "titulo": "Informe Test de Dominó D-48 — Análisis Psicométrico",
+  "subtitulo": "Razonamiento abstracto · Factor G",
+  "secciones": [
+    {
+      "id": "resumen",
+      "tipo": "kpis",
+      "titulo": "Resumen de resultados",
+      "campos": [
+        { "label": "Aciertos", "valor": "{correctas}/{total}" },
+        { "label": "Porcentaje", "valor": "{porcentaje}%" },
+        { "label": "Percentil", "valor": "{percentil}" },
+        { "label": "Nivel", "valor": "{nivel}" }
+      ]
+    },
+    {
+      "id": "interpretacion",
+      "tipo": "texto",
+      "titulo": "Interpretación general",
+      "fuente": "interpretacion.general"
+    },
+    {
+      "id": "fortalezas",
+      "tipo": "lista",
+      "titulo": "Fortalezas",
+      "fuente": "interpretacion.fortalezas"
+    },
+    {
+      "id": "grafico_tipologia",
+      "tipo": "grafico_barras",
+      "titulo": "Rendimiento por tipo de patrón",
+      "datos": {
+        "labels": "analisis_por_tipo[*].nombre",
+        "valores": "analisis_por_tipo[*].porcentaje",
+        "eje_y": { "min": 0, "max": 100, "sufijo": "%" }
+      }
+    },
+    {
+      "id": "detalle_tipologia",
+      "tipo": "tabla",
+      "titulo": "Detalle por patrón",
+      "fuente": "analisis_por_tipo",
+      "columnas": [
+        { "label": "Patrón", "valor": "nombre" },
+        { "label": "Aciertos", "valor": "{correctas}/{total}" },
+        { "label": "%", "valor": "{porcentaje}" },
+        { "label": "Descripción", "valor": "descripcion" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "_descripcion": "Configuración del informe del Test de Kuder. El renderizador consume la salida de scoring.py (percentiles, areasOrdenadas, codigoPerfil, verificacion/estadoValidez, profesionesCombinadas). Réplica de los elementos visuales del .gs (gráfico de barras horizontales por percentil, color por nivel) y del script.js (caja de validez + tarjetas de área).",
+  "titulo": "Informe del Test de Kuder — Preferencias Vocacionales",
+  "subtitulo": "Registro de Preferencias Vocacionales (Forma C)",
+  "secciones": [
+    {
+      "id": "validez",
+      "tipo": "caja_validez",
+      "titulo": "Validez del test (escala V)",
+      "fuente": { "verificacion": "verificacion", "estado": "estadoValidez", "es_valido": "esValido" },
+      "_nota": "VALIDO: 31-39 · DUDOSO: 28-32 · INVALIDO: <28 o >39. Mensaje según estadoValidez (réplica de showResults en script.js)."
+    },
+    {
+      "id": "grafico_barras",
+      "tipo": "grafico_barras_horizontal",
+      "titulo": "Perfil de intereses (percentil por área)",
+      "_fuente": "Test2/script.gs · chartConfig (horizontalBar, quickchart.io)",
+      "datos": {
+        "labels": "areasOrdenadas[*].nombre",
+        "valores": "areasOrdenadas[*].percentil",
+        "eje_x": { "min": 0, "max": 100 }
+      },
+      "color_por_valor": [
+        { "min_percentil": 75, "color": "#10b981" },
+        { "min_percentil": 50, "color": "#0b4a6e" },
+        { "min_percentil": 25, "color": "#f59e0b" },
+        { "min_percentil": 0, "color": "#ef4444" }
+      ]
+    },
+    {
+      "id": "codigo_perfil",
+      "tipo": "bloque_resumen",
+      "titulo": "Código de perfil",
+      "datos": {
+        "codigo": "codigoPerfil",
+        "areas_top": "top2[*].nombre",
+        "profesiones_combinadas": "profesionesCombinadas"
+      }
+    },
+    {
+      "id": "detalle_areas",
+      "tipo": "bloques_por_area",
+      "titulo": "Análisis por área vocacional",
+      "fuente": "areasOrdenadas",
+      "bloque": {
+        "encabezado": "{nombre} — percentil {percentil} (PD {puntajeDirecto}/{maxPD})",
+        "campos": [
+          { "label": "Descripción", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Nivel de interés", "tipo": "nivel", "valor": "nivel" },
+          { "label": "Profesiones relacionadas", "tipo": "lista", "valor": "profesiones" }
+        ]
+      }
+    }
+  ]
+}

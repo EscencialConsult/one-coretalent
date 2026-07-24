@@ -1,0 +1,50 @@
+{
+  "_descripcion": "Casos de regresión para GDS-15. 'respuestas' = dict id->'si'|'no'. Los esperados se derivan del algoritmo inline del legacy (Test19/index.html): +1 por coincidencia con la respuesta sintomática; cortes 0-4 normal, 5-8 leve, 9-11 moderada, 12-15 grave. Respuestas sintomáticas: 'no' en {1,5,7,11,13}; 'si' en {2,3,4,6,8,9,10,12,14,15}.",
+  "casos": [
+    {
+      "nombre": "Todo 'no' — coinciden 5 ítems (1,5,7,11,13) -> leve",
+      "respuestas": { "1":"no","2":"no","3":"no","4":"no","5":"no","6":"no","7":"no","8":"no","9":"no","10":"no","11":"no","12":"no","13":"no","14":"no","15":"no" },
+      "esperado": { "puntuacion_total": 5, "nivel": "leve", "nombre_nivel": "Depresión leve" }
+    },
+    {
+      "nombre": "Todo 'si' — coinciden 10 ítems -> moderada",
+      "respuestas": { "1":"si","2":"si","3":"si","4":"si","5":"si","6":"si","7":"si","8":"si","9":"si","10":"si","11":"si","12":"si","13":"si","14":"si","15":"si" },
+      "esperado": { "puntuacion_total": 10, "nivel": "moderada", "nombre_nivel": "Depresión moderada" }
+    },
+    {
+      "nombre": "Todas sintomáticas -> 15 grave",
+      "respuestas": { "1":"no","2":"si","3":"si","4":"si","5":"no","6":"si","7":"no","8":"si","9":"si","10":"si","11":"no","12":"si","13":"no","14":"si","15":"si" },
+      "esperado": { "puntuacion_total": 15, "nivel": "grave", "nombre_nivel": "Depresión grave" }
+    },
+    {
+      "nombre": "Ninguna sintomática -> 0 normal",
+      "respuestas": { "1":"si","2":"no","3":"no","4":"no","5":"si","6":"no","7":"si","8":"no","9":"no","10":"no","11":"si","12":"no","13":"si","14":"no","15":"no" },
+      "esperado": { "puntuacion_total": 0, "nivel": "normal", "nombre_nivel": "Normal" }
+    },
+    {
+      "nombre": "Corte exacto 4 -> normal (límite superior normal)",
+      "respuestas": { "1":"no","2":"si","3":"si","4":"si","5":"si","6":"no","7":"si","8":"no","9":"no","10":"no","11":"si","12":"no","13":"si","14":"no","15":"no" },
+      "esperado": { "puntuacion_total": 4, "nivel": "normal", "nombre_nivel": "Normal" }
+    },
+    {
+      "nombre": "Corte exacto 8 -> leve (límite superior leve)",
+      "respuestas": { "1":"no","2":"si","3":"si","4":"si","5":"no","6":"si","7":"no","8":"si","9":"no","10":"no","11":"si","12":"no","13":"si","14":"no","15":"no" },
+      "esperado": { "puntuacion_total": 8, "nivel": "leve", "nombre_nivel": "Depresión leve" }
+    },
+    {
+      "nombre": "Corte exacto 9 -> moderada (límite inferior moderada)",
+      "respuestas": { "1":"no","2":"si","3":"si","4":"si","5":"no","6":"si","7":"no","8":"si","9":"si","10":"no","11":"si","12":"no","13":"si","14":"no","15":"no" },
+      "esperado": { "puntuacion_total": 9, "nivel": "moderada", "nombre_nivel": "Depresión moderada" }
+    },
+    {
+      "nombre": "Corte exacto 12 -> grave (límite inferior grave)",
+      "respuestas": { "1":"no","2":"si","3":"si","4":"si","5":"no","6":"si","7":"no","8":"si","9":"si","10":"si","11":"no","12":"si","13":"si","14":"no","15":"no" },
+      "esperado": { "puntuacion_total": 12, "nivel": "grave", "nombre_nivel": "Depresión grave" }
+    },
+    {
+      "nombre": "Parcial: solo 3 respondidas, 2 sintomáticas -> normal + desglose",
+      "respuestas": { "3":"si","4":"si","5":"si" },
+      "esperado": { "puntuacion_total": 2, "nivel": "normal", "desglose": { "respondidas": 3, "sin_responder": 12, "sintomaticas": 2 } }
+    }
+  ]
+}

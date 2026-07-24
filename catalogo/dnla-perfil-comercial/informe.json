@@ -1,0 +1,55 @@
+{
+  "_descripcion": "Configuración del informe DNLA Perfil Comercial. El renderizador consume la salida de scoring.py (dimensiones + promedio_global + fortalezas + areas_mejora + recomendaciones_globales).",
+  "_fuente": "Test10/script.gs · generarGraficoRadar + generarHTMLInforme + identificarFortalezas/AreasMejora.",
+  "titulo": "Informe DNLA Sales Profile - Análisis de Competencias Comerciales",
+  "subtitulo": "Perfil Comercial DNLA Sales",
+  "secciones": [
+    {
+      "id": "evaluacion_global",
+      "tipo": "tarjeta_global",
+      "titulo": "Evaluación Global",
+      "datos": {
+        "puntuacion": "promedio_global",
+        "badge": "badge_global",
+        "emoji": "emoji_global",
+        "color": "color_global",
+        "recomendaciones": "recomendaciones_globales"
+      }
+    },
+    {
+      "id": "grafico_radar",
+      "tipo": "grafico_radar",
+      "titulo": "Perfil Comercial DNLA Sales",
+      "datos": {
+        "labels": "dimensiones[*].nombre",
+        "valores": "dimensiones[*].promedio",
+        "eje": { "min": 0, "max": 5, "paso": 1 }
+      }
+    },
+    {
+      "id": "detalle_dimensiones",
+      "tipo": "bloques_por_dimension",
+      "titulo": "Análisis Detallado por Competencia",
+      "fuente": "dimensiones",
+      "bloque": {
+        "encabezado": "{nombre} {emoji} — {badge} (promedio {promedio}/5)",
+        "campos": [
+          { "label": "Descripción de la competencia", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Interpretación", "tipo": "texto", "valor": "interpretacion.descripcion" },
+          { "label": "Fortalezas", "tipo": "lista", "valor": "interpretacion.fortalezas" },
+          { "label": "Recomendaciones", "tipo": "lista", "valor": "interpretacion.recomendaciones" },
+          { "label": "Riesgos", "tipo": "texto", "valor": "interpretacion.riesgos" }
+        ]
+      }
+    },
+    {
+      "id": "sintesis",
+      "tipo": "sintesis_perfil",
+      "titulo": "Síntesis del Perfil",
+      "datos": {
+        "fortalezas": "fortalezas",
+        "areas_mejora": "areas_mejora"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "_fuente": "Test5/script.gs · const TIPOLOGIA_PATRONES — Dominó D-48",
+  "_descripcion": "Agrupa los ítems en 7 patrones (A-G) y reporta % de aciertos por patrón para el gráfico de barras. Nota: los ítems 4 y 5 no pertenecen a ningún patrón (cubre 46 de 48 ítems).",
+  "patrones": {
+    "A": { "nombre": "Progresiones Simples", "preguntas": [1, 2, 3, 6, 7, 8], "descripcion": "Capacidad básica para identificar secuencias lineales y patrones predecibles." },
+    "B": { "nombre": "Progresiones con Ciclos", "preguntas": [9, 10, 11, 12], "descripcion": "Comprensión de sistemas cíclicos y patrones que se reinician." },
+    "C": { "nombre": "Alternancia y Pares", "preguntas": [13, 14, 15, 16, 17, 18, 19, 20, 21], "descripcion": "Flexibilidad cognitiva para detectar patrones no lineales." },
+    "D": { "nombre": "Progresiones Múltiples", "preguntas": [22, 23, 24, 25, 26, 27, 28, 29, 30], "descripcion": "Razonamiento aritmético avanzado con operaciones complejas." },
+    "E": { "nombre": "Intercalación Compleja", "preguntas": [31, 32, 33, 34, 35, 36], "descripcion": "Capacidad de separar y analizar múltiples secuencias entrelazadas." },
+    "F": { "nombre": "Series Especiales", "preguntas": [37, 38, 39, 40, 41, 42], "descripcion": "Pensamiento recursivo y memoria de trabajo avanzada." },
+    "G": { "nombre": "Máxima Complejidad", "preguntas": [43, 44, 45, 46, 47, 48], "descripcion": "Combinación de múltiples operaciones lógicas de alto nivel." }
+  }
+}

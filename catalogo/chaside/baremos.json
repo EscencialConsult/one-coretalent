@@ -1,0 +1,35 @@
+{
+  "_fuente": "Test7/script.gs · calcularPercentil(pd, 14) + obtenerNivelInterpretacion(pd)",
+  "_descripcion": "Conversión puntaje directo (PD, 0-14 por área) -> percentil y -> nivel. Tabla discreta tal cual el .gs. El percentil NO se interpola: se devuelve el valor del tramo. Casos borde pd<=0 -> 5 y pd>=14 -> 99 anteceden a la tabla.",
+  "max_pd": 14,
+  "percentil": {
+    "_borde_inferior": { "condicion": "pd <= 0", "percentil": 5 },
+    "_borde_superior": { "condicion": "pd >= 14", "percentil": 99 },
+    "tabla": [
+      { "min": 13, "max": 14, "percentil": 99 },
+      { "min": 11, "max": 12, "percentil": 90 },
+      { "min": 9, "max": 10, "percentil": 75 },
+      { "min": 7, "max": 8, "percentil": 60 },
+      { "min": 5, "max": 6, "percentil": 45 },
+      { "min": 3, "max": 4, "percentil": 25 },
+      { "min": 1, "max": 2, "percentil": 10 },
+      { "min": 0, "max": 0, "percentil": 5 }
+    ],
+    "_default": 50
+  },
+  "niveles": {
+    "_descripcion": "Nivel de interpretación según el puntaje directo (PD). Umbrales descendentes: el primer umbral cuyo min_pd se cumple gana.",
+    "umbral_descendente": [
+      { "min_pd": 12, "nivel": "MUY_ALTO", "rango": "12-14" },
+      { "min_pd": 9, "nivel": "ALTO", "rango": "9-11" },
+      { "min_pd": 5, "nivel": "PROMEDIO", "rango": "5-8" },
+      { "min_pd": 2, "nivel": "BAJO", "rango": "2-4" },
+      { "min_pd": 0, "nivel": "MUY_BAJO", "rango": "0-1" }
+    ]
+  },
+  "clasificacion_areas": {
+    "_descripcion": "Reglas del .gs para listar áreas altas/bajas por PD.",
+    "area_alta": "pd >= 9",
+    "area_baja": "pd <= 4"
+  }
+}

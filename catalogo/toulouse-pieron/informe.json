@@ -1,0 +1,57 @@
+{
+  "_descripcion": "Configuracion del informe Toulouse-Pieron. El renderizador consume la salida de scoring.py. Estructura derivada de generarInformeHTML (Test13/script.gs).",
+  "titulo": "Informe Test de Toulouse-Piéron",
+  "subtitulo": "Evaluación de Atención y Concentración",
+  "secciones": [
+    {
+      "id": "resultados_globales",
+      "tipo": "tarjetas",
+      "titulo": "📊 Resultados",
+      "tarjetas": [
+        { "label": "TOTAL PROCESADO", "valor": "totalProcesado", "nota": "{porcentajeCompletado:.1f}% del protocolo completado" },
+        { "label": "TOTAL MARCADOS", "valor": "totalMarcados" }
+      ]
+    },
+    {
+      "id": "aciertos_errores_omisiones",
+      "tipo": "tarjetas",
+      "titulo": "Aciertos / Errores / Omisiones",
+      "tarjetas": [
+        { "label": "ACIERTOS", "valor": "aciertos" },
+        { "label": "ERRORES", "valor": "errores" },
+        { "label": "OMISIONES", "valor": "omisiones" }
+      ]
+    },
+    {
+      "id": "clasificacion",
+      "tipo": "clasificacion",
+      "titulo": "🎯 Clasificación",
+      "bloques": [
+        { "label": "NIVEL DE ATENCIÓN", "nivel": "nivelAtencion.nivel", "descripcion": "nivelAtencion.descripcion" },
+        { "label": "PRECISIÓN (ERRORES)", "nivel": "nivelPrecision.nivel", "descripcion": "nivelPrecision.descripcion" },
+        { "label": "VELOCIDAD (CUADRADOS PROCESADOS)", "nivel": "nivelVelocidad.nivel", "descripcion": "nivelVelocidad.descripcion" }
+      ]
+    },
+    {
+      "id": "distribucion_segmentos",
+      "tipo": "grafico_barras",
+      "titulo": "Distribución de respuestas por segmentos",
+      "datos": {
+        "labels": "analisisPorSegmentos[*].segmento (prefijo 'S')",
+        "valores": "analisisPorSegmentos[*].cantidad",
+        "_nota": "10 segmentos de 160 cuadrados. En el legacy se renderiza via QuickChart (bar)."
+      }
+    },
+    {
+      "id": "perfil_desempeno",
+      "tipo": "perfil",
+      "titulo": "👤 Perfil",
+      "datos": {
+        "nombre": "perfil.nombre",
+        "interpretacion": "perfil.interpretacion",
+        "fortalezas": "perfil.fortalezas",
+        "recomendaciones": "perfil.recomendaciones"
+      }
+    }
+  ]
+}

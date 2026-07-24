@@ -1,0 +1,32 @@
+{
+  "id": "stai",
+  "nombre": "STAI - Cuestionario de Ansiedad Estado-Rasgo",
+  "codigo": "STAI",
+  "descripcion": "Cuestionario de Ansiedad Estado-Rasgo (Spielberger, Gorsuch y Lushene). Evalúa la Ansiedad Estado (A/E, condición emocional transitoria) y la Ansiedad Rasgo (A/R, propensión ansiosa estable).",
+  "categoria": "clinica",
+  "version": "1.0",
+  "n_items": 40,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "likert_0_3",
+  "_tipo_respuesta_nota": "Escala 0-3. Estado: Nada/Algo/Bastante/Mucho. Rasgo: Casi nunca/A veces/A menudo/Casi siempre. Los ítems 'inverso' se invierten (3 - valor) a dirección-ansiedad antes de sumar.",
+  "escalas": ["estado", "rasgo"],
+  "_escalas_nota": "Estado = ítems 1-20 (PD 0-60). Rasgo = ítems 21-40 (PD 0-60). Baremos de adultos por sexo (varón/mujer).",
+  "dimensiones_factoriales": ["EA", "EN", "RA", "RN"],
+  "baremos": "por_sexo_adultos",
+  "scoring": "scoring.py",
+  "salida": [
+    "escalas (pd, categoria, percentil, interpretacion por sexo)",
+    "factores (EA/EN/RA/RN: suma, porcentaje)",
+    "relacion_estado_rasgo (estado_mayor/estado_igual/estado_menor)",
+    "analisis_items"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "_fuente_legacy": "_migracion/catalogo-tests-one/tests/Test16 (index.html con lógica inline de inversión + script.gs autoridad de scoring)",
+  "estado": "completo"
+}

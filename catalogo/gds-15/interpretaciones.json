@@ -1,0 +1,30 @@
+{
+  "_fuente": "Test19/index.html · finishTest() (textos de badge inline) + nota de instrucciones",
+  "_descripcion": "Texto de resultado por nivel. 'badge' replica literalmente el texto mostrado en el legacy (interpretationBadge). 'descripcion' amplía con redacción clínica de cribado estándar GDS-15. El badge es port fiel; la descripción extendida es contenido de apoyo y debe ser validado por el psicólogo.",
+  "por_nivel": {
+    "normal": {
+      "badge": "✅ Normal — Sin depresión significativa",
+      "titulo": "Normal",
+      "descripcion": "La puntuación se encuentra dentro del rango normal. No se detecta sintomatología depresiva clínicamente significativa en el cribado.",
+      "recomendacion": "No se requiere acción específica derivada del cribado. Mantener seguimiento habitual."
+    },
+    "leve": {
+      "badge": "⚠️ Depresión leve",
+      "titulo": "Depresión leve",
+      "descripcion": "La puntuación sugiere presencia de sintomatología depresiva leve. El GDS-15 es un instrumento de cribado, no diagnóstico.",
+      "recomendacion": "Se sugiere valoración clínica complementaria y seguimiento."
+    },
+    "moderada": {
+      "badge": "⚠️ Depresión moderada",
+      "titulo": "Depresión moderada",
+      "descripcion": "La puntuación sugiere presencia de sintomatología depresiva moderada. El GDS-15 es un instrumento de cribado, no diagnóstico.",
+      "recomendacion": "Se recomienda evaluación clínica especializada."
+    },
+    "grave": {
+      "badge": "🔴 Depresión grave",
+      "titulo": "Depresión grave",
+      "descripcion": "La puntuación sugiere presencia de sintomatología depresiva grave. El GDS-15 es un instrumento de cribado, no diagnóstico.",
+      "recomendacion": "Se recomienda evaluación clínica especializada prioritaria."
+    }
+  }
+}

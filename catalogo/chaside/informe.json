@@ -1,0 +1,60 @@
+{
+  "_descripcion": "Configuración del informe CHASIDE. El renderizador consume la salida de scoring.py. El gráfico legacy (Test7/script.gs) era un horizontalBar de las 7 áreas ordenadas por puntaje, eje 0-14 con stepSize 2 y color por nivel.",
+  "titulo": "Informe Test CHASIDE — Orientación Vocacional",
+  "subtitulo": "Perfil de intereses y aptitudes vocacionales",
+  "secciones": [
+    {
+      "id": "resumen_perfil",
+      "tipo": "resumen",
+      "titulo": "Tu perfil vocacional",
+      "campos": [
+        { "label": "Código de perfil", "valor": "codigoPerfil" },
+        { "label": "Áreas dominantes", "valor": "top2[*].nombre" },
+        { "label": "Profesiones sugeridas (combinación)", "valor": "profesionesCombinadas" }
+      ]
+    },
+    {
+      "id": "grafico_barras",
+      "tipo": "grafico_barras_horizontal",
+      "titulo": "Puntaje por área vocacional",
+      "datos": {
+        "labels": "areasOrdenadas[*].letra + ' - ' + areasOrdenadas[*].nombre",
+        "valores": "areasOrdenadas[*].puntajeDirecto",
+        "eje": { "min": 0, "max": 14, "paso": 2 },
+        "color_por_puntaje": [
+          { "min": 12, "color": "#10b981" },
+          { "min": 9, "color": "#0b4a6e" },
+          { "min": 5, "color": "#f59e0b" },
+          { "min": 0, "color": "#ef4444" }
+        ]
+      }
+    },
+    {
+      "id": "detalle_areas",
+      "tipo": "bloques_por_area",
+      "titulo": "Análisis por área",
+      "fuente": "areasOrdenadas",
+      "bloque": {
+        "encabezado": "{letra} - {nombre} — {nivel} (puntaje {puntajeDirecto}/{maxPD}, percentil {percentil})",
+        "campos": [
+          { "label": "Descripción del área", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Interpretación del nivel", "tipo": "texto", "valor": "interpretacion" },
+          { "label": "Intereses", "tipo": "fraccion", "valor": "puntajeIntereses", "sobre": "maxIntereses" },
+          { "label": "Aptitudes", "tipo": "fraccion", "valor": "puntajeAptitudes", "sobre": "maxAptitudes" },
+          { "label": "Aptitudes asociadas", "tipo": "lista", "valor": "aptitudes" },
+          { "label": "Profesiones", "tipo": "lista", "valor": "profesiones" }
+        ]
+      }
+    },
+    {
+      "id": "estadisticas",
+      "tipo": "estadisticas",
+      "titulo": "Estadísticas generales",
+      "campos": [
+        { "label": "Total de preguntas", "valor": "totalPreguntas" },
+        { "label": "Respuestas SÍ", "valor": "totalSI" },
+        { "label": "Respuestas NO", "valor": "totalNO" }
+      ]
+    }
+  ]
+}

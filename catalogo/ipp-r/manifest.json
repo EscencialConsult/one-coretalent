@@ -1,0 +1,37 @@
+{
+  "id": "ipp-r",
+  "nombre": "IPP-R — Intereses y Preferencias Profesionales (Revisado)",
+  "codigo": "IPP-R",
+  "descripcion": "Inventario de Intereses y Preferencias Profesionales Revisado: explora intereses vocacionales hacia 15 campos profesionales mediante 180 ítems (actividades y profesiones) en escala de agrado.",
+  "categoria": "intereses_vocacionales",
+  "version": "1.0",
+  "n_items": 180,
+  "tiempo_limite_min": null,
+  "_tiempo_nota": "El front no impone tiempo (estimado 20-25 min). El tiempo medido solo alimenta la evaluación de validez (alertas <10 min / >60 min).",
+  "tipo_respuesta": "agrado_0_3",
+  "_tipo_respuesta_nota": "Escala 0-3: 0=No Conozco, 1=Desagrado, 2=Indiferencia, 3=Agrado. No hay ítems inversos.",
+  "n_campos": 15,
+  "items_por_campo": 12,
+  "estructura_campo": "6 ítems AC (actividades) + 6 ítems PR (profesiones); PD máx por campo = 36",
+  "campos": [
+    "Científico", "Técnico", "Sanitario", "Científico-Social. Humanidades",
+    "Jurídico-Social", "Comunicación-Información", "Psicopedagógico",
+    "Empresarial. Administrativo", "Informática", "Agrario. Ambiental",
+    "Artístico-Plástico. Moda", "Artístico-Musical. Espectáculo",
+    "Fuerzas Armadas. Seguridad", "Deportivo", "Turismo y Hostelería"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "puntuaciones por campo (pd_total, pd_ac, pd_pr, porcentaje, n_nc, nivel)",
+    "analisis (ranking, tipo de perfil, primarios/secundarios/rechazos/desconocidos, discrepancias AC/PR)",
+    "validez (respondidos, NC, concentración, etiqueta, alertas de tiempo)"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo"
+}

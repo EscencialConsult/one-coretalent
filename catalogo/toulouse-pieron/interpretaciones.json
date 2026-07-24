@@ -1,0 +1,88 @@
+{
+  "_fuente": "Test13/script.gs · PERFILES_DESEMPENO",
+  "_descripcion": "Perfiles de desempeno evaluados EN ORDEN. Se asigna el primer perfil cuyo 'criterio' se cumple; el ultimo (INTERMEDIO) es siempre verdadero (catch-all). Los criterios se expresan como datos para preservar la logica exacta del .gs; scoring.py los evalua en este mismo orden. Variables: a = aciertos, e = errores, tp = totalProcesado.",
+  "perfiles_orden": ["ATENTO_PRECISO", "RAPIDO_IMPULSIVO", "LENTO_PRECISO", "DISPERSO", "INTERMEDIO"],
+  "perfiles": {
+    "ATENTO_PRECISO": {
+      "nombre": "Atento y Preciso",
+      "criterio": { "tipo": "and", "condiciones": [["a", ">", 70], ["e", "<", 10]] },
+      "interpretacion": "Excelente atención sostenida y control inhibitorio. Capacidad destacada para mantener la concentración y discriminar estímulos relevantes con alta precisión.",
+      "fortalezas": [
+        "Atención sostenida excepcional",
+        "Control inhibitorio bien desarrollado",
+        "Alta capacidad de discriminación perceptual",
+        "Excelente manejo de la impulsividad"
+      ],
+      "recomendaciones": [
+        "Mantener y consolidar el nivel alcanzado",
+        "Considerar tareas de mayor complejidad cognitiva",
+        "Aprovechar esta fortaleza en contextos académicos y laborales"
+      ]
+    },
+    "RAPIDO_IMPULSIVO": {
+      "nombre": "Rápido e Impulsivo",
+      "criterio": { "tipo": "and", "condiciones": [["tp", ">", 1100], ["e", ">", 15]] },
+      "interpretacion": "Patrón caracterizado por alta velocidad de procesamiento pero con tendencia a la impulsividad. Se observa dificultad para inhibir respuestas automáticas, priorizando la velocidad sobre la precisión.",
+      "fortalezas": [
+        "Excelente velocidad de procesamiento perceptual",
+        "Alta motivación y persistencia en la tarea",
+        "Capacidad de mantener un ritmo de trabajo sostenido"
+      ],
+      "recomendaciones": [
+        "Trabajar técnicas de autocontrol y monitoreo cognitivo",
+        "Practicar estrategias de 'detención del pensamiento'",
+        "Implementar pausas reflexivas antes de responder",
+        "Ejercicios de mindfulness para reducir impulsividad"
+      ]
+    },
+    "LENTO_PRECISO": {
+      "nombre": "Lento y Preciso",
+      "criterio": { "tipo": "and", "condiciones": [["tp", "<", 450], ["e", "<", 10]] },
+      "interpretacion": "Estilo cognitivo reflexivo con énfasis en la precisión. Buen control de errores pero velocidad de procesamiento limitada, posiblemente por perfeccionismo o ansiedad anticipatoria.",
+      "fortalezas": [
+        "Excelente precisión y cuidado en la ejecución",
+        "Buen control de la impulsividad",
+        "Capacidad de autorregulación cognitiva",
+        "Meticulosidad en el procesamiento de información"
+      ],
+      "recomendaciones": [
+        "Entrenamiento en estrategias de optimización del tiempo",
+        "Reducir perfeccionismo cuando no sea necesario",
+        "Ejercicios de toma de decisiones bajo presión temporal",
+        "Trabajar confianza en las propias capacidades"
+      ]
+    },
+    "DISPERSO": {
+      "nombre": "Disperso",
+      "criterio": { "tipo": "and", "condiciones": [["a", "<", 40], ["e", ">", 15]] },
+      "interpretacion": "Perfil que evidencia dificultades significativas en atención sostenida y selectiva. Se observan problemas tanto en la velocidad como en la precisión, sugiriendo posibles dificultades atencionales que requieren evaluación complementaria.",
+      "fortalezas": [
+        "Disposición para completar la evaluación",
+        "Oportunidad de identificar áreas de mejora específicas"
+      ],
+      "recomendaciones": [
+        "Evaluación neuropsicológica complementaria urgente",
+        "Descartar TDAH u otros trastornos atencionales",
+        "Intervención psicopedagógica especializada",
+        "Considerar apoyo terapéutico para mejorar funciones ejecutivas",
+        "Implementar estrategias compensatorias en contextos académicos/laborales"
+      ]
+    },
+    "INTERMEDIO": {
+      "nombre": "Perfil Intermedio",
+      "criterio": { "tipo": "siempre" },
+      "interpretacion": "Perfil balanceado con capacidades atencionales en desarrollo. Se observa un rendimiento dentro de rangos esperados con oportunidades de mejora en aspectos específicos.",
+      "fortalezas": [
+        "Capacidad atencional funcional",
+        "Potencial de desarrollo con entrenamiento",
+        "Balance entre velocidad y precisión"
+      ],
+      "recomendaciones": [
+        "Entrenamiento cognitivo en atención sostenida",
+        "Práctica con ejercicios de discriminación perceptual",
+        "Técnicas de organización y planificación",
+        "Ejercicios de concentración progresivos"
+      ]
+    }
+  }
+}

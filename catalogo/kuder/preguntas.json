@@ -1,0 +1,2174 @@
+{
+  "_fuente": "Test2/script.gs - TRIADAS (AUTORIDAD del calculo, 165 triadas) + Test2/script.js - triads (textos de actividades, 168 triadas tras REWRITE_MAP)",
+  "_descripcion": "Test de Kuder (Registro de Preferencias Vocacionales, Forma C). Cada triada presenta 3 actividades; el evaluado marca una como '+' (la que MAS le gusta) y otra como '-' (la que MENOS le gusta). 'keys' mapea posicion de actividad (0,1,2) -> area vocacional (0-9). El .gs puntua +1 al area del '+' y +1 al area del '-'. IMPORTANTE: el .gs solo define 165 triadas y solo puntua idx < 165; el front-end presenta 168. Ver ANALISIS.md (BLOQUEO). 'keys' es la clave de scoring autoritativa (del .gs). '_keys_frontend_difiere' se incluye solo donde el front difiere, para trazabilidad.",
+  "n_triadas_scoring": 165,
+  "n_triadas_frontend": 168,
+  "formato_respuesta": "Por triada: {mas: 0|1|2, menos: 0|1|2}. mas y menos son indices de actividad dentro de la triada (deben ser distintos).",
+  "triadas": [
+    {
+      "n": 1,
+      "keys": [
+        5,
+        2,
+        6
+      ],
+      "actividades": [
+        "Visitar un museo",
+        "Navegar por internet",
+        "Coleccionar autógrafos"
+      ]
+    },
+    {
+      "n": 2,
+      "keys": [
+        8,
+        6,
+        3
+      ],
+      "actividades": [
+        "Pertenecer a un club social",
+        "Pertenecer a un club literario",
+        "Pertenecer a un club de aficionados a la astronomía"
+      ]
+    },
+    {
+      "n": 3,
+      "keys": [
+        8,
+        4,
+        7
+      ],
+      "actividades": [
+        "Asistir a una reunión de servicio social",
+        "Asistir a una reunión política",
+        "Asistir a un concierto"
+      ]
+    },
+    {
+      "n": 4,
+      "keys": [
+        5,
+        6,
+        9
+      ],
+      "actividades": [
+        "Diseñar muebles",
+        "Escribir artículos",
+        "Llevar la contabilidad de una empresa"
+      ]
+    },
+    {
+      "n": 5,
+      "keys": [
+        0,
+        7,
+        4
+      ],
+      "actividades": [
+        "Dirigir la crianza de ganado",
+        "Ser cantante lírico",
+        "Trabajar en una agencia de publicidad"
+      ]
+    },
+    {
+      "n": 6,
+      "keys": [
+        2,
+        3,
+        6
+      ],
+      "actividades": [
+        "Conocer datos útiles para navegar en internet",
+        "Dar charlas sobre química",
+        "Escribir obras de teatro"
+      ]
+    },
+    {
+      "n": 7,
+      "keys": [
+        0,
+        7,
+        4
+      ],
+      "actividades": [
+        "Estudiar métodos de regadío",
+        "Tocar en una orquesta sinfónica",
+        "Ser jefe de ventas de una empresa"
+      ]
+    },
+    {
+      "n": 8,
+      "keys": [
+        2,
+        8,
+        5
+      ],
+      "actividades": [
+        "Ser ingeniero(a) en sistemas",
+        "Trabajar haciendo encuestas o entrevistas",
+        "Ilustrar libros"
+      ]
+    },
+    {
+      "n": 9,
+      "keys": [
+        0,
+        2,
+        8
+      ],
+      "actividades": [
+        "Investigar sobre nuevas variedades de trigo",
+        "Desarrollar teorías matemáticas",
+        "Atender enfermos"
+      ]
+    },
+    {
+      "n": 10,
+      "keys": [
+        3,
+        4,
+        5
+      ],
+      "actividades": [
+        "Ser profesor(a) de ciencias naturales",
+        "Ser vendedor(a) de productos técnicos",
+        "Ser artista"
+      ]
+    },
+    {
+      "n": 11,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Criar animales",
+        "Reparar aparatos eléctricos",
+        "Resolver problemas de aritmética"
+      ]
+    },
+    {
+      "n": 12,
+      "keys": [
+        3,
+        5,
+        7
+      ],
+      "actividades": [
+        "Investigar las causas de las enfermedades",
+        "Estudiar la historia del arte",
+        "Componer música"
+      ]
+    },
+    {
+      "n": 13,
+      "keys": [
+        4,
+        8,
+        9
+      ],
+      "actividades": [
+        "Convencer a otros sobre algo",
+        "Ayudar a niños con dificultades de aprendizaje",
+        "Ordenar y clasificar documentos en una oficina"
+      ]
+    },
+    {
+      "n": 14,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Plantar árboles",
+        "Manejar máquinas y herramientas",
+        "Llevar libros de contabilidad"
+      ]
+    },
+    {
+      "n": 15,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer experimentos en un laboratorio",
+        "Diseñar joyas",
+        "Leer novelas"
+      ]
+    },
+    {
+      "n": 16,
+      "keys": [
+        5,
+        4,
+        8
+      ],
+      "actividades": [
+        "Participar en una obra de teatro",
+        "Vender seguros",
+        "Enseñar en una escuela"
+      ]
+    },
+    {
+      "n": 17,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Cuidar plantas en un invernadero",
+        "Armar aparatos mecánicos",
+        "Hacer cálculos de ingeniería"
+      ]
+    },
+    {
+      "n": 18,
+      "keys": [
+        3,
+        6,
+        8
+      ],
+      "actividades": [
+        "Estudiar la estructura del átomo",
+        "Escribir poesías",
+        "Participar en campañas de ayuda a niños discapacitados"
+      ]
+    },
+    {
+      "n": 19,
+      "keys": [
+        7,
+        4,
+        9
+      ],
+      "actividades": [
+        "Ser cantante",
+        "Ser gerente de una empresa",
+        "Ser secretario(a) ejecutivo(a)"
+      ]
+    },
+    {
+      "n": 20,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar al aire libre",
+        "Instalar equipos eléctricos",
+        "Hacer presupuestos"
+      ]
+    },
+    {
+      "n": 21,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Realizar investigaciones científicas",
+        "Pintar cuadros",
+        "Redactar noticias para un diario"
+      ]
+    },
+    {
+      "n": 22,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar un instrumento musical",
+        "Dirigir un negocio",
+        "Ayudar a personas con problemas"
+      ]
+    },
+    {
+      "n": 23,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Sembrar y cosechar",
+        "Usar herramientas de carpintería",
+        "Analizar estados financieros"
+      ]
+    },
+    {
+      "n": 24,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar fenómenos físicos",
+        "Hacer trabajos artesanales",
+        "Escribir cuentos"
+      ]
+    },
+    {
+      "n": 25,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Interpretar música clásica",
+        "Ser representante de ventas",
+        "Trabajar en servicio social"
+      ]
+    },
+    {
+      "n": 26,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Criar peces",
+        "Reparar automóviles",
+        "Realizar cálculos estadísticos"
+      ]
+    },
+    {
+      "n": 27,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar nuevos medicamentos",
+        "Diseñar ropa",
+        "Revisar y corregir textos"
+      ]
+    },
+    {
+      "n": 28,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Componer canciones",
+        "Convencer a otros de tus ideas",
+        "Cuidar niños"
+      ]
+    },
+    {
+      "n": 29,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en un rancho",
+        "Manejar maquinaria industrial",
+        "Llevar registros contables"
+      ]
+    },
+    {
+      "n": 30,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer experimentos químicos",
+        "Esculpir",
+        "Escribir ensayos"
+      ]
+    },
+    {
+      "n": 31,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Dar conciertos de música",
+        "Negociar contratos",
+        "Orientar a jóvenes"
+      ]
+    },
+    {
+      "n": 32,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Cultivar hortalizas",
+        "Arreglar motores",
+        "Hacer gráficos estadísticos"
+      ]
+    },
+    {
+      "n": 33,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar biología",
+        "Hacer trabajos de cerámica",
+        "Traducir textos"
+      ]
+    },
+    {
+      "n": 34,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar en un coro",
+        "Vender productos",
+        "Trabajar con personas discapacitadas"
+      ]
+    },
+    {
+      "n": 35,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Pescar",
+        "Usar tornos y fresadoras",
+        "Realizar auditorías"
+      ]
+    },
+    {
+      "n": 36,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar en un observatorio",
+        "Diseñar logotipos",
+        "Escribir críticas literarias"
+      ]
+    },
+    {
+      "n": 37,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Dirigir una orquesta",
+        "Administrar una empresa",
+        "Ser psicólogo(a)"
+      ]
+    },
+    {
+      "n": 38,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en agricultura",
+        "Soldar piezas metálicas",
+        "Hacer balances"
+      ]
+    },
+    {
+      "n": 39,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer investigación médica",
+        "Fotografiar",
+        "Escribir guiones"
+      ]
+    },
+    {
+      "n": 40,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Afinar instrumentos musicales",
+        "Promocionar productos",
+        "Enseñar a leer"
+      ]
+    },
+    {
+      "n": 41,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Cuidar animales domésticos",
+        "Reparar electrodomésticos",
+        "Programar computadoras"
+      ]
+    },
+    {
+      "n": 42,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar astronomía",
+        "Hacer esculturas",
+        "Ser editor(a) de libros"
+      ]
+    },
+    {
+      "n": 43,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar piano",
+        "Ser agente de ventas",
+        "Trabajar en un hospital"
+      ]
+    },
+    {
+      "n": 44,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Podar árboles",
+        "Construir muebles",
+        "Realizar inventarios"
+      ]
+    },
+    {
+      "n": 45,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer experimentos de laboratorio",
+        "Dibujar ilustraciones",
+        "Escribir artículos"
+      ]
+    },
+    {
+      "n": 46,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Estudiar composición musical",
+        "Dirigir equipos de trabajo",
+        "Ser enfermero(a)"
+      ]
+    },
+    {
+      "n": 47,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en ganadería",
+        "Instalar sistemas eléctricos",
+        "Analizar datos financieros"
+      ]
+    },
+    {
+      "n": 48,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar enfermedades",
+        "Hacer trabajos en cuero",
+        "Redactar informes"
+      ]
+    },
+    {
+      "n": 49,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar ópera",
+        "Hacer negocios",
+        "Ayudar en asilos"
+      ]
+    },
+    {
+      "n": 50,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Sembrar flores",
+        "Manejar grúas",
+        "Hacer cuentas"
+      ]
+    },
+    {
+      "n": 51,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar genética",
+        "Pintar retratos",
+        "Escribir novelas"
+      ]
+    },
+    {
+      "n": 52,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar guitarra",
+        "Vender inmuebles",
+        "Ser maestro(a)"
+      ]
+    },
+    {
+      "n": 53,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cosechar frutas",
+        "Armar computadoras",
+        "Hacer presupuestos"
+      ]
+    },
+    {
+      "n": 54,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar microorganismos",
+        "Hacer grabados",
+        "Ser periodista"
+      ]
+    },
+    {
+      "n": 55,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Componer sinfonías",
+        "Ser empresario(a)",
+        "Trabajar con ancianos"
+      ]
+    },
+    {
+      "n": 56,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Criar caballos",
+        "Reparar relojes",
+        "Llevar estadísticas"
+      ]
+    },
+    {
+      "n": 57,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer análisis químicos",
+        "Diseñar tarjetas",
+        "Escribir columnas de opinión"
+      ]
+    },
+    {
+      "n": 58,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar en un musical",
+        "Convencer inversionistas",
+        "Cuidar enfermos"
+      ]
+    },
+    {
+      "n": 59,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en un vivero",
+        "Usar máquinas de precisión",
+        "Organizar archivos"
+      ]
+    },
+    {
+      "n": 60,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar física nuclear",
+        "Hacer diseño gráfico",
+        "Traducir libros"
+      ]
+    },
+    {
+      "n": 61,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar violín",
+        "Negociar acuerdos",
+        "Ser consejero(a) escolar"
+      ]
+    },
+    {
+      "n": 62,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Plantar café",
+        "Hacer trabajos de mecánica",
+        "Realizar cálculos"
+      ]
+    },
+    {
+      "n": 63,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar el ADN",
+        "Hacer vitrales",
+        "Escribir biografías"
+      ]
+    },
+    {
+      "n": 64,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Dirigir un coro",
+        "Administrar negocios",
+        "Ser trabajador(a) social"
+      ]
+    },
+    {
+      "n": 65,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cultivar vegetales",
+        "Ensamblar equipos",
+        "Hacer liquidaciones"
+      ]
+    },
+    {
+      "n": 66,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer investigación científica",
+        "Diseñar carteles",
+        "Ser escritor(a)"
+      ]
+    },
+    {
+      "n": 67,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar baladas",
+        "Vender servicios",
+        "Ayudar a discapacitados"
+      ]
+    },
+    {
+      "n": 68,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cuidar un jardín botánico",
+        "Soldar circuitos",
+        "Hacer contabilidad"
+      ]
+    },
+    {
+      "n": 69,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar virología",
+        "Hacer mosaicos",
+        "Redactar ensayos"
+      ]
+    },
+    {
+      "n": 70,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Interpretar jazz",
+        "Ser comerciante",
+        "Enseñar matemáticas"
+      ]
+    },
+    {
+      "n": 71,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en campo",
+        "Reparar bicicletas",
+        "Analizar presupuestos"
+      ]
+    },
+    {
+      "n": 72,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar células",
+        "Fotografiar bodas",
+        "Escribir poemas"
+      ]
+    },
+    {
+      "n": 73,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar batería",
+        "Dirigir ventas",
+        "Ser terapeuta"
+      ]
+    },
+    {
+      "n": 74,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Criar ovejas",
+        "Manejar tornos",
+        "Hacer auditorías"
+      ]
+    },
+    {
+      "n": 75,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar ecología",
+        "Diseñar vestuario",
+        "Ser crítico(a) literario(a)"
+      ]
+    },
+    {
+      "n": 76,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar rock",
+        "Vender franquicias",
+        "Trabajar en cruz roja"
+      ]
+    },
+    {
+      "n": 77,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Sembrar maíz",
+        "Arreglar televisores",
+        "Llevar libros de caja"
+      ]
+    },
+    {
+      "n": 78,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer experimentos de física",
+        "Hacer artesanías",
+        "Escribir reseñas"
+      ]
+    },
+    {
+      "n": 79,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar flauta",
+        "Ser ejecutivo(a) de ventas",
+        "Dar terapia a niños"
+      ]
+    },
+    {
+      "n": 80,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en apicultura",
+        "Instalar antenas",
+        "Hacer nóminas"
+      ]
+    },
+    {
+      "n": 81,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar el clima",
+        "Pintar murales",
+        "Ser novelista"
+      ]
+    },
+    {
+      "n": 82,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Componer bandas sonoras",
+        "Negociar exportaciones",
+        "Ser médico(a)"
+      ]
+    },
+    {
+      "n": 83,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Cultivar orquídeas",
+        "Reparar electrodomésticos",
+        "Hacer cálculos de costos"
+      ]
+    },
+    {
+      "n": 84,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar botánica",
+        "Hacer joyería",
+        "Escribir teatro"
+      ]
+    },
+    {
+      "n": 85,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar en festivales",
+        "Ser gerente comercial",
+        "Trabajar con refugiados"
+      ]
+    },
+    {
+      "n": 86,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cosechar verduras",
+        "Usar taladros industriales",
+        "Organizar documentos"
+      ]
+    },
+    {
+      "n": 87,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer análisis de laboratorio",
+        "Hacer serigrafía",
+        "Redactar crónicas"
+      ]
+    },
+    {
+      "n": 88,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar saxofón",
+        "Vender tecnología",
+        "Ser nutricionista"
+      ]
+    },
+    {
+      "n": 89,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Plantar arroz",
+        "Armar robots",
+        "Hacer declaraciones"
+      ]
+    },
+    {
+      "n": 90,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar océanos",
+        "Diseñar interiores",
+        "Escribir ciencia ficción"
+      ]
+    },
+    {
+      "n": 91,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Dirigir bandas musicales",
+        "Administrar franquicias",
+        "Ser pediatra"
+      ]
+    },
+    {
+      "n": 92,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en silvicultura",
+        "Reparar smartphones",
+        "Analizar costos"
+      ]
+    },
+    {
+      "n": 93,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar paleontología",
+        "Hacer cerámica artística",
+        "Ser poeta"
+      ]
+    },
+    {
+      "n": 94,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar trompeta",
+        "Ser vendedor(a) profesional",
+        "Trabajar en orfanatos"
+      ]
+    },
+    {
+      "n": 95,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Criar conejos",
+        "Usar fresadoras",
+        "Hacer balances generales"
+      ]
+    },
+    {
+      "n": 96,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar bacterias",
+        "Pintar paisajes",
+        "Escribir biografías"
+      ]
+    },
+    {
+      "n": 97,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar música folclórica",
+        "Dirigir proyectos comerciales",
+        "Ser fisioterapeuta"
+      ]
+    },
+    {
+      "n": 98,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Sembrar café",
+        "Soldar estructuras",
+        "Llevar inventarios"
+      ]
+    },
+    {
+      "n": 99,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar geología",
+        "Diseñar publicidad",
+        "Redactar editoriales"
+      ]
+    },
+    {
+      "n": 100,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Interpretar música clásica contemporánea",
+        "Vender consultoría",
+        "Ser enfermero(a) especializado(a)"
+      ]
+    },
+    {
+      "n": 101,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en acuicultura",
+        "Reparar drones",
+        "Hacer liquidaciones de impuestos"
+      ]
+    },
+    {
+      "n": 102,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer investigación espacial",
+        "Hacer ilustraciones digitales",
+        "Ser guionista"
+      ]
+    },
+    {
+      "n": 103,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar arpa",
+        "Ser emprendedor(a)",
+        "Dar apoyo psicológico"
+      ]
+    },
+    {
+      "n": 104,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cultivar bonsáis",
+        "Armar circuitos electrónicos",
+        "Realizar auditorías fiscales"
+      ]
+    },
+    {
+      "n": 105,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar tecnología a escala muy pequeña",
+        "Hacer esmaltes",
+        "Escribir críticas de cine"
+      ]
+    },
+    {
+      "n": 106,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar en musicales de Broadway",
+        "Negociar contratos internacionales",
+        "Ser médico(a) especializado(a) en personas mayores"
+      ]
+    },
+    {
+      "n": 107,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Sembrar soja",
+        "Usar prensas hidráulicas",
+        "Organizar presupuestos"
+      ]
+    },
+    {
+      "n": 108,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar el cerebro y cómo funciona",
+        "Diseñar videojuegos",
+        "Ser dramaturgo(a)"
+      ]
+    },
+    {
+      "n": 109,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar violonchelo",
+        "Ser director(a) comercial",
+        "Trabajar en centros de rehabilitación"
+      ]
+    },
+    {
+      "n": 110,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Criar alpacas",
+        "Instalar sistemas de aire acondicionado",
+        "Hacer estados financieros"
+      ]
+    },
+    {
+      "n": 111,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar energías renovables",
+        "Hacer animación 3D",
+        "Escribir ensayos filosóficos"
+      ]
+    },
+    {
+      "n": 112,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Componer música electrónica",
+        "Vender startups",
+        "Ser médico(a) especializado(a) en cáncer"
+      ]
+    },
+    {
+      "n": 113,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Trabajar en horticultura orgánica",
+        "Programar controles de máquinas en una fábrica",
+        "Analizar flujos de efectivo"
+      ]
+    },
+    {
+      "n": 114,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar astrofísica",
+        "Diseñar apps",
+        "Ser ensayista"
+      ]
+    },
+    {
+      "n": 115,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar ópera contemporánea",
+        "Dirigir multinacionales",
+        "Ser médico(a) especializado(a) en salud mental"
+      ]
+    },
+    {
+      "n": 116,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cultivar té",
+        "Reparar maquinaria pesada",
+        "Llevar contabilidad internacional"
+      ]
+    },
+    {
+      "n": 117,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar genes y herencia",
+        "Diseñar tatuajes",
+        "Escribir columnas políticas"
+      ]
+    },
+    {
+      "n": 118,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar contrabajo",
+        "Ser inversionista",
+        "Trabajar en medicina humanitaria"
+      ]
+    },
+    {
+      "n": 119,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Plantar cacao",
+        "Ensamblar drones",
+        "Hacer auditorías forenses"
+      ]
+    },
+    {
+      "n": 120,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar inteligencia artificial",
+        "Hacer street art",
+        "Ser crítico(a) de arte"
+      ]
+    },
+    {
+      "n": 121,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Dirigir grupos corales",
+        "Administrar fondos de inversión",
+        "Ser médico(a) especializado(a) en el corazón"
+      ]
+    },
+    {
+      "n": 122,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en permacultura",
+        "Instalar cables de internet de alta velocidad",
+        "Realizar análisis financieros"
+      ]
+    },
+    {
+      "n": 123,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar química farmacéutica",
+        "Diseñar tatuajes temporales",
+        "Escribir memorias"
+      ]
+    },
+    {
+      "n": 124,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar oboe",
+        "Vender bienes raíces de lujo",
+        "Ser médico(a) de recién nacidos"
+      ]
+    },
+    {
+      "n": 125,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Criar llamas",
+        "Reparar impresoras que crean objetos en 3D",
+        "Hacer proyecciones financieras"
+      ]
+    },
+    {
+      "n": 126,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar cambio climático",
+        "Hacer graffiti profesional",
+        "Ser blogger literario(a)"
+      ]
+    },
+    {
+      "n": 127,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar música de cámara",
+        "Dirigir fusiones empresariales",
+        "Ser médico(a) especializado(a) en el sistema nervioso"
+      ]
+    },
+    {
+      "n": 128,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Sembrar quinoa",
+        "Trabajar con robots en una fábrica",
+        "Organizar tesorería"
+      ]
+    },
+    {
+      "n": 129,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Hacer investigación oceanográfica",
+        "Diseñar merchandising",
+        "Escribir ciencia ficción distópica"
+      ]
+    },
+    {
+      "n": 130,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar laúd",
+        "Invertir en empresas nuevas",
+        "Acompañar a personas con enfermedades graves para aliviar su malestar"
+      ]
+    },
+    {
+      "n": 131,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cultivar hierbas aromáticas",
+        "Armar impresoras industriales",
+        "Hacer balances consolidados"
+      ]
+    },
+    {
+      "n": 132,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar bioquímica",
+        "Hacer body painting",
+        "Ser cronista deportivo(a)"
+      ]
+    },
+    {
+      "n": 133,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Interpretar música barroca",
+        "Negociar la salida a bolsa de una empresa",
+        "Ser dermatólogo(a)"
+      ]
+    },
+    {
+      "n": 134,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en hidroponía",
+        "Instalar paneles solares",
+        "Analizar razones financieras"
+      ]
+    },
+    {
+      "n": 135,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar bioética",
+        "Diseñar empaques",
+        "Escribir sátira política"
+      ]
+    },
+    {
+      "n": 136,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar música renacentista",
+        "Ser CEO de corporación",
+        "Trabajar en medicina deportiva"
+      ]
+    },
+    {
+      "n": 137,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Criar abejas reinas",
+        "Reparar computadoras que dan servicio a muchas personas",
+        "Llevar costos de producción"
+      ]
+    },
+    {
+      "n": 138,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar cómo se activan o desactivan genes",
+        "Crear arte digital con certificado",
+        "Ser dramaturgo(a) experimental"
+      ]
+    },
+    {
+      "n": 139,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar clavecín",
+        "Vender planes de inversión",
+        "Ser médico(a) especializado(a) en hormonas"
+      ]
+    },
+    {
+      "n": 140,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Plantar bambú",
+        "Armar equipos que van al espacio (satélites)",
+        "Hacer auditorías de riesgos"
+      ],
+      "_keys_frontend_difiere": [
+        0,
+        1,
+        9
+      ]
+    },
+    {
+      "n": 141,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar biomedicina",
+        "Diseñar sneakers personalizados",
+        "Escribir microrrelatos"
+      ]
+    },
+    {
+      "n": 142,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Componer música experimental",
+        "Dirigir holdings",
+        "Ser médico(a) especializado(a) en defensas del cuerpo"
+      ]
+    },
+    {
+      "n": 143,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en agricultura vertical",
+        "Programar chips que controlan aparatos",
+        "Realizar valuaciones"
+      ],
+      "_keys_frontend_difiere": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "n": 144,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar neuroplasticidad",
+        "Hacer performance art",
+        "Ser poeta slam"
+      ]
+    },
+    {
+      "n": 145,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar música gregoriana",
+        "Invertir en empresas nuevas",
+        "Trabajar en medicina forense"
+      ]
+    },
+    {
+      "n": 146,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cultivar microgreens",
+        "Reparar placas principales de computadoras",
+        "Hacer consolidación de empresas"
+      ]
+    },
+    {
+      "n": 147,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar tratamientos según la genética",
+        "Diseñar wearables",
+        "Escribir distopías"
+      ]
+    },
+    {
+      "n": 148,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar theremin",
+        "Administrar fondos de inversión de alto riesgo",
+        "Ser médico(a) especializado(a) en el aparato digestivo"
+      ]
+    },
+    {
+      "n": 149,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Sembrar microalgas",
+        "Instalar domótica",
+        "Organizar fusiones"
+      ]
+    },
+    {
+      "n": 150,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar física cuántica",
+        "Crear instalaciones artísticas",
+        "Ser novelista gráfico(a)"
+      ]
+    },
+    {
+      "n": 151,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Dirigir ópera moderna",
+        "Negociar adquisiciones",
+        "Ser médico(a) especializado(a) en pulmones"
+      ]
+    },
+    {
+      "n": 152,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar en biojardinería",
+        "Usar máquinas automáticas para cortar o tallar piezas",
+        "Analizar solvencia empresarial"
+      ]
+    },
+    {
+      "n": 153,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar edición genética",
+        "Hacer land art",
+        "Escribir manifiestos"
+      ]
+    },
+    {
+      "n": 154,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar hang drum",
+        "Invertir al inicio de una empresa nueva",
+        "Trabajar en tratamientos para reparar tejidos"
+      ]
+    },
+    {
+      "n": 155,
+      "keys": [
+        0,
+        1,
+        2
+      ],
+      "actividades": [
+        "Cultivar hongos gourmet",
+        "Armar estructuras para trabajo en el espacio (simulación)",
+        "Hacer peritajes contables"
+      ],
+      "_keys_frontend_difiere": [
+        0,
+        1,
+        9
+      ]
+    },
+    {
+      "n": 156,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar vida fuera de la Tierra (en teoría)",
+        "Diseñar experiencias en realidad virtual",
+        "Ser libretista de podcast"
+      ]
+    },
+    {
+      "n": 157,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Cantar en flashmobs",
+        "Dirigir consorcios",
+        "Ser médico(a) especializado(a) en la vista"
+      ]
+    },
+    {
+      "n": 158,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Plantar trufas",
+        "Instalar sensores y equipos conectados en una fábrica",
+        "Hacer una revisión a fondo antes de invertir o comprar"
+      ]
+    },
+    {
+      "n": 159,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar planetas fuera del sistema solar",
+        "Crear arte generativo",
+        "Escribir haikus modernos"
+      ]
+    },
+    {
+      "n": 160,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Tocar kalimba",
+        "Vender activos digitales",
+        "Ser médico(a) especializado(a) en vías urinarias"
+      ]
+    },
+    {
+      "n": 161,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Trabajar con células en laboratorio",
+        "Programar el sistema interno de un dispositivo",
+        "Hacer una revisión financiera a fondo antes de invertir o comprar"
+      ],
+      "_keys_frontend_difiere": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "n": 162,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Investigar la “materia invisible” del universo",
+        "Diseñar mundos virtuales",
+        "Ser poeta digital"
+      ]
+    },
+    {
+      "n": 163,
+      "keys": [
+        7,
+        4,
+        8
+      ],
+      "actividades": [
+        "Componer música que cambia según lo que hace la persona",
+        "Administrar organizaciones online basadas en reglas",
+        "Atender pacientes a distancia (por videollamada)"
+      ]
+    },
+    {
+      "n": 164,
+      "keys": [
+        0,
+        1,
+        9
+      ],
+      "actividades": [
+        "Cultivar espirulina",
+        "Reparar exoesqueletos",
+        "Calcular cuánto vale una empresa nueva"
+      ]
+    },
+    {
+      "n": 165,
+      "keys": [
+        3,
+        5,
+        6
+      ],
+      "actividades": [
+        "Estudiar impresión 3D de tejidos",
+        "Crear arte digital ligado a criptomonedas",
+        "Escribir fan fiction profesional"
+      ]
+    }
+  ]
+}

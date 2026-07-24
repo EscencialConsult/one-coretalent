@@ -1,0 +1,38 @@
+{
+  "id": "dnla-perfil-comercial",
+  "nombre": "DNLA - Perfil Comercial",
+  "codigo": "DNLA-SALES",
+  "descripcion": "DNLA Sales Profile: evaluación de competencias comerciales en 5 dimensiones (Iniciativa y Proactividad, Comunicación Persuasiva, Escucha Activa y Empatía, Orientación al Cliente, Resiliencia y Gestión del Rechazo).",
+  "categoria": "competencias-comerciales",
+  "version": "1.1",
+  "n_items": 25,
+  "tiempo_limite_min": null,
+  "tipo_respuesta": "likert_1_5",
+  "_tipo_respuesta_nota": "Escala 1 (Nunca) a 5 (Siempre). No hay ítems inversos. La puntuación de cada dimensión es el PROMEDIO de sus 5 ítems (rango 1.0-5.0).",
+  "dimensiones": [
+    "iniciativa_proactividad",
+    "comunicacion_persuasiva",
+    "escucha_empatia",
+    "orientacion_cliente",
+    "resiliencia_rechazo"
+  ],
+  "scoring": "scoring.py",
+  "salida": [
+    "dimensiones (promedio, nivel, badge, interpretacion)",
+    "promedio_global (promedio, nivel, badge)",
+    "fortalezas (top 3)",
+    "areas_mejora (bottom 3)",
+    "recomendaciones_globales"
+  ],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "baremos": "baremos.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "parcial_logica_gs_falta_contenido_original",
+  "_autoridad": "Test10/script.gs (DNLA Sales Profile v1.1). Ver ANALISIS.md: el index.html legacy implementa un test DISTINTO (30 ítems, 6 dimensiones) y NO se usa como autoridad.",
+  "disponible": false,
+  "_disponible_nota": "No disponible: en preparacion. No asignable a empresas; en el catalogo aparece deshabilitado al final y sin categoria."
+}

@@ -1,0 +1,94 @@
+{
+  "_fuente": "Test16/script.gs · BAREMOS_ADULTOS + PERCENTILES_ADULTOS + FACTORES",
+  "_descripcion": "Baremos de adultos del STAI (programa STAI-PROGRAMA-ADULTOS.xls y Tabla 9 del manual). La Puntuación Directa (PD) por escala va de 0 a 60. Categoría: primer rango [min,max] que contiene la PD. Percentil (centil): primera fila de la tabla (ordenada de mayor a menor pd) donde PD >= pd. Dimensiones factoriales: Tablas 7 y 8 del manual.",
+  "categorias": {
+    "VARONES_AE": [
+      { "min": 0, "max": 13, "categoria": "Bajo" },
+      { "min": 14, "max": 18, "categoria": "Tend. Promedio" },
+      { "min": 19, "max": 19, "categoria": "Promedio" },
+      { "min": 20, "max": 28, "categoria": "Sobre promedio" },
+      { "min": 29, "max": 60, "categoria": "Alto" }
+    ],
+    "MUJERES_AE": [
+      { "min": 0, "max": 14, "categoria": "Bajo" },
+      { "min": 15, "max": 19, "categoria": "Tend. Promedio" },
+      { "min": 20, "max": 22, "categoria": "Promedio" },
+      { "min": 23, "max": 31, "categoria": "Sobre promedio" },
+      { "min": 32, "max": 60, "categoria": "Alto" }
+    ],
+    "VARONES_AR": [
+      { "min": 0, "max": 13, "categoria": "Bajo" },
+      { "min": 14, "max": 18, "categoria": "Tend. Promedio" },
+      { "min": 19, "max": 19, "categoria": "Promedio" },
+      { "min": 20, "max": 28, "categoria": "Sobre promedio" },
+      { "min": 29, "max": 60, "categoria": "Alto" }
+    ],
+    "MUJERES_AR": [
+      { "min": 0, "max": 16, "categoria": "Bajo" },
+      { "min": 17, "max": 22, "categoria": "Tend. Promedio" },
+      { "min": 23, "max": 25, "categoria": "Promedio" },
+      { "min": 26, "max": 34, "categoria": "Sobre promedio" },
+      { "min": 35, "max": 60, "categoria": "Alto" }
+    ]
+  },
+  "percentiles": {
+    "VARONES_AE": [
+      { "pd": 47, "centil": 99 }, { "pd": 43, "centil": 97 }, { "pd": 42, "centil": 96 },
+      { "pd": 40, "centil": 95 }, { "pd": 37, "centil": 90 }, { "pd": 33, "centil": 85 },
+      { "pd": 30, "centil": 80 }, { "pd": 29, "centil": 77 }, { "pd": 28, "centil": 75 },
+      { "pd": 25, "centil": 70 }, { "pd": 23, "centil": 65 }, { "pd": 21, "centil": 60 },
+      { "pd": 20, "centil": 55 }, { "pd": 19, "centil": 50 }, { "pd": 18, "centil": 45 },
+      { "pd": 16, "centil": 40 }, { "pd": 15, "centil": 35 }, { "pd": 14, "centil": 30 },
+      { "pd": 13, "centil": 25 }, { "pd": 12, "centil": 20 }, { "pd": 10, "centil": 15 },
+      { "pd": 9, "centil": 11 }, { "pd": 8, "centil": 10 }, { "pd": 6, "centil": 5 },
+      { "pd": 5, "centil": 4 }, { "pd": 0, "centil": 1 }
+    ],
+    "MUJERES_AE": [
+      { "pd": 54, "centil": 99 }, { "pd": 49, "centil": 97 }, { "pd": 48, "centil": 96 },
+      { "pd": 47, "centil": 95 }, { "pd": 41, "centil": 90 }, { "pd": 37, "centil": 85 },
+      { "pd": 34, "centil": 80 }, { "pd": 32, "centil": 77 }, { "pd": 31, "centil": 75 },
+      { "pd": 29, "centil": 70 }, { "pd": 26, "centil": 65 }, { "pd": 24, "centil": 60 },
+      { "pd": 23, "centil": 55 }, { "pd": 21, "centil": 50 }, { "pd": 19, "centil": 45 },
+      { "pd": 18, "centil": 40 }, { "pd": 17, "centil": 35 }, { "pd": 16, "centil": 30 },
+      { "pd": 15, "centil": 25 }, { "pd": 13, "centil": 20 }, { "pd": 12, "centil": 15 },
+      { "pd": 11, "centil": 11 }, { "pd": 10, "centil": 10 }, { "pd": 7, "centil": 5 },
+      { "pd": 6, "centil": 4 }, { "pd": 0, "centil": 1 }
+    ],
+    "VARONES_AR": [
+      { "pd": 46, "centil": 99 }, { "pd": 39, "centil": 97 }, { "pd": 38, "centil": 96 },
+      { "pd": 37, "centil": 95 }, { "pd": 33, "centil": 90 }, { "pd": 29, "centil": 85 },
+      { "pd": 27, "centil": 80 }, { "pd": 26, "centil": 77 }, { "pd": 25, "centil": 75 },
+      { "pd": 24, "centil": 70 }, { "pd": 23, "centil": 65 }, { "pd": 21, "centil": 60 },
+      { "pd": 20, "centil": 55 }, { "pd": 19, "centil": 50 }, { "pd": 18, "centil": 45 },
+      { "pd": 17, "centil": 40 }, { "pd": 16, "centil": 35 }, { "pd": 15, "centil": 30 },
+      { "pd": 14, "centil": 25 }, { "pd": 13, "centil": 20 }, { "pd": 11, "centil": 15 },
+      { "pd": 10, "centil": 11 }, { "pd": 9, "centil": 10 }, { "pd": 8, "centil": 5 },
+      { "pd": 7, "centil": 4 }, { "pd": 0, "centil": 1 }
+    ],
+    "MUJERES_AR": [
+      { "pd": 49, "centil": 99 }, { "pd": 45, "centil": 97 }, { "pd": 44, "centil": 96 },
+      { "pd": 43, "centil": 95 }, { "pd": 40, "centil": 90 }, { "pd": 37, "centil": 85 },
+      { "pd": 34, "centil": 80 }, { "pd": 33, "centil": 77 }, { "pd": 32, "centil": 75 },
+      { "pd": 30, "centil": 70 }, { "pd": 29, "centil": 65 }, { "pd": 27, "centil": 60 },
+      { "pd": 26, "centil": 55 }, { "pd": 24, "centil": 50 }, { "pd": 23, "centil": 45 },
+      { "pd": 21, "centil": 40 }, { "pd": 20, "centil": 35 }, { "pd": 18, "centil": 30 },
+      { "pd": 17, "centil": 25 }, { "pd": 16, "centil": 20 }, { "pd": 14, "centil": 15 },
+      { "pd": 13, "centil": 11 }, { "pd": 12, "centil": 10 }, { "pd": 11, "centil": 5 },
+      { "pd": 10, "centil": 4 }, { "pd": 0, "centil": 1 }
+    ]
+  },
+  "factores": {
+    "_nota": "Los ítems se listan por id original. EA y RA (afirmativos) suman el valor en dirección-ansiedad (= valor crudo del usuario, pues son ítems no inversos). EN y RN (negativos) suman el valor ORIGINAL del usuario (= 3 - valor_direccion_ansiedad). porcentaje = round((suma / (numItems*3)) * 100).",
+    "EA": { "nombre": "Estado Afirmativo", "items": [3, 4, 6, 7, 9, 12, 13, 14, 17, 18], "descripcion": "Nerviosismo, tensión, preocupación e intranquilidad percibidos en el momento actual." },
+    "EN": { "nombre": "Estado Negativo", "items": [1, 2, 5, 8, 10, 11, 15, 16, 19, 20], "descripcion": "Activación positiva, animación, bienestar, satisfacción y confianza en sí mismo en el momento actual." },
+    "RA": { "nombre": "Rasgo Afirmativo", "items": [22, 23, 24, 25, 28, 29, 31, 32, 34, 35, 37, 38, 40], "descripcion": "Melancolía, desesperanza y sentimientos de incapacidad como disposición habitual." },
+    "RN": { "nombre": "Rasgo Negativo", "items": [21, 26, 27, 30, 33, 36, 39], "descripcion": "Estabilidad emocional y ausencia de cambios de humor como disposición habitual." }
+  },
+  "relacion_estado_rasgo": {
+    "_nota": "Compara PD Estado vs PD Rasgo con umbral fijo de 3 puntos.",
+    "umbral": 3,
+    "estado_mayor": "pdEstado > pdRasgo + 3",
+    "estado_menor": "pdEstado < pdRasgo - 3",
+    "estado_igual": "en otro caso"
+  }
+}

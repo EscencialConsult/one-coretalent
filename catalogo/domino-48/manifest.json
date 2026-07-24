@@ -1,0 +1,26 @@
+{
+  "id": "domino-48",
+  "nombre": "Dominó 48",
+  "codigo": "D-48",
+  "descripcion": "Test de inteligencia general (Factor G) por razonamiento abstracto con fichas de dominó.",
+  "categoria": "psicotecnico",
+  "version": "1.0",
+  "n_items": 48,
+  "tiempo_limite_min": 25,
+  "_tiempo_nota": "25 min = tiempo oficial del D-48 (confirmado por el cliente, 2026-06-30). El front original usaba 30 min, pero se corrige a 25.",
+  "tipo_respuesta": "seleccion_ficha",
+  "_tipo_respuesta_nota": "El evaluado elige 1 de 6 fichas (par de pips) que completa la secuencia.",
+  "scoring": "scoring.py",
+  "salida": ["correctas", "porcentaje", "percentil", "nivel", "analisis_por_tipo", "interpretacion"],
+  "archivos": {
+    "preguntas": "preguntas.json",
+    "clave": "clave-respuestas.json",
+    "baremos": "baremos.json",
+    "tipologia": "tipologia.json",
+    "interpretaciones": "interpretaciones.json",
+    "informe": "informe.json",
+    "regresion": "regresion.json"
+  },
+  "estado": "completo",
+  "_estado_nota": "Estímulos de 48 ítems recuperados del front original (Test5/index.html, 48 ítems); su clave coincide 100% con script.gs · RESPUESTAS_CORRECTAS. Motor + datos + regresión (5/5) OK. Pendiente solo la UI React (componente de dominó por pips) + informe."
+}

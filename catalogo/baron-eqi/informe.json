@@ -1,0 +1,63 @@
+{
+  "_descripcion": "Configuración del informe Bar-On EQ-i. El renderizador consume la salida de scoring.py (ceTotal + compuestas + subescalas + fortalezas/debilidades). Replica la estructura del informe del .gs (generarInformeHTML): índice global, radar de compuestas, bloques por compuesta y por subescala, top fortalezas/debilidades.",
+  "titulo": "Informe Profesional Test Bar-On EQ-i",
+  "subtitulo": "Perfil de Inteligencia Emocional",
+  "secciones": [
+    {
+      "id": "ce_total",
+      "tipo": "indice_global",
+      "titulo": "Cociente Emocional Total (CE Total)",
+      "datos": {
+        "valor": "ceTotal.porcentaje",
+        "nivel": "ceTotal.nivel",
+        "texto": "ceTotal.interpretacion",
+        "eje": { "min": 0, "max": 100 }
+      }
+    },
+    {
+      "id": "grafico_radar",
+      "tipo": "grafico_radar",
+      "titulo": "Perfil EQ-i por componentes",
+      "datos": {
+        "labels": "compuestas[*].nombre",
+        "valores": "compuestas[*].porcentaje",
+        "eje": { "min": 0, "max": 100, "paso": 20 }
+      }
+    },
+    {
+      "id": "componentes",
+      "tipo": "bloques_por_escala",
+      "titulo": "Análisis por componente (escalas compuestas)",
+      "fuente": "compuestas",
+      "bloque": {
+        "encabezado": "{nombre} — {porcentaje}% · Nivel {nivel}",
+        "campos": [
+          { "label": "Descripción", "tipo": "texto", "valor": "descripcion" },
+          { "label": "Interpretación", "tipo": "texto", "valor": "interpretacion.general" },
+          { "label": "Fortalezas", "tipo": "lista", "valor": "interpretacion.fortalezas" }
+        ]
+      }
+    },
+    {
+      "id": "subescalas",
+      "tipo": "bloques_por_escala",
+      "titulo": "Detalle por subescala",
+      "fuente": "subescalas",
+      "bloque": {
+        "encabezado": "{nombre} — {porcentaje}% · Nivel {nivel}",
+        "campos": [
+          { "label": "Puntaje bruto", "tipo": "texto", "valor": "puntajeBruto" }
+        ]
+      }
+    },
+    {
+      "id": "fortalezas_debilidades",
+      "tipo": "top_listas",
+      "titulo": "Fortalezas y áreas de desarrollo",
+      "listas": [
+        { "label": "Top 5 fortalezas", "fuente": "fortalezas", "item": "{nombre}: {porcentaje}%" },
+        { "label": "Top 5 áreas de desarrollo", "fuente": "debilidades", "item": "{nombre}: {porcentaje}%" }
+      ]
+    }
+  ]
+}

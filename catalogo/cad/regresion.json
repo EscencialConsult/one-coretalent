@@ -1,0 +1,88 @@
+{
+  "_descripcion": "Casos de regresión para CAD. 'fill' = todas las respuestas con ese valor (0-4). 'respuestas' = dict id->valor; 'fill_resto' completa los ids no listados (default 2). Valores esperados derivados del algoritmo del front (script.js · calcularEscalasDetalladas) + ranking del .gs. El CAD no tiene baremos: se validan total/n/max/avg/pct y el ranking ipsativo.",
+  "casos": [
+    {
+      "nombre": "Todo 4 (máximo) — avg=4 y pct=100 en todas",
+      "fill": 4,
+      "esperado": {
+        "escalas": {
+          "Religión": { "total": 20, "n": 5, "max": 20, "avg": 4.0, "pct": 100 },
+          "Catarsis": { "total": 20, "n": 5, "max": 20, "avg": 4.0, "pct": 100 },
+          "Distracción": { "total": 24, "n": 6, "max": 24, "avg": 4.0, "pct": 100 },
+          "Autocontrol mental": { "total": 20, "n": 5, "max": 20, "avg": 4.0, "pct": 100 },
+          "Autoafirmación": { "total": 20, "n": 5, "max": 20, "avg": 4.0, "pct": 100 },
+          "Búsqueda de información": { "total": 20, "n": 5, "max": 20, "avg": 4.0, "pct": 100 }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 0 (mínimo) — avg=0 y pct=0 en todas",
+      "fill": 0,
+      "esperado": {
+        "escalas": {
+          "Religión": { "total": 0, "n": 5, "max": 20, "avg": 0.0, "pct": 0 },
+          "Catarsis": { "total": 0, "n": 5, "max": 20, "avg": 0.0, "pct": 0 },
+          "Distracción": { "total": 0, "n": 6, "max": 24, "avg": 0.0, "pct": 0 },
+          "Autocontrol mental": { "total": 0, "n": 5, "max": 20, "avg": 0.0, "pct": 0 },
+          "Autoafirmación": { "total": 0, "n": 5, "max": 20, "avg": 0.0, "pct": 0 },
+          "Búsqueda de información": { "total": 0, "n": 5, "max": 20, "avg": 0.0, "pct": 0 }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 2 (punto medio) — avg=2 y pct=50 en todas",
+      "fill": 2,
+      "esperado": {
+        "escalas": {
+          "Religión": { "total": 10, "n": 5, "max": 20, "avg": 2.0, "pct": 50 },
+          "Distracción": { "total": 12, "n": 6, "max": 24, "avg": 2.0, "pct": 50 }
+        }
+      }
+    },
+    {
+      "nombre": "Perfil mixto: Religión máxima, Distracción nula (resto 2)",
+      "fill_resto": 2,
+      "respuestas": {
+        "3": 4, "8": 4, "17": 4, "22": 4, "25": 4,
+        "1": 0, "10": 0, "15": 0, "18": 0, "23": 0, "28": 0
+      },
+      "esperado": {
+        "escalas": {
+          "Religión": { "total": 20, "n": 5, "max": 20, "avg": 4.0, "pct": 100 },
+          "Distracción": { "total": 0, "n": 6, "max": 24, "avg": 0.0, "pct": 0 },
+          "Catarsis": { "total": 10, "n": 5, "max": 20, "avg": 2.0, "pct": 50 }
+        },
+        "ranking": {
+          "top": ["Religión", "Catarsis"],
+          "bottom": ["Distracción", "Búsqueda de información"]
+        }
+      }
+    },
+    {
+      "nombre": "Respuestas parciales: solo Catarsis respondida, ítems omitidos = 0",
+      "respuestas": { "7": 4, "9": 3, "13": 4, "16": 2, "29": 1 },
+      "fill_resto": 0,
+      "esperado": {
+        "escalas": {
+          "Catarsis": { "total": 14, "n": 5, "max": 20, "avg": 2.8, "pct": 70 },
+          "Religión": { "total": 0, "n": 5, "max": 20, "avg": 0.0, "pct": 0 }
+        },
+        "ranking": {
+          "top": ["Catarsis", "Religión"]
+        }
+      }
+    },
+    {
+      "nombre": "Redondeo half-up: Distracción total=15 -> pct 62.5 -> 63, avg 2.5",
+      "respuestas": {
+        "1": 4, "10": 4, "15": 4, "18": 3, "23": 0, "28": 0
+      },
+      "fill_resto": 0,
+      "esperado": {
+        "escalas": {
+          "Distracción": { "total": 15, "n": 6, "max": 24, "avg": 2.5, "pct": 63 }
+        }
+      }
+    }
+  ]
+}

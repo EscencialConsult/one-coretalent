@@ -1,0 +1,361 @@
+{
+  "_fuente": "Test2/script.gs - AREAS + TEXTOS_INTERPRETACION + COMBINACIONES_PROFESIONES",
+  "_descripcion": "Areas vocacionales (0-9) con nombre, descripcion, profesiones y maxPD (PD maximo segun manual; solo informativo). Niveles de interpretacion segun percentil (umbral descendente). Combinaciones de codigo de perfil (2 areas mas altas, ordenadas asc) -> profesiones sugeridas.",
+  "areas": {
+    "0": {
+      "codigo": 0,
+      "nombre": "AIRE LIBRE",
+      "descripcion": "Preferencia por trabajos que se realizan fuera de oficinas, en contacto con la naturaleza, cultivo de plantas o cría de animales.",
+      "profesiones": [
+        "Ingeniero Agrónomo",
+        "Veterinario",
+        "Biólogo",
+        "Guardabosques",
+        "Paisajista",
+        "Ingeniero Forestal",
+        "Guía de Turismo de Naturaleza",
+        "Pescador",
+        "Agricultor"
+      ],
+      "maxPD": 82
+    },
+    "1": {
+      "codigo": 1,
+      "nombre": "MECÁNICO",
+      "descripcion": "Interés por trabajos manuales, uso de máquinas, herramientas y comprensión de cómo funcionan los aparatos mecánicos.",
+      "profesiones": [
+        "Ingeniero Mecánico",
+        "Ingeniero Civil",
+        "Ingeniero Industrial",
+        "Técnico Electrónico",
+        "Mecánico Automotriz",
+        "Electricista",
+        "Operador de Maquinaria"
+      ],
+      "maxPD": 68
+    },
+    "2": {
+      "codigo": 2,
+      "nombre": "CÁLCULO",
+      "descripcion": "Agrado por trabajar con números, razonamiento deductivo y resolución de problemas matemáticos.",
+      "profesiones": [
+        "Contador",
+        "Actuario",
+        "Estadístico",
+        "Analista Financiero",
+        "Programador",
+        "Ingeniero en Sistemas",
+        "Matemático",
+        "Economista"
+      ],
+      "maxPD": 56
+    },
+    "3": {
+      "codigo": 3,
+      "nombre": "CIENTÍFICO",
+      "descripcion": "Preferencia por el descubrimiento de nuevos hechos, la investigación, la resolución de problemas de índole física, química o biológica.",
+      "profesiones": [
+        "Médico",
+        "Químico",
+        "Físico",
+        "Biólogo",
+        "Investigador",
+        "Farmacéutico",
+        "Bioquímico",
+        "Psicólogo Experimental"
+      ],
+      "maxPD": 70
+    },
+    "4": {
+      "codigo": 4,
+      "nombre": "PERSUASIVO",
+      "descripcion": "Interés por el trato con personas, los negocios, la venta de productos o imponer puntos de vista, liderazgo y ventas.",
+      "profesiones": [
+        "Vendedor",
+        "Gerente Comercial",
+        "Abogado",
+        "Político",
+        "Relacionista Público",
+        "Ejecutivo de Ventas",
+        "Periodista",
+        "Director de Marketing"
+      ],
+      "maxPD": 86
+    },
+    "5": {
+      "codigo": 5,
+      "nombre": "ARTÍSTICO",
+      "descripcion": "Preferencia por trabajos manuales creativos, diseño, uso de colores, materiales plásticos y expresión gráfica.",
+      "profesiones": [
+        "Diseñador Gráfico",
+        "Arquitecto",
+        "Artista Plástico",
+        "Fotógrafo",
+        "Diseñador de Interiores",
+        "Ilustrador",
+        "Escultor",
+        "Decorador"
+      ],
+      "maxPD": 52
+    },
+    "6": {
+      "codigo": 6,
+      "nombre": "LITERARIO",
+      "descripcion": "Gusto por la lectura, la escritura y la expresión verbal oral y escrita.",
+      "profesiones": [
+        "Escritor",
+        "Periodista",
+        "Editor",
+        "Profesor de Literatura",
+        "Bibliotecario",
+        "Corrector de Estilo",
+        "Traductor",
+        "Crítico Literario"
+      ],
+      "maxPD": 42
+    },
+    "7": {
+      "codigo": 7,
+      "nombre": "MUSICAL",
+      "descripcion": "Preferencia por asistir a conciertos, tocar instrumentos, leer sobre música o actividades relacionadas con el sonido.",
+      "profesiones": [
+        "Músico",
+        "Compositor",
+        "Director de Orquesta",
+        "Profesor de Música",
+        "Técnico de Sonido",
+        "Productor Musical",
+        "Cantante"
+      ],
+      "maxPD": 30
+    },
+    "8": {
+      "codigo": 8,
+      "nombre": "ASISTENCIAL",
+      "descripcion": "Interés por actividades que impliquen ayudar a los demás y buscar el bienestar de las personas.",
+      "profesiones": [
+        "Trabajador Social",
+        "Enfermero",
+        "Psicólogo",
+        "Profesor",
+        "Orientador",
+        "Médico General",
+        "Terapeuta",
+        "Consejero"
+      ],
+      "maxPD": 80
+    },
+    "9": {
+      "codigo": 9,
+      "nombre": "ADMINISTRATIVO",
+      "descripcion": "Preferencia por tareas de oficina que requieren precisión, orden, exactitud y manejo de archivos o sistemas.",
+      "profesiones": [
+        "Secretario Ejecutivo",
+        "Administrador",
+        "Asistente Administrativo",
+        "Archivero",
+        "Recepcionista",
+        "Contador",
+        "Auditor"
+      ],
+      "maxPD": 102
+    }
+  },
+  "niveles": {
+    "_descripcion": "Nivel asignado segun percentil: >=90 MUY_ALTO, >=75 ALTO, >=60 PROMEDIO_ALTO, >=40 PROMEDIO, >=25 PROMEDIO_BAJO, resto BAJO.",
+    "umbral_descendente": [
+      {
+        "min_percentil": 90,
+        "nivel": "MUY_ALTO"
+      },
+      {
+        "min_percentil": 75,
+        "nivel": "ALTO"
+      },
+      {
+        "min_percentil": 60,
+        "nivel": "PROMEDIO_ALTO"
+      },
+      {
+        "min_percentil": 40,
+        "nivel": "PROMEDIO"
+      },
+      {
+        "min_percentil": 25,
+        "nivel": "PROMEDIO_BAJO"
+      },
+      {
+        "min_percentil": 0,
+        "nivel": "BAJO"
+      }
+    ],
+    "textos": {
+      "MUY_ALTO": {
+        "rango": ">= 90",
+        "descripcion": "Interés muy marcado y definido. Esta área representa una fuerte inclinación vocacional que debería considerarse prioritaria en la orientación profesional."
+      },
+      "ALTO": {
+        "rango": "75-89",
+        "descripcion": "Interés significativo. Esta área debería explorarse como posible campo de desarrollo profesional."
+      },
+      "PROMEDIO_ALTO": {
+        "rango": "60-74",
+        "descripcion": "Interés moderado-alto. Podría complementar otras áreas de interés principal."
+      },
+      "PROMEDIO": {
+        "rango": "40-59",
+        "descripcion": "Interés dentro del rango esperado. No representa una preferencia distintiva ni rechazo."
+      },
+      "PROMEDIO_BAJO": {
+        "rango": "25-39",
+        "descripcion": "Interés por debajo del promedio. Esta área probablemente no representa una vocación primaria."
+      },
+      "BAJO": {
+        "rango": "<= 24",
+        "descripcion": "Escaso interés en esta área. Se recomienda evitar profesiones que dependan principalmente de estas actividades."
+      }
+    }
+  },
+  "combinaciones_profesiones": {
+    "0-1": [
+      "Ingeniero Naval",
+      "Ingeniero de Montes",
+      "Capitán de Barco",
+      "Operador de Maquinaria Agrícola"
+    ],
+    "0-3": [
+      "Ingeniero Agrónomo",
+      "Geólogo",
+      "Biólogo Marino",
+      "Arqueólogo",
+      "Veterinario Rural"
+    ],
+    "0-5": [
+      "Arquitecto Paisajista",
+      "Fotógrafo de Naturaleza",
+      "Decorador Floral"
+    ],
+    "0-8": [
+      "Profesor de Educación Física",
+      "Entrenador Deportivo",
+      "Guía de Actividades Recreativas",
+      "Monitor de Campamentos"
+    ],
+    "1-2": [
+      "Ingeniero Civil",
+      "Ingeniero Industrial",
+      "Topógrafo"
+    ],
+    "1-3": [
+      "Ingeniero Químico",
+      "Metalúrgico",
+      "Odontólogo",
+      "Técnico de Laboratorio Clínico"
+    ],
+    "1-5": [
+      "Arquitecto",
+      "Diseñador Industrial",
+      "Orfebre/Joyero",
+      "Fotógrafo Técnico",
+      "Grabador"
+    ],
+    "1-9": [
+      "Jefe de Taller",
+      "Administrador de Fábrica",
+      "Operador de Imprenta"
+    ],
+    "2-3": [
+      "Físico",
+      "Astrónomo",
+      "Químico Investigador",
+      "Ingeniero en Sistemas/Informática"
+    ],
+    "2-4": [
+      "Economista",
+      "Asesor Financiero",
+      "Vendedor Técnico",
+      "Gerente Bancario"
+    ],
+    "2-9": [
+      "Contador Público",
+      "Auditor",
+      "Cajero Bancario",
+      "Programador de Gestión",
+      "Estadístico de Negocios"
+    ],
+    "3-4": [
+      "Visitador Médico",
+      "Farmacéutico",
+      "Profesor de Ciencias"
+    ],
+    "3-5": [
+      "Cirujano Plástico",
+      "Odontólogo",
+      "Arquitecto",
+      "Restaurador de Arte"
+    ],
+    "3-8": [
+      "Médico General",
+      "Enfermero",
+      "Psicólogo Clínico",
+      "Terapeuta Ocupacional",
+      "Nutricionista"
+    ],
+    "4-5": [
+      "Publicista",
+      "Director de Marketing",
+      "Decorador de Interiores",
+      "Diseñador de Moda"
+    ],
+    "4-6": [
+      "Abogado",
+      "Periodista Político",
+      "Escritor Editorial",
+      "Relacionista Público"
+    ],
+    "4-8": [
+      "Consejero Escolar",
+      "Director de Recursos Humanos",
+      "Político",
+      "Mediador Familiar"
+    ],
+    "4-9": [
+      "Gerente de Ventas",
+      "Administrador de Hotel",
+      "Agente Inmobiliario",
+      "Comerciante"
+    ],
+    "5-6": [
+      "Crítico de Arte",
+      "Editor de Revistas de Diseño",
+      "Escritor de Literatura Infantil",
+      "Profesor de Arte"
+    ],
+    "5-8": [
+      "Arteterapeuta",
+      "Profesor de Manualidades",
+      "Terapeuta Ocupacional"
+    ],
+    "6-8": [
+      "Profesor de Lenguas/Literatura",
+      "Trabajador Social",
+      "Psicopedagogo"
+    ],
+    "6-9": [
+      "Secretario Ejecutivo",
+      "Editor Técnico",
+      "Archivero",
+      "Bibliotecario"
+    ],
+    "7-4": [
+      "Director Artístico",
+      "Productor de Espectáculos",
+      "Promotor Musical"
+    ],
+    "7-8": [
+      "Musicoterapeuta",
+      "Profesor de Música",
+      "Director de Coro Comunitario"
+    ]
+  }
+}

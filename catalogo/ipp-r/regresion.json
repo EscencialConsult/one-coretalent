@@ -1,0 +1,81 @@
+{
+  "_descripcion": "Casos de regresión IPP-R. 'fill' = todas las 180 respuestas con ese valor. 'respuestas' = dict id->valor (0-3); 'fill_resto' completa los ids no listados. 'tiempo_segundos' alimenta la validez. Valores esperados derivados del algoritmo del .gs (calcularPuntuacionesIPPR / analizarPerfil / evaluarValidez). Pendiente validar también contra salidas históricas reales del sistema.",
+  "casos": [
+    {
+      "nombre": "Todo 2 (Indiferencia) — PD 24 homogéneo, perfil Plano",
+      "fill": 2,
+      "tiempo_segundos": 1200,
+      "esperado": {
+        "tipoPerfil": "Plano",
+        "validez": { "etiqueta": "Con cautela", "respondidos": 180, "nc": 0, "pctNC": 0, "maxConc": 100 },
+        "campos": {
+          "1": { "pd_total": 24, "pd_ac": 12, "pd_pr": 12, "porcentaje": 67, "n_nc": 0, "nivel": "Medio-alto" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 0 (No Conozco) — PD 0, todos rechazo, NC máximo",
+      "fill": 0,
+      "tiempo_segundos": 1200,
+      "esperado": {
+        "tipoPerfil": "Plano",
+        "validez": { "etiqueta": "Con cautela", "respondidos": 180, "nc": 180, "pctNC": 100, "maxConc": 100 },
+        "campos": {
+          "1": { "pd_total": 0, "n_nc": 12, "nivel": "Muy bajo / Rechazo", "porcentaje": 0 }
+        }
+      }
+    },
+    {
+      "nombre": "Campo 1 todo Agrado (3), resto Desagrado (1) — diferenciación de un campo, perfil Disperso",
+      "fill_resto": 1,
+      "respuestas": { "1": 3, "2": 3, "3": 3, "4": 3, "5": 3, "6": 3, "7": 3, "8": 3, "9": 3, "10": 3, "11": 3, "12": 3 },
+      "tiempo_segundos": 1200,
+      "esperado": {
+        "tipoPerfil": "Disperso",
+        "validez": { "etiqueta": "Con cautela", "respondidos": 180, "nc": 0, "maxConc": 93 },
+        "campos": {
+          "1": { "pd_total": 36, "nivel": "Muy alto", "porcentaje": 100 },
+          "2": { "pd_total": 12, "nivel": "Bajo" }
+        }
+      }
+    },
+    {
+      "nombre": "Discrepancia AC/PR en Campo 1 (AC=3, PR=0), resto Desagrado — detecta AC_MAYOR",
+      "fill_resto": 1,
+      "respuestas": { "1": 3, "3": 3, "6": 3, "7": 3, "10": 3, "12": 3, "2": 0, "4": 0, "5": 0, "8": 0, "9": 0, "11": 0 },
+      "tiempo_segundos": 1200,
+      "esperado": {
+        "tipoPerfil": "Plano",
+        "campos": {
+          "1": { "pd_total": 18, "pd_ac": 18, "pd_pr": 0, "n_nc": 6, "nivel": "Medio" }
+        },
+        "discrepancias": [
+          { "nombre": "Científico", "pd_ac": 18, "pd_pr": 0, "tipo": "AC_MAYOR" }
+        ]
+      }
+    },
+    {
+      "nombre": "Aplicación parcial (50 ítems) y tiempo corto — No válida + alerta de tiempo",
+      "respuestas": {
+        "1": 3, "2": 3, "3": 3, "4": 3, "5": 3, "6": 3, "7": 3, "8": 3, "9": 3, "10": 3,
+        "11": 3, "12": 3, "13": 3, "14": 3, "15": 3, "16": 3, "17": 3, "18": 3, "19": 3, "20": 3,
+        "21": 3, "22": 3, "23": 3, "24": 3, "25": 3, "26": 3, "27": 3, "28": 3, "29": 3, "30": 3,
+        "31": 3, "32": 3, "33": 3, "34": 3, "35": 3, "36": 3, "37": 3, "38": 3, "39": 3, "40": 3,
+        "41": 3, "42": 3, "43": 3, "44": 3, "45": 3, "46": 3, "47": 3, "48": 3, "49": 3, "50": 3
+      },
+      "tiempo_segundos": 300,
+      "esperado": {
+        "validez": { "etiqueta": "No válida", "respondidos": 50, "alertaTiempo": "Tiempo muy corto (< 10 min). Posible respuesta apresurada." }
+      }
+    },
+    {
+      "nombre": "Patrón cíclico 0-1-2-3 en los 180 ítems — Válida (baja concentración), perfil Plano",
+      "respuestas_patron_ciclico": true,
+      "tiempo_segundos": 1500,
+      "esperado": {
+        "tipoPerfil": "Plano",
+        "validez": { "etiqueta": "Válida", "respondidos": 180, "nc": 45, "pctNC": 25, "maxConc": 25 }
+      }
+    }
+  ]
+}

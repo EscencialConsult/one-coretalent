@@ -1,0 +1,80 @@
+{
+  "_descripcion": "Casos de regresión para Bar-On EQ-i. 'fill' = todos los 133 ítems con ese valor. 'patron': 'ciclo_2a6' rellena cada ítem i con (2 + i%5). Valores esperados derivados del algoritmo del script.gs (autoridad), reproducidos por una implementación de referencia independiente. Pendiente validar contra salidas históricas reales del sistema. Nota: por las restas (CEIE, CE Total) los porcentajes pueden ser negativos en valores extremos bajos; esto es comportamiento fiel del .gs.",
+  "casos": [
+    {
+      "nombre": "Todo 2 (Nunca) — mínimo; verifica restas (CEIE y CE Total negativos)",
+      "fill": 2,
+      "esperado": {
+        "ceTotal": { "puntajeBruto": 196, "porcentaje": -13.2, "nivel": "MUY_BAJO" },
+        "compuestas": {
+          "CEIA": { "puntajeBruto": 80, "porcentaje": 0.0, "nivel": "MUY_BAJO" },
+          "CEIE": { "puntajeBruto": 36, "porcentaje": -10.9, "nivel": "MUY_BAJO" },
+          "CEAD": { "puntajeBruto": 44, "porcentaje": 0.0, "nivel": "MUY_BAJO" },
+          "CEME": { "puntajeBruto": 26, "porcentaje": 0.0, "nivel": "MUY_BAJO" },
+          "CEAG": { "puntajeBruto": 22, "porcentaje": 0.0, "nivel": "MUY_BAJO" }
+        },
+        "subescalas": {
+          "EN": { "puntajeBruto": 10, "porcentaje": 0.0, "nivel": "MUY_BAJO" },
+          "RI": { "puntajeBruto": 20, "porcentaje": 0.0, "nivel": "MUY_BAJO" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 4 (A veces) — punto medio; subescalas todas 50% PROMEDIO",
+      "fill": 4,
+      "esperado": {
+        "ceTotal": { "puntajeBruto": 392, "porcentaje": 23.7, "nivel": "BAJO" },
+        "compuestas": {
+          "CEIA": { "puntajeBruto": 160, "porcentaje": 50.0, "nivel": "PROMEDIO" },
+          "CEIE": { "puntajeBruto": 72, "porcentaje": 28.3, "nivel": "BAJO" },
+          "CEAD": { "puntajeBruto": 88, "porcentaje": 50.0, "nivel": "PROMEDIO" },
+          "CEME": { "puntajeBruto": 52, "porcentaje": 50.0, "nivel": "PROMEDIO" },
+          "CEAG": { "puntajeBruto": 44, "porcentaje": 50.0, "nivel": "PROMEDIO" }
+        },
+        "subescalas": {
+          "CM": { "puntajeBruto": 32, "porcentaje": 50.0, "nivel": "PROMEDIO" },
+          "OP": { "puntajeBruto": 16, "porcentaje": 50.0, "nivel": "PROMEDIO" }
+        }
+      }
+    },
+    {
+      "nombre": "Todo 6 (Siempre) — máximo; subescalas 100% MUY_ALTO, CEIE con resta",
+      "fill": 6,
+      "esperado": {
+        "ceTotal": { "puntajeBruto": 588, "porcentaje": 60.5, "nivel": "PROMEDIO" },
+        "compuestas": {
+          "CEIA": { "puntajeBruto": 240, "porcentaje": 100.0, "nivel": "MUY_ALTO" },
+          "CEIE": { "puntajeBruto": 108, "porcentaje": 67.4, "nivel": "ALTO" },
+          "CEAD": { "puntajeBruto": 132, "porcentaje": 100.0, "nivel": "MUY_ALTO" },
+          "CEME": { "puntajeBruto": 78, "porcentaje": 100.0, "nivel": "MUY_ALTO" },
+          "CEAG": { "puntajeBruto": 66, "porcentaje": 100.0, "nivel": "MUY_ALTO" }
+        },
+        "subescalas": {
+          "EN": { "puntajeBruto": 30, "porcentaje": 100.0, "nivel": "MUY_ALTO" },
+          "RI": { "puntajeBruto": 60, "porcentaje": 100.0, "nivel": "MUY_ALTO" }
+        }
+      }
+    },
+    {
+      "nombre": "Patrón cíclico (2 + i%5) — caso mixto; orden de fortalezas/debilidades",
+      "patron": "ciclo_2a6",
+      "esperado": {
+        "ceTotal": { "puntajeBruto": 395, "porcentaje": 24.2, "nivel": "BAJO" },
+        "compuestas": {
+          "CEIA": { "puntajeBruto": 146, "porcentaje": 41.3, "nivel": "PROMEDIO" },
+          "CEIE": { "puntajeBruto": 80, "porcentaje": 37.0, "nivel": "BAJO" },
+          "CEAD": { "puntajeBruto": 98, "porcentaje": 61.4, "nivel": "ALTO" },
+          "CEME": { "puntajeBruto": 56, "porcentaje": 57.7, "nivel": "PROMEDIO" },
+          "CEAG": { "puntajeBruto": 37, "porcentaje": 34.1, "nivel": "BAJO" }
+        },
+        "subescalas": {
+          "EN": { "puntajeBruto": 26, "porcentaje": 80.0, "nivel": "ALTO" },
+          "AR": { "puntajeBruto": 25, "porcentaje": 19.4, "nivel": "MUY_BAJO" },
+          "FL": { "puntajeBruto": 40, "porcentaje": 75.0, "nivel": "ALTO" }
+        },
+        "fortalezas_codigos": ["EN", "FL", "TE", "PR", "RI"],
+        "debilidades_codigos": ["AR", "FE", "RS", "OP", "AC"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "_fuente": "Test6/script.gs · NORMAS_POBLACIONALES + PROMEDIOS_POBLACIONALES",
+  "_descripcion": "Puntos de anclaje puntuación->percentil por dimensión (rango de puntuación por dimensión: 10-50). El percentil se obtiene por interpolación lineal entre anclas (ver scoring.py).",
+  "normas": {
+    "extraversion": { "5": 17, "10": 20, "25": 26, "50": 33, "75": 40, "90": 45, "95": 47 },
+    "agreeableness": { "5": 25, "10": 28, "25": 33, "50": 38, "75": 43, "90": 47, "95": 49 },
+    "conscientiousness": { "5": 20, "10": 23, "25": 29, "50": 35, "75": 41, "90": 46, "95": 48 },
+    "neuroticism": { "5": 12, "10": 15, "25": 21, "50": 28, "75": 35, "90": 41, "95": 44 },
+    "openness": { "5": 25, "10": 28, "25": 33, "50": 38, "75": 42, "90": 46, "95": 48 }
+  },
+  "promedios": {
+    "extraversion": 33,
+    "agreeableness": 38,
+    "conscientiousness": 35,
+    "neuroticism": 28,
+    "openness": 38
+  },
+  "nombres": {
+    "extraversion": "Extraversión",
+    "agreeableness": "Amabilidad",
+    "conscientiousness": "Responsabilidad",
+    "neuroticism": "Neuroticismo",
+    "openness": "Apertura a la Experiencia"
+  },
+  "niveles": {
+    "_descripcion": "Clasificación del nivel según el percentil.",
+    "umbral_descendente": [
+      { "min_percentil": 90, "nivel": "muyAlto", "nombre": "Muy Alto" },
+      { "min_percentil": 75, "nivel": "alto", "nombre": "Alto" },
+      { "min_percentil": 50, "nivel": "moderadoAlto", "nombre": "Moderadamente Alto" },
+      { "min_percentil": 40, "nivel": "promedio", "nombre": "Promedio" },
+      { "min_percentil": 25, "nivel": "bajo", "nombre": "Bajo" },
+      { "min_percentil": 0, "nivel": "muyBajo", "nombre": "Muy Bajo" }
+    ]
+  }
+}

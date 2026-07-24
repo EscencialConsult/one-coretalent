@@ -1,0 +1,39 @@
+{
+  "_fuente": "Test3/script.gs · CAMPOS_PROFESIONALES + NIVELES_INTERES",
+  "_descripcion": "Define los 18 campos profesionales (orden de inserción del .gs, relevante para el desempate del ordenamiento) y los baremos de nivel de interés por puntuación cruda (0-12 por campo).",
+  "valores_respuesta": { "A": 2, "I": 1, "D": 0 },
+  "_valores_nota": "A (Agrada)=+2, I (Indiferente)=+1, D (Desagrada)=+0. Sin respuesta = no suma (0). Máximo por campo = 6 ítems × 2 = 12.",
+  "puntuacion_maxima_campo": 12,
+  "orden_campos": ["C", "T", "S", "CS", "L", "AP", "M", "SA", "EE", "PC", "A", "JP", "CI", "E", "SE", "D", "AA", "I"],
+  "campos": {
+    "C":  { "nombre": "Científico",            "items": [1, 2, 3, 4, 5, 6] },
+    "T":  { "nombre": "Técnico",               "items": [7, 8, 9, 10, 11, 12] },
+    "S":  { "nombre": "Sanitario",             "items": [13, 14, 15, 16, 17, 18] },
+    "CS": { "nombre": "Científico-Social",     "items": [19, 20, 21, 22, 23, 24] },
+    "L":  { "nombre": "Literario",             "items": [25, 26, 27, 28, 29, 30] },
+    "AP": { "nombre": "Artístico-Plástico",    "items": [31, 32, 33, 34, 35, 36] },
+    "M":  { "nombre": "Musical",               "items": [37, 38, 39, 40, 41, 42] },
+    "SA": { "nombre": "Social-Asistencial",    "items": [43, 44, 45, 46, 47, 48] },
+    "EE": { "nombre": "Económico-Empresarial", "items": [49, 50, 51, 52, 53, 54] },
+    "PC": { "nombre": "Persuasivo-Comercial",  "items": [55, 56, 57, 58, 59, 60] },
+    "A":  { "nombre": "Administrativo",        "items": [61, 62, 63, 64, 65, 66] },
+    "JP": { "nombre": "Jurídico-Político",     "items": [67, 68, 69, 70, 71, 72] },
+    "CI": { "nombre": "Comunicación-Información", "items": [73, 74, 75, 76, 77, 78] },
+    "E":  { "nombre": "Enseñanza",             "items": [79, 80, 81, 82, 83, 84] },
+    "SE": { "nombre": "Seguridad",             "items": [85, 86, 87, 88, 89, 90] },
+    "D":  { "nombre": "Deportivo",             "items": [91, 92, 93, 94, 95, 96] },
+    "AA": { "nombre": "Agropecuario-Ambiental","items": [97, 98, 99, 100, 101, 102] },
+    "I":  { "nombre": "Informático",           "items": [103, 104, 105, 106, 107, 108] }
+  },
+  "niveles_interes": {
+    "_descripcion": "Nivel de interés según puntuación cruda del campo. Se evalúa en orden de inserción (MUY_ALTO→MUY_BAJO) y se toma el primer rango que contenga la puntuación. Por defecto MUY_BAJO.",
+    "orden": ["MUY_ALTO", "ALTO", "MEDIO", "BAJO", "MUY_BAJO"],
+    "rangos": {
+      "MUY_ALTO": { "min": 10, "max": 12, "nombre": "Muy Alto", "color": "#059669", "descripcion": "Interés muy marcado y prioritario" },
+      "ALTO":     { "min": 7,  "max": 9,  "nombre": "Alto",     "color": "#0b4a6e", "descripcion": "Interés significativo" },
+      "MEDIO":    { "min": 4,  "max": 6,  "nombre": "Medio",    "color": "#d97706", "descripcion": "Interés moderado" },
+      "BAJO":     { "min": 1,  "max": 3,  "nombre": "Bajo",     "color": "#94a3b8", "descripcion": "Poco interés" },
+      "MUY_BAJO": { "min": -6, "max": 0,  "nombre": "Muy Bajo", "color": "#dc2626", "descripcion": "Sin interés o rechazo" }
+    }
+  }
+}

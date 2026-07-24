@@ -1,0 +1,27 @@
+{
+  "_fuente": "Test8/script.gs · NIVELES_INTERES",
+  "_descripcion": "Baremo de interpretación cualitativa de la Puntuación Directa (PD) por campo. Rango PD por campo: 0-36 (12 ítems x escala 0-3). El nivel se asigna por intervalo cerrado [min,max] sobre la PD total del campo. NO hay conversión a percentiles ni baremos normativos por edad/sexo en el legacy: la interpretación es directa por PD.",
+  "pd_max_por_campo": 36,
+  "niveles_interes": [
+    { "nombre": "Muy alto",           "min": 31, "max": 36, "color": "#059669", "colorFondo": "#d1fae5" },
+    { "nombre": "Alto",               "min": 25, "max": 30, "color": "#0b4a6e", "colorFondo": "#dbeafe" },
+    { "nombre": "Medio-alto",         "min": 19, "max": 24, "color": "#7c3aed", "colorFondo": "#ede9fe" },
+    { "nombre": "Medio",              "min": 13, "max": 18, "color": "#d97706", "colorFondo": "#fef3c7" },
+    { "nombre": "Bajo",               "min": 7,  "max": 12, "color": "#94a3b8", "colorFondo": "#f1f5f9" },
+    { "nombre": "Muy bajo / Rechazo", "min": 0,  "max": 6,  "color": "#dc2626", "colorFondo": "#fee2e2" }
+  ],
+  "_perfil": {
+    "_descripcion": "Clasificación del tipo de perfil global (analizarPerfil del .gs). Se evalúa en este orden con los primeros que cumplan.",
+    "umbral_rechazo_pd": 12,
+    "umbral_secundario_pd": 19,
+    "umbral_alto_pd": 25,
+    "umbral_nc_desconocido": 3,
+    "discrepancia_acpr_min": 6,
+    "reglas_tipo": [
+      { "tipo": "Plano",             "condicion": "rango (max-min) <= 8" },
+      { "tipo": "Alto generalizado", "condicion": "n_campos con PD>=25 es >= 6" },
+      { "tipo": "Diferenciado",      "condicion": "n_campos con PD>=25 entre 2 y 4 (inclusive)" },
+      { "tipo": "Disperso",          "condicion": "resto" }
+    ]
+  }
+}
