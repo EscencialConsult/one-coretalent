@@ -17,6 +17,7 @@ from app.models.persona import Persona
 from app.models.user import Usuario
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+oauth2_optional = OAuth2PasswordBearer(tokenUrl="/api/auth/persona/login", auto_error=False)
 
 _credentials_exc = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
@@ -144,6 +145,28 @@ async def get_current_persona(
     db: AsyncSession = Depends(get_db),
 ) -> Persona:
     """Persona autenticada (portal self-service del postulante, token con rol 'persona')."""
+    try:
+        payload = decode_access_token(token)
+        if payload.get("rol") != "persona":
+            raise _credentials_exc
+        persona_id = uuid.UUID(payload.get("sub", ""))
+    except (jwt.PyJWTError, ValueError):
+        raise _credentials_exc
+
+    await apply_rls_context(db, persona_id=persona_id)
+    persona = await db.get(Persona, persona_id)
+    if persona is None or not persona.activo:
+        raise _credentials_exc
+    return persona
+
+
+async def get_optional_current_persona(
+    token: str | None = Depends(oauth2_optional),
+    db: AsyncSession = Depends(get_db),
+) -> Persona | None:
+    """Devuelve la Persona autenticada o None cuando la solicitud es pública."""
+    if token is None:
+        return None
     try:
         payload = decode_access_token(token)
         if payload.get("rol") != "persona":

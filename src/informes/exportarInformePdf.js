@@ -31,6 +31,7 @@ export async function exportarInformePdf(informe) {
   escribir(informe.configuracion?.titulo || informe.test_nombre, 18, 8);
   escribir(`${informe.evaluado?.nombre || ""} ${informe.evaluado?.apellido || ""}`.trim(), 12, 7);
   escribir(`Fecha: ${new Date(informe.fecha).toLocaleDateString("es-AR")} · Versión del test: ${informe.catalogo_version || "histórica"}`, 9, 6);
+  escribir(`Versión del algoritmo: ${informe.algoritmo_version || "histórica"}`, 9, 6);
   if (informe.contexto?.puesto) escribir(`Contexto: proceso de selección · ${informe.contexto.puesto}`, 9, 6);
   y += 3;
   lineasResultado(informe.resultado).forEach((linea) => escribir(linea, 9, 5));

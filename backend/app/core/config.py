@@ -4,6 +4,7 @@ from __future__ import annotations
 from functools import lru_cache
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -48,6 +49,20 @@ class Settings(BaseSettings):
     # service_role: server-side ÚNICAMENTE, nunca se expone al navegador (salta RLS de Storage).
     SUPABASE_URL: str = ""
     SUPABASE_SERVICE_ROLE_KEY: str = ""
+
+    @model_validator(mode="after")
+    def validar_produccion(self) -> "Settings":
+        if self.ENV.lower() != "prod":
+            return self
+        secretos_inseguros = {
+            "change-me-in-prod",
+            "cambia-esto-por-una-clave-larga-y-secreta",
+        }
+        if self.SECRET_KEY in secretos_inseguros or len(self.SECRET_KEY) < 32:
+            raise ValueError("SECRET_KEY debe ser aleatoria y tener al menos 32 caracteres en producción")
+        if "*" in self.cors_origins_list:
+            raise ValueError("CORS_ORIGINS no puede contener '*' en producción")
+        return self
 
     @property
     def cors_origins_list(self) -> list[str]:

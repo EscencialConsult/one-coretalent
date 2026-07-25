@@ -11,6 +11,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.api.deps import get_optional_current_persona
 from app.core.db import apply_rls_context, apply_rls_pre_auth, get_db
 from app.core.security import hash_password
 from app.core.storage import subir_archivo, url_firmada
@@ -169,16 +170,23 @@ async def vacantes_publicas(db: AsyncSession = Depends(get_db)) -> List[dict]:
 
 
 @router.post("/postular", response_model=PostulacionOut, status_code=status.HTTP_201_CREATED)
-async def postular(data: PostulacionIn, db: AsyncSession = Depends(get_db)) -> PostulacionOut:
+async def postular(
+    data: PostulacionIn,
+    persona_autenticada: Persona | None = Depends(get_optional_current_persona),
+    db: AsyncSession = Depends(get_db),
+) -> PostulacionOut:
     """Postulación pública a una vacante. Crea/actualiza la Persona (identidad global, por
     email) y crea la Postulacion. Si manda `password`, deja la cuenta lista para el login
     self-service (/auth/persona/login) — igual que "cuenta reutilizable" del legacy."""
+    # La vacante activa es un recurso público incluso cuando la solicitud incluye
+    # una sesión de Persona. Después se reemplaza este contexto por tenant+persona
+    # antes de insertar la postulación.
     await apply_rls_pre_auth(db)
     vacante = await db.get(Vacante, data.vacante_id)
     if vacante is None or vacante.estado != "activa":
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Vacante no encontrada o no está activa")
 
-    email = data.email.lower()
+    email = persona_autenticada.email if persona_autenticada is not None else data.email.lower()
     campos_persona = data.model_dump(
         exclude={
             "vacante_id", "email", "password", "cv_base64", "cv_nombre",
@@ -186,17 +194,19 @@ async def postular(data: PostulacionIn, db: AsyncSession = Depends(get_db)) -> P
             "respuesta_pregunta_1", "respuesta_pregunta_2",
         }
     )
-    persona = (await db.execute(select(Persona).where(Persona.email == email))).scalar_one_or_none()
+    persona = persona_autenticada
+    if persona is None:
+        persona = (await db.execute(select(Persona).where(Persona.email == email))).scalar_one_or_none()
     if persona is None:
         persona = Persona(email=email, **campos_persona)
-        if data.password:
+        if data.password and persona_autenticada is None:
             persona.password_hash = hash_password(data.password)
         db.add(persona)
         await db.flush()
     else:
         for campo, valor in campos_persona.items():
             setattr(persona, campo, valor)
-        if data.password:
+        if data.password and persona_autenticada is None:
             persona.password_hash = hash_password(data.password)
 
     if data.cv_base64:
@@ -207,7 +217,11 @@ async def postular(data: PostulacionIn, db: AsyncSession = Depends(get_db)) -> P
 
     # Ya existe la Persona: se fija el tenant real (el de la vacante) para que la
     # Postulacion (tenant-scoped) pase el WITH CHECK de RLS.
-    await apply_rls_context(db, tenant_id=vacante.tenant_id)
+    await apply_rls_context(
+        db,
+        tenant_id=vacante.tenant_id,
+        persona_id=persona.id if persona_autenticada is not None else None,
+    )
 
     ya = await db.execute(
         select(Postulacion).where(Postulacion.persona_id == persona.id, Postulacion.vacante_id == vacante.id)

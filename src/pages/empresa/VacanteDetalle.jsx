@@ -60,17 +60,22 @@ export default function VacanteDetalle() {
               </p>
             </div>
           </div>
-          <select
-            value={vacante.estado}
-            disabled={cambiando}
-            onChange={(e) => onCambiarEstado(e.target.value)}
-            className="input-marca font-bold ml-auto"
-            style={{ width: "auto" }}
-          >
-            {ESTADOS.map((e) => (
-              <option key={e} value={e}>{e}</option>
-            ))}
-          </select>
+          <div className="ml-auto">
+            <label htmlFor="estado-vacante" className="sr-only">Estado de la vacante</label>
+            <select
+              id="estado-vacante"
+              name="estado"
+              value={vacante.estado}
+              disabled={cambiando}
+              onChange={(e) => onCambiarEstado(e.target.value)}
+              className="input-marca font-bold"
+              style={{ width: "auto" }}
+            >
+              {ESTADOS.map((e) => (
+                <option key={e} value={e}>{e}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {error && <p className="text-sm text-rosa font-semibold mt-4">{error}</p>}
@@ -105,10 +110,22 @@ export default function VacanteDetalle() {
               </span>
             </div>
             {p.cv_url && (
-              <a href={p.cv_url} target="_blank" rel="noreferrer" className="boton boton-fantasma inline-flex items-center gap-1.5 !py-2 !px-3.5 text-xs flex-none">
+              <a
+                href={p.cv_url}
+                target="_blank"
+                rel="noreferrer"
+                className="boton boton-fantasma inline-flex items-center gap-1.5 !py-2 !px-3.5 text-xs flex-none"
+              >
                 <Icon name="file" className="w-3.5 h-3.5" /> Ver CV
               </a>
             )}
+            <button
+              type="button"
+              onClick={() => navigate(`/empresa/vacantes/${id}/postulaciones/${p.id}`)}
+              className="boton boton-acento inline-flex items-center gap-1 !py-2 !px-3.5 text-xs flex-none"
+            >
+              Gestionar <Icon name="chevR" className="w-3.5 h-3.5" />
+            </button>
           </div>
         ))}
       </div>

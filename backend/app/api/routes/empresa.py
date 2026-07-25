@@ -51,6 +51,25 @@ async def mis_tests(
     return [t for t in engine.listar_catalogo() if t["slug"] in habilitados]
 
 
+@router.get("/catalogo-tests")
+async def catalogo_tests_empresa(
+    tenant_id: uuid.UUID = Depends(get_current_tenant_id),
+    db: AsyncSession = Depends(get_db),
+) -> List[dict]:
+    """Catálogo visible para asignación, incluyendo el estado de licencia de la empresa."""
+    res = await db.execute(
+        select(EmpresaTest.test_slug).where(
+            EmpresaTest.tenant_id == tenant_id,
+            EmpresaTest.habilitado.is_(True),
+        )
+    )
+    habilitados = set(res.scalars().all())
+    return [
+        {**test, "habilitado": test["slug"] in habilitados}
+        for test in engine.listar_catalogo()
+    ]
+
+
 def _estado_evaluado(asignadas: int, completadas: int) -> str:
     if asignadas == 0:
         return "sin_asignar"

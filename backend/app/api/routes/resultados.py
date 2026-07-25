@@ -14,7 +14,7 @@ from app.core.db import get_db
 from app.models.evaluado import Evaluado
 from app.models.resultado import Resultado
 from app.models.tenant import Empresa
-from app.models.evaluacion_postulante import EventoEvaluacion
+from app.models.evaluacion_postulante import AccesoResultado, EventoEvaluacion
 from app.models.asignacion import Asignacion
 from app.models.postulacion import Postulacion
 from app.models.vacante import Vacante
@@ -41,6 +41,40 @@ def _sin_respuestas_crudas(valor):
     if isinstance(valor, list):
         return [_sin_respuestas_crudas(item) for item in valor]
     return valor
+
+
+async def _autorizar_resultado(
+    resultado: Resultado,
+    actor: ActorActual,
+    db: AsyncSession,
+) -> uuid.UUID:
+    """Resuelve el tenant de lectura y aplica la revocación a resultados de postulantes."""
+    if actor.tipo == "persona":
+        if resultado.persona_id != actor.id:
+            raise HTTPException(status.HTTP_404_NOT_FOUND, "Resultado no disponible")
+        return resultado.tenant_id
+
+    if actor.tenant_id is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Resultado no disponible")
+
+    # Los resultados legados de evaluados no tienen Persona ni acceso compartido.
+    # Los nuevos resultados de postulantes exigen un acceso activo del tenant.
+    if resultado.persona_id is not None:
+        acceso = (
+            await db.execute(
+                select(AccesoResultado).where(
+                    AccesoResultado.resultado_id == resultado.id,
+                    AccesoResultado.tenant_id == actor.tenant_id,
+                    AccesoResultado.revocado_at.is_(None),
+                )
+            )
+        ).scalar_one_or_none()
+        if acceso is None:
+            raise HTTPException(status.HTTP_404_NOT_FOUND, "Resultado no disponible")
+    elif resultado.tenant_id != actor.tenant_id:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Resultado no disponible")
+
+    return actor.tenant_id
 
 
 @router.get("/evaluados/{evaluado_id}/resultados")
@@ -77,9 +111,7 @@ async def obtener_resultado(
     r = await db.get(Resultado, resultado_id)
     if r is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Resultado no encontrado")
-    if actor.tipo == "persona" and r.persona_id != actor.id:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Resultado no encontrado")
-    tenant_id = actor.tenant_id or r.tenant_id
+    tenant_id = await _autorizar_resultado(r, actor, db)
     ev = await db.get(Evaluado, r.evaluado_id)
     emp = await db.get(Empresa, tenant_id)
     cat = {t["slug"]: t for t in engine.listar_catalogo()}
@@ -123,11 +155,10 @@ async def obtener_informe(
     resultado = await db.get(Resultado, resultado_id)
     if resultado is None or resultado.test_slug in _INFORMES_EXCLUIDOS:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Informe no disponible")
-    if actor.tipo == "persona" and resultado.persona_id != actor.id:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Informe no disponible")
+    tenant_marca = await _autorizar_resultado(resultado, actor, db)
 
     evaluado = await db.get(Evaluado, resultado.evaluado_id)
-    tenant_marca = actor.tenant_id or resultado.tenant_id
+    identidad_evaluada = actor.persona if actor.tipo == "persona" and actor.persona else evaluado
     empresa = await db.get(Empresa, tenant_marca)
     contexto = None
     asignacion = (
@@ -146,7 +177,12 @@ async def obtener_informe(
         postulacion = await db.get(Postulacion, asignacion.postulacion_id)
         vacante = await db.get(Vacante, postulacion.vacante_id) if postulacion else None
         if vacante:
-            contexto = {"tipo": "seleccion", "puesto": vacante.puesto}
+            contexto = {
+                "tipo": "seleccion",
+                "puesto": vacante.puesto,
+                "vacante_id": str(vacante.id),
+                "postulacion_id": str(postulacion.id),
+            }
 
     catalogo = {item["slug"]: item for item in engine.listar_catalogo()}
     config = engine.cargar_informe(resultado.test_slug)
@@ -170,8 +206,8 @@ async def obtener_informe(
         "contexto": contexto,
         "audiencia": actor.tipo,
         "evaluado": (
-            {"nombre": evaluado.nombre, "apellido": evaluado.apellido}
-            if evaluado else None
+            {"nombre": identidad_evaluada.nombre, "apellido": identidad_evaluada.apellido}
+            if identidad_evaluada else None
         ),
         "empresa": ({
             "razon_social": empresa.razon_social,

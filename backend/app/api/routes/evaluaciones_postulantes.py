@@ -141,6 +141,7 @@ async def _resumen(asignacion: Asignacion, db: AsyncSession) -> EvaluacionResume
         reutilizada=asignacion.resultado_reutilizado_id is not None,
         resultado_id=resultado_id,
         acceso_resultado_id=acceso.id if acceso else None,
+        acceso_revocado=bool(acceso and acceso.revocado_at),
         iniciada_at=asignacion.iniciada_at,
         progreso_guardado_at=asignacion.progreso_guardado_at,
         finalizada_at=asignacion.finalizada_at,
@@ -444,7 +445,9 @@ async def finalizar_evaluacion(
 ) -> EvaluacionResumenOut:
     asignacion = await _asignacion_persona(asignacion_id, persona, db, bloquear=True)
     if asignacion.estado == "completado":
-        raise HTTPException(status.HTTP_409_CONFLICT, "La evaluación ya fue finalizada")
+        # Un reintento por doble clic, timeout o pérdida de la respuesta HTTP
+        # devuelve el resultado persistido sin volver a ejecutar el scoring.
+        return await _resumen(asignacion, db)
     respuestas = data.respuestas if data and data.respuestas is not None else asignacion.respuestas_parciales
     if not respuestas:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "No hay respuestas guardadas para finalizar")

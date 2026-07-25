@@ -17,6 +17,7 @@ const PoliticaPrivacidad = lazy(() => import("./pages/publico/PoliticaPrivacidad
 const TerminosCondiciones = lazy(() => import("./pages/publico/TerminosCondiciones"));
 const Vacantes = lazy(() => import("./pages/empresa/Vacantes"));
 const VacanteDetalle = lazy(() => import("./pages/empresa/VacanteDetalle"));
+const PostulacionEmpresaDetalle = lazy(() => import("./pages/empresa/PostulacionEmpresaDetalle"));
 const Postulantes = lazy(() => import("./pages/empresa/Postulantes"));
 const EmpresasPendientes = lazy(() => import("./pages/admin/EmpresasPendientes"));
 const NoEncontrado = lazy(() => import("./pages/NoEncontrado"));
@@ -87,6 +88,7 @@ export default function App() {
           <Route index element={<Navigate to="vacantes" replace />} />
           <Route path="vacantes" element={<Vacantes />} />
           <Route path="vacantes/:id" element={<VacanteDetalle />} />
+          <Route path="vacantes/:vacanteId/postulaciones/:postulacionId" element={<PostulacionEmpresaDetalle />} />
           <Route path="postulantes" element={<Postulantes />} />
           <Route path="informe/:id" element={<InformeEmpresa />} />
         </Route>

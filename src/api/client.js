@@ -42,7 +42,13 @@ export async function apiFetch(
 
   let res;
   try {
-    res = await fetch(`${API_URL}${path}`, { method, headers, body: payload, signal });
+    res = await fetch(`${API_URL}${path}`, {
+      method,
+      headers,
+      body: payload,
+      signal,
+      cache: token ? "no-store" : "default",
+    });
   } catch (error) {
     if (error?.name === "AbortError") {
       throw new ApiError(0, "La solicitud fue cancelada.", { code: "ABORTED" });

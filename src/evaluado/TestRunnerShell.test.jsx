@@ -56,6 +56,32 @@ describe("TestRunnerShell", () => {
     expect(await screen.findByText("Evaluación completada")).toBeInTheDocument();
   });
 
+  it("retoma en la primera pregunta pendiente", async () => {
+    iniciar.mockResolvedValue({
+      respuestas: { "1": "1" },
+      progreso_guardado_at: "2026-07-25T12:00:00Z",
+    });
+    render(<TestRunnerShell evaluacion={evaluacion} />);
+    await screen.findByText("Consentimiento para la evaluación");
+    fireEvent.click(screen.getByRole("checkbox"));
+    fireEvent.click(screen.getByRole("button", { name: "Aceptar y comenzar" }));
+    expect(await screen.findByText("Pregunta dos")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Progreso recuperado");
+  });
+
+  it("permite reintentar un autoguardado fallido", async () => {
+    guardar.mockRejectedValueOnce(new Error("sin red")).mockResolvedValue({ ok: true });
+    render(<TestRunnerShell evaluacion={evaluacion} />);
+    await screen.findByText("Consentimiento para la evaluación");
+    fireEvent.click(screen.getByRole("checkbox"));
+    fireEvent.click(screen.getByRole("button", { name: "Aceptar y comenzar" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Nunca" }));
+    const reintentar = await screen.findByRole("button", { name: "Reintentar guardado" }, { timeout: 2000 });
+    fireEvent.click(reintentar);
+    await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Guardado"));
+    expect(guardar).toHaveBeenCalledTimes(2);
+  });
+
   it("excluye Excel y los tres tests bloqueados", () => {
     expect([...TESTS_EXCLUIDOS]).toEqual(expect.arrayContaining([
       "excel-inicial", "excel-intermedio", "excel-avanzado",

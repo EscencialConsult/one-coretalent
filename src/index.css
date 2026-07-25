@@ -162,6 +162,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .landing-btn, .landing-benefit-grid article, .public-nav-cta, .public-mobile-menu { transition: none; }
+  .runner-progress-bar, .candidate-content * { scroll-behavior: auto; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
 /* Búsquedas públicas */
@@ -238,7 +239,7 @@
 .job-card:hover { border-color: rgba(77,36,143,.35); transform: translateY(-4px); box-shadow: 0 20px 42px rgba(39,27,48,.11); }
 .job-card-main { display: flex; width: 100%; height: 100%; flex-direction: column; text-align: left; }
 .job-card-main:focus-visible { outline: 3px solid rgba(77,36,143,.25); outline-offset: -3px; }
-.job-card-cover, .job-dialog-cover { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; overflow: hidden; min-height: 7rem; padding: 1rem; color: white; background: linear-gradient(145deg, rgba(37,29,43,.18), rgba(77,36,143,.28)), url("/busqueda-cover.jpg") center/cover no-repeat, linear-gradient(145deg, #4d248f, #6be1e3); }
+.job-card-cover, .job-dialog-cover { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; overflow: hidden; min-height: 7rem; padding: 1rem; color: white; background: linear-gradient(145deg, rgba(37,29,43,.18), rgba(77,36,143,.28)), url("/busqueda-cover.webp") center/cover no-repeat, linear-gradient(145deg, #4d248f, #6be1e3); }
 .job-card-cover::after, .job-dialog-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(25,18,31,.72)); }
 .job-card-cover span, .job-card-cover small, .job-dialog-cover span { position: relative; z-index: 1; }
 .job-card-cover span, .job-dialog-cover span { max-width: 70%; padding: .4rem .65rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(30,23,36,.42); font-size: .63rem; font-weight: 850; letter-spacing: .045em; text-transform: uppercase; backdrop-filter: blur(7px); }
@@ -442,7 +443,7 @@
 .informe-cabecera h1 { font-size: clamp(1.65rem, 4vw, 2.5rem); line-height: 1.1; font-weight: 900; margin-top: .4rem; }
 .informe-cabecera img { width: 120px; height: 70px; object-fit: contain; }
 .informe-marca { color: var(--informe-acento); text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; font-weight: 900; }
-.informe-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid #e5e4ea; }
+.informe-meta { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid #e5e4ea; }
 .informe-meta span, .informe-datos span { display: block; color: #777482; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; }
 .informe-meta strong { display: block; margin-top: .3rem; font-size: .9rem; overflow-wrap: anywhere; }
 .informe-seccion { margin-top: 2rem; break-inside: avoid; }
@@ -461,6 +462,9 @@
 .informe-grafico { min-width: 0; }
 .informe-grafico-placeholder { min-height: 18rem; display: grid; place-items: center; color: #777482; }
 .informe-aviso { margin-top: 2.5rem; padding: 1rem; background: #f5f3f8; border-radius: .75rem; color: #5f5b68; font-size: .8rem; line-height: 1.5; }
+.informe-audiencia { display: inline-flex; margin-top: .75rem; padding: .35rem .65rem; border-radius: 999px; color: var(--informe-acento); background: color-mix(in srgb, var(--informe-acento) 10%, white); font-size: .72rem; font-weight: 800; }
+.informe-error { margin-bottom: 1rem; padding: .8rem 1rem; border: 1px solid #fecaca; border-radius: .7rem; color: #991b1b; background: #fef2f2; font-size: .85rem; }
+.informe-vacio { padding: 1rem; border: 1px dashed #d8d7df; border-radius: .75rem; color: #676472; background: #faf9fb; }
 
 @media (max-width: 760px) {
   .informe-meta, .informe-datos, .informe-tres-columnas { grid-template-columns: 1fr; }

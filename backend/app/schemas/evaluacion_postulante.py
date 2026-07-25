@@ -35,6 +35,7 @@ class EvaluacionResumenOut(BaseModel):
     reutilizada: bool
     resultado_id: uuid.UUID | None = None
     acceso_resultado_id: uuid.UUID | None = None
+    acceso_revocado: bool = False
     iniciada_at: dt.datetime | None = None
     progreso_guardado_at: dt.datetime | None = None
     finalizada_at: dt.datetime | None = None
