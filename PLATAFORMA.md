@@ -1,7 +1,7 @@
 # ONE Core-Talent — Documento de traspaso
 
-> Para Santiago. Si es tu primera vez en este proyecto, leé esto entero antes de tocar código.
-> Última actualización: 2026-07-24, por Facundo.
+> Documento de traspaso para cualquier integrante que continúe el proyecto.
+> Última actualización: 2026-07-24, por Santiago.
 
 ---
 
@@ -29,13 +29,13 @@ Los repos originales (`one-test`, `postulaciones-empresas`) **siguen funcionando
 sistema mixto core-talent/          ← este repo
 ├── backend/                        ← FastAPI (Python), copiado de one-test/backend + Etapas 1-3 nuevas
 ├── catalogo/                       ← los 22 tests psicométricos (preguntas + scoring), lo usa el backend
-├── src/                            ← frontend (React + Vite + Tailwind 2.2.1)
+├── src/                            ← frontend (React 19 + Vite 8 + Tailwind 2.2.19)
 ├── PLATAFORMA.md                   ← este archivo
 └── INSTRUCCIONES.md                ← el contexto original completo de la fusión (leer si falta algo acá)
 ```
 
 - **Backend**: FastAPI + SQLAlchemy async + Alembic. Base de datos: **Supabase Postgres** (ya no Render). Multi-tenant con **Row Level Security real** activado a nivel de base de datos (no solo por código).
-- **Frontend**: React 18 + Vite + Tailwind CSS **2.2.1** (versión vieja a propósito, pedida por Facundo — no actualizar a v3/v4 sin confirmar). Un solo archivo de marca (`src/theme/brand.json`) define colores/tipografía; el white-label por empresa se aplica en runtime pisando variables CSS (`src/theme/ThemeProvider.jsx`), no hay que tocar Tailwind para eso.
+- **Frontend**: React **19.2.7** + Vite **8.1.5** + Tailwind CSS **2.2.19**. El white-label por empresa se aplica en runtime mediante variables CSS desde `src/theme/ThemeProvider.jsx`; no hay que modificar componentes para cambiar la marca.
 - **Storage de archivos** (CVs, selfies, firmas): Supabase Storage, buckets privados con URLs firmadas — reemplaza Google Drive del sistema viejo.
 
 ---
@@ -47,22 +47,37 @@ sistema mixto core-talent/          ← este repo
 | 1 | Base movida a Supabase, RLS activado, rol de runtime sin privilegios de superusuario | ✅ hecho y probado |
 | 2 | Modelo de datos nuevo: `Persona` (candidato global), `Vacante`, `Postulacion`, `NotificacionVacante`, `EventoComercial` | ✅ hecho y probado |
 | 3 | Backend: motor de matching, Supabase Storage, registro público de empresa, login de candidato, postulación pública | ✅ hecho y probado |
-| 4 | Frontend nuevo (React+Tailwind) para todo lo de Talent Hub + panel de empresa/SuperAdmin rediseñado con la identidad visual real de Plataforma ONE | ✅ hecho y probado |
+| 4 | Frontend nuevo para Talent Hub, panel de empresa, SuperAdmin y portal profesional del candidato | ✅ hecho y probado |
+| 5 | Evaluaciones de postulantes: asignación, progreso, scoring backend, reutilización, auditoría y revocación | ✅ implementado y migrado |
+| 6 | Runners psicométricos, resultados e informes para empresa/candidato | ✅ implementado hasta Fase 5 |
 
-### Lo que falta (pendiente para vos, Santiago)
+### Estado funcional consolidado
 
-1. **Portar las pantallas que YA existen en Plataforma ONE** (`../one-test/frontend/`) a este frontend nuevo: los 17 runners de tests, los informes por test, el portal del evaluado, el módulo de evaluaciones 360°. Es trabajo mecánico (convertir su CSS a Tailwind usando `src/index.css` como base) — no hay decisiones de diseño nuevas, ya está resuelto en el original.
-2. **El flujo de "empresa evalúa a un postulante"** — ver sección 4, está diseñado pero no implementado.
-3. Revisar los 3 tests del catálogo que siguen bloqueados (`dat`, `dnla-perfil-comercial`, `ebp` — incompletos, requieren al psicólogo a cargo, no es tema de código).
-4. Decisión pendiente de Facundo: hosting del backend (¿se queda en Render o se migra, p. ej. a Vercel?) y dominio final.
+- Portal público: landing, navbar, footer, registro de empresa, registro/login de candidato y búsquedas activas.
+- Portal candidato: dashboard, búsquedas internas, postulaciones, evaluaciones, resultados, perfil, CV, seguridad y privacidad.
+- Panel empresa: vacantes, consolidado de postulantes, asignación de evaluaciones y consulta de informes.
+- SuperAdmin: revisión de empresas pendientes.
+- Portal evaluado y runners habilitados portados con carga diferida.
+- Informes psicométricos para empresa y candidato, gráficos y exportación PDF.
+- Supabase conectado localmente; migraciones de Fases 3 y 4 aplicadas; RLS y Storage validados.
+- Datos sintéticos E2E disponibles para los tres roles.
+
+### Pendientes reales para la próxima persona
+
+1. Ejecutar y documentar el recorrido E2E completo en navegador: vacante → postulación → asignación → progreso → finalización → resultado → informe → revocación.
+2. Completar el flujo empresarial de gestión de evaluaciones si se requiere una interfaz más amplia que la disponible desde las postulaciones.
+3. Portar o completar el módulo 360° según la siguiente fase acordada.
+4. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
+5. Confirmar hosting definitivo del backend, dominio final y estrategia de cutover.
+6. Los módulos de informes con IA y planilla/Excel permanecen fuera del alcance.
 
 ---
 
 ## 4. Flujo de negocio: empresa evalúa a un postulante (IMPLEMENTADO — Fase 3)
 
-> Actualización de Santiago, 2026-07-24: el backend, la migración, RLS, progreso parcial,
-> reutilización, accesos revocables, auditoría y outbox ya fueron implementados. La migración
-> todavía debe aplicarse y probarse E2E en Supabase cuando estén disponibles las credenciales.
+> Actualización de Santiago, 2026-07-24: backend, migraciones, RLS, progreso parcial,
+> reutilización, accesos revocables, auditoría y outbox fueron implementados. Las migraciones
+> ya están aplicadas en Supabase; queda pendiente el recorrido E2E integral en navegador.
 
 Confirmado con Facundo el 2026-07-24:
 

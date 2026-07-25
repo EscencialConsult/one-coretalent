@@ -4,6 +4,90 @@
 
 ---
 
+## ACTUALIZACIÓN DE TRASPASO — 24/07/2026
+
+> Esta sección refleja el estado actual del repositorio y prevalece sobre los checklists históricos que aparecen más abajo.
+
+### Trabajo completado
+
+- Etapas originales 1 a 4 de CoreTalent implementadas.
+- Fases 1 a 5 del plan posterior implementadas a nivel funcional.
+- Supabase configurado localmente con roles separados para runtime y migraciones.
+- Migraciones `d5e6f7a8b9c0` y `e6f7a8b9c0d1` aplicadas.
+- RLS forzado y validado sobre entidades sensibles.
+- Supabase Storage validado para CV, firmas y verificaciones.
+- Portal público completo: landing, búsquedas, registro de empresa, registro/login de candidato y páginas legales.
+- Portal privado del candidato completo: inicio, búsquedas, postulaciones, evaluaciones, resultados, perfil, seguridad y privacidad.
+- Panel de empresa con vacantes y sección consolidada de postulantes.
+- Flujo backend de evaluaciones de postulantes con asignación, inicio idempotente, progreso parcial, finalización, scoring backend, reutilización, revocación, auditoría y outbox.
+- Portal del evaluado y runners psicométricos habilitados.
+- Informes psicométricos para empresa/candidato con gráficos y PDF.
+- Datos sintéticos E2E creados para SuperAdmin, empresa y candidato.
+
+### Rutas principales agregadas
+
+- Públicas: `/busquedas`, `/registro-candidato`, `/login-candidato`, `/registro-empresa`.
+- Candidato: `/candidato`, `/candidato/busquedas`, `/candidato/postulaciones`, `/candidato/evaluaciones`, `/candidato/resultados`, `/candidato/perfil`, `/candidato/seguridad`, `/candidato/privacidad`.
+- Empresa: `/empresa/vacantes`, `/empresa/postulantes`.
+- SuperAdmin: `/admin/empresas-pendientes`.
+
+### Puesta en marcha local
+
+Backend:
+
+```bash
+cd backend
+python -m venv .venv
+./.venv/Scripts/python -m pip install -r requirements.txt
+cp .env.example .env
+./.venv/Scripts/python -m alembic upgrade head
+./.venv/Scripts/python -m uvicorn app.main:app --reload
+```
+
+Variables importantes:
+
+- `DATABASE_URL`: conexión del rol restringido `app_runtime`.
+- `DATABASE_URL_MIGRATIONS`: conexión administrativa usada solamente por Alembic.
+- `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY`: necesarias para CV, selfies y firmas.
+- Nunca incorporar `.env`, claves de Supabase ni credenciales E2E al repositorio.
+
+Frontend:
+
+```bash
+npm install
+npm run dev
+```
+
+Validación:
+
+```bash
+npm run lint
+npm test -- --run
+npm run build
+
+cd backend
+./.venv/Scripts/python -m compileall -q app
+./.venv/Scripts/python -m unittest discover -s tests -v
+```
+
+Estado validado al cierre:
+
+- 33 tests frontend aprobados.
+- 15 tests backend aprobados.
+- Lint sin errores; quedan dos warnings preexistentes en el código legacy de Dominó-48.
+- Build de producción y compilación backend correctos.
+
+### Siguiente trabajo recomendado
+
+1. Ejecutar el recorrido E2E integral: vacante → postulación → asignación → inicio → respuestas → finalización → resultado → informe → revocación.
+2. Documentar cualquier incidencia detectada durante ese recorrido.
+3. Continuar con el módulo 360° y la gestión empresarial ampliada de evaluaciones si son priorizados.
+4. No habilitar `dat`, `dnla-perfil-comercial` ni `ebp` sin definición del profesional psicométrico responsable.
+5. Mantener fuera de alcance informes con IA y planilla/Excel.
+6. Confirmar hosting del backend, dominio definitivo y plan de migración de datos reales antes del cutover.
+
+---
+
 ## 0. Quién pide esto y para qué
 
 **Facundo Maximiliano Lazarte** — Área de Innovación y Desarrollo, **Escencial Consultora** (RRHH, contable/laboral, capacitaciones, Argentina). Perfil no-programador (estudiante de Psicología), fuerte en UX/lógica de negocio, aprende los detalles técnicos en el proceso. Cuando trabajes con él: explicá el razonamiento (el "por qué"), no solo el "qué"; conectá cada decisión técnica con el impacto en el usuario final; sé directo, sin relleno.
