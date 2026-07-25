@@ -5,9 +5,11 @@ import ssl
 import uuid
 from pathlib import Path
 from typing import AsyncGenerator, Optional
+from uuid import uuid4
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.pool import NullPool
 
 from app.core.config import settings
 
@@ -21,7 +23,14 @@ from app.core.config import settings
 # la validación real de identidad del servidor.
 _SUPABASE_CA_BUNDLE = Path(__file__).parent / "certs" / "supabase-ca-bundle.pem"
 
-_connect_args: dict = {"statement_cache_size": 0}
+_connect_args: dict = {
+    "statement_cache_size": 0,
+    # SQLAlchemy mantiene además una caché propia de sentencias preparadas para asyncpg.
+    # El pooler transaccional de Supabase puede entregar la conexión física a otra sesión
+    # entre transacciones, por lo que un nombre preparado previamente deja de existir.
+    "prepared_statement_cache_size": 0,
+    "prepared_statement_name_func": lambda: f"__asyncpg_{uuid4()}__",
+}
 if settings.DB_SSL:
     _ssl_context = ssl.create_default_context()
     if _SUPABASE_CA_BUNDLE.exists():
@@ -30,7 +39,9 @@ if settings.DB_SSL:
 
 engine = create_async_engine(
     settings.async_database_url,
-    pool_pre_ping=True,
+    # Supavisor ya administra el pool en el servidor. Mantener otro pool persistente en
+    # la aplicación reintroduce estado de sesión y sentencias preparadas entre requests.
+    poolclass=NullPool,
     echo=(settings.ENV == "dev"),
     connect_args=_connect_args,
 )

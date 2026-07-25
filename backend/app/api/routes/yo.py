@@ -79,22 +79,31 @@ async def yo_guardar_resultado(
     res = await db.execute(
         select(Asignacion).where(
             Asignacion.evaluado_id == evaluado.id, Asignacion.test_slug == slug
-        )
+        ).with_for_update()
     )
     asignacion = res.scalar_one_or_none()
     if asignacion is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No tenés asignado ese test")
+    if asignacion.estado == "completado":
+        raise HTTPException(
+            status.HTTP_409_CONFLICT,
+            "Esta evaluación ya fue completada",
+        )
 
     try:
         datos = engine.calcular(slug, data.respuestas)
     except Exception as e:  # noqa: BLE001
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f"Error al calcular: {e}")
 
+    catalogo_version, algoritmo_version = engine.versiones(slug)
     resultado = Resultado(
         tenant_id=evaluado.tenant_id,
         evaluado_id=evaluado.id,
+        persona_id=evaluado.persona_id,
         test_slug=slug,
         datos=datos,
+        catalogo_version=catalogo_version,
+        algoritmo_version=algoritmo_version,
     )
     db.add(resultado)
     await db.flush()  # obtiene resultado.id para el link del aviso

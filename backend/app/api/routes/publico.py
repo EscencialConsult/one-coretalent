@@ -21,10 +21,42 @@ from app.models.tenant import Empresa
 from app.models.user import Usuario
 from app.models.vacante import Vacante
 from app.schemas.postulacion import PostulacionIn, PostulacionOut
-from app.schemas.registro_publico import RegistroEmpresaIn
+from app.schemas.registro_publico import RegistroCandidatoIn, RegistroEmpresaIn
 from app.schemas.vacante import VacantePublicaOut
 
 router = APIRouter(prefix="/publico", tags=["público"])
+
+
+@router.post("/registro-candidato", status_code=status.HTTP_201_CREATED)
+async def registro_candidato(
+    data: RegistroCandidatoIn, db: AsyncSession = Depends(get_db)
+) -> dict:
+    """Crea una identidad global de candidato sin exigir una postulación previa."""
+    await apply_rls_pre_auth(db)
+    email = data.email.strip().lower()
+    existente = (
+        await db.execute(select(Persona).where(func.lower(Persona.email) == email))
+    ).scalar_one_or_none()
+    if existente is not None:
+        raise HTTPException(
+            status.HTTP_409_CONFLICT,
+            "Ya existe una cuenta o un perfil asociado a ese email. Ingresá o recuperá tu acceso.",
+        )
+
+    db.add(
+        Persona(
+            nombre=data.nombre,
+            apellido=data.apellido,
+            email=email,
+            password_hash=hash_password(data.password),
+            activo=True,
+        )
+    )
+    await db.commit()
+    return {
+        "ok": True,
+        "mensaje": "Cuenta creada correctamente. Ya podés ingresar a tu portal.",
+    }
 
 
 @router.get("/marca/{subdominio}")
@@ -115,11 +147,25 @@ async def registro_empresa(data: RegistroEmpresaIn, db: AsyncSession = Depends(g
 
 
 @router.get("/vacantes", response_model=List[VacantePublicaOut])
-async def vacantes_publicas(db: AsyncSession = Depends(get_db)) -> List[Vacante]:
+async def vacantes_publicas(db: AsyncSession = Depends(get_db)) -> List[dict]:
     """Listado público de búsquedas activas, cruzando todas las empresas (reemplaza busquedas.html)."""
     await apply_rls_pre_auth(db)
-    res = await db.execute(select(Vacante).where(Vacante.estado == "activa").order_by(Vacante.created_at.desc()))
-    return list(res.scalars().all())
+    res = await db.execute(
+        select(Vacante, Empresa.razon_social)
+        .join(Empresa, Empresa.id == Vacante.tenant_id)
+        .where(Vacante.estado == "activa", Empresa.estado == EstadoEmpresa.ACTIVO)
+        .order_by(Vacante.created_at.desc())
+    )
+    return [
+        {
+            **{
+                columna.name: getattr(vacante, columna.name)
+                for columna in Vacante.__table__.columns
+            },
+            "empresa": razon_social,
+        }
+        for vacante, razon_social in res.all()
+    ]
 
 
 @router.post("/postular", response_model=PostulacionOut, status_code=status.HTTP_201_CREATED)

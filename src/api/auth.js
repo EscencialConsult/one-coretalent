@@ -4,7 +4,9 @@ import { apiFetch } from "./client";
 export const loginAdmin = (email, password) =>
   apiFetch("/auth/login", { method: "POST", form: true, body: { username: email, password } });
 
-export const meAdmin = (token) => apiFetch("/auth/me", { token });
+export const meAdmin = (token, signal) => apiFetch("/auth/me", { token, signal });
 
 export const loginPersona = (email, password) =>
   apiFetch("/auth/persona/login", { method: "POST", form: true, body: { username: email, password } });
+
+export const mePersona = (token, signal) => apiFetch("/auth/persona/me", { token, signal });

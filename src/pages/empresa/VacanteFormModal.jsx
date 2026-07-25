@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 import { crearVacante } from "../../api/empresa";
 import { ApiError } from "../../api/client";
 import Icon from "../../components/Icon";

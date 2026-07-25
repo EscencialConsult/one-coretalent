@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 import { listarEmpresasPendientes, aprobarEmpresa, rechazarEmpresa } from "../../api/admin";
 import Icon from "../../components/Icon";
 

@@ -14,7 +14,7 @@ from app.core.storage import url_firmada
 from app.models.persona import Persona
 from app.models.postulacion import Postulacion
 from app.models.vacante import Vacante
-from app.schemas.postulacion import PostulacionOut
+from app.schemas.postulacion import PostulacionOut, PostulacionResumenOut
 
 router = APIRouter(tags=["postulaciones (empresa)"])
 
@@ -57,6 +57,42 @@ async def listar_postulaciones(
                 perfil_profesional=persona.perfil_profesional,
                 cv_url=cv_url,
                 respuestas_busqueda=post.respuestas_busqueda,
+                created_at=post.created_at,
+            )
+        )
+    return salida
+
+
+@router.get("/postulaciones", response_model=List[PostulacionResumenOut])
+async def listar_todas_postulaciones(
+    tenant_id: uuid.UUID = Depends(get_current_tenant_id),
+    db: AsyncSession = Depends(get_db),
+) -> List[PostulacionResumenOut]:
+    filas = (
+        await db.execute(
+            select(Postulacion, Persona, Vacante)
+            .join(Persona, Persona.id == Postulacion.persona_id)
+            .join(Vacante, Vacante.id == Postulacion.vacante_id)
+            .where(Postulacion.tenant_id == tenant_id, Vacante.tenant_id == tenant_id)
+            .order_by(Postulacion.created_at.desc())
+        )
+    ).all()
+
+    salida: List[PostulacionResumenOut] = []
+    for post, persona, vacante in filas:
+        cv_url = await url_firmada(persona.cv_url) if persona.cv_url else None
+        salida.append(
+            PostulacionResumenOut(
+                id=post.id,
+                persona_id=persona.id,
+                vacante_id=post.vacante_id,
+                nombre=persona.nombre,
+                apellido=persona.apellido,
+                email=persona.email,
+                telefono=persona.telefono,
+                perfil_profesional=persona.perfil_profesional,
+                cv_url=cv_url,
+                vacante_puesto=vacante.puesto,
                 created_at=post.created_at,
             )
         )

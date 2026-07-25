@@ -89,6 +89,7 @@ class VacantePublicaOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: uuid.UUID
+    empresa: Optional[str] = None
     puesto: str
     descripcion: Optional[str] = None
     provincia: Optional[str] = None

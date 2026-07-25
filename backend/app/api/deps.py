@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import uuid
+from dataclasses import dataclass
 
 import jwt
 from fastapi import Depends, HTTPException, status
@@ -22,6 +23,50 @@ _credentials_exc = HTTPException(
     detail="Credenciales inválidas",
     headers={"WWW-Authenticate": "Bearer"},
 )
+
+
+@dataclass(frozen=True)
+class ActorActual:
+    tipo: str
+    id: uuid.UUID
+    tenant_id: uuid.UUID | None = None
+    usuario: Usuario | None = None
+    persona: Persona | None = None
+
+
+async def get_current_actor(
+    token: str = Depends(oauth2_scheme),
+    db: AsyncSession = Depends(get_db),
+) -> ActorActual:
+    """Identidad polimórfica para recursos compartidos por empresa y Persona."""
+    try:
+        payload = decode_access_token(token)
+        actor_id = uuid.UUID(payload.get("sub", ""))
+        rol = payload.get("rol")
+    except (jwt.PyJWTError, ValueError):
+        raise _credentials_exc
+
+    if rol == "persona":
+        await apply_rls_context(db, persona_id=actor_id)
+        persona = await db.get(Persona, actor_id)
+        if persona is None or not persona.activo:
+            raise _credentials_exc
+        return ActorActual(tipo="persona", id=actor_id, persona=persona)
+
+    if rol in (RolUsuario.ADMIN_EMPRESA.value, RolUsuario.SUPERADMIN.value):
+        tenant_claim = payload.get("tenant_id")
+        tenant_id = uuid.UUID(tenant_claim) if tenant_claim else None
+        await apply_rls_context(
+            db,
+            tenant_id=tenant_id,
+            is_superadmin=rol == RolUsuario.SUPERADMIN.value,
+        )
+        usuario = await db.get(Usuario, actor_id)
+        if usuario is None or not usuario.activo:
+            raise _credentials_exc
+        return ActorActual(tipo="empresa", id=actor_id, tenant_id=tenant_id, usuario=usuario)
+
+    raise _credentials_exc
 
 
 async def get_current_user(

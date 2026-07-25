@@ -7,13 +7,13 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_current_user
+from app.api.deps import get_current_persona, get_current_user
 from app.core.db import apply_rls_pre_auth, get_db
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models.evaluado import Evaluado
 from app.models.persona import Persona
 from app.models.user import Usuario
-from app.schemas.auth import Token, UsuarioOut
+from app.schemas.auth import PersonaAuthOut, Token, UsuarioOut
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -99,3 +99,9 @@ async def login_persona(
             detail="Email o contraseña incorrectos",
         )
     return Token(access_token=create_access_token(str(persona.id), {"rol": "persona"}))
+
+
+@router.get("/persona/me", response_model=PersonaAuthOut)
+async def me_persona(persona: Persona = Depends(get_current_persona)) -> Persona:
+    """Perfil mínimo usado para validar y restaurar la sesión global del candidato."""
+    return persona

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 import { obtenerVacante, cambiarEstadoVacante, listarPostulaciones } from "../../api/empresa";
 import { ApiError } from "../../api/client";
 import Icon from "../../components/Icon";

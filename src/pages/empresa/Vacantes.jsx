@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
 import { listarVacantes } from "../../api/empresa";
 import Icon from "../../components/Icon";
 import VacanteFormModal from "./VacanteFormModal";

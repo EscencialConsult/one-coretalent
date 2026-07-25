@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from "react";
+import VerificacionRostro from "./VerificacionRostro";
 
 /**
  * Firma manuscrita en canvas (mouse + touch). `onCambio(base64PNG | null)` se llama
  * con `null` cuando el trazo se borra. Reemplaza signature_pad + <canvas> del legacy
  * (postulaciones-empresas), reescrito como componente React reutilizable.
+ *
+ * Si `requiereVerificacion` es true, se exige presencia facial antes de firmar.
+ * No valida identidad ni constituye una prueba de vida.
  */
-export default function FirmaCanvas({ onCambio }) {
+export default function FirmaCanvas({ onCambio, requiereVerificacion = false, className = "" }) {
   const canvasRef = useRef(null);
   const dibujando = useRef(false);
   const [vacio, setVacio] = useState(true);
+  const [rostroDetectado, setRostroDetectado] = useState(!requiereVerificacion);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,6 +34,7 @@ export default function FirmaCanvas({ onCambio }) {
   }
 
   function empezar(e) {
+    if (!rostroDetectado) return;
     e.preventDefault();
     dibujando.current = true;
     const { x, y } = posicion(e);
@@ -63,9 +69,20 @@ export default function FirmaCanvas({ onCambio }) {
 
   return (
     <div>
+      {requiereVerificacion && (
+        <div className="mb-3">
+          <p className="text-xs text-muted mb-2">
+            Esta comprobación solo detecta presencia facial para habilitar la firma; no valida tu identidad.
+          </p>
+          <VerificacionRostro onRostroDetectado={setRostroDetectado} />
+        </div>
+      )}
       <canvas
         ref={canvasRef}
-        className="w-full h-36 bg-white border border-linea rounded-chico touch-none cursor-crosshair"
+        role="img"
+        aria-label="Área para dibujar la firma"
+        aria-disabled={!rostroDetectado}
+        className={`w-full h-36 bg-white border border-linea rounded-chico touch-none ${rostroDetectado ? "cursor-crosshair" : "opacity-50 cursor-not-allowed"} ${className}`}
         onMouseDown={empezar}
         onMouseMove={mover}
         onMouseUp={terminar}
@@ -75,7 +92,9 @@ export default function FirmaCanvas({ onCambio }) {
         onTouchEnd={terminar}
       />
       <div className="flex items-center justify-between mt-2">
-        <span className="text-xs text-muted">{vacio ? "Firmá arriba con el mouse o el dedo" : "Firma capturada"}</span>
+        <span className="text-xs text-muted">
+          {!rostroDetectado ? "Mostrá tu rostro para habilitar la firma" : vacio ? "Firmá arriba con el mouse o el dedo" : "Firma capturada"}
+        </span>
         <button type="button" onClick={limpiar} className="text-xs font-semibold text-rosa">
           Borrar
         </button>

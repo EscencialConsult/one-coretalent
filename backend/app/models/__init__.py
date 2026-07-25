@@ -22,10 +22,12 @@ from app.models.vacante import Vacante
 from app.models.postulacion import Postulacion
 from app.models.notificacion_vacante import NotificacionVacante
 from app.models.evento_comercial import EventoComercial
+from app.models.evaluacion_postulante import AccesoResultado, EventoEvaluacion, OutboxEvento
 
 __all__ = [
     "Base", "Empresa", "Usuario", "Perfil", "Area", "Evaluado",
     "EmpresaTest", "Asignacion", "Resultado", "InformeIntegral", "Notificacion",
     "EvalFormulario", "EvalCompetencia", "EvalPregunta", "EvalCampania", "EvalEvaluador",
     "Persona", "Vacante", "Postulacion", "NotificacionVacante", "EventoComercial",
+    "AccesoResultado", "EventoEvaluacion", "OutboxEvento",
 ]

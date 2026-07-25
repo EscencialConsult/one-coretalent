@@ -50,3 +50,23 @@ class RegistroEmpresaIn(BaseModel):
         if not v:
             raise ValueError("Hay que aceptar los términos y condiciones para registrarse.")
         return v
+
+
+class RegistroCandidatoIn(BaseModel):
+    nombre: str = Field(min_length=2, max_length=120)
+    apellido: str = Field(min_length=2, max_length=120)
+    email: EmailStr
+    password: str = Field(min_length=8, max_length=128)
+    acepto_terminos: bool
+
+    @field_validator("nombre", "apellido")
+    @classmethod
+    def limpiar_nombre(cls, valor: str) -> str:
+        return " ".join(valor.strip().split())
+
+    @field_validator("acepto_terminos")
+    @classmethod
+    def exigir_terminos(cls, valor: bool) -> bool:
+        if not valor:
+            raise ValueError("Debés aceptar los términos y la política de privacidad.")
+        return valor

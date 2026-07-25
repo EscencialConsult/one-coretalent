@@ -1,0 +1,59 @@
+/* Portal del Evaluado (home: saludo + lista de pruebas). Prefijo pe-. */
+.pe-nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 34px; background: rgba(254,254,255,.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(198,201,215,.6); position: sticky; top: 0; z-index: 10; }
+.pe-logo { font-weight: 800; font-size: 22px; letter-spacing: .5px; color: var(--negro); }
+.pe-logo b { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pe-logoimg { height: 54px; max-width: 220px; object-fit: contain; display: block; }
+.pe-user { display: flex; align-items: center; gap: 12px; }
+.pe-pill { display: flex; align-items: center; gap: 9px; border: 1.5px solid var(--rosa); border-radius: 999px; padding: 6px 8px 6px 14px; font-weight: 700; font-size: 13px; }
+.pe-pill .av { width: 24px; height: 24px; border-radius: 50%; background: var(--grad); color: #fff; display: grid; place-items: center; font-size: 10px; font-weight: 800; }
+.pe-out { border: 0; background: #fff; border: 1.5px solid var(--linea); color: var(--tinta); font-weight: 700; font-size: 13px; padding: 9px 16px; border-radius: 11px; cursor: pointer; }
+.pe-out:hover { border-color: var(--rosa); }
+
+.pe-wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 70px; }
+
+/* saludo */
+.pe-hello { padding: 30px 34px; margin-bottom: 22px; }
+.pe-hello .eb { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: 2px; color: var(--violeta); background: rgba(77,36,143,.08); padding: 6px 13px; border-radius: 999px; margin-bottom: 14px; }
+.pe-hello h1 { font-size: 30px; letter-spacing: -.5px; margin-bottom: 8px; }
+.pe-hello p { color: var(--tinta); opacity: .72; font-size: 15px; line-height: 1.6; max-width: 620px; }
+.pe-stats { display: flex; gap: 26px; margin-top: 20px; flex-wrap: wrap; }
+.pe-stat { display: flex; align-items: center; gap: 12px; }
+.pe-stat .n { font-size: 26px; font-weight: 800; letter-spacing: -.5px; }
+.pe-stat .l { font-size: 12.5px; color: var(--muted); font-weight: 600; line-height: 1.2; }
+.pe-stat .dotc { width: 10px; height: 10px; border-radius: 50%; }
+
+/* grilla de pruebas */
+.pe-sec { font-size: 12.5px; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); font-weight: 800; margin: 4px 4px 14px; }
+.pe-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.pe-card { background: rgba(255,255,255,.92); border: 1px solid var(--linea); border-radius: 20px; box-shadow: var(--sombra); padding: 22px 24px; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: .2s; }
+.pe-card::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 4px; background: var(--grad); opacity: 0; transition: .2s; }
+.pe-card.can:hover { transform: translateY(-3px); } .pe-card.can:hover::before { opacity: 1; }
+.pe-card.done { opacity: .82; }
+.pe-cat { font-size: 10.5px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; color: var(--violeta); background: rgba(77,36,143,.08); padding: 4px 10px; border-radius: 6px; align-self: flex-start; margin-bottom: 12px; }
+.pe-card h3 { font-size: 18px; margin-bottom: 6px; }
+.pe-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.pe-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--tinta); background: #fff; border: 1px solid var(--linea); padding: 7px 12px; border-radius: 11px; }
+.pe-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+.pe-foot { margin-top: auto; display: flex; align-items: center; gap: 12px; }
+.pe-estado { font-size: 11px; font-weight: 800; padding: 5px 11px; border-radius: 999px; }
+.pe-estado.pendiente { color: #9a8330; background: rgba(228,199,106,.26); }
+.pe-estado.completado { color: #1b9aa0; background: rgba(107,225,227,.2); }
+.pe-btn { margin-left: auto; border: 0; cursor: pointer; font-weight: 700; font-size: 13.5px; padding: 11px 20px; border-radius: 12px; transition: .2s; }
+.pe-btn.prim { background: var(--grad); color: #fff; box-shadow: 0 12px 26px -12px rgba(225,123,215,.85); }
+.pe-btn.prim:hover { transform: translateY(-1px); }
+.pe-btn.ghost { background: #fff; color: var(--muted); border: 1.5px solid var(--linea); cursor: default; }
+
+.pe-empty { padding: 40px; text-align: center; color: var(--muted); font-size: 14px; }
+.pe-err { color: #c0392b; background: rgba(192,57,43,.08); border: 1px solid rgba(192,57,43,.25); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; margin-bottom: 16px; }
+
+@media (max-width: 720px) { .pe-grid { grid-template-columns: 1fr; } .pe-hello h1 { font-size: 25px; } }
+@media (max-width: 560px) {
+  .pe-nav { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+  .pe-wrap { padding: 22px 14px 60px; }
+  .pe-hello { padding: 22px 18px; }
+  .pe-hello h1 { font-size: 23px; }
+  .pe-stats { gap: 16px; }
+  /* En pantallas muy chicas, la pastilla del usuario muestra solo la inicial */
+  .pe-pill { padding: 6px; }
+  .pe-pill .nm { display: none; }
+}

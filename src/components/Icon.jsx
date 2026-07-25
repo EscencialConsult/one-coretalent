@@ -23,6 +23,14 @@ const PATHS = {
   file: <><path d="M4 21V5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v16" /><path d="M13 6l4 4" /></>,
   map: <><path d="M9 4l6 2.5L21 4v14l-6 2.5L9 18l-6 2.5v-14L9 4z" /><path d="M9 4v14M15 6.5v14" /></>,
   clock: <><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></>,
+  user: <><circle cx="12" cy="8" r="4" /><path d="M6 21c0-3 2.7-5 6-5s6 2 6 5" /></>,
+  camera: <><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" /></>,
+  globe: <><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" /></>,
+  home: <><path d="M3 11l9-8 9 8" /><path d="M5 10v11h14V10" /><path d="M9 21v-7h6v7" /></>,
+  clipboard: <><rect x="5" y="4" width="14" height="17" rx="2" /><path d="M9 4V2h6v2M9 10h6M9 14h6M9 18h4" /></>,
+  chart: <><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></>,
+  lock: <><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" /></>,
+  shield: <><path d="M12 3l8 3v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3z" /><path d="M8.5 12l2.2 2.2 4.8-5" /></>,
 }
 
 export default function Icon({ name, className = "w-5 h-5", style }) {

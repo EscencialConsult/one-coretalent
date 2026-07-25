@@ -1,7 +1,11 @@
 """Punto de entrada de la API de Plataforma ONE (ONE Core Analytics)."""
 from __future__ import annotations
 
-from fastapi import FastAPI
+import asyncio
+from contextlib import asynccontextmanager
+import uuid
+
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import (
@@ -13,10 +17,12 @@ from app.api.routes import (
     empresa,
     empresas,
     evaluaciones,
+    evaluaciones_postulantes,
     evaluados,
     health,
     informes_ia,
     perfiles,
+    personas,
     postulaciones,
     publico,
     resultados,
@@ -25,11 +31,23 @@ from app.api.routes import (
     yo,
 )
 from app.core.config import settings
+from app.core.outbox import ejecutar_worker_outbox
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    worker = asyncio.create_task(ejecutar_worker_outbox())
+    try:
+        yield
+    finally:
+        worker.cancel()
+        await asyncio.gather(worker, return_exceptions=True)
 
 app = FastAPI(
     title="Plataforma ONE — API",
     description="Backend de ONE Core Analytics: evaluaciones psicométricas multi-tenant.",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -38,7 +56,19 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["X-Request-ID"],
 )
+
+
+@app.middleware("http")
+async def request_id_middleware(request: Request, call_next):
+    """Identificador de correlación para soporte, logs y errores reportados por el frontend."""
+    recibido = request.headers.get("X-Request-ID", "")
+    request_id = recibido if 0 < len(recibido) <= 128 else uuid.uuid4().hex
+    request.state.request_id = request_id
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = request_id
+    return response
 
 app.include_router(health.router, prefix="/api")
 app.include_router(auth.router, prefix="/api")
@@ -60,6 +90,8 @@ app.include_router(yo.router, prefix="/api")
 app.include_router(tests.router, prefix="/api")
 app.include_router(vacantes.router, prefix="/api")
 app.include_router(postulaciones.router, prefix="/api")
+app.include_router(evaluaciones_postulantes.router, prefix="/api")
+app.include_router(personas.router, prefix="/api")
 
 
 @app.get("/", tags=["root"])

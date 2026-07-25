@@ -6,6 +6,7 @@ Cada test tiene `preguntas.json` (reactivos) y `scoring.py` (cálculo determinis
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 from functools import lru_cache
 from pathlib import Path
@@ -92,3 +93,29 @@ def listar_catalogo() -> list[dict[str, Any]]:
 def slugs_catalogo() -> set[str]:
     """Conjunto de slugs válidos del catálogo."""
     return {t["slug"] for t in listar_catalogo()}
+
+
+def versiones(slug: str) -> tuple[str, str]:
+    """Huella inmutable de reactivos/manifest y del algoritmo usado en un resultado."""
+    carpeta = _slug_dir(slug)
+
+    def _hash(archivos: list[Path]) -> str:
+        digest = hashlib.sha256()
+        for archivo in archivos:
+            if archivo.exists():
+                digest.update(archivo.name.encode())
+                digest.update(archivo.read_bytes())
+        return digest.hexdigest()
+
+    catalogo = _hash([carpeta / "manifest.json", carpeta / "preguntas.json", carpeta / "baremos.json"])
+    algoritmo = _hash([carpeta / "scoring.py"])
+    return catalogo, algoritmo
+
+
+@lru_cache(maxsize=None)
+def cargar_informe(slug: str) -> dict[str, Any] | None:
+    """Configuración declarativa del informe; nunca ejecuta ni recalcula scoring."""
+    archivo = _slug_dir(slug) / "informe.json"
+    if not archivo.exists():
+        return None
+    return json.loads(archivo.read_text(encoding="utf-8"))

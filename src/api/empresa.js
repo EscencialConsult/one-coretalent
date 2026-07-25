@@ -13,3 +13,5 @@ export const eliminarVacante = (token, id) => apiFetch(`/vacantes/${id}`, { meth
 // ── Postulaciones ────────────────────────────────────────────────────────────
 export const listarPostulaciones = (token, vacanteId) =>
   apiFetch(`/vacantes/${vacanteId}/postulaciones`, { token });
+export const listarTodasPostulaciones = (token) =>
+  apiFetch("/postulaciones", { token });

@@ -58,7 +58,11 @@ sistema mixto core-talent/          ← este repo
 
 ---
 
-## 4. Flujo de negocio: empresa evalúa a un postulante (DISEÑADO, NO IMPLEMENTADO)
+## 4. Flujo de negocio: empresa evalúa a un postulante (IMPLEMENTADO — Fase 3)
+
+> Actualización de Santiago, 2026-07-24: el backend, la migración, RLS, progreso parcial,
+> reutilización, accesos revocables, auditoría y outbox ya fueron implementados. La migración
+> todavía debe aplicarse y probarse E2E en Supabase cuando estén disponibles las credenciales.
 
 Confirmado con Facundo el 2026-07-24:
 
@@ -69,19 +73,36 @@ Confirmado con Facundo el 2026-07-24:
 - `Evaluado.persona_id` (FK, ver `backend/app/models/evaluado.py`) ya vincula un evaluado con su `Persona` global — esto se agregó en la Etapa 2 pensando exactamente en este flujo.
 - `Resultado` está atado a `evaluado_id` + `tenant_id` (aislado por empresa hoy).
 
-### Lo que falta construir
+### Implementación realizada
 
-**Backend — nuevo endpoint**, algo como `POST /vacantes/{vacante_id}/postulaciones/{postulacion_id}/evaluar`:
+**Backend — endpoints implementados:**
+
+- `POST /vacantes/{vacante_id}/postulaciones/{postulacion_id}/evaluaciones`
+- `GET /vacantes/{vacante_id}/postulaciones/{postulacion_id}/evaluaciones`
+- `GET /personas/me/evaluaciones`
+- `GET /personas/me/resultados`
+- `GET /resultados/{resultado_id}`
+- `POST /asignaciones/{asignacion_id}/iniciar`
+- `POST /asignaciones/{asignacion_id}/respuestas`
+- `POST /asignaciones/{asignacion_id}/finalizar`
+- `POST /accesos-resultados/{id}/revocar`
+
+Flujo:
 1. Recibe `test_slug` + `persona_id` (de la postulación).
 2. Busca si ya existe un `Evaluado` para esa `Persona` en el tenant actual (por `persona_id`). Si no existe, lo crea (con `tipo="postulante"`, vinculado por `persona_id`).
 3. **Antes de asignar el test**, busca si YA existe un `Resultado` para esa `Persona` en ese `test_slug`, **en cualquier tenant** (join por `evaluado.persona_id`).
    - Si existe: no crea una `Asignacion` nueva pendiente — directamente expone/vincula ese resultado ya calculado a este evaluado/tenant (decidir si se copia la fila o se referencia; referenciar es más simple pero hay que revisar el modelo de `Resultado` para eso).
    - Si no existe: crea la `Asignacion` normal (flujo actual, sin cambios) y el candidato la rinde como cualquier evaluado.
 
-**RLS — esto es lo más delicado, prestale atención:**
-La tabla `resultado` hoy tiene una política estándar (`tenant_id = tenant actual`, ver migración `f1a2b3c4d5e6`). Para que la Empresa B pueda **leer** un resultado que se calculó en el contexto de la Empresa A (mismo `test_slug`, misma `Persona`), hay que ampliar esa política con un `EXISTS` que compare por `persona_id` — mismo patrón que ya se usó para la tabla `persona` en la migración `b2c3d4e5f6a7` (leé esa migración como referencia, es exactamente este caso). **No lo hice hoy a propósito**: es un cambio de política de seguridad y quiero que se pruebe bien (aislamiento real entre tenants) antes de mergear, no algo para apurar al final de una sesión larga.
+**RLS:**
+La migración `d5e6f7a8b9c0` amplía las políticas mediante `persona_id` y
+`acceso_resultado`. Una empresa solamente puede leer un resultado externo mientras posea un
+acceso activo; la revocación elimina ese permiso sin borrar el resultado canónico. El aislamiento
+debe validarse contra Supabase antes del merge o despliegue.
 
-**Frontend**: en `VacanteDetalle.jsx` (panel de empresa), cada fila de postulación necesita un botón "Evaluar" que abra un selector de test (usar `/catalogo` para listar los habilitados) y llame al endpoint nuevo.
+**Frontend del candidato implementado (Fase 4)**: el portal profesional ya consume estos contratos e incluye postulaciones, evaluaciones, resultados, perfil, antecedentes, seguridad, privacidad y el runner común con recuperación y guardado automático. La acción de asignación desde `VacanteDetalle.jsx` continúa pendiente para la interfaz de empresa.
+
+**Informes psicométricos implementados (Fase 5)**: existe un contrato seguro y auditable de sólo lectura, vistas protegidas para empresa y candidato, presentación diferenciada de puntajes/baremos/interpretaciones, marca empresarial, gráficos con carga diferida, exportación PDF e impresión accesible. Se excluyen los informes Excel y el InformeIntegral con IA.
 
 ---
 

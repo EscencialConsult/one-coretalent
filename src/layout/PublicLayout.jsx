@@ -1,33 +1,25 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { usePersonaAuth } from "../auth/usePersonaAuth";
 import Fondo from "../components/Fondo";
-import Marca from "../components/Marca";
+import PublicNavbar from "../components/PublicNavbar";
+import SiteFooter from "../components/SiteFooter";
 
 export default function PublicLayout() {
+  const { autenticado: personaAutenticada } = usePersonaAuth();
+  const { pathname } = useLocation();
+
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative flex flex-col">
       <Fondo />
-      <header className="flex items-center justify-between px-6 md:px-10 py-4 bg-white bg-opacity-70 backdrop-blur-md border-b border-linea border-opacity-60 sticky top-0 z-10">
-        <Link to="/">
-          <Marca />
-        </Link>
-        <nav className="flex items-center gap-3 md:gap-5 text-sm font-semibold">
-          <Link to="/busquedas" className="hover:text-acento transition-colors">
-            Búsquedas
-          </Link>
-          <Link to="/registro-empresa" className="hover:text-acento transition-colors">
-            Soy empresa
-          </Link>
-          <Link to="/login" className="boton boton-fantasma !py-2.5 !px-5">
-            Ingresar
-          </Link>
-        </nav>
-      </header>
-      <main className="max-w-5xl mx-auto px-4 md:px-6 py-10">
-        <Outlet />
-      </main>
-      <footer className="text-center text-xs text-muted py-10">
-        © {new Date().getFullYear()} ONE Core-Talent
-      </footer>
+      <PublicNavbar personaAutenticada={personaAutenticada} />
+      <main className={
+        pathname === "/"
+          ? "public-main public-main-landing"
+          : pathname === "/busquedas"
+            ? "public-main public-main-busquedas"
+            : "public-main"
+      }><Outlet /></main>
+      <SiteFooter />
     </div>
   );
 }

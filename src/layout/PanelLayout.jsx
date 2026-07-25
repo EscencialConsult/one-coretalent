@@ -1,28 +1,37 @@
+import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/useAuth";
 import Fondo from "../components/Fondo";
-import Marca from "../components/Marca";
 import Icon from "../components/Icon";
-import { useAuth } from "../auth/AuthContext";
+import Marca from "../components/Marca";
 
-const NAV_EMPRESA = [{ to: "/empresa/vacantes", icon: "briefcase", label: "Vacantes", titulo: "Vacantes" }];
+const NAV_EMPRESA = [
+  { to: "/empresa/vacantes", icon: "briefcase", label: "Vacantes", titulo: "Vacantes" },
+  { to: "/empresa/postulantes", icon: "users", label: "Postulantes", titulo: "Postulantes" },
+];
 const NAV_SUPERADMIN = [
   { to: "/admin/empresas-pendientes", icon: "build", label: "Empresas pendientes", titulo: "Empresas pendientes" },
 ];
 
 function inicialesDe(user) {
   if (!user) return "··";
-  const a = (user.nombre || "")[0] || "";
-  const b = (user.apellido || "")[0] || "";
-  return (a + b).toUpperCase() || user.email?.[0]?.toUpperCase() || "··";
+  const nombre = (user.nombre || "")[0] || "";
+  const apellido = (user.apellido || "")[0] || "";
+  return (nombre + apellido).toUpperCase() || user.email?.[0]?.toUpperCase() || "··";
 }
 
 export default function PanelLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [menuAbierto, setMenuAbierto] = useState(false);
   const esSuperadmin = user?.rol === "superadmin";
   const nav = esSuperadmin ? NAV_SUPERADMIN : NAV_EMPRESA;
-  const activo = nav.find((n) => pathname.startsWith(n.to));
+  const activo = nav.find((item) => pathname.startsWith(item.to));
+
+  useEffect(() => {
+    setMenuAbierto(false);
+  }, [pathname]);
 
   function salir() {
     logout();
@@ -32,11 +41,27 @@ export default function PanelLayout() {
   return (
     <div className="panel-shell">
       <Fondo />
-      <aside className="panel-side">
+      {menuAbierto && (
+        <button
+          type="button"
+          aria-label="Cerrar menú al tocar fuera"
+          className="panel-overlay"
+          onClick={() => setMenuAbierto(false)}
+        />
+      )}
+      <aside className={`panel-side ${menuAbierto ? "abierto" : ""}`}>
         <div className="flex items-center gap-2.5 px-2 pb-6">
           <Marca tamaño="text-base" />
+          <button
+            type="button"
+            aria-label="Cerrar menú"
+            className="panel-close ml-auto"
+            onClick={() => setMenuAbierto(false)}
+          >
+            <Icon name="x" />
+          </button>
         </div>
-        <nav className="flex flex-col gap-1">
+        <nav className="flex flex-col gap-1" aria-label="Navegación del panel">
           {nav.map((item) => (
             <NavLink
               key={item.to}
@@ -59,7 +84,13 @@ export default function PanelLayout() {
             <b className="block text-sm truncate">{user ? `${user.nombre} ${user.apellido}` : "Usuario"}</b>
             <span className="block text-xs text-muted">{esSuperadmin ? "SuperAdmin" : "Administrador"}</span>
           </div>
-          <button onClick={salir} title="Salir" className="ml-auto border-0 bg-transparent cursor-pointer text-muted p-1.5 rounded-chico hover:bg-linea hover:bg-opacity-30 hover:text-tinta transition-colors">
+          <button
+            type="button"
+            onClick={salir}
+            aria-label="Cerrar sesión"
+            title="Cerrar sesión"
+            className="ml-auto border-0 bg-transparent cursor-pointer text-muted p-1.5 rounded-chico hover:bg-linea hover:bg-opacity-30 hover:text-tinta transition-colors"
+          >
             <Icon name="logout" className="w-5 h-5" />
           </button>
         </div>
@@ -67,12 +98,18 @@ export default function PanelLayout() {
 
       <div className="panel-main">
         <div className="panel-topbar">
+          <button
+            type="button"
+            aria-label="Abrir menú"
+            className="panel-menu-btn"
+            onClick={() => setMenuAbierto(true)}
+          >
+            <Icon name="menu" />
+          </button>
           <h1 className="text-xl font-extrabold">{activo?.titulo || "Panel"}</h1>
-          <span className="text-xs text-muted font-semibold">{user?.email}</span>
+          <span className="text-xs text-muted font-semibold truncate">{user?.email}</span>
         </div>
-        <div className="panel-content">
-          <Outlet />
-        </div>
+        <div className="panel-content"><Outlet /></div>
       </div>
     </div>
   );
