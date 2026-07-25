@@ -5,6 +5,7 @@ import { ErrorState, PageLoader } from "../../components/AsyncState";
 import Icon from "../../components/Icon";
 import { useApiResource } from "../../hooks/useApiResource";
 import { archivoABase64 } from "../../utils/archivo";
+import { combinarPerfilConCv } from "../../utils/perfilCandidato";
 import { Titulo } from "./MisPostulaciones";
 
 const ETIQUETAS = {
@@ -63,7 +64,8 @@ export default function PerfilCandidato() {
     }
     try {
       const base64 = await archivoABase64(archivo);
-      setForm(await actualizarMiCv(token, { nombre: archivo.name, base64 }));
+      const perfilActualizado = await actualizarMiCv(token, { nombre: archivo.name, base64 });
+      setForm((actual) => combinarPerfilConCv(actual, perfilActualizado));
       setMensaje("CV actualizado correctamente.");
     } catch (err) {
       setError(err.detail || err.message);

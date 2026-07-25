@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
-import { listarTodasPostulaciones, listarEvaluacionesPostulante } from "../../api/empresa";
+import { listarTodasPostulaciones, listarEvaluacionesPostulacion } from "../../api/empresa";
 import Icon from "../../components/Icon";
 import { ApiError } from "../../api/client";
 
@@ -27,7 +27,7 @@ export default function Postulantes() {
         if (!activo) return;
         setPostulaciones(data);
         data.forEach((p) => {
-          listarEvaluacionesPostulante(token, p.vacante_id, p.id)
+          listarEvaluacionesPostulacion(token, p.vacante_id, p.id)
             .then((evals) => activo && setEvaluacionesPorPostulacion((actual) => ({ ...actual, [p.id]: evals })))
             .catch(() => {});
         });

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { vacantesPublicas, postular } from "../../api/publico";
 import { obtenerMiPerfil } from "../../api/persona";
 import { usePersonaAuth } from "../../auth/usePersonaAuth";
@@ -17,6 +17,8 @@ const PASOS = [
   { key: "documentos", titulo: "CV y cuenta", icon: "file" },
   { key: "firma", titulo: "Firma", icon: "edit" },
 ];
+
+export const RUTA_BUSQUEDAS_TRAS_POSTULACION = "/candidato/busquedas";
 
 const VACIO = {
   email: "",
@@ -40,8 +42,7 @@ const VACIO = {
 
 export default function Postular() {
   const { vacanteId } = useParams();
-  const navigate = useNavigate();
-  const { token: tokenPersona, persona } = usePersonaAuth();
+  const { token, persona } = usePersonaAuth();
   const [vacante, setVacante] = useState(null);
   const [paso, setPaso] = useState(0);
   const [form, setForm] = useState(VACIO);
@@ -59,32 +60,43 @@ export default function Postular() {
 
   // Si ya tenés cuenta de candidato, precargamos tu perfil guardado en vez de pedirte todo de nuevo.
   useEffect(() => {
-    if (!tokenPersona) return;
-    let cancelado = false;
-    obtenerMiPerfil(tokenPersona).then((perfil) => {
-      if (cancelado || !perfil) return;
-      setForm((f) => ({
-        ...f,
-        email: perfil.email || f.email,
-        nombre: perfil.nombre || f.nombre,
-        apellido: perfil.apellido || f.apellido,
-        telefono: perfil.telefono || f.telefono,
-        puesto_deseado: perfil.puesto_deseado || f.puesto_deseado,
-        fecha_nacimiento: perfil.fecha_nacimiento || f.fecha_nacimiento,
-        identificacion: perfil.identificacion || f.identificacion,
-        provincia: perfil.provincia || f.provincia,
-        codigo_postal_ciudad: perfil.codigo_postal_ciudad || f.codigo_postal_ciudad,
-        perfil_profesional: perfil.perfil_profesional || f.perfil_profesional,
-        descripcion_perfil: perfil.descripcion_perfil || f.descripcion_perfil,
-        disp_viajar: perfil.disp_viajar ?? f.disp_viajar,
-        disp_cambio_residencia: perfil.disp_cambio_residencia ?? f.disp_cambio_residencia,
-        primer_empleo: perfil.primer_empleo ?? f.primer_empleo,
-      }));
-      if (perfil.idiomas?.length) setIdiomas(perfil.idiomas);
-      if (perfil.experiencias?.length) setExperiencias(perfil.experiencias);
-    }).catch(() => {});
-    return () => { cancelado = true; };
-  }, [tokenPersona]);
+    if (!token) return;
+    obtenerMiPerfil(token)
+      .then((perfil) => {
+        setForm((actual) => ({
+          ...actual,
+          email: perfil.email || "",
+          nombre: perfil.nombre || "",
+          apellido: perfil.apellido || "",
+          telefono: perfil.telefono || "",
+          puesto_deseado: perfil.puesto_deseado || "",
+          fecha_nacimiento: perfil.fecha_nacimiento || "",
+          identificacion: perfil.identificacion || "",
+          provincia: perfil.provincia || "",
+          codigo_postal_ciudad: perfil.codigo_postal_ciudad || "",
+          perfil_profesional: perfil.perfil_profesional || "",
+          descripcion_perfil: perfil.descripcion_perfil || "",
+          formacion: perfil.formacion || [],
+          disp_viajar: Boolean(perfil.disp_viajar),
+          disp_cambio_residencia: Boolean(perfil.disp_cambio_residencia),
+          primer_empleo: Boolean(perfil.primer_empleo),
+        }));
+        setIdiomas(
+          perfil.idiomas?.length
+            ? perfil.idiomas.map((item) => ({
+                ...item,
+                nivel: String(item.nivel || "").toLocaleLowerCase("es"),
+              }))
+            : [{ idioma: "", nivel: "" }],
+        );
+        setExperiencias(
+          perfil.experiencias?.length
+            ? perfil.experiencias
+            : [{ puesto: "", empresa: "", descripcion: "" }],
+        );
+      })
+      .catch(() => setError("No pudimos reutilizar tu perfil. Recargá la página para volver a intentarlo."));
+  }, [token]);
 
   function campo(nombre, valor) {
     setForm((f) => ({ ...f, [nombre]: valor }));
@@ -140,7 +152,7 @@ export default function Postular() {
         cv_base64,
         cv_nombre: cvFile?.name,
         firma_consentimiento_base64: firma,
-      });
+      }, token);
       setOk(true);
     } catch (err) {
       setError(err instanceof ApiError ? err.detail : "No se pudo enviar la postulación");
@@ -157,9 +169,9 @@ export default function Postular() {
         </div>
         <h1 className="text-2xl font-extrabold mb-2">¡Listo, {form.nombre}!</h1>
         <p className="text-muted mb-6">Tu postulación se envió correctamente. Te vamos a contactar por email.</p>
-        <button onClick={() => navigate("/busquedas")} className="boton boton-primario">
+        <Link to={RUTA_BUSQUEDAS_TRAS_POSTULACION} className="boton boton-primario inline-flex justify-center">
           Ver más búsquedas
-        </button>
+        </Link>
       </div>
     );
   }

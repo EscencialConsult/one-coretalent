@@ -1,5 +1,8 @@
 import os
 import unittest
+import uuid
+from types import SimpleNamespace
+from unittest.mock import AsyncMock, patch
 
 os.environ.setdefault("DATABASE_URL", "postgresql://user:pass@localhost/test")
 
@@ -8,6 +11,7 @@ from pydantic import ValidationError
 
 from app.core import engine
 from app.main import app
+from app.api.routes.evaluaciones_postulantes import finalizar_evaluacion
 from app.schemas.evaluacion_postulante import EvaluacionPostulanteCreate, EvaluacionResumenOut
 
 
@@ -52,6 +56,36 @@ class Phase3ContractsTest(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertTrue(all(len(value) == 64 for value in first))
         self.assertNotEqual(first[0], first[1])
+
+
+class Phase3IdempotencyTest(unittest.IsolatedAsyncioTestCase):
+    async def test_finalizar_completed_assignment_returns_existing_summary(self):
+        asignacion_id = uuid.uuid4()
+        persona = SimpleNamespace(id=uuid.uuid4())
+        asignacion = SimpleNamespace(id=asignacion_id, estado="completado")
+        resumen = SimpleNamespace(id=asignacion_id, estado="completado")
+
+        with (
+            patch(
+                "app.api.routes.evaluaciones_postulantes._asignacion_persona",
+                new=AsyncMock(return_value=asignacion),
+            ) as obtener,
+            patch(
+                "app.api.routes.evaluaciones_postulantes._resumen",
+                new=AsyncMock(return_value=resumen),
+            ) as resumir,
+        ):
+            resultado = await finalizar_evaluacion(
+                asignacion_id=asignacion_id,
+                background=SimpleNamespace(),
+                data=None,
+                persona=persona,
+                db=SimpleNamespace(),
+            )
+
+        self.assertIs(resultado, resumen)
+        obtener.assert_awaited_once()
+        resumir.assert_awaited_once()
 
 
 if __name__ == "__main__":

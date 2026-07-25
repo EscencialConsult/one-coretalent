@@ -5,6 +5,18 @@ const formValido = { nombre: "Ana", apellido: "Pérez", email: "ana@example.com"
 const base = { form: formValido, idiomas: [{ idioma: "", nivel: "" }], cvFile: null, firma: null };
 
 describe("validarPasoPostulacion", () => {
+  it("acepta un email válido en el paso de datos personales", () => {
+    expect(
+      validarPasoPostulacion({
+        paso: 0,
+        form: { ...formValido, nombre: "Santiago", apellido: "Prueba", email: "candidato@example.com" },
+        idiomas: [],
+        cvFile: null,
+        firma: null,
+      }),
+    ).toBe("");
+  });
+
   it("impide avanzar sin los datos personales obligatorios", () => {
     expect(validarPasoPostulacion({ ...base, paso: 0, form: { ...formValido, nombre: "" } })).toContain("nombre");
   });

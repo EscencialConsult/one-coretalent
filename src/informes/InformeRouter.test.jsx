@@ -9,6 +9,7 @@ const base = {
   test_nombre: "Big Five",
   fecha: "2026-07-24T12:00:00Z",
   catalogo_version: "abc1234567890",
+  algoritmo_version: "def9876543210",
   audiencia: "persona",
   evaluado: { nombre: "Santiago", apellido: "Test" },
   empresa: null,
@@ -31,6 +32,8 @@ describe("InformeRouter", () => {
     expect(screen.getByText("Baremo")).toBeInTheDocument();
     expect(screen.getByText("Interpretación")).toBeInTheDocument();
     expect(screen.getByText(/No constituye un diagnóstico/)).toBeInTheDocument();
+    expect(screen.getByText("Versión del algoritmo")).toBeInTheDocument();
+    expect(screen.getByText("Informe personal")).toBeInTheDocument();
   });
 
   it("bloquea explícitamente InformeExcel", () => {
@@ -40,5 +43,14 @@ describe("InformeRouter", () => {
       </MemoryRouter>
     );
     expect(screen.getByRole("alert")).toHaveTextContent("no está habilitado");
+  });
+
+  it("presenta un estado explícito cuando no hay datos informables", () => {
+    render(
+      <MemoryRouter>
+        <InformeRouter informe={{ ...base, resultado: {} }} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText("Este resultado no contiene datos presentables.")).toBeInTheDocument();
   });
 });

@@ -72,17 +72,30 @@ cd backend
 
 Estado validado al cierre:
 
-- 33 tests frontend aprobados.
-- 15 tests backend aprobados.
+- 40 tests frontend aprobados.
+- 20 tests backend aprobados.
 - Lint sin errores; quedan dos warnings preexistentes en el código legacy de Dominó-48.
 - Build de producción y compilación backend correctos.
 
 ### Siguiente trabajo recomendado
 
-1. Ejecutar el recorrido E2E integral: vacante → postulación → asignación → inicio → respuestas → finalización → resultado → informe → revocación.
+1. S0–S5 de Santiago están cerradas; continuar con las tareas coordinadas restantes del plan general.
 2. Documentar cualquier incidencia detectada durante ese recorrido.
 3. Continuar con el módulo 360° y la gestión empresarial ampliada de evaluaciones si son priorizados.
 4. No habilitar `dat`, `dnla-perfil-comercial` ni `ebp` sin definición del profesional psicométrico responsable.
+
+### Auditoría final S5 — 25/07/2026
+
+- No hay secretos ni archivos `.env` reales versionados.
+- El backend agrega `X-Content-Type-Options`, `X-Frame-Options` y `Referrer-Policy`.
+- Las respuestas a solicitudes autenticadas usan `Cache-Control: no-store, private`.
+- En producción se rechazan `SECRET_KEY` inseguras y CORS con origen comodín.
+- Landing, registros, búsquedas, portal candidato, panel empresa e informes fueron revisados en móvil, tablet y escritorio sin overflow horizontal.
+- Rutas profundas de candidato y empresa sobreviven al refresh.
+- Consola del navegador sin errores ni advertencias del producto.
+- Imagen principal optimizada de JPG 554 KB a WebP 64 KB.
+- PDF, Recharts, runners y MediaPipe permanecen separados por carga diferida.
+- `npm audit` reporta el advisory `GHSA-qwww-vcr4-c8h2` en React Router 7.18.1. El advisory oficial indica que afecta solamente las APIs RSC inestables, que esta SPA no utiliza. La versión corregida anunciada es `react-router` 8.3.0, todavía no publicada como `react-router-dom`; mantener seguimiento antes de habilitar RSC o actualizar el router.
 5. Mantener fuera de alcance informes con IA y planilla/Excel.
 6. Confirmar hosting del backend, dominio definitivo y plan de migración de datos reales antes del cutover.
 

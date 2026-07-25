@@ -49,7 +49,7 @@ sistema mixto core-talent/          ← este repo
 | 3 | Backend: motor de matching, Supabase Storage, registro público de empresa, login de candidato, postulación pública | ✅ hecho y probado |
 | 4 | Frontend nuevo para Talent Hub, panel de empresa, SuperAdmin y portal profesional del candidato | ✅ hecho y probado |
 | 5 | Evaluaciones de postulantes: asignación, progreso, scoring backend, reutilización, auditoría y revocación | ✅ implementado y migrado |
-| 6 | Runners psicométricos, resultados e informes para empresa/candidato | ✅ implementado hasta Fase 5 |
+| 6 | Runners psicométricos, resultados e informes para empresa/candidato | ✅ recorrido GDS-15 completo, informes y revocación validados |
 
 ### Estado funcional consolidado
 
@@ -61,11 +61,13 @@ sistema mixto core-talent/          ← este repo
 - Informes psicométricos para empresa y candidato, gráficos y exportación PDF.
 - Supabase conectado localmente; migraciones de Fases 3 y 4 aplicadas; RLS y Storage validados.
 - Datos sintéticos E2E disponibles para los tres roles.
+- Recorrido E2E integral S0–S5 validado: vacante, postulación, evaluación, recuperación, resultado, informe y revocación.
+- Auditoría responsive, accesible, de caché, secretos y cabeceras defensivas completada.
 
 ### Pendientes reales para la próxima persona
 
-1. Ejecutar y documentar el recorrido E2E completo en navegador: vacante → postulación → asignación → progreso → finalización → resultado → informe → revocación.
-2. Completar el flujo empresarial de gestión de evaluaciones si se requiere una interfaz más amplia que la disponible desde las postulaciones.
+1. Continuar el trabajo coordinado restante del plan general, especialmente módulo 360°, staging y migración definitiva.
+2. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
 3. Portar o completar el módulo 360° según la siguiente fase acordada.
 4. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
 5. Confirmar hosting definitivo del backend, dominio final y estrategia de cutover.

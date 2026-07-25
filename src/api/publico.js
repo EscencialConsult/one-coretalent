@@ -4,4 +4,5 @@ export const marcaPorSubdominio = (subdominio) => apiFetch(`/publico/marca/${sub
 export const vacantesPublicas = () => apiFetch("/publico/vacantes");
 export const registrarEmpresa = (data) => apiFetch("/publico/registro-empresa", { method: "POST", body: data });
 export const registrarCandidato = (data) => apiFetch("/publico/registro-candidato", { method: "POST", body: data });
-export const postular = (data) => apiFetch("/publico/postular", { method: "POST", body: data });
+export const postular = (data, token) =>
+  apiFetch("/publico/postular", { method: "POST", body: data, token });

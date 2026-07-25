@@ -27,7 +27,7 @@ export default function Landing() {
         </div>
         <div className="landing-hero-visual">
           <div className="landing-image-frame">
-            <img src="/busqueda-cover.jpg" alt="Entrevista profesional entre una candidata y un reclutador" />
+            <img src="/busqueda-cover.webp" width="1600" height="594" alt="Entrevista profesional entre una candidata y un reclutador" />
             <div className="landing-image-gradient" />
           </div>
           <article className="landing-floating-card landing-floating-top">
