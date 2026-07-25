@@ -15,3 +15,14 @@ export const listarPostulaciones = (token, vacanteId) =>
   apiFetch(`/vacantes/${vacanteId}/postulaciones`, { token });
 export const listarTodasPostulaciones = (token) =>
   apiFetch("/postulaciones", { token });
+
+// ── Tests / evaluaciones ─────────────────────────────────────────────────────
+export const misTests = (token) => apiFetch("/empresa/tests", { token });
+export const listarEvaluacionesPostulante = (token, vacanteId, postulacionId) =>
+  apiFetch(`/vacantes/${vacanteId}/postulaciones/${postulacionId}/evaluaciones`, { token });
+export const asignarEvaluacionPostulante = (token, vacanteId, postulacionId, testSlug) =>
+  apiFetch(`/vacantes/${vacanteId}/postulaciones/${postulacionId}/evaluaciones`, {
+    method: "POST",
+    token,
+    body: { test_slug: testSlug },
+  });

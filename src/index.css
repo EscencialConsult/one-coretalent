@@ -243,6 +243,7 @@
 .job-card-cover span, .job-card-cover small, .job-dialog-cover span { position: relative; z-index: 1; }
 .job-card-cover span, .job-dialog-cover span { max-width: 70%; padding: .4rem .65rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(30,23,36,.42); font-size: .63rem; font-weight: 850; letter-spacing: .045em; text-transform: uppercase; backdrop-filter: blur(7px); }
 .job-card-cover small { color: rgba(255,255,255,.85); font-size: .62rem; font-weight: 750; }
+.job-postulado-badge { position: relative; z-index: 1; padding: .4rem .65rem; border-radius: 999px; text-transform: uppercase; letter-spacing: .045em; color: #0f6d72; background: rgba(107,225,227,.85); }
 .job-card-body { position: relative; display: flex; min-height: 16.5rem; padding: 1.35rem; flex: 1; flex-direction: column; }
 .job-company-mark { position: absolute; right: 1.15rem; top: -1.45rem; display: grid; width: 2.9rem; height: 2.9rem; place-items: center; border: 3px solid white; border-radius: .72rem; color: var(--brand-acento); background: #f0ebf5; font-size: .68rem; font-weight: 900; box-shadow: 0 8px 18px rgba(29,22,35,.13); }
 .job-company { padding-right: 3.4rem; color: var(--brand-acento); font-size: .67rem; font-weight: 850; }

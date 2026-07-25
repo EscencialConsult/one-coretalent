@@ -1,11 +1,33 @@
 """Registro público de empresa (auto-registro con verificación — flujo de Talent Hub)."""
 from __future__ import annotations
 
+import base64
+import binascii
 import re
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
 _SUBDOMINIO_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$")
+_IMAGEN_MAX_BYTES = 5 * 1024 * 1024
+
+
+def _decodificar_base64(valor: str, nombre: str) -> bytes:
+    try:
+        return base64.b64decode(valor, validate=True)
+    except (binascii.Error, ValueError) as exc:
+        raise ValueError(f"El archivo de {nombre} no contiene base64 válido.") from exc
+
+
+def _validar_imagen(valor: str, nombre: str) -> str:
+    contenido = _decodificar_base64(valor, nombre)
+    if len(contenido) > _IMAGEN_MAX_BYTES:
+        raise ValueError(f"La imagen de {nombre} no puede superar los 5 MB.")
+    es_jpeg = contenido.startswith(b"\xff\xd8\xff")
+    es_png = contenido.startswith(b"\x89PNG\r\n\x1a\n")
+    es_webp = contenido[:4] == b"RIFF" and contenido[8:12] == b"WEBP"
+    if not (es_jpeg or es_png or es_webp):
+        raise ValueError(f"La imagen de {nombre} debe ser JPEG, PNG o WEBP.")
+    return valor
 
 
 class RegistroEmpresaIn(BaseModel):

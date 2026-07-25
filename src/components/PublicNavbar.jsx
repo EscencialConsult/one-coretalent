@@ -32,6 +32,7 @@ export default function PublicNavbar({ personaAutenticada }) {
             {personaAutenticada ? "Mi portal" : "Ingresar"}
           </Link>
           {!personaAutenticada && <Link to="/registro-candidato" className="public-nav-candidate">Crear cuenta</Link>}
+          <Link to="/registro-empresa" className="public-nav-candidate">Crear empresa</Link>
           <Link to="/login" className="public-nav-cta">Panel empresa <span aria-hidden="true">→</span></Link>
         </div>
         <button type="button" className="public-navbar-menu" aria-expanded={abierto} aria-controls="menu-publico-movil" aria-label={abierto ? "Cerrar menú" : "Abrir menú"} onClick={() => setAbierto((valor) => !valor)}>
@@ -44,6 +45,7 @@ export default function PublicNavbar({ personaAutenticada }) {
           <div className="public-mobile-actions">
             <Link to={personaAutenticada ? "/candidato" : "/login-candidato"}>{personaAutenticada ? "Mi portal" : "Ingresar como candidato"}</Link>
             {!personaAutenticada && <Link to="/registro-candidato" className="public-nav-candidate">Registrarme como candidato</Link>}
+            <Link to="/registro-empresa" className="public-nav-candidate">Crear empresa</Link>
             <Link to="/login" className="public-nav-cta">Ingresar como empresa</Link>
           </div>
         </nav>

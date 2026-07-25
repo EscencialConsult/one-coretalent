@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { vacantesPublicas } from "../../api/publico";
+import { listarMisPostulaciones } from "../../api/persona";
 import { PersonaAuthContext } from "../../auth/PersonaAuthContext";
 import Icon from "../../components/Icon";
 
@@ -45,9 +46,10 @@ function antiguedad(fecha) {
 }
 
 export default function Busquedas({ modoCandidato = false }) {
-  const { autenticado = false, persona = null } = useContext(PersonaAuthContext) || {};
+  const { autenticado = false, persona = null, token = null } = useContext(PersonaAuthContext) || {};
   const personalizada = modoCandidato && autenticado;
   const [vacantes, setVacantes] = useState(null);
+  const [postulacionesPorVacante, setPostulacionesPorVacante] = useState({});
   const [filtros, setFiltros] = useState(FILTROS_INICIALES);
   const [seleccionada, setSeleccionada] = useState(null);
   const [error, setError] = useState("");
@@ -65,6 +67,18 @@ export default function Busquedas({ modoCandidato = false }) {
   }, []);
 
   useEffect(cargar, [cargar]);
+
+  // Para marcar en el listado las búsquedas a las que ya postulaste.
+  useEffect(() => {
+    if (!token) return setPostulacionesPorVacante({});
+    listarMisPostulaciones(token)
+      .then((lista) => {
+        const mapa = {};
+        (lista || []).forEach((p) => { mapa[p.vacante_id] = p; });
+        setPostulacionesPorVacante(mapa);
+      })
+      .catch(() => {});
+  }, [token]);
 
   useEffect(() => {
     if (!seleccionada) return undefined;
@@ -246,7 +260,13 @@ export default function Busquedas({ modoCandidato = false }) {
           {vacantes && lista.length > 0 && (
             <div className="jobs-grid">
               {lista.map((vacante) => (
-                <VacanteCard key={vacante.id} vacante={vacante} autenticado={personalizada} onOpen={() => setSeleccionada(vacante)} />
+                <VacanteCard
+                  key={vacante.id}
+                  vacante={vacante}
+                  autenticado={personalizada}
+                  postulacion={postulacionesPorVacante[vacante.id]}
+                  onOpen={() => setSeleccionada(vacante)}
+                />
               ))}
             </div>
           )}
@@ -258,6 +278,7 @@ export default function Busquedas({ modoCandidato = false }) {
           vacante={seleccionada}
           copiado={copiado}
           autenticado={personalizada}
+          postulacion={postulacionesPorVacante[seleccionada.id]}
           onCopy={copiarLink}
           onClose={() => setSeleccionada(null)}
         />
@@ -290,14 +311,14 @@ function CampoSelect({ id, label, items, todos, ...selectProps }) {
   );
 }
 
-function VacanteCard({ vacante, autenticado, onOpen }) {
+function VacanteCard({ vacante, autenticado, postulacion, onOpen }) {
   const ubicacion = [vacante.localidad || vacante.provincia, vacante.modalidad].filter(Boolean);
   return (
     <article className="job-card">
       <button type="button" className="job-card-main" onClick={onOpen} aria-label={`Ver detalle de ${vacante.puesto}`}>
         <div className="job-card-cover">
           <span>{vacante.area || "Nueva oportunidad"}</span>
-          <small>{antiguedad(vacante.created_at)}</small>
+          {postulacion ? <small className="job-postulado-badge">Ya postulado</small> : <small>{antiguedad(vacante.created_at)}</small>}
         </div>
         <div className="job-card-body">
           <div className="job-company-mark">{(vacante.empresa || "ONE").slice(0, 2).toUpperCase()}</div>
@@ -310,7 +331,9 @@ function VacanteCard({ vacante, autenticado, onOpen }) {
           <p className="job-description">{vacante.descripcion || vacante.responsabilidades || "Conocé los detalles de esta oportunidad."}</p>
           <div className="job-card-bottom">
             <span className="job-salary">{salarioVacante(vacante)}</span>
-            <span className="job-open">{autenticado ? "Ver y postularme" : "Ver oportunidad"} <Icon name="chevR" /></span>
+            <span className="job-open">
+              {postulacion ? "Ya postulado" : autenticado ? "Ver y postularme" : "Ver oportunidad"} <Icon name="chevR" />
+            </span>
           </div>
         </div>
       </button>
@@ -318,7 +341,7 @@ function VacanteCard({ vacante, autenticado, onOpen }) {
   );
 }
 
-function DetalleVacante({ vacante, autenticado, copiado, onCopy, onClose }) {
+function DetalleVacante({ vacante, autenticado, postulacion, copiado, onCopy, onClose }) {
   const habilidades = String(vacante.habilidades || "").split(",").map((item) => item.trim()).filter(Boolean);
   const beneficios = String(vacante.beneficios || "").split(",").map((item) => item.trim()).filter(Boolean);
   return (
@@ -344,16 +367,27 @@ function DetalleVacante({ vacante, autenticado, copiado, onCopy, onClose }) {
           <Seccion titulo="Salario" contenido={salarioVacante(vacante)} />
           <Seccion titulo="Horario" contenido={vacante.horario} />
           {beneficios.length > 0 && <Tags titulo="Beneficios" items={beneficios} />}
-          {autenticado && (
+          {postulacion ? (
+            <div className="job-profile-ready">
+              <Icon name="check" />
+              <span><strong>Ya te postulaste a esta búsqueda</strong><small>Podés seguir el estado desde tus postulaciones.</small></span>
+            </div>
+          ) : autenticado && (
             <div className="job-profile-ready">
               <Icon name="check" />
               <span><strong>Tu perfil está listo</strong><small>Vamos a reutilizar tus datos profesionales para agilizar la postulación.</small></span>
             </div>
           )}
           <div className="job-dialog-actions">
-            <Link to={`/postular/${vacante.id}`} className="jobs-primary-action">
-              {autenticado ? "Postularme con mi perfil" : "Postularme ahora"} <Icon name="chevR" />
-            </Link>
+            {postulacion ? (
+              <Link to={`/candidato/postulaciones/${postulacion.id}`} className="jobs-primary-action">
+                Ver mi postulación <Icon name="chevR" />
+              </Link>
+            ) : (
+              <Link to={`/postular/${vacante.id}`} className="jobs-primary-action">
+                {autenticado ? "Postularme con mi perfil" : "Postularme ahora"} <Icon name="chevR" />
+              </Link>
+            )}
             <button type="button" className="jobs-copy-action" onClick={onCopy}><Icon name="doc" /> {copiado ? "Link copiado" : "Copiar link"}</button>
           </div>
         </div>

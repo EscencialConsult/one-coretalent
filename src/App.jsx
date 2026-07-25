@@ -13,12 +13,16 @@ const RegistroEmpresa = lazy(() => import("./pages/publico/RegistroEmpresa"));
 const RegistroCandidato = lazy(() => import("./pages/publico/RegistroCandidato"));
 const Login = lazy(() => import("./pages/Login"));
 const LoginCandidato = lazy(() => import("./pages/publico/LoginCandidato"));
+const RecuperarPassword = lazy(() => import("./pages/publico/RecuperarPassword"));
+const RestablecerPassword = lazy(() => import("./pages/publico/RestablecerPassword"));
 const PoliticaPrivacidad = lazy(() => import("./pages/publico/PoliticaPrivacidad"));
 const TerminosCondiciones = lazy(() => import("./pages/publico/TerminosCondiciones"));
 const Vacantes = lazy(() => import("./pages/empresa/Vacantes"));
 const VacanteDetalle = lazy(() => import("./pages/empresa/VacanteDetalle"));
 const Postulantes = lazy(() => import("./pages/empresa/Postulantes"));
 const EmpresasPendientes = lazy(() => import("./pages/admin/EmpresasPendientes"));
+const Empresas = lazy(() => import("./pages/admin/Empresas"));
+const EmpresaTests = lazy(() => import("./pages/admin/EmpresaTests"));
 const NoEncontrado = lazy(() => import("./pages/NoEncontrado"));
 const PortalEvaluado = lazy(() => import("./pages/evaluado/PortalEvaluado"));
 const CandidatoLayout = lazy(() => import("./layout/CandidatoLayout"));
@@ -47,6 +51,8 @@ export default function App() {
           <Route path="/registro-candidato" element={<RegistroCandidato />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login-candidato" element={<LoginCandidato />} />
+          <Route path="/recuperar-password" element={<RecuperarPassword />} />
+          <Route path="/restablecer-password" element={<RestablecerPassword />} />
           <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
         </Route>
@@ -101,6 +107,8 @@ export default function App() {
         >
           <Route index element={<Navigate to="empresas-pendientes" replace />} />
           <Route path="empresas-pendientes" element={<EmpresasPendientes />} />
+          <Route path="empresas" element={<Empresas />} />
+          <Route path="empresas/:empresaId/tests" element={<EmpresaTests />} />
         </Route>
 
         <Route path="*" element={<NoEncontrado />} />

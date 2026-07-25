@@ -1,11 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
-import { obtenerVacante, cambiarEstadoVacante, listarPostulaciones } from "../../api/empresa";
+import {
+  obtenerVacante,
+  cambiarEstadoVacante,
+  listarPostulaciones,
+  misTests,
+  listarEvaluacionesPostulante,
+  asignarEvaluacionPostulante,
+} from "../../api/empresa";
 import { ApiError } from "../../api/client";
 import Icon from "../../components/Icon";
 
 const ESTADOS = ["borrador", "activa", "pausada", "cerrada"];
+// Excluidos del alcance de esta plataforma (ver PLATAFORMA.md) — no se ofrecen para asignar.
+const TESTS_EXCLUIDOS = ["excel-inicial", "excel-intermedio", "excel-avanzado"];
+
+const ESTADO_EVAL_LABEL = {
+  pendiente: "Pendiente",
+  en_progreso: "En curso",
+  completado: "Completado",
+};
 
 export default function VacanteDetalle() {
   const { id } = useParams();
@@ -13,15 +28,38 @@ export default function VacanteDetalle() {
   const navigate = useNavigate();
   const [vacante, setVacante] = useState(null);
   const [postulaciones, setPostulaciones] = useState(null);
+  const [tests, setTests] = useState([]);
+  const [evaluacionesPorPostulacion, setEvaluacionesPorPostulacion] = useState({});
   const [cambiando, setCambiando] = useState(false);
   const [error, setError] = useState("");
 
   function cargar() {
     obtenerVacante(token, id).then(setVacante);
-    listarPostulaciones(token, id).then(setPostulaciones);
+    listarPostulaciones(token, id).then((lista) => {
+      setPostulaciones(lista);
+      lista.forEach((p) => {
+        listarEvaluacionesPostulante(token, id, p.id)
+          .then((evals) => setEvaluacionesPorPostulacion((actual) => ({ ...actual, [p.id]: evals })))
+          .catch(() => {});
+      });
+    });
+    misTests(token).then((lista) => setTests(lista.filter((t) => !TESTS_EXCLUIDOS.includes(t.slug)))).catch(() => setTests([]));
   }
 
   useEffect(cargar, [token, id]);
+
+  async function onAsignar(postulacionId, testSlug) {
+    setError("");
+    try {
+      const nueva = await asignarEvaluacionPostulante(token, id, postulacionId, testSlug);
+      setEvaluacionesPorPostulacion((actual) => ({
+        ...actual,
+        [postulacionId]: [...(actual[postulacionId] || []), nueva],
+      }));
+    } catch (err) {
+      setError(err instanceof ApiError ? err.detail : "No se pudo asignar la evaluación");
+    }
+  }
 
   async function onCambiarEstado(estado) {
     setError("");
@@ -91,7 +129,7 @@ export default function VacanteDetalle() {
           <div className="text-muted text-sm px-5 py-10 text-center">Todavía no hay postulaciones.</div>
         )}
         {postulaciones?.map((p) => (
-          <div key={p.id} className="fila-lista">
+          <div key={p.id} className="fila-lista" style={{ flexWrap: "wrap" }}>
             <div
               className="w-9 h-9 rounded-chico grid place-items-center font-extrabold flex-none text-white"
               style={{ fontSize: 12, backgroundColor: "var(--brand-acento)" }}
@@ -109,9 +147,57 @@ export default function VacanteDetalle() {
                 <Icon name="file" className="w-3.5 h-3.5" /> Ver CV
               </a>
             )}
+            <AsignarEvaluacion
+              tests={tests}
+              asignadas={evaluacionesPorPostulacion[p.id] || []}
+              onAsignar={(slug) => onAsignar(p.id, slug)}
+            />
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+function AsignarEvaluacion({ tests, asignadas, onAsignar }) {
+  const [seleccion, setSeleccion] = useState("");
+  const [asignando, setAsignando] = useState(false);
+  const disponibles = tests.filter((t) => !asignadas.some((a) => a.test_slug === t.slug));
+
+  async function asignar() {
+    if (!seleccion) return;
+    setAsignando(true);
+    try {
+      await onAsignar(seleccion);
+      setSeleccion("");
+    } finally {
+      setAsignando(false);
+    }
+  }
+
+  return (
+    <div className="w-full flex flex-wrap items-center gap-2 mt-2 pl-12">
+      {asignadas.map((a) => (
+        <span key={a.id} className={`pastilla ${a.estado === "completado" ? "ok" : a.estado === "en_progreso" ? "alerta" : "apagado"}`}>
+          {a.test_nombre} · {ESTADO_EVAL_LABEL[a.estado] || a.estado}{a.reutilizada ? " (reutilizado)" : ""}
+        </span>
+      ))}
+      {disponibles.length > 0 && (
+        <div className="inline-flex items-center gap-1.5">
+          <select value={seleccion} onChange={(e) => setSeleccion(e.target.value)} className="input-marca text-xs !py-1.5 !w-auto">
+            <option value="">Asignar evaluación…</option>
+            {disponibles.map((t) => <option key={t.slug} value={t.slug}>{t.nombre}</option>)}
+          </select>
+          <button
+            type="button"
+            onClick={asignar}
+            disabled={!seleccion || asignando}
+            className="boton boton-acento !py-1.5 !px-3 text-xs"
+          >
+            {asignando ? "Asignando…" : "Asignar"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

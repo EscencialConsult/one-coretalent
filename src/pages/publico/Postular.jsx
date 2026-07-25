@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { vacantesPublicas, postular } from "../../api/publico";
+import { obtenerMiPerfil } from "../../api/persona";
+import { usePersonaAuth } from "../../auth/usePersonaAuth";
 import { archivoABase64 } from "../../utils/archivo";
 import { ApiError } from "../../api/client";
 import FirmaCanvas from "../../components/FirmaCanvas";
@@ -39,6 +41,7 @@ const VACIO = {
 export default function Postular() {
   const { vacanteId } = useParams();
   const navigate = useNavigate();
+  const { token: tokenPersona, persona } = usePersonaAuth();
   const [vacante, setVacante] = useState(null);
   const [paso, setPaso] = useState(0);
   const [form, setForm] = useState(VACIO);
@@ -53,6 +56,35 @@ export default function Postular() {
   useEffect(() => {
     vacantesPublicas().then((lista) => setVacante(lista.find((v) => v.id === vacanteId) || null));
   }, [vacanteId]);
+
+  // Si ya tenés cuenta de candidato, precargamos tu perfil guardado en vez de pedirte todo de nuevo.
+  useEffect(() => {
+    if (!tokenPersona) return;
+    let cancelado = false;
+    obtenerMiPerfil(tokenPersona).then((perfil) => {
+      if (cancelado || !perfil) return;
+      setForm((f) => ({
+        ...f,
+        email: perfil.email || f.email,
+        nombre: perfil.nombre || f.nombre,
+        apellido: perfil.apellido || f.apellido,
+        telefono: perfil.telefono || f.telefono,
+        puesto_deseado: perfil.puesto_deseado || f.puesto_deseado,
+        fecha_nacimiento: perfil.fecha_nacimiento || f.fecha_nacimiento,
+        identificacion: perfil.identificacion || f.identificacion,
+        provincia: perfil.provincia || f.provincia,
+        codigo_postal_ciudad: perfil.codigo_postal_ciudad || f.codigo_postal_ciudad,
+        perfil_profesional: perfil.perfil_profesional || f.perfil_profesional,
+        descripcion_perfil: perfil.descripcion_perfil || f.descripcion_perfil,
+        disp_viajar: perfil.disp_viajar ?? f.disp_viajar,
+        disp_cambio_residencia: perfil.disp_cambio_residencia ?? f.disp_cambio_residencia,
+        primer_empleo: perfil.primer_empleo ?? f.primer_empleo,
+      }));
+      if (perfil.idiomas?.length) setIdiomas(perfil.idiomas);
+      if (perfil.experiencias?.length) setExperiencias(perfil.experiencias);
+    }).catch(() => {});
+    return () => { cancelado = true; };
+  }, [tokenPersona]);
 
   function campo(nombre, valor) {
     setForm((f) => ({ ...f, [nombre]: valor }));
@@ -269,10 +301,16 @@ export default function Postular() {
           <PasoWrapper titulo="CV y cuenta">
             <label className="block text-xs font-semibold mb-1.5">Currículum (PDF, máximo 5 MB)</label>
             <input type="file" accept="application/pdf,.pdf" onChange={(e) => setCvFile(e.target.files?.[0] || null)} className="mb-4 text-sm" />
-            <label className="block text-xs font-semibold mb-1.5">
-              Contraseña (opcional — te permite volver a entrar y ver el estado de tus postulaciones)
-            </label>
-            <input type="password" className="input-marca" value={form.password} onChange={(e) => campo("password", e.target.value)} minLength={8} />
+            {persona ? (
+              <p className="text-xs text-muted">Vas a postular con tu cuenta de candidato ({persona.email}).</p>
+            ) : (
+              <>
+                <label className="block text-xs font-semibold mb-1.5">
+                  Contraseña (opcional — te permite volver a entrar y ver el estado de tus postulaciones)
+                </label>
+                <input type="password" className="input-marca" value={form.password} onChange={(e) => campo("password", e.target.value)} minLength={8} />
+              </>
+            )}
           </PasoWrapper>
         )}
 

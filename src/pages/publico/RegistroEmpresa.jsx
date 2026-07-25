@@ -95,7 +95,7 @@ export default function RegistroEmpresa() {
               <Campo label="Apellido" autoComplete="family-name" value={form.admin_apellido} onChange={(v) => campo("admin_apellido", v)} />
               <Campo label="Email corporativo" type="email" autoComplete="email" required value={form.email_admin} onChange={(v) => campo("email_admin", v)} />
               <Campo label="Contraseña" type="password" autoComplete="new-password" ayuda="Mínimo 8 caracteres" required value={form.admin_password} onChange={(v) => campo("admin_password", v)} minLength={8} />
-              <Campo label="DNI del representante" inputMode="numeric" pattern="[0-9 .-]{8,12}" ayuda="Ingresá los 8 dígitos" required value={form.dni} onChange={(v) => campo("dni", v)} />
+              <Campo label="DNI del representante" inputMode="numeric" pattern="[0-9 .\-]{8,12}" ayuda="Ingresá los 8 dígitos" required value={form.dni} onChange={(v) => campo("dni", v)} />
             </div>
           </Seccion>
 

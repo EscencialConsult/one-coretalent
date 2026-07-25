@@ -74,6 +74,10 @@ export default function LoginCandidato() {
           {enviando ? "Ingresando…" : "Ingresar →"}
         </button>
 
+        <p className="text-center text-sm mt-4">
+          <Link to="/recuperar-password?tipo=persona" className="text-acento font-semibold">¿Olvidaste tu contraseña?</Link>
+        </p>
+
         <p className="text-xs text-muted text-center mt-5">
           ¿No tenés cuenta?{" "}
           <Link to="/registro-candidato" className="font-semibold text-acento hover:underline">Crear cuenta</Link>

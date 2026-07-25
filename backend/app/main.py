@@ -7,7 +7,11 @@ import uuid
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 
+from app.core.rate_limit import limiter
 from app.api.routes import (
     admin,
     areas,
@@ -20,7 +24,6 @@ from app.api.routes import (
     evaluaciones_postulantes,
     evaluados,
     health,
-    informes_ia,
     perfiles,
     personas,
     postulaciones,
@@ -49,6 +52,10 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifespan,
 )
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
@@ -82,7 +89,6 @@ app.include_router(areas.router, prefix="/api")
 app.include_router(evaluados.router, prefix="/api")
 app.include_router(asignaciones.router, prefix="/api")
 app.include_router(resultados.router, prefix="/api")
-app.include_router(informes_ia.router, prefix="/api")
 app.include_router(evaluaciones.router_admin, prefix="/api")
 app.include_router(evaluaciones.router_emp, prefix="/api")
 app.include_router(evaluaciones.router_pub, prefix="/api")

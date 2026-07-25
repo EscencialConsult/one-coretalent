@@ -108,7 +108,14 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    settings = Settings()
+    if settings.ENV != "dev" and settings.SECRET_KEY == "change-me-in-prod":
+        raise RuntimeError(
+            "SECRET_KEY sigue en su valor por defecto fuera de ENV=dev. "
+            "Generá uno propio (ej. `python -c \"import secrets; print(secrets.token_hex(32))\"`) "
+            "y configuralo como variable de entorno antes de desplegar."
+        )
+    return settings
 
 
 settings = get_settings()

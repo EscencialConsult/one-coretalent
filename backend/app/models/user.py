@@ -1,10 +1,11 @@
 """Usuario administrador: SuperAdmin (global) o Admin de Empresa (con tenant_id)."""
 from __future__ import annotations
 
+import datetime as dt
 import uuid
 from typing import Optional
 
-from sqlalchemy import Boolean, Enum as SAEnum, ForeignKey, String, Uuid
+from sqlalchemy import Boolean, DateTime, Enum as SAEnum, ForeignKey, String, Uuid
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base, TimestampMixin, UUIDPkMixin
@@ -27,3 +28,7 @@ class Usuario(UUIDPkMixin, TimestampMixin, Base):
         Uuid, ForeignKey("empresa.id", ondelete="CASCADE"), index=True, nullable=True
     )
     activo: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+
+    # Recuperación de contraseña self-service (mismo patrón que Persona.reset_token).
+    reset_token: Mapped[Optional[str]] = mapped_column(String(64), nullable=True, index=True)
+    reset_expira: Mapped[Optional[dt.datetime]] = mapped_column(DateTime(timezone=True), nullable=True)

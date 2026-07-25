@@ -11,6 +11,7 @@ const NAV_EMPRESA = [
 ];
 const NAV_SUPERADMIN = [
   { to: "/admin/empresas-pendientes", icon: "build", label: "Empresas pendientes", titulo: "Empresas pendientes" },
+  { to: "/admin/empresas", icon: "briefcase", label: "Empresas", titulo: "Empresas" },
 ];
 
 function inicialesDe(user) {

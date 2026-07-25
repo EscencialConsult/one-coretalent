@@ -5,7 +5,7 @@ export function validarPasoPostulacion({ paso, form, idiomas, cvFile, firma }) {
     if (!form.nombre.trim() || !form.apellido.trim() || !form.email.trim()) {
       return "Completá nombre, apellido y email para continuar.";
     }
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(form.email.trim())) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
       return "Ingresá un email válido.";
     }
   }

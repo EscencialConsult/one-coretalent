@@ -20,6 +20,11 @@ def generar_password(largo: int = 10) -> str:
     return "".join(secrets.choice(_ALFABETO) for _ in range(largo))
 
 
+def generar_token_recuperacion() -> str:
+    """Token opaco de un solo uso para links de recuperación de contraseña por email."""
+    return secrets.token_urlsafe(32)
+
+
 def hash_password(password: str) -> str:
     """Hash irreversible con bcrypt (incluye salt)."""
     return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")

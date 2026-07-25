@@ -7,11 +7,12 @@ import base64
 import datetime as dt
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import apply_rls_context, apply_rls_pre_auth, get_db
+from app.core.rate_limit import limiter
 from app.core.security import hash_password
 from app.core.storage import subir_archivo, url_firmada
 from app.models.enums import EstadoEmpresa, RolUsuario
@@ -29,7 +30,7 @@ router = APIRouter(prefix="/publico", tags=["público"])
 
 @router.post("/registro-candidato", status_code=status.HTTP_201_CREATED)
 async def registro_candidato(
-    data: RegistroCandidatoIn, db: AsyncSession = Depends(get_db)
+    request: Request, data: RegistroCandidatoIn, db: AsyncSession = Depends(get_db)
 ) -> dict:
     """Crea una identidad global de candidato sin exigir una postulación previa."""
     await apply_rls_pre_auth(db)
@@ -78,7 +79,7 @@ async def marca_por_subdominio(subdominio: str, db: AsyncSession = Depends(get_d
 
 
 @router.post("/registro-empresa", status_code=status.HTTP_201_CREATED)
-async def registro_empresa(data: RegistroEmpresaIn, db: AsyncSession = Depends(get_db)) -> dict:
+async def registro_empresa(request: Request, data: RegistroEmpresaIn, db: AsyncSession = Depends(get_db)) -> dict:
     """Auto-registro de empresa con verificación de identidad (flujo de Talent Hub).
     A diferencia del alta que hace el SuperAdmin (empresas.py, queda ACTIVO directo), acá
     la empresa queda PENDIENTE_VERIFICACION hasta que un admin la aprueba (ver admin.py)."""
@@ -169,7 +170,7 @@ async def vacantes_publicas(db: AsyncSession = Depends(get_db)) -> List[dict]:
 
 
 @router.post("/postular", response_model=PostulacionOut, status_code=status.HTTP_201_CREATED)
-async def postular(data: PostulacionIn, db: AsyncSession = Depends(get_db)) -> PostulacionOut:
+async def postular(request: Request, data: PostulacionIn, db: AsyncSession = Depends(get_db)) -> PostulacionOut:
     """Postulación pública a una vacante. Crea/actualiza la Persona (identidad global, por
     email) y crea la Postulacion. Si manda `password`, deja la cuenta lista para el login
     self-service (/auth/persona/login) — igual que "cuenta reutilizable" del legacy."""

@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
-import { listarTodasPostulaciones } from "../../api/empresa";
+import { listarTodasPostulaciones, listarEvaluacionesPostulante } from "../../api/empresa";
 import Icon from "../../components/Icon";
 import { ApiError } from "../../api/client";
+
+const ESTADO_EVAL_LABEL = {
+  pendiente: "Pendiente",
+  en_progreso: "En curso",
+  completado: "Completado",
+};
 
 export default function Postulantes() {
   const { token } = useAuth();
   const navigate = useNavigate();
   const [postulaciones, setPostulaciones] = useState(null);
+  const [evaluacionesPorPostulacion, setEvaluacionesPorPostulacion] = useState({});
   const [filtro, setFiltro] = useState("");
   const [error, setError] = useState("");
 
@@ -17,7 +24,13 @@ export default function Postulantes() {
     setError("");
     listarTodasPostulaciones(token)
       .then((data) => {
-        if (activo) setPostulaciones(data);
+        if (!activo) return;
+        setPostulaciones(data);
+        data.forEach((p) => {
+          listarEvaluacionesPostulante(token, p.vacante_id, p.id)
+            .then((evals) => activo && setEvaluacionesPorPostulacion((actual) => ({ ...actual, [p.id]: evals })))
+            .catch(() => {});
+        });
       })
       .catch((err) => {
         if (activo) setError(err instanceof ApiError ? err.detail : "No se pudieron cargar las postulaciones.");
@@ -97,6 +110,7 @@ export default function Postulantes() {
                 <th style={{ paddingLeft: 20 }}>Candidato</th>
                 <th>Vacante</th>
                 <th>Fecha</th>
+                <th>Evaluaciones</th>
                 <th></th>
               </tr>
             </thead>
@@ -124,6 +138,29 @@ export default function Postulantes() {
                     <span className="text-xs text-muted">
                       {new Date(p.created_at).toLocaleDateString("es-AR")}
                     </span>
+                  </td>
+                  <td>
+                    <div className="flex flex-wrap gap-1.5" onClick={(e) => e.stopPropagation()}>
+                      {(evaluacionesPorPostulacion[p.id] || []).length === 0 && (
+                        <span className="text-xs text-muted">Sin asignar</span>
+                      )}
+                      {(evaluacionesPorPostulacion[p.id] || []).map((ev) =>
+                        ev.estado === "completado" && ev.resultado_id ? (
+                          <Link
+                            key={ev.id}
+                            to={`/empresa/informe/${ev.resultado_id}`}
+                            className="pastilla ok"
+                            style={{ textDecoration: "none" }}
+                          >
+                            {ev.test_nombre} · Ver informe
+                          </Link>
+                        ) : (
+                          <span key={ev.id} className={`pastilla ${ev.estado === "en_progreso" ? "alerta" : "apagado"}`}>
+                            {ev.test_nombre} · {ESTADO_EVAL_LABEL[ev.estado] || ev.estado}
+                          </span>
+                        )
+                      )}
+                    </div>
                   </td>
                   <td style={{ textAlign: "right", paddingRight: 20 }}>
                     {p.cv_url && (

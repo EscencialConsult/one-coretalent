@@ -1,21 +1,33 @@
 """Autenticación: login (JWT) y datos del usuario actual."""
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, status
+import datetime as dt
+
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordRequestForm
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, EmailStr, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_current_persona, get_current_user
+from app.core.config import settings
 from app.core.db import apply_rls_pre_auth, get_db
-from app.core.security import create_access_token, hash_password, verify_password
+from app.core.email import enviar_recuperacion_password
+from app.core.rate_limit import limiter
+from app.core.security import create_access_token, generar_token_recuperacion, hash_password, verify_password
 from app.models.evaluado import Evaluado
 from app.models.persona import Persona
+from app.models.tenant import Empresa
 from app.models.user import Usuario
 from app.schemas.auth import PersonaAuthOut, Token, UsuarioOut
 
 router = APIRouter(prefix="/auth", tags=["auth"])
+
+RECUPERACION_VIGENCIA = dt.timedelta(hours=1)
+_MENSAJE_RECUPERACION_GENERICO = {
+    "ok": True,
+    "detail": "Si el email existe en nuestro sistema, vas a recibir un enlace para restablecer tu contraseña.",
+}
 
 
 class CambiarPasswordIn(BaseModel):
@@ -23,8 +35,18 @@ class CambiarPasswordIn(BaseModel):
     password_nueva: str = Field(min_length=8)
 
 
+class RecuperarPasswordIn(BaseModel):
+    email: EmailStr
+
+
+class RestablecerPasswordIn(BaseModel):
+    token: str
+    password: str = Field(min_length=8)
+
+
 @router.post("/login", response_model=Token)
 async def login(
+    request: Request,
     form: OAuth2PasswordRequestForm = Depends(),
     db: AsyncSession = Depends(get_db),
 ) -> Token:
@@ -66,6 +88,7 @@ async def cambiar_password(
 
 @router.post("/evaluado/login", response_model=Token)
 async def login_evaluado(
+    request: Request,
     form: OAuth2PasswordRequestForm = Depends(),
     db: AsyncSession = Depends(get_db),
 ) -> Token:
@@ -85,6 +108,7 @@ async def login_evaluado(
 
 @router.post("/persona/login", response_model=Token)
 async def login_persona(
+    request: Request,
     form: OAuth2PasswordRequestForm = Depends(),
     db: AsyncSession = Depends(get_db),
 ) -> Token:
@@ -105,3 +129,100 @@ async def login_persona(
 async def me_persona(persona: Persona = Depends(get_current_persona)) -> Persona:
     """Perfil mínimo usado para validar y restaurar la sesión global del candidato."""
     return persona
+
+
+# ── Recuperación de contraseña — Usuario (admin de empresa / superadmin) ────────
+@router.post("/recuperar")
+async def recuperar_password_usuario(
+    request: Request,
+    data: RecuperarPasswordIn,
+    background: BackgroundTasks,
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    """Solicita el link de recuperación. Respuesta genérica siempre (no revela si el email existe)."""
+    await apply_rls_pre_auth(db)
+    email = data.email.lower().strip()
+    result = await db.execute(select(Usuario).where(Usuario.email == email, Usuario.activo.is_(True)))
+    user = result.scalar_one_or_none()
+    if user is not None:
+        user.reset_token = generar_token_recuperacion()
+        user.reset_expira = dt.datetime.now(dt.timezone.utc) + RECUPERACION_VIGENCIA
+        marca = None
+        if user.tenant_id:
+            empresa = await db.get(Empresa, user.tenant_id)
+            if empresa is not None:
+                marca = {
+                    "razon_social": empresa.razon_social,
+                    "color_acento": empresa.color_acento,
+                    "color_secundario": empresa.color_secundario,
+                    "logo_url": empresa.logo_url,
+                }
+        link = f"{settings.PUBLIC_BASE_URL.rstrip('/')}/restablecer-password?token={user.reset_token}&tipo=usuario"
+        await db.commit()
+        background.add_task(enviar_recuperacion_password, user.email, link, marca)
+    return _MENSAJE_RECUPERACION_GENERICO
+
+
+@router.post("/restablecer")
+async def restablecer_password_usuario(
+    request: Request,
+    data: RestablecerPasswordIn,
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    await apply_rls_pre_auth(db)
+    result = await db.execute(select(Usuario).where(Usuario.reset_token == data.token))
+    user = result.scalar_one_or_none()
+    if (
+        user is None
+        or user.reset_expira is None
+        or user.reset_expira < dt.datetime.now(dt.timezone.utc)
+    ):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "El enlace no es válido o ya expiró")
+    user.password_hash = hash_password(data.password)
+    user.reset_token = None
+    user.reset_expira = None
+    await db.commit()
+    return {"ok": True}
+
+
+# ── Recuperación de contraseña — Persona (candidato) ─────────────────────────────
+@router.post("/persona/recuperar")
+async def recuperar_password_persona(
+    request: Request,
+    data: RecuperarPasswordIn,
+    background: BackgroundTasks,
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    await apply_rls_pre_auth(db)
+    email = data.email.lower().strip()
+    result = await db.execute(select(Persona).where(Persona.email == email, Persona.activo.is_(True)))
+    persona = result.scalar_one_or_none()
+    if persona is not None and persona.password_hash:
+        persona.reset_token = generar_token_recuperacion()
+        persona.reset_expira = dt.datetime.now(dt.timezone.utc) + RECUPERACION_VIGENCIA
+        link = f"{settings.PUBLIC_BASE_URL.rstrip('/')}/restablecer-password?token={persona.reset_token}&tipo=persona"
+        await db.commit()
+        background.add_task(enviar_recuperacion_password, persona.email, link, None)
+    return _MENSAJE_RECUPERACION_GENERICO
+
+
+@router.post("/persona/restablecer")
+async def restablecer_password_persona(
+    request: Request,
+    data: RestablecerPasswordIn,
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    await apply_rls_pre_auth(db)
+    result = await db.execute(select(Persona).where(Persona.reset_token == data.token))
+    persona = result.scalar_one_or_none()
+    if (
+        persona is None
+        or persona.reset_expira is None
+        or persona.reset_expira < dt.datetime.now(dt.timezone.utc)
+    ):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "El enlace no es válido o ya expiró")
+    persona.password_hash = hash_password(data.password)
+    persona.reset_token = None
+    persona.reset_expira = None
+    await db.commit()
+    return {"ok": True}

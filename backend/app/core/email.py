@@ -155,6 +155,24 @@ async def enviar_nuevas_credenciales_empresa(email: str, password: str, link: st
     return await enviar_email(email, "Nuevas credenciales - ONE Core Analytics", html, from_name="ONE Core Analytics")
 
 
+async def enviar_recuperacion_password(email: str, link: str, marca: dict | None = None) -> bool:
+    """Link de recuperación (1 uso, expira) — para Usuario (admin) o Persona (candidato)."""
+    marca = marca or {
+        "razon_social": "ONE Core Analytics",
+        "color_acento": "#4d248f",
+        "color_secundario": "#6be1e3",
+        "logo_url": f"{settings.PUBLIC_BASE_URL.rstrip('/')}/logo.png",
+    }
+    cuerpo = (
+        '<p style="font-size:14.5px;line-height:1.6;">Recibimos una solicitud para restablecer tu contraseña.</p>'
+        '<p style="font-size:14.5px;line-height:1.6;">Si fuiste vos, hacé clic en el botón de abajo para elegir una nueva. '
+        'El enlace vale por <b>1 hora</b> y solo se puede usar una vez.</p>'
+        '<p style="font-size:12.5px;color:#8a8f9c;margin-top:10px;">Si no fuiste vos, ignorá este correo: tu contraseña actual sigue funcionando.</p>'
+    )
+    html = _plantilla(marca, "Restablecer tu contraseña", cuerpo, "Elegir nueva contraseña", link)
+    return await enviar_email(email, "Restablecer contraseña — ONE Core Analytics", html, from_name=marca.get("razon_social"))
+
+
 async def enviar_invitacion_evaluado(marca: dict, nombre: str, email: str, password: str, link: str) -> bool:
     c1 = marca.get("color_acento") or "#4d248f"
     razon = escape(marca.get("razon_social") or "la empresa")

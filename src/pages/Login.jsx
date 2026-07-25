@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { ApiError } from "../api/client";
 import { useAuth } from "../auth/useAuth";
 import Marca from "../components/Marca";
@@ -80,6 +80,9 @@ export default function Login() {
         <button type="submit" disabled={enviando} className="boton boton-primario w-full mt-6">
           {enviando ? "Ingresando…" : "Ingresar →"}
         </button>
+        <p className="text-center text-sm mt-4">
+          <Link to="/recuperar-password?tipo=usuario" className="text-acento font-semibold">¿Olvidaste tu contraseña?</Link>
+        </p>
       </form>
     </div>
   );
