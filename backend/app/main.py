@@ -2,10 +2,22 @@
 from __future__ import annotations
 
 import asyncio
+import logging
+import sys
 from contextlib import asynccontextmanager
 import uuid
 
 from fastapi import FastAPI, Request
+
+# Sin esto, loggers propios (ej. "app.email") no tenían ningún handler configurado:
+# Python solo los muestra vía el "handler de último recurso" (stderr, solo WARNING+),
+# así que un envío de correo exitoso (logger.info) quedaba invisible en los logs de
+# Railway y era imposible diagnosticar si el SMTP realmente se estaba intentando.
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    stream=sys.stdout,
+)
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
