@@ -84,7 +84,7 @@ export default function RegistroCandidato() {
           <button type="submit" className="candidate-register-submit" disabled={enviando}>
             {enviando ? "Creando cuenta…" : "Crear mi cuenta"} <Icon name="chevR" />
           </button>
-          <p className="candidate-register-login">¿Ya tenés una cuenta? <Link to="/login-candidato">Ingresar al portal</Link></p>
+          <p className="candidate-register-login">¿Ya tenés una cuenta? <Link to="/login">Ingresar al portal</Link></p>
         </div>
       </form>
     </section>

@@ -39,7 +39,7 @@ export default function VacanteDetalle() {
   if (!vacante) return <div className="tarjeta p-8"><p className="text-muted text-sm">Cargando…</p></div>;
 
   return (
-    <div className="max-w-3xl">
+    <div>
       <button onClick={() => navigate("/empresa/vacantes")} className="volver-link">
         <Icon name="chevL" className="w-4 h-4" /> Volver a Vacantes
       </button>

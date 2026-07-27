@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { ApiError } from "../api/client";
 import { useAuth } from "../auth/useAuth";
+import { usePersonaAuth } from "../auth/usePersonaAuth";
 import Marca from "../components/Marca";
 
 function destinoPorRol(rol) {
-  return rol === "superadmin" ? "/admin/empresas-pendientes" : "/empresa/vacantes";
+  return rol === "superadmin" ? "/admin/empresas-pendientes" : "/empresa/inicio";
 }
 
 export default function Login() {
-  const { login, autenticado, user } = useAuth();
+  const { login: loginAdmin, autenticado: autenticadoAdmin, user } = useAuth();
+  const { login: loginPersona, autenticado: autenticadoPersona } = usePersonaAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState("");
@@ -17,8 +19,11 @@ export default function Login() {
   const [error, setError] = useState("");
   const [enviando, setEnviando] = useState(false);
 
-  if (autenticado) {
+  if (autenticadoAdmin) {
     return <Navigate to={destinoPorRol(user.rol)} replace />;
+  }
+  if (autenticadoPersona) {
+    return <Navigate to="/candidato" replace />;
   }
 
   async function onSubmit(event) {
@@ -27,9 +32,22 @@ export default function Login() {
     setError("");
     setEnviando(true);
     try {
-      const perfil = await login(email, password);
+      // Un solo formulario para empresa/admin y candidato: probamos primero como
+      // cuenta de empresa y, si no existe con esas credenciales, como candidato.
+      const perfil = await loginAdmin(email, password);
       const destino = location.state?.from || destinoPorRol(perfil.rol);
       navigate(destino, { replace: true });
+      return;
+    } catch (err) {
+      if (!(err instanceof ApiError) || err.status !== 401) {
+        setError(err instanceof ApiError ? err.detail : "No se pudo iniciar sesión");
+        setEnviando(false);
+        return;
+      }
+    }
+    try {
+      await loginPersona(email, password);
+      navigate(location.state?.from || "/candidato", { replace: true });
     } catch (err) {
       setError(err instanceof ApiError ? err.detail : "No se pudo iniciar sesión");
     } finally {
@@ -43,25 +61,25 @@ export default function Login() {
         <div className="mb-6 text-center"><Marca /></div>
         <h1 className="text-xl font-extrabold text-center mb-1">Iniciar sesión</h1>
         <p className="text-sm text-tinta text-opacity-70 text-center mb-6">
-          Accedé a tu panel de ONE Core-Talent.
+          Entrá con tu cuenta de empresa o de candidato.
         </p>
 
-        <label htmlFor="email-admin" className="block text-xs font-bold text-tinta mb-1.5 mt-2">Email</label>
+        <label htmlFor="email-login" className="block text-xs font-bold text-tinta mb-1.5 mt-2">Email</label>
         <input
-          id="email-admin"
+          id="email-login"
           type="email"
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           className="input-marca"
-          placeholder="tu@empresa.com"
+          placeholder="tu@email.com"
           autoComplete="username"
           autoFocus
         />
 
-        <label htmlFor="password-admin" className="block text-xs font-bold text-tinta mb-1.5 mt-3">Contraseña</label>
+        <label htmlFor="password-login" className="block text-xs font-bold text-tinta mb-1.5 mt-3">Contraseña</label>
         <input
-          id="password-admin"
+          id="password-login"
           type="password"
           required
           value={password}
@@ -82,6 +100,12 @@ export default function Login() {
         </button>
         <p className="text-center text-sm mt-4">
           <Link to="/recuperar-password?tipo=usuario" className="text-acento font-semibold">¿Olvidaste tu contraseña?</Link>
+        </p>
+        <p className="text-xs text-muted text-center mt-5">
+          ¿No tenés cuenta?{" "}
+          <Link to="/registro-candidato" className="font-semibold text-acento hover:underline">Crear cuenta</Link>
+          {" · "}
+          <Link to="/registro-empresa" className="font-semibold text-acento hover:underline">Crear empresa</Link>
         </p>
       </form>
     </div>

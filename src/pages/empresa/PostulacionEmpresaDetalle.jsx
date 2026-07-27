@@ -108,7 +108,7 @@ export default function PostulacionEmpresaDetalle() {
   const { vacante, postulacion, evaluaciones, catalogo } = datos;
 
   return (
-    <div className="max-w-5xl">
+    <div>
       <button onClick={() => navigate(`/empresa/vacantes/${vacanteId}`)} className="volver-link">
         <Icon name="chevL" className="w-4 h-4" /> Volver a la vacante
       </button>

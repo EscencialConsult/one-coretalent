@@ -120,6 +120,31 @@ async def _conteos(postulacion_id: uuid.UUID, db: AsyncSession) -> tuple[int, in
     return total, total - completadas, completadas
 
 
+async def _conteos_batch(
+    postulacion_ids: list[uuid.UUID], db: AsyncSession
+) -> dict[uuid.UUID, tuple[int, int, int]]:
+    """Versión en lote de `_conteos`: una sola query agrupada en vez de una por postulación."""
+    if not postulacion_ids:
+        return {}
+    filas = (
+        await db.execute(
+            select(Asignacion.postulacion_id, Asignacion.estado, func.count())
+            .where(Asignacion.postulacion_id.in_(postulacion_ids))
+            .group_by(Asignacion.postulacion_id, Asignacion.estado)
+        )
+    ).all()
+    por_postulacion: dict[uuid.UUID, dict[str, int]] = {}
+    for postulacion_id, estado, cantidad in filas:
+        por_postulacion.setdefault(postulacion_id, {})[estado] = cantidad
+    resultado = {}
+    for pid in postulacion_ids:
+        por_estado = por_postulacion.get(pid, {})
+        total = sum(por_estado.values())
+        completadas = por_estado.get("completado", 0)
+        resultado[pid] = (total, total - completadas, completadas)
+    return resultado
+
+
 @router.get("/postulaciones", response_model=list[PostulacionPersonaResumenOut])
 async def mis_postulaciones(
     persona: Persona = Depends(get_current_persona),
@@ -134,9 +159,10 @@ async def mis_postulaciones(
             .order_by(Postulacion.created_at.desc())
         )
     ).all()
+    conteos = await _conteos_batch([postulacion.id for postulacion, _, _ in filas], db)
     salida = []
     for postulacion, vacante, empresa in filas:
-        total, pendientes, completadas = await _conteos(postulacion.id, db)
+        total, pendientes, completadas = conteos[postulacion.id]
         salida.append(PostulacionPersonaResumenOut(
             id=postulacion.id,
             vacante_id=vacante.id,
@@ -203,9 +229,10 @@ async def mis_consentimientos(
             .order_by(Postulacion.created_at.desc())
         )
     ).all()
+    conteos = await _conteos_batch([postulacion.id for postulacion, _, _ in filas], db)
     salida = []
     for postulacion, vacante, empresa in filas:
-        total, _, _ = await _conteos(postulacion.id, db)
+        total, _, _ = conteos[postulacion.id]
         salida.append(ConsentimientoOut(
             postulacion_id=postulacion.id,
             vacante=vacante.puesto,

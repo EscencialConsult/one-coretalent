@@ -13,7 +13,7 @@ describe("PublicNavbar", () => {
     const navegacion = screen.getByRole("navigation", { name: "Navegación principal" });
     expect(navegacion).toBeInTheDocument();
     expect(navegacion.querySelector('a[href="/busquedas"]')).toHaveTextContent("Oportunidades");
-    expect(screen.getByRole("link", { name: "Panel empresa" })).toHaveAttribute("href", "/login");
+    expect(document.querySelector(".public-navbar-actions a.public-nav-cta")).toHaveAttribute("href", "/login");
   });
 
   it("abre un menú móvil accesible", () => {

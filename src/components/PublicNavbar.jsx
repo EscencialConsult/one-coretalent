@@ -28,12 +28,11 @@ export default function PublicNavbar({ personaAutenticada }) {
           ))}
         </nav>
         <div className="public-navbar-actions">
-          <Link to={personaAutenticada ? "/candidato" : "/login-candidato"} className="public-nav-login">
-            {personaAutenticada ? "Mi portal" : "Ingresar"}
-          </Link>
           {!personaAutenticada && <Link to="/registro-candidato" className="public-nav-candidate">Crear cuenta</Link>}
           <Link to="/registro-empresa" className="public-nav-candidate">Crear empresa</Link>
-          <Link to="/login" className="public-nav-cta">Panel empresa <span aria-hidden="true">→</span></Link>
+          <Link to={personaAutenticada ? "/candidato" : "/login"} className="public-nav-cta">
+            {personaAutenticada ? "Mi portal" : "Ingresar"} <span aria-hidden="true">→</span>
+          </Link>
         </div>
         <button type="button" className="public-navbar-menu" aria-expanded={abierto} aria-controls="menu-publico-movil" aria-label={abierto ? "Cerrar menú" : "Abrir menú"} onClick={() => setAbierto((valor) => !valor)}>
           <Icon name={abierto ? "x" : "menu"} />
@@ -43,10 +42,9 @@ export default function PublicNavbar({ personaAutenticada }) {
         <nav aria-label="Navegación móvil">
           {LINKS.map((item) => <Link key={item.to} to={item.to}>{item.label}</Link>)}
           <div className="public-mobile-actions">
-            <Link to={personaAutenticada ? "/candidato" : "/login-candidato"}>{personaAutenticada ? "Mi portal" : "Ingresar como candidato"}</Link>
-            {!personaAutenticada && <Link to="/registro-candidato" className="public-nav-candidate">Registrarme como candidato</Link>}
+            {!personaAutenticada && <Link to="/registro-candidato" className="public-nav-candidate">Crear cuenta</Link>}
             <Link to="/registro-empresa" className="public-nav-candidate">Crear empresa</Link>
-            <Link to="/login" className="public-nav-cta">Ingresar como empresa</Link>
+            <Link to={personaAutenticada ? "/candidato" : "/login"} className="public-nav-cta">{personaAutenticada ? "Mi portal" : "Ingresar"}</Link>
           </div>
         </nav>
       </div>

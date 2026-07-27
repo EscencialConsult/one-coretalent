@@ -126,9 +126,20 @@ async def _acceso_de_asignacion(asignacion_id: uuid.UUID, db: AsyncSession) -> A
     ).scalar_one_or_none()
 
 
-async def _resumen(asignacion: Asignacion, db: AsyncSession) -> EvaluacionResumenOut:
-    acceso = await _acceso_de_asignacion(asignacion.id, db)
-    empresa = await db.get(Empresa, asignacion.tenant_id)
+_SIN_PRECARGAR = object()
+
+
+async def _resumen(
+    asignacion: Asignacion,
+    db: AsyncSession,
+    *,
+    acceso: AccesoResultado | None = _SIN_PRECARGAR,  # type: ignore[assignment]
+    empresa: Empresa | None = _SIN_PRECARGAR,  # type: ignore[assignment]
+) -> EvaluacionResumenOut:
+    if acceso is _SIN_PRECARGAR:
+        acceso = await _acceso_de_asignacion(asignacion.id, db)
+    if empresa is _SIN_PRECARGAR:
+        empresa = await db.get(Empresa, asignacion.tenant_id)
     meta = _catalogo().get(asignacion.test_slug, {})
     resultado_id = None if acceso and acceso.revocado_at else (
         asignacion.resultado_reutilizado_id or (acceso.resultado_id if acceso else None)
@@ -151,6 +162,28 @@ async def _resumen(asignacion: Asignacion, db: AsyncSession) -> EvaluacionResume
         empresa_color_acento=empresa.color_acento if empresa else None,
         empresa_color_secundario=empresa.color_secundario if empresa else None,
     )
+
+
+async def _resumenes(asignaciones: list[Asignacion], db: AsyncSession) -> list[EvaluacionResumenOut]:
+    """Versión en lote de `_resumen`: evita 1 query de AccesoResultado + 1 de Empresa por fila."""
+    if not asignaciones:
+        return []
+    ids = [a.id for a in asignaciones]
+    accesos = (
+        await db.execute(select(AccesoResultado).where(AccesoResultado.asignacion_id.in_(ids)))
+    ).scalars().all()
+    acceso_por_asignacion = {a.asignacion_id: a for a in accesos}
+    tenant_ids = {a.tenant_id for a in asignaciones}
+    empresas = (await db.execute(select(Empresa).where(Empresa.id.in_(tenant_ids)))).scalars().all()
+    empresa_por_id = {e.id: e for e in empresas}
+    return [
+        await _resumen(
+            a, db,
+            acceso=acceso_por_asignacion.get(a.id),
+            empresa=empresa_por_id.get(a.tenant_id),
+        )
+        for a in asignaciones
+    ]
 
 
 def _auditar(
@@ -318,7 +351,7 @@ async def listar_evaluaciones_postulante(
             .order_by(Asignacion.created_at.desc())
         )
     ).scalars().all()
-    return [await _resumen(item, db) for item in asignaciones]
+    return await _resumenes(list(asignaciones), db)
 
 
 @router.get("/personas/me/evaluaciones", response_model=list[EvaluacionResumenOut])
@@ -333,7 +366,7 @@ async def mis_evaluaciones(
             .order_by(Asignacion.created_at.desc())
         )
     ).scalars().all()
-    return [await _resumen(item, db) for item in asignaciones]
+    return await _resumenes(list(asignaciones), db)
 
 
 @router.get("/personas/me/resultados", response_model=list[ResultadoResumenOut])

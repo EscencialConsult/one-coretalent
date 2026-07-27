@@ -9,7 +9,6 @@ from uuid import uuid4
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.pool import NullPool
 
 from app.core.config import settings
 
@@ -39,9 +38,16 @@ if settings.DB_SSL:
 
 engine = create_async_engine(
     settings.async_database_url,
-    # Supavisor ya administra el pool en el servidor. Mantener otro pool persistente en
-    # la aplicación reintroduce estado de sesión y sentencias preparadas entre requests.
-    poolclass=NullPool,
+    # Pool de conexiones real (no NullPool): abrir conexión nueva por request implica un
+    # handshake TLS completo contra el pooler de Supabase en cada llamada (~0.8-1.2s medidos,
+    # la mayor parte de la latencia percibida en la app). Reusar conexiones evita ese costo.
+    # El riesgo que NullPool evitaba (sentencias preparadas "viejas" si Supavisor transaccional
+    # cambia la conexión física entre transacciones) ya está cubierto por statement_cache_size=0
+    # y prepared_statement_cache_size=0 en connect_args — no depende del tipo de pool.
+    pool_size=5,
+    max_overflow=5,
+    pool_pre_ping=True,
+    pool_recycle=1800,
     echo=(settings.ENV == "dev"),
     connect_args=_connect_args,
 )

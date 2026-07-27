@@ -73,6 +73,23 @@ class RegistroEmpresaIn(BaseModel):
             raise ValueError("Hay que aceptar los términos y condiciones para registrarse.")
         return v
 
+    @field_validator("selfie_base64")
+    @classmethod
+    def _validar_selfie(cls, v: str) -> str:
+        return _validar_imagen(v, "la selfie")
+
+    @field_validator("firma_legal_base64")
+    @classmethod
+    def _validar_firma(cls, v: str) -> str:
+        return _validar_imagen(v, "la firma")
+
+    @field_validator("dni_frente_base64", "dni_dorso_base64")
+    @classmethod
+    def _validar_dni_foto(cls, v: str | None) -> str | None:
+        if v is None:
+            return None
+        return _validar_imagen(v, "el DNI")
+
 
 class RegistroCandidatoIn(BaseModel):
     nombre: str = Field(min_length=2, max_length=120)

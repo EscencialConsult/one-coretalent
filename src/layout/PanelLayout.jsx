@@ -6,8 +6,10 @@ import Icon from "../components/Icon";
 import Marca from "../components/Marca";
 
 const NAV_EMPRESA = [
+  { to: "/empresa/inicio", icon: "home", label: "Inicio", titulo: "Inicio" },
   { to: "/empresa/vacantes", icon: "briefcase", label: "Vacantes", titulo: "Vacantes" },
   { to: "/empresa/postulantes", icon: "users", label: "Postulantes", titulo: "Postulantes" },
+  { to: "/empresa/perfil", icon: "user", label: "Mi perfil", titulo: "Mi perfil" },
 ];
 const NAV_SUPERADMIN = [
   { to: "/admin/empresas-pendientes", icon: "build", label: "Empresas pendientes", titulo: "Empresas pendientes" },

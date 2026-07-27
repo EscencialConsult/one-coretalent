@@ -1,5 +1,4 @@
 """Autenticación: login (JWT) y datos del usuario actual."""
-from __future__ import annotations
 
 import datetime as dt
 
@@ -45,6 +44,7 @@ class RestablecerPasswordIn(BaseModel):
 
 
 @router.post("/login", response_model=Token)
+@limiter.limit("10/minute")
 async def login(
     request: Request,
     form: OAuth2PasswordRequestForm = Depends(),
@@ -87,6 +87,7 @@ async def cambiar_password(
 
 
 @router.post("/evaluado/login", response_model=Token)
+@limiter.limit("10/minute")
 async def login_evaluado(
     request: Request,
     form: OAuth2PasswordRequestForm = Depends(),
@@ -107,6 +108,7 @@ async def login_evaluado(
 
 
 @router.post("/persona/login", response_model=Token)
+@limiter.limit("10/minute")
 async def login_persona(
     request: Request,
     form: OAuth2PasswordRequestForm = Depends(),
@@ -133,6 +135,7 @@ async def me_persona(persona: Persona = Depends(get_current_persona)) -> Persona
 
 # ── Recuperación de contraseña — Usuario (admin de empresa / superadmin) ────────
 @router.post("/recuperar")
+@limiter.limit("5/hour")
 async def recuperar_password_usuario(
     request: Request,
     data: RecuperarPasswordIn,
@@ -164,6 +167,7 @@ async def recuperar_password_usuario(
 
 
 @router.post("/restablecer")
+@limiter.limit("10/minute")
 async def restablecer_password_usuario(
     request: Request,
     data: RestablecerPasswordIn,
@@ -187,6 +191,7 @@ async def restablecer_password_usuario(
 
 # ── Recuperación de contraseña — Persona (candidato) ─────────────────────────────
 @router.post("/persona/recuperar")
+@limiter.limit("5/hour")
 async def recuperar_password_persona(
     request: Request,
     data: RecuperarPasswordIn,
@@ -207,6 +212,7 @@ async def recuperar_password_persona(
 
 
 @router.post("/persona/restablecer")
+@limiter.limit("10/minute")
 async def restablecer_password_persona(
     request: Request,
     data: RestablecerPasswordIn,

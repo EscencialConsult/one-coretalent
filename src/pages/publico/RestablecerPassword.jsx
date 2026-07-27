@@ -15,7 +15,7 @@ export default function RestablecerPassword() {
   const [error, setError] = useState("");
   const [ok, setOk] = useState(false);
 
-  const linkLogin = tipo === "persona" ? "/login-candidato" : "/login";
+  const linkLogin = "/login";
 
   async function onSubmit(event) {
     event.preventDefault();

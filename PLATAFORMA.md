@@ -1,7 +1,7 @@
 # ONE Core-Talent — Documento de traspaso
 
 > Documento de traspaso para cualquier integrante que continúe el proyecto.
-> Última actualización: 2026-07-24, por Santiago.
+> Última actualización: 2026-07-27, por Facundo.
 
 ---
 
@@ -16,10 +16,11 @@ Escencial Consultora tiene dos plataformas separadas bajo la marca "ONE":
 
 Los repos originales (`one-test`, `postulaciones-empresas`) **siguen funcionando en producción sin tocarse** durante toda la migración — son el respaldo hasta que este proyecto nuevo esté probado y listo para el cutover.
 
-### Lo que NO incluye este proyecto (decisión de Facundo, confirmá si tenés dudas)
+### Lo que NO incluye este proyecto (confirmado por Facundo, 2026-07-27 — definitivo, no "todavía no")
 
-- **Módulo de informes con IA** (`informes_ia.py` en el backend, usa OpenAI para redactar informes gerenciales). El código sigue existiendo porque vino con el resto de Plataforma ONE, pero **no hay que construirle UI ni exponerlo** en esta plataforma.
-- **Módulo de "planilla"** — interpreté esto como los tests de Excel del catálogo (`excel-inicial`, `excel-intermedio`, `excel-avanzado`). Mismo criterio: el código queda, pero no se expone. **Si esto no es lo que quiso decir Facundo, confirmar con él** antes de asumir que está bien.
+- **Módulo 360°**: NO se va a construir en esta plataforma. Queda descartado, no es un pendiente para más adelante.
+- **Módulo de informes con IA** (`informes_ia.py` en el backend, usa OpenAI). El código sigue existiendo porque vino con el resto de Plataforma ONE, pero no se construye UI ni se expone — confirmado que tampoco va a estar en la plataforma.
+- **Módulo de "planilla"** — los tests de Excel del catálogo (`excel-inicial`, `excel-intermedio`, `excel-avanzado`). El código queda, no se expone.
 
 ---
 
@@ -64,14 +65,22 @@ sistema mixto core-talent/          ← este repo
 - Recorrido E2E integral S0–S5 validado: vacante, postulación, evaluación, recuperación, resultado, informe y revocación.
 - Auditoría responsive, accesible, de caché, secretos y cabeceras defensivas completada.
 
+### Decisiones confirmadas por Facundo (2026-07-27)
+
+- **Módulo 360°**: descartado, no se construye (ver arriba).
+- **Informe con IA**: descartado, no se construye (ver arriba).
+- **Hosting**: backend probablemente en **Render**. Frontend lo despliega Facundo directamente en **Netlify**.
+- **Migración de datos reales**: NO se trae nada de la base vieja de Render/Plataforma ONE (los datos de esos tests psicométricos no andaban bien de antes, se descarta esa migración). SÍ se van a traer los datos de **postulaciones**, que hoy viven en una planilla de Google Sheets (Talent Hub) — Facundo va a pasar esa planilla para migrarla.
+- **Reutilización de resultados**: confirmado que la lógica actual es la correcta — si el resultado ya existe se reusa directo (no se pide de nuevo); si no existe, recién ahí se solicita acceso/se rinde. No requiere cambios.
+
 ### Pendientes reales para la próxima persona
 
-1. Continuar el trabajo coordinado restante del plan general, especialmente módulo 360°, staging y migración definitiva.
+1. Falta que Facundo pruebe manualmente: revocación de acceso, doble asignación y doble finalización de una evaluación (ver Etapa 5).
 2. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
-3. Portar o completar el módulo 360° según la siguiente fase acordada.
-4. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
-5. Confirmar hosting definitivo del backend, dominio final y estrategia de cutover.
-6. Los módulos de informes con IA y planilla/Excel permanecen fuera del alcance.
+3. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
+4. **Etapa 11 — Despliegue**: falta el dominio definitivo, cargar `SECRET_KEY`/credenciales de Supabase/SMTP reales en Render y Netlify (hoy corre local; el código ya bloquea el arranque si `SECRET_KEY` queda con el valor por defecto fuera de modo desarrollo), y definir estrategia de rollback.
+5. **Email real**: no hay SMTP configurado todavía en ningún entorno — recuperación de contraseña y notificaciones no envían correos reales hasta cargar credenciales (Etapa 11).
+6. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso.
 
 ---
 

@@ -6,6 +6,13 @@ export const loginAdmin = (email, password) =>
 
 export const meAdmin = (token, signal) => apiFetch("/auth/me", { token, signal });
 
+export const cambiarPasswordAdmin = (token, passwordActual, passwordNueva) =>
+  apiFetch("/auth/cambiar-password", {
+    method: "POST",
+    token,
+    body: { password_actual: passwordActual, password_nueva: passwordNueva },
+  });
+
 export const loginPersona = (email, password) =>
   apiFetch("/auth/persona/login", { method: "POST", form: true, body: { username: email, password } });
 

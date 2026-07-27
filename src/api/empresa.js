@@ -32,3 +32,7 @@ export const revocarAccesoResultado = (token, accesoId) =>
     method: "POST",
     token,
   });
+
+// ── Panel de la empresa ───────────────────────────────────────────────────────
+export const obtenerResumenEmpresa = (token) => apiFetch("/empresa/resumen", { token });
+export const obtenerMiEmpresa = (token) => apiFetch("/empresa/me", { token });

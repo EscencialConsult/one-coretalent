@@ -314,17 +314,22 @@ def _evaluador_dict(e: EvalEvaluador) -> dict:
     }
 
 
-async def _campania_dict(db: AsyncSession, camp: EvalCampania, full: bool = False) -> dict:
-    tot = (
-        await db.execute(select(func.count()).select_from(EvalEvaluador).where(EvalEvaluador.campania_id == camp.id))
-    ).scalar() or 0
-    comp = (
-        await db.execute(
-            select(func.count()).select_from(EvalEvaluador).where(
-                EvalEvaluador.campania_id == camp.id, EvalEvaluador.estado == "completado"
+async def _campania_dict(
+    db: AsyncSession, camp: EvalCampania, full: bool = False, conteos: tuple[int, int] | None = None
+) -> dict:
+    if conteos is not None:
+        tot, comp = conteos
+    else:
+        tot = (
+            await db.execute(select(func.count()).select_from(EvalEvaluador).where(EvalEvaluador.campania_id == camp.id))
+        ).scalar() or 0
+        comp = (
+            await db.execute(
+                select(func.count()).select_from(EvalEvaluador).where(
+                    EvalEvaluador.campania_id == camp.id, EvalEvaluador.estado == "completado"
+                )
             )
-        )
-    ).scalar() or 0
+        ).scalar() or 0
     base = {
         "id": str(camp.id),
         "nombre": camp.nombre,
@@ -388,7 +393,22 @@ async def listar_campanias(
             )
         ).scalars().all()
     )
-    return [await _campania_dict(db, c) for c in camps]
+    if not camps:
+        return []
+    ids = [c.id for c in camps]
+    filas = (
+        await db.execute(
+            select(
+                EvalEvaluador.campania_id,
+                func.count(),
+                func.count().filter(EvalEvaluador.estado == "completado"),
+            )
+            .where(EvalEvaluador.campania_id.in_(ids))
+            .group_by(EvalEvaluador.campania_id)
+        )
+    ).all()
+    conteos = {cid: (tot, comp) for cid, tot, comp in filas}
+    return [await _campania_dict(db, c, conteos=conteos.get(c.id, (0, 0))) for c in camps]
 
 
 @router_emp.post("/eval-campanias", status_code=status.HTTP_201_CREATED)

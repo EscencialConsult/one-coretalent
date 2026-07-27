@@ -12,11 +12,12 @@ const Postular = lazy(() => import("./pages/publico/Postular"));
 const RegistroEmpresa = lazy(() => import("./pages/publico/RegistroEmpresa"));
 const RegistroCandidato = lazy(() => import("./pages/publico/RegistroCandidato"));
 const Login = lazy(() => import("./pages/Login"));
-const LoginCandidato = lazy(() => import("./pages/publico/LoginCandidato"));
 const RecuperarPassword = lazy(() => import("./pages/publico/RecuperarPassword"));
 const RestablecerPassword = lazy(() => import("./pages/publico/RestablecerPassword"));
 const PoliticaPrivacidad = lazy(() => import("./pages/publico/PoliticaPrivacidad"));
 const TerminosCondiciones = lazy(() => import("./pages/publico/TerminosCondiciones"));
+const InicioEmpresa = lazy(() => import("./pages/empresa/InicioEmpresa"));
+const PerfilEmpresa = lazy(() => import("./pages/empresa/PerfilEmpresa"));
 const Vacantes = lazy(() => import("./pages/empresa/Vacantes"));
 const VacanteDetalle = lazy(() => import("./pages/empresa/VacanteDetalle"));
 const PostulacionEmpresaDetalle = lazy(() => import("./pages/empresa/PostulacionEmpresaDetalle"));
@@ -51,7 +52,7 @@ export default function App() {
           <Route path="/registro-empresa" element={<RegistroEmpresa />} />
           <Route path="/registro-candidato" element={<RegistroCandidato />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/login-candidato" element={<LoginCandidato />} />
+          <Route path="/login-candidato" element={<Navigate to="/login" replace />} />
           <Route path="/recuperar-password" element={<RecuperarPassword />} />
           <Route path="/restablecer-password" element={<RestablecerPassword />} />
           <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
@@ -91,11 +92,13 @@ export default function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate to="vacantes" replace />} />
+          <Route index element={<Navigate to="inicio" replace />} />
+          <Route path="inicio" element={<InicioEmpresa />} />
           <Route path="vacantes" element={<Vacantes />} />
           <Route path="vacantes/:id" element={<VacanteDetalle />} />
           <Route path="vacantes/:vacanteId/postulaciones/:postulacionId" element={<PostulacionEmpresaDetalle />} />
           <Route path="postulantes" element={<Postulantes />} />
+          <Route path="perfil" element={<PerfilEmpresa />} />
           <Route path="informe/:id" element={<InformeEmpresa />} />
         </Route>
 

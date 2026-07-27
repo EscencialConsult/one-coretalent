@@ -22,7 +22,7 @@ export default function SiteFooter() {
 
         <nav className="site-footer-col" aria-label="Plataforma">
           <h2>Plataforma</h2>
-          <Link to="/login-candidato">Postulantes</Link>
+          <Link to="/login">Postulantes</Link>
           <Link to="/registro-empresa">Empresas</Link>
           <Link to="/busquedas">Búsquedas activas</Link>
         </nav>

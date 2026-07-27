@@ -27,7 +27,7 @@ export default function RecuperarPassword() {
     }
   }
 
-  const linkLogin = tipo === "persona" ? "/login-candidato" : "/login";
+  const linkLogin = "/login";
 
   return (
     <div className="min-h-[70vh] grid place-items-center px-4">
