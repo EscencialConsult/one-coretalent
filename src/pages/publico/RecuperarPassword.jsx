@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { recuperarPasswordAdmin, recuperarPasswordPersona } from "../../api/auth";
+import { Link } from "react-router-dom";
+import { recuperarPasswordAdmin } from "../../api/auth";
 import { ApiError } from "../../api/client";
 import Marca from "../../components/Marca";
 
 export default function RecuperarPassword() {
-  const [params] = useSearchParams();
-  const tipo = params.get("tipo") === "persona" ? "persona" : "usuario";
   const [email, setEmail] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState("");
@@ -17,8 +15,9 @@ export default function RecuperarPassword() {
     setError("");
     setEnviando(true);
     try {
-      const solicitar = tipo === "persona" ? recuperarPasswordPersona : recuperarPasswordAdmin;
-      await solicitar(email.trim().toLowerCase());
+      // Un solo endpoint: prueba Usuario (empresa/admin) y si no matchea cae a Persona
+      // (candidato) del lado del backend — no hace falta saber de antemano quién sos.
+      await recuperarPasswordAdmin(email.trim().toLowerCase());
       setOk(true);
     } catch (err) {
       setError(err instanceof ApiError ? err.detail : "No se pudo procesar la solicitud.");

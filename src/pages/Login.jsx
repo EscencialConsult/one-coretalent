@@ -99,7 +99,7 @@ export default function Login() {
           {enviando ? "Ingresando…" : "Ingresar →"}
         </button>
         <p className="text-center text-sm mt-4">
-          <Link to="/recuperar-password?tipo=usuario" className="text-acento font-semibold">¿Olvidaste tu contraseña?</Link>
+          <Link to="/recuperar-password" className="text-acento font-semibold">¿Olvidaste tu contraseña?</Link>
         </p>
         <p className="text-xs text-muted text-center mt-5">
           ¿No tenés cuenta?{" "}

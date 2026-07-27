@@ -142,7 +142,12 @@ async def recuperar_password_usuario(
     background: BackgroundTasks,
     db: AsyncSession = Depends(get_db),
 ) -> dict:
-    """Solicita el link de recuperación. Respuesta genérica siempre (no revela si el email existe)."""
+    """Solicita el link de recuperación. Respuesta genérica siempre (no revela si el email existe).
+
+    Punto de entrada único desde el login unificado: no sabemos de antemano si quien pide la
+    recuperación es un Usuario (admin de empresa) o una Persona (candidato), así que se prueba
+    Usuario primero y, si no hay match, se cae a Persona — mismo patrón que el login unificado
+    en Login.jsx (intenta admin, si falla prueba persona)."""
     await apply_rls_pre_auth(db)
     email = data.email.lower().strip()
     result = await db.execute(select(Usuario).where(Usuario.email == email, Usuario.activo.is_(True)))
@@ -163,6 +168,17 @@ async def recuperar_password_usuario(
         link = f"{settings.PUBLIC_BASE_URL.rstrip('/')}/restablecer-password?token={user.reset_token}&tipo=usuario"
         await db.commit()
         background.add_task(enviar_recuperacion_password, user.email, link, marca)
+        return _MENSAJE_RECUPERACION_GENERICO
+
+    persona = (
+        await db.execute(select(Persona).where(Persona.email == email, Persona.activo.is_(True)))
+    ).scalar_one_or_none()
+    if persona is not None and persona.password_hash:
+        persona.reset_token = generar_token_recuperacion()
+        persona.reset_expira = dt.datetime.now(dt.timezone.utc) + RECUPERACION_VIGENCIA
+        link = f"{settings.PUBLIC_BASE_URL.rstrip('/')}/restablecer-password?token={persona.reset_token}&tipo=persona"
+        await db.commit()
+        background.add_task(enviar_recuperacion_password, persona.email, link, None)
     return _MENSAJE_RECUPERACION_GENERICO
 
 
