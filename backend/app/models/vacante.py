@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime as dt
 from typing import Optional
 
-from sqlalchemy import Boolean, DateTime, Integer, Numeric, String, Text
+from sqlalchemy import Boolean, DateTime, Integer, JSON, Numeric, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import Base, TenantMixin, TimestampMixin, UUIDPkMixin
@@ -43,3 +43,6 @@ class Vacante(UUIDPkMixin, TimestampMixin, TenantMixin, Base):
     # Preguntas de filtrado que el postulante responde al aplicar (opcionales).
     pregunta_1: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     pregunta_2: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    # Slugs de tests psicométricos que se asignan automáticamente a cada postulación
+    # nueva de esta vacante (reemplaza la asignación manual uno por uno).
+    tests_requeridos: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)

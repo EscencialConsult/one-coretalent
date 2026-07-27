@@ -18,6 +18,7 @@ const PoliticaPrivacidad = lazy(() => import("./pages/publico/PoliticaPrivacidad
 const TerminosCondiciones = lazy(() => import("./pages/publico/TerminosCondiciones"));
 const InicioEmpresa = lazy(() => import("./pages/empresa/InicioEmpresa"));
 const PerfilEmpresa = lazy(() => import("./pages/empresa/PerfilEmpresa"));
+const TestsEmpresa = lazy(() => import("./pages/empresa/TestsEmpresa"));
 const Vacantes = lazy(() => import("./pages/empresa/Vacantes"));
 const VacanteDetalle = lazy(() => import("./pages/empresa/VacanteDetalle"));
 const PostulacionEmpresaDetalle = lazy(() => import("./pages/empresa/PostulacionEmpresaDetalle"));
@@ -98,6 +99,7 @@ export default function App() {
           <Route path="vacantes/:id" element={<VacanteDetalle />} />
           <Route path="vacantes/:vacanteId/postulaciones/:postulacionId" element={<PostulacionEmpresaDetalle />} />
           <Route path="postulantes" element={<Postulantes />} />
+          <Route path="tests" element={<TestsEmpresa />} />
           <Route path="perfil" element={<PerfilEmpresa />} />
           <Route path="informe/:id" element={<InformeEmpresa />} />
         </Route>

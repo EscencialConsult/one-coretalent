@@ -6,12 +6,14 @@ import base64
 import datetime as dt
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_optional_current_persona
+from app.api.routes.evaluaciones_postulantes import _asignar_test_a_postulacion
 from app.core.db import apply_rls_context, apply_rls_pre_auth, get_db
+from app.core.outbox import procesar_evento_outbox
 from app.core.rate_limit import limiter
 from app.core.security import hash_password
 from app.core.storage import subir_archivo, url_firmada
@@ -176,6 +178,7 @@ async def vacantes_publicas(db: AsyncSession = Depends(get_db)) -> List[dict]:
 async def postular(
     request: Request,
     data: PostulacionIn,
+    background: BackgroundTasks,
     persona_autenticada: Persona | None = Depends(get_optional_current_persona),
     db: AsyncSession = Depends(get_db),
 ) -> PostulacionOut:
@@ -258,7 +261,28 @@ async def postular(
 
     db.add(postulacion)
     await db.flush()
+
+    # Tests que la empresa configuró como requeridos para este puesto: se asignan solos,
+    # sin que un admin tenga que entrar postulante por postulante (ver Vacante.tests_requeridos).
+    eventos_outbox = []
+    for test_slug in vacante.tests_requeridos:
+        resultado = await _asignar_test_a_postulacion(
+            tenant_id=vacante.tenant_id,
+            vacante_id=vacante.id,
+            postulacion=postulacion,
+            persona=persona,
+            test_slug=test_slug,
+            db=db,
+            actor_tipo="sistema",
+            actor_id=vacante.id,
+            estricto=False,
+        )
+        if resultado is not None:
+            eventos_outbox.append(resultado[1])
+
     await db.commit()
+    for evento_outbox in eventos_outbox:
+        background.add_task(procesar_evento_outbox, evento_outbox.id, vacante.tenant_id)
 
     cv_url = await url_firmada(persona.cv_url) if persona.cv_url else None
     return PostulacionOut(

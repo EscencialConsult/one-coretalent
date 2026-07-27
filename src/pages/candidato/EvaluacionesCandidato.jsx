@@ -51,6 +51,7 @@ function Grupo({ titulo, items, acciones }) {
               <div className="candidate-result-icon"><Icon name="clipboard" /></div>
               <EstadoEvaluacion estado={evaluacion.estado} />
               <h3>{evaluacion.test_nombre}</h3>
+              {evaluacion.empresa_nombre && <p className="candidate-evaluation-empresa">{evaluacion.empresa_nombre}</p>}
               {evaluacion.reutilizada && <p className="candidate-reused"><Icon name="check" /> Resultado reutilizado</p>}
               {evaluacion.progreso_guardado_at && (
                 <p className="candidate-saved">Último guardado: {new Date(evaluacion.progreso_guardado_at).toLocaleString("es-AR")}</p>

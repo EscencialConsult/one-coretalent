@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 import { obtenerResumenEmpresa } from "../../api/empresa";
+import { ErrorState, PageLoader } from "../../components/AsyncState";
 import Icon from "../../components/Icon";
 
 const ESTADO_LABEL = {
@@ -14,10 +15,18 @@ const ESTADO_LABEL = {
 export default function InicioEmpresa() {
   const { token, user } = useAuth();
   const [resumen, setResumen] = useState(null);
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    obtenerResumenEmpresa(token).then(setResumen).catch(() => setResumen(null));
-  }, [token]);
+  function cargar() {
+    setError(false);
+    setResumen(null);
+    obtenerResumenEmpresa(token).then(setResumen).catch(() => setError(true));
+  }
+
+  useEffect(cargar, [token]);
+
+  if (error) return <ErrorState mensaje="No pudimos cargar el resumen de tu empresa." onReintentar={cargar} />;
+  if (!resumen) return <PageLoader mensaje="Cargando tu resumen…" />;
 
   const maxMes = Math.max(1, ...(resumen?.completadas_por_mes || []).map((m) => m.n));
 

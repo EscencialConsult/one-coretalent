@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 import { listarVacantes } from "../../api/empresa";
+import { ErrorState, PageLoader } from "../../components/AsyncState";
 import Icon from "../../components/Icon";
 import VacanteFormModal from "./VacanteFormModal";
 
@@ -16,22 +17,30 @@ export default function Vacantes() {
   const { token } = useAuth();
   const navigate = useNavigate();
   const [vacantes, setVacantes] = useState(null);
+  const [error, setError] = useState(false);
   const [modalAbierto, setModalAbierto] = useState(false);
 
-  useEffect(() => {
-    listarVacantes(token).then(setVacantes);
-  }, [token]);
+  function cargar() {
+    setError(false);
+    setVacantes(null);
+    listarVacantes(token).then(setVacantes).catch(() => setError(true));
+  }
 
-  const activas = vacantes?.filter((v) => v.estado === "activa").length ?? 0;
-  const borrador = vacantes?.filter((v) => v.estado === "borrador").length ?? 0;
-  const cerradas = vacantes?.filter((v) => v.estado === "cerrada" || v.estado === "pausada").length ?? 0;
+  useEffect(cargar, [token]);
+
+  if (error) return <ErrorState mensaje="No pudimos cargar las vacantes." onReintentar={cargar} />;
+  if (!vacantes) return <PageLoader mensaje="Cargando vacantes…" />;
+
+  const activas = vacantes.filter((v) => v.estado === "activa").length;
+  const borrador = vacantes.filter((v) => v.estado === "borrador").length;
+  const cerradas = vacantes.filter((v) => v.estado === "cerrada" || v.estado === "pausada").length;
 
   return (
     <div>
       <div className="kpi-grid">
         <div className="kpi-card">
           <div className="kpi-icon v"><Icon name="briefcase" className="w-5 h-5" /></div>
-          <div className="kpi-numero">{vacantes?.length ?? "—"}</div>
+          <div className="kpi-numero">{vacantes.length}</div>
           <div className="kpi-etiqueta">Vacantes totales</div>
         </div>
         <div className="kpi-card">
@@ -61,10 +70,10 @@ export default function Vacantes() {
       </div>
 
       <div className="tarjeta" style={{ padding: "4px 0" }}>
-        {vacantes?.length === 0 && (
+        {vacantes.length === 0 && (
           <div className="text-muted text-sm px-5 py-10 text-center">Todavía no publicaste ninguna vacante.</div>
         )}
-        {vacantes?.length > 0 && (
+        {vacantes.length > 0 && (
           <table className="tabla-panel">
             <thead>
               <tr>

@@ -620,6 +620,7 @@
 .candidate-evaluation-status { position: absolute; right: 1.2rem; top: 1.2rem; padding: .35rem .58rem; border-radius: 999px; font-size: .56rem; font-weight: 900; }
 .candidate-evaluation-status.is-en_progreso { color: #26679e; background: #e7f2fc; }.candidate-evaluation-status.is-completado { color: #177269; background: #e5f6f3; }.candidate-evaluation-status.is-pendiente { color: #936112; background: #fff1d5; }
 .candidate-evaluation-card h3 { padding-right: 6.5rem; }
+.candidate-evaluation-empresa { margin-top: .2rem; color: #938b98; font-size: .68rem; font-weight: 700; }
 .candidate-reused, .candidate-saved { margin-top: .65rem; color: #7e7682; font-size: .64rem; }
 .candidate-reused { display: flex; align-items: center; gap: .3rem; color: #167269; font-weight: 800; }.candidate-reused svg { width: .8rem; }
 .candidate-evaluation-action { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: 1.1rem; padding: .72rem .8rem; border-radius: .62rem; color: white; background: var(--brand-acento); font-size: .68rem; font-weight: 900; }

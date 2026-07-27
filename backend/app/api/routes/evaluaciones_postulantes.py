@@ -146,6 +146,7 @@ async def _resumen(
     )
     return EvaluacionResumenOut(
         id=asignacion.id,
+        postulacion_id=asignacion.postulacion_id,
         test_slug=asignacion.test_slug,
         test_nombre=meta.get("nombre", asignacion.test_slug),
         estado=asignacion.estado,
@@ -234,59 +235,70 @@ def _outbox_asignacion(
     )
 
 
-@router.post(
-    "/vacantes/{vacante_id}/postulaciones/{postulacion_id}/evaluaciones",
-    response_model=EvaluacionResumenOut,
-    status_code=status.HTTP_201_CREATED,
-)
-async def asignar_evaluacion_postulante(
+async def _asignar_test_a_postulacion(
+    *,
+    tenant_id: uuid.UUID,
     vacante_id: uuid.UUID,
-    postulacion_id: uuid.UUID,
-    data: EvaluacionPostulanteCreate,
-    background: BackgroundTasks,
-    tenant_id: uuid.UUID = Depends(get_current_tenant_id),
-    db: AsyncSession = Depends(get_db),
-) -> EvaluacionResumenOut:
-    _, postulacion, persona = await _postulacion_propia(
-        vacante_id, postulacion_id, tenant_id, db
-    )
+    postulacion: Postulacion,
+    persona: Persona,
+    test_slug: str,
+    db: AsyncSession,
+    actor_tipo: str = "empresa",
+    actor_id: uuid.UUID | None = None,
+    estricto: bool = True,
+) -> tuple[EvaluacionResumenOut, OutboxEvento] | None:
+    """Crea la Asignacion (+ AccesoResultado si hay resultado reutilizable) de un test para
+    una postulación puntual. No hace commit ni programa el outbox en background — eso lo
+    maneja el caller, para poder asignar varios tests en una sola transacción (alta
+    automática al postular, alta en lote por vacante).
+
+    Con `estricto=True` levanta HTTPException ante cualquier problema (uso: endpoint manual,
+    conserva el comportamiento de siempre). Con `estricto=False` devuelve None en silencio
+    (uso: automático/en lote, donde un test sin licencia o ya asignado no debe frenar el resto).
+    """
     catalogo = _catalogo()
-    meta = catalogo.get(data.test_slug)
+    meta = catalogo.get(test_slug)
     if meta is None or not meta.get("tomable") or not meta.get("disponible"):
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "El test no está disponible en el catálogo")
+        if estricto:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, "El test no está disponible en el catálogo")
+        return None
     licencia = (
         await db.execute(
             select(EmpresaTest).where(
                 EmpresaTest.tenant_id == tenant_id,
-                EmpresaTest.test_slug == data.test_slug,
+                EmpresaTest.test_slug == test_slug,
                 EmpresaTest.habilitado.is_(True),
             )
         )
     ).scalar_one_or_none()
     if licencia is None:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, "La empresa no tiene habilitado ese test")
+        if estricto:
+            raise HTTPException(status.HTTP_403_FORBIDDEN, "La empresa no tiene habilitado ese test")
+        return None
 
     evaluado = await _evaluado_para_persona(persona, tenant_id, db)
     duplicada = (
         await db.execute(
             select(Asignacion).where(
                 Asignacion.evaluado_id == evaluado.id,
-                Asignacion.test_slug == data.test_slug,
+                Asignacion.test_slug == test_slug,
             )
         )
     ).scalar_one_or_none()
     if duplicada:
-        raise HTTPException(status.HTTP_409_CONFLICT, "La evaluación ya fue asignada")
+        if estricto:
+            raise HTTPException(status.HTTP_409_CONFLICT, "La evaluación ya fue asignada")
+        return None
 
-    catalogo_version, algoritmo_version = engine.versiones(data.test_slug)
-    existente = await _resultado_global(postulacion.persona_id, data.test_slug)
+    catalogo_version, algoritmo_version = engine.versiones(test_slug)
+    existente = await _resultado_global(postulacion.persona_id, test_slug)
     ahora = _ahora()
     asignacion = Asignacion(
         tenant_id=tenant_id,
         evaluado_id=evaluado.id,
         persona_id=postulacion.persona_id,
         postulacion_id=postulacion.id,
-        test_slug=data.test_slug,
+        test_slug=test_slug,
         estado="completado" if existente else "pendiente",
         finalizada_at=ahora if existente else None,
         catalogo_version=catalogo_version,
@@ -312,22 +324,108 @@ async def asignar_evaluacion_postulante(
     db.add(_auditar(
         tenant_id=tenant_id,
         persona_id=postulacion.persona_id,
-        actor_tipo="empresa",
-        actor_id=tenant_id,
+        actor_tipo=actor_tipo,
+        actor_id=actor_id if actor_id is not None else tenant_id,
         accion=accion,
         asignacion_id=asignacion.id,
         resultado_id=existente.id if existente else None,
         acceso_id=acceso.id if acceso else None,
-        detalle={"test_slug": data.test_slug, "vacante_id": str(vacante_id)},
+        detalle={"test_slug": test_slug, "vacante_id": str(vacante_id)},
     ))
     empresa = await db.get(Empresa, tenant_id)
     evento_outbox = _outbox_asignacion(tenant_id, persona, empresa, meta["nombre"])
     db.add(evento_outbox)
     await db.flush()
     resumen = await _resumen(asignacion, db)
+    return resumen, evento_outbox
+
+
+@router.post(
+    "/vacantes/{vacante_id}/postulaciones/{postulacion_id}/evaluaciones",
+    response_model=EvaluacionResumenOut,
+    status_code=status.HTTP_201_CREATED,
+)
+async def asignar_evaluacion_postulante(
+    vacante_id: uuid.UUID,
+    postulacion_id: uuid.UUID,
+    data: EvaluacionPostulanteCreate,
+    background: BackgroundTasks,
+    tenant_id: uuid.UUID = Depends(get_current_tenant_id),
+    db: AsyncSession = Depends(get_db),
+) -> EvaluacionResumenOut:
+    _, postulacion, persona = await _postulacion_propia(
+        vacante_id, postulacion_id, tenant_id, db
+    )
+    resultado = await _asignar_test_a_postulacion(
+        tenant_id=tenant_id,
+        vacante_id=vacante_id,
+        postulacion=postulacion,
+        persona=persona,
+        test_slug=data.test_slug,
+        db=db,
+        estricto=True,
+    )
+    assert resultado is not None  # estricto=True siempre levanta o devuelve algo
+    resumen, evento_outbox = resultado
     await db.commit()
     background.add_task(procesar_evento_outbox, evento_outbox.id, tenant_id)
     return resumen
+
+
+async def aplicar_tests_a_postulaciones_existentes(
+    vacante: Vacante, tenant_id: uuid.UUID, db: AsyncSession
+) -> list[tuple[EvaluacionResumenOut, OutboxEvento]]:
+    """Asigna los `tests_requeridos` vigentes de la vacante a todas sus postulaciones que
+    todavía no los tengan. No hace commit — lo maneja el caller (se llama tanto desde el
+    endpoint dedicado como automáticamente al guardar la vacante con tests nuevos)."""
+    if not vacante.tests_requeridos:
+        return []
+    filas = (
+        await db.execute(
+            select(Postulacion, Persona)
+            .join(Persona, Persona.id == Postulacion.persona_id)
+            .where(Postulacion.vacante_id == vacante.id, Postulacion.tenant_id == tenant_id)
+        )
+    ).all()
+    resultados: list[tuple[EvaluacionResumenOut, OutboxEvento]] = []
+    for postulacion, persona in filas:
+        for test_slug in vacante.tests_requeridos:
+            resultado = await _asignar_test_a_postulacion(
+                tenant_id=tenant_id,
+                vacante_id=vacante.id,
+                postulacion=postulacion,
+                persona=persona,
+                test_slug=test_slug,
+                db=db,
+                actor_tipo="empresa",
+                actor_id=tenant_id,
+                estricto=False,
+            )
+            if resultado is not None:
+                resultados.append(resultado)
+    return resultados
+
+
+@router.post(
+    "/vacantes/{vacante_id}/evaluaciones/aplicar-requeridos",
+    response_model=list[EvaluacionResumenOut],
+)
+async def aplicar_tests_requeridos(
+    vacante_id: uuid.UUID,
+    background: BackgroundTasks,
+    tenant_id: uuid.UUID = Depends(get_current_tenant_id),
+    db: AsyncSession = Depends(get_db),
+) -> list[EvaluacionResumenOut]:
+    """Botón manual de "ponerse al día": por si alguna postulación quedó sin el test pese a
+    la asignación automática (por ejemplo, se revocó y volvió a habilitar una licencia)."""
+    vacante = await db.get(Vacante, vacante_id)
+    if vacante is None or vacante.tenant_id != tenant_id:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Vacante no encontrada")
+    resultados = await aplicar_tests_a_postulaciones_existentes(vacante, tenant_id, db)
+    await db.commit()
+    for _, evento_outbox in resultados:
+        background.add_task(procesar_evento_outbox, evento_outbox.id, tenant_id)
+    return [resumen for resumen, _ in resultados]
 
 
 @router.get(

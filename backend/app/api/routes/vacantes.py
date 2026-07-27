@@ -9,8 +9,10 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_current_tenant_id
+from app.api.routes.evaluaciones_postulantes import aplicar_tests_a_postulaciones_existentes
 from app.core.db import get_db
 from app.core.matching import notificar_postulantes_compatibles
+from app.core.outbox import procesar_evento_outbox
 from app.models.vacante import Vacante
 from app.schemas.vacante import VacanteCreate, VacanteEstadoIn, VacanteOut, VacanteUpdate
 
@@ -63,14 +65,27 @@ async def obtener_vacante(
 async def actualizar_vacante(
     vacante_id: uuid.UUID,
     data: VacanteUpdate,
+    background: BackgroundTasks,
     tenant_id: uuid.UUID = Depends(get_current_tenant_id),
     db: AsyncSession = Depends(get_db),
 ) -> Vacante:
     vacante = await _get_vacante(vacante_id, tenant_id, db)
-    for campo, valor in data.model_dump(exclude_unset=True).items():
+    cambios = data.model_dump(exclude_unset=True)
+    for campo, valor in cambios.items():
         setattr(vacante, campo, valor)
     await db.flush()
+
+    # Si se tocaron los tests requeridos, se ponen al día las postulaciones que ya
+    # existían — la empresa no debería tener que asignarlas a mano una por una después.
+    resultados = (
+        await aplicar_tests_a_postulaciones_existentes(vacante, tenant_id, db)
+        if "tests_requeridos" in cambios
+        else []
+    )
+
     await db.commit()
+    for _, evento_outbox in resultados:
+        background.add_task(procesar_evento_outbox, evento_outbox.id, tenant_id)
     return vacante
 
 

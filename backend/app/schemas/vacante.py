@@ -37,6 +37,7 @@ class VacanteCreate(BaseModel):
     reclutador: Optional[str] = None
     pregunta_1: Optional[str] = None
     pregunta_2: Optional[str] = None
+    tests_requeridos: list[str] = Field(default_factory=list)
 
 
 class VacanteUpdate(VacanteCreate):
@@ -80,6 +81,7 @@ class VacanteOut(BaseModel):
     reclutador: Optional[str] = None
     pregunta_1: Optional[str] = None
     pregunta_2: Optional[str] = None
+    tests_requeridos: list[str] = Field(default_factory=list)
     created_at: dt.datetime
 
 

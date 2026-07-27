@@ -15,17 +15,42 @@ export default function FirmaCanvas({ onCambio, requiereVerificacion = false, cl
   const [vacio, setVacio] = useState(true);
   const [rostroDetectado, setRostroDetectado] = useState(!requiereVerificacion);
 
-  useEffect(() => {
+  function prepararTrazo() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const ratio = window.devicePixelRatio || 1;
-    canvas.width = canvas.clientWidth * ratio;
-    canvas.height = canvas.clientHeight * ratio;
-    ctx.scale(ratio, ratio);
     ctx.lineWidth = 2.4;
     ctx.lineCap = "round";
     ctx.strokeStyle = "#1a181d";
-  }, []);
+  }
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    // El área de arriba (verificación de rostro por webcam) cambia de tamaño de forma
+    // asíncrona cuando el video carga, lo que corre el layout DESPUÉS de montar este
+    // canvas. Si el tamaño del lienzo (canvas.width/height) queda fijado con la medida
+    // vieja, el trazo se ve chico/distorsionado y el borrado no limpia todo el recuadro
+    // visible (CSS estira un bitmap más chico que el área mostrada). Por eso el tamaño
+    // se recalcula cada vez que el elemento cambia de tamaño, no solo al montar.
+    const ajustarTamaño = () => {
+      if (!vacio) return; // no pisar una firma ya dibujada por un reflow tardío
+      const ratio = window.devicePixelRatio || 1;
+      const ancho = canvas.clientWidth * ratio;
+      const alto = canvas.clientHeight * ratio;
+      if (canvas.width === ancho && canvas.height === alto) return;
+      canvas.width = ancho;
+      canvas.height = alto;
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(ratio, ratio);
+      prepararTrazo();
+    };
+
+    ajustarTamaño();
+    const observer = new ResizeObserver(ajustarTamaño);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, [vacio]);
 
   function posicion(e) {
     const rect = canvasRef.current.getBoundingClientRect();
@@ -62,7 +87,10 @@ export default function FirmaCanvas({ onCambio, requiereVerificacion = false, cl
   function limpiar() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // ignora cualquier scale() vigente: limpia el bitmap físico entero
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
     setVacio(true);
     onCambio(null);
   }

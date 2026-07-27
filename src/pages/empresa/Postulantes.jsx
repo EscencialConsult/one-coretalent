@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
 import { listarTodasPostulaciones, listarEvaluacionesPostulacion } from "../../api/empresa";
+import { ErrorState, PageLoader } from "../../components/AsyncState";
 import Icon from "../../components/Icon";
 import { ApiError } from "../../api/client";
 
@@ -18,10 +19,12 @@ export default function Postulantes() {
   const [evaluacionesPorPostulacion, setEvaluacionesPorPostulacion] = useState({});
   const [filtro, setFiltro] = useState("");
   const [error, setError] = useState("");
+  const [intento, setIntento] = useState(0);
 
   useEffect(() => {
     let activo = true;
     setError("");
+    setPostulaciones(null);
     listarTodasPostulaciones(token)
       .then((data) => {
         if (!activo) return;
@@ -38,9 +41,12 @@ export default function Postulantes() {
     return () => {
       activo = false;
     };
-  }, [token]);
+  }, [token, intento]);
 
-  const filtradas = postulaciones?.filter((p) => {
+  if (error) return <ErrorState mensaje={error} onReintentar={() => setIntento((n) => n + 1)} />;
+  if (!postulaciones) return <PageLoader mensaje="Cargando postulaciones…" />;
+
+  const filtradas = postulaciones.filter((p) => {
     if (!filtro) return true;
     const buscar = filtro.toLowerCase();
     return (
@@ -56,21 +62,17 @@ export default function Postulantes() {
       <div className="kpi-grid" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
         <div className="kpi-card">
           <div className="kpi-icon v"><Icon name="users" className="w-5 h-5" /></div>
-          <div className="kpi-numero">{postulaciones?.length ?? "—"}</div>
+          <div className="kpi-numero">{postulaciones.length}</div>
           <div className="kpi-etiqueta">Total postulaciones</div>
         </div>
         <div className="kpi-card">
           <div className="kpi-icon r"><Icon name="file" className="w-5 h-5" /></div>
-          <div className="kpi-numero">{postulaciones?.filter((p) => p.cv_url).length ?? "—"}</div>
+          <div className="kpi-numero">{postulaciones.filter((p) => p.cv_url).length}</div>
           <div className="kpi-etiqueta">Con CV</div>
         </div>
         <div className="kpi-card">
           <div className="kpi-icon c"><Icon name="clock" className="w-5 h-5" /></div>
-          <div className="kpi-numero">
-            {postulaciones?.length
-              ? new Set(postulaciones.map((p) => p.email)).size
-              : "—"}
-          </div>
+          <div className="kpi-numero">{new Set(postulaciones.map((p) => p.email)).size}</div>
           <div className="kpi-etiqueta">Candidatos únicos</div>
         </div>
       </div>
@@ -87,17 +89,8 @@ export default function Postulantes() {
         </div>
       </div>
 
-{error && (
-        <div role="alert" className="mb-4 text-sm font-semibold px-4 py-3 rounded-chico" style={{ color: "#c0392b", background: "rgba(192,57,43,.08)", border: "1px solid rgba(192,57,43,.3)" }}>
-          {error}
-        </div>
-      )}
-
       <div className="tarjeta overflow-x-auto" style={{ padding: "4px 0" }}>
-        {postulaciones === null && !error && (
-          <div className="text-muted text-sm px-5 py-10 text-center">Cargando postulaciones…</div>
-        )}
-        {postulaciones?.length === 0 && (
+        {postulaciones.length === 0 && (
           <div className="text-muted text-sm px-5 py-10 text-center">Todavía no hay postulaciones.</div>
         )}
         {filtradas?.length === 0 && postulaciones?.length > 0 && (

@@ -29,6 +29,7 @@ class IniciarEvaluacionIn(BaseModel):
 
 class EvaluacionResumenOut(BaseModel):
     id: uuid.UUID
+    postulacion_id: uuid.UUID | None = None
     test_slug: str
     test_nombre: str
     estado: str

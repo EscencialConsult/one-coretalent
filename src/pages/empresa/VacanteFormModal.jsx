@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../auth/useAuth";
-import { crearVacante } from "../../api/empresa";
+import { crearVacante, actualizarVacante, listarCatalogoTestsEmpresa } from "../../api/empresa";
 import { ApiError } from "../../api/client";
 import Icon from "../../components/Icon";
 
@@ -21,16 +21,34 @@ const VACIO = {
   nivel_idioma: "",
   pregunta_1: "",
   pregunta_2: "",
+  tests_requeridos: [],
 };
 
-export default function VacanteFormModal({ onClose, onCreada }) {
+export default function VacanteFormModal({ onClose, onCreada, vacante }) {
   const { token } = useAuth();
-  const [form, setForm] = useState(VACIO);
+  const editando = Boolean(vacante);
+  const [form, setForm] = useState(() =>
+    editando ? { ...VACIO, ...vacante, tests_requeridos: vacante.tests_requeridos || [] } : VACIO
+  );
+  const [catalogo, setCatalogo] = useState([]);
   const [error, setError] = useState("");
   const [enviando, setEnviando] = useState(false);
 
+  useEffect(() => {
+    listarCatalogoTestsEmpresa(token).then(setCatalogo).catch(() => setCatalogo([]));
+  }, [token]);
+
   function campo(nombre, valor) {
     setForm((f) => ({ ...f, [nombre]: valor }));
+  }
+
+  function alternarTest(slug) {
+    setForm((f) => ({
+      ...f,
+      tests_requeridos: f.tests_requeridos.includes(slug)
+        ? f.tests_requeridos.filter((s) => s !== slug)
+        : [...f.tests_requeridos, slug],
+    }));
   }
 
   async function onSubmit(e) {
@@ -38,10 +56,13 @@ export default function VacanteFormModal({ onClose, onCreada }) {
     setError("");
     setEnviando(true);
     try {
-      const vacante = await crearVacante(token, { ...form, vacantes: Number(form.vacantes) || 1 });
-      onCreada(vacante);
+      const datos = { ...form, vacantes: Number(form.vacantes) || 1 };
+      const resultado = editando
+        ? await actualizarVacante(token, vacante.id, datos)
+        : await crearVacante(token, datos);
+      onCreada(resultado);
     } catch (err) {
-      setError(err instanceof ApiError ? err.detail : "No se pudo crear la vacante");
+      setError(err instanceof ApiError ? err.detail : `No se pudo ${editando ? "guardar" : "crear"} la vacante`);
     } finally {
       setEnviando(false);
     }
@@ -58,8 +79,10 @@ export default function VacanteFormModal({ onClose, onCreada }) {
         >
           <Icon name="x" className="w-5 h-5" />
         </button>
-        <h2 className="text-lg font-extrabold mb-1">Nueva vacante</h2>
-        <p className="text-muted text-sm mb-6">Se crea como borrador — la activás cuando esté lista.</p>
+        <h2 className="text-lg font-extrabold mb-1">{editando ? "Editar vacante" : "Nueva vacante"}</h2>
+        <p className="text-muted text-sm mb-6">
+          {editando ? "Los cambios se aplican de inmediato." : "Se crea como borrador — la activás cuando esté lista."}
+        </p>
 
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           <Campo id="vacante-puesto" name="puesto" label="Puesto" required value={form.puesto} onChange={(v) => campo("puesto", v)} />
@@ -109,6 +132,24 @@ export default function VacanteFormModal({ onClose, onCreada }) {
           </div>
         </div>
 
+        <h3 className="text-xs font-extrabold uppercase tracking-wide text-muted mb-1">Tests requeridos para este puesto (opcional)</h3>
+        <p className="text-xs text-muted mb-3">Se van a asignar solos a cada persona que postule — no hace falta asignarlos uno por uno.</p>
+        <div className="grid md:grid-cols-2 gap-2 mb-6">
+          {catalogo.filter((t) => t.habilitado && t.disponible && t.tomable).map((t) => (
+            <label key={t.slug} className="flex items-center gap-2 rounded-chico border border-linea px-3 py-2 text-sm cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.tests_requeridos.includes(t.slug)}
+                onChange={() => alternarTest(t.slug)}
+              />
+              {t.nombre}
+            </label>
+          ))}
+          {!catalogo.some((t) => t.habilitado && t.disponible && t.tomable) && (
+            <p className="text-xs text-muted col-span-2">La empresa todavía no tiene tests habilitados en su licencia.</p>
+          )}
+        </div>
+
         <h3 className="text-xs font-extrabold uppercase tracking-wide text-muted mb-3">Preguntas al postulante (opcional)</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">
           <Campo id="vacante-pregunta-1" name="pregunta_1" label="Pregunta 1" value={form.pregunta_1} onChange={(v) => campo("pregunta_1", v)} />
@@ -120,7 +161,7 @@ export default function VacanteFormModal({ onClose, onCreada }) {
         <div className="flex justify-end gap-2.5 pt-2 border-t border-linea">
           <button type="button" onClick={onClose} className="boton boton-fantasma !py-2.5 mt-4">Cancelar</button>
           <button type="submit" disabled={enviando} className="boton boton-acento !py-2.5 mt-4">
-            {enviando ? "Creando…" : "Crear vacante"}
+            {enviando ? "Guardando…" : editando ? "Guardar cambios" : "Crear vacante"}
           </button>
         </div>
       </form>

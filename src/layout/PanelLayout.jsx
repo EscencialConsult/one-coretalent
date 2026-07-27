@@ -9,6 +9,7 @@ const NAV_EMPRESA = [
   { to: "/empresa/inicio", icon: "home", label: "Inicio", titulo: "Inicio" },
   { to: "/empresa/vacantes", icon: "briefcase", label: "Vacantes", titulo: "Vacantes" },
   { to: "/empresa/postulantes", icon: "users", label: "Postulantes", titulo: "Postulantes" },
+  { to: "/empresa/tests", icon: "clipboard", label: "Tests", titulo: "Tests" },
   { to: "/empresa/perfil", icon: "user", label: "Mi perfil", titulo: "Mi perfil" },
 ];
 const NAV_SUPERADMIN = [
