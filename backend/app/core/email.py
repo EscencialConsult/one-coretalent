@@ -45,13 +45,19 @@ def _send_sync(to: str, subject: str, html: str, from_name: str | None = None) -
 async def enviar_email(to: str, subject: str, html: str, from_name: str | None = None) -> bool:
     """Envía un correo HTML. Devuelve True si se envió, False si está deshabilitado o falló."""
     if not settings.email_habilitado:
+        print(f"[email] SMTP no configurado; se omite el correo '{subject}' a {to}", flush=True)
         logger.warning("SMTP no configurado; se omite el correo '%s' a %s", subject, to)
         return False
     try:
         await asyncio.to_thread(_send_sync, to, subject, html, from_name)
+        print(f"[email] Correo enviado a {to}: {subject}", flush=True)
         logger.info("Correo enviado a %s: %s", to, subject)
         return True
     except Exception as e:  # noqa: BLE001
+        # print(..., flush=True) además del logger: en más de un entorno el logger de
+        # "app.email" quedó sin handler visible en los logs del hosting y esto era
+        # imposible de diagnosticar sin saber si el intento fallaba o ni se hacía.
+        print(f"[email] ERROR enviando correo a {to}: {e!r}", flush=True)
         logger.error("Error enviando correo a %s: %s", to, e)
         return False
 

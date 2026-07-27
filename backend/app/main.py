@@ -17,6 +17,8 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     stream=sys.stdout,
+    force=True,  # uvicorn ya configuró sus propios loggers antes de este import; sin
+                 # force=True, basicConfig() no hace nada si el root ya tiene handlers.
 )
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
