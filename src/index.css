@@ -548,6 +548,15 @@
 .candidate-primary-button:focus-visible { outline: 3px solid rgba(77,36,143,.2); outline-offset: 2px; }
 .candidate-primary-button:disabled { opacity: .58; cursor: not-allowed; }
 .candidate-primary-button svg { width: .92rem; height: .92rem; flex: none; }
+.btn-primario, .btn-secundario { display: inline-flex; min-height: 2.75rem; align-items: center; justify-content: center; gap: .42rem; padding: .72rem 1.15rem; border-radius: .65rem; font-size: .78rem; font-weight: 800; line-height: 1; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease; }
+.btn-primario { border: 1px solid transparent; color: white; background: linear-gradient(135deg, var(--brand-acento), #7043b4); box-shadow: 0 10px 22px rgba(77,36,143,.2); }
+.btn-primario:hover:not(:disabled) { color: white; transform: translateY(-1px); box-shadow: 0 14px 26px rgba(77,36,143,.26); }
+.btn-secundario { border: 1px solid #ddd8e2; color: #48414e; background: white; }
+.btn-secundario:hover:not(:disabled) { border-color: var(--brand-acento); color: var(--brand-acento); }
+.btn-primario:disabled, .btn-secundario:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.candidate-runner-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .7rem; }
+.candidate-runner-saved { color: #776f7b; font-size: .68rem; font-weight: 700; }
+.candidate-runner-saved.is-error { color: #b5342a; font-weight: 900; }
 .candidate-application-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin-bottom: 1rem; }
 .candidate-application-stat { display: flex; align-items: center; gap: .8rem; padding: 1rem; border: 1px solid #e0dce4; border-radius: .85rem; background: white; box-shadow: 0 8px 22px rgba(37,28,44,.04); }
 .candidate-application-stat > div { display: grid; width: 2.65rem; height: 2.65rem; flex: none; place-items: center; border-radius: .68rem; }
@@ -595,7 +604,7 @@
 .candidate-content .input:focus { border-color: var(--brand-acento); box-shadow: 0 0 0 3px rgba(77,36,143,.1); }
 .candidate-content .btn-primario, .candidate-content .btn-secundario { border-radius: .65rem; }
 .candidate-loader { display: grid; min-height: 55vh; place-items: center; align-content: center; color: #776f7c; }
-.candidate-loader .spinner-marca { margin-bottom: .8rem; }.candidate-loader p { font-size: .75rem; font-weight: 750; }
+.candidate-loader .one-spinwrap { margin-bottom: .8rem; }.candidate-loader p { font-size: .75rem; font-weight: 750; }
 .candidate-state { display: grid; min-height: 350px; place-items: center; align-content: center; padding: 2.5rem 1.5rem; border: 1px dashed #d8d2dc; border-radius: 1rem; text-align: center; background: rgba(255,255,255,.7); }
 .candidate-state > div { display: grid; width: 3.25rem; height: 3.25rem; place-items: center; border-radius: .85rem; color: var(--brand-acento); background: #efeaf5; }
 .candidate-state > div svg { width: 1.25rem; }.candidate-state.is-error > div { color: #ad334d; background: #fbecef; }
@@ -771,18 +780,12 @@ body {
   background: #fefeff;
 }
 
-.spinner-marca {
-  width: 34px;
-  height: 34px;
-  border: 3px solid rgba(77, 36, 143, 0.16);
-  border-top-color: var(--brand-acento);
-  border-radius: 9999px;
-  animation: girar 0.75s linear infinite;
-}
-
-@keyframes girar {
-  to { transform: rotate(360deg); }
-}
+.one-spinwrap { position: relative; display: grid; width: 72px; height: 72px; place-items: center; }
+.one-spiral { display: block; width: 72px; height: 72px; animation: one-pulse 2.6s ease-in-out infinite; filter: drop-shadow(0 4px 12px rgba(120,90,200,.18)); }
+.one-ring { position: absolute; inset: 6px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(107,225,227,0) 0deg, #6be1e3 80deg, #7f9fe4 150deg, #9a6fd6 220deg, #d86bc0 300deg, rgba(216,107,192,0) 360deg); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px)); animation: one-spin 1.1s linear infinite; }
+@keyframes one-spin { to { transform: rotate(360deg); } }
+@keyframes one-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@media (prefers-reduced-motion: reduce) { .one-ring { animation-duration: 2.8s; } .one-spiral { animation: none; } }
 
 /* ── Fondo decorativo (blobs animados) — misma identidad visual que Plataforma ONE ── */
 .fondo-blobs {

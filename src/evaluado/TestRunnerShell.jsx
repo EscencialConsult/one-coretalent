@@ -161,7 +161,26 @@ export default function TestRunnerShell({ evaluacion }) {
 }
 
 function ShellCabecera({ titulo, onSalir, estadoGuardado, guardadoFallido, onReintentarGuardado, children }) {
-  return <div className="min-h-screen bg-gray-50"><header className="bg-white border-b px-4 sm:px-8 min-h-[4rem] py-2 flex items-center justify-between gap-4"><div className="min-w-0"><p className="text-xs text-purple-700 font-bold uppercase">ONE · Evaluación</p><h1 className="font-extrabold truncate max-w-[55vw]">{titulo}</h1></div><div className="flex flex-wrap justify-end items-center gap-2">{estadoGuardado && <span role="status" className={`text-xs ${guardadoFallido ? "text-red-700 font-bold" : "text-gray-500"}`}>{estadoGuardado}</span>}{guardadoFallido && <button className="text-xs font-bold text-purple-700 underline" onClick={() => onReintentarGuardado?.()}>Reintentar guardado</button>}{onSalir && <button className="btn-secundario" onClick={onSalir}>Salir</button>}</div></header><main className="p-4 sm:p-8">{children}</main></div>;
+  return (
+    <section className="candidate-page">
+      <header className="candidate-page-header">
+        <div>
+          <span>ONE · Evaluación</span>
+          <h1>{titulo}</h1>
+        </div>
+        <div className="candidate-runner-actions">
+          {estadoGuardado && (
+            <span role="status" className={`candidate-runner-saved ${guardadoFallido ? "is-error" : ""}`}>{estadoGuardado}</span>
+          )}
+          {guardadoFallido && (
+            <button type="button" className="btn-secundario" onClick={() => onReintentarGuardado?.()}>Reintentar guardado</button>
+          )}
+          {onSalir && <button type="button" className="btn-secundario" onClick={onSalir}>Salir</button>}
+        </div>
+      </header>
+      {children}
+    </section>
+  );
 }
 
 function crearAdaptador(data) {
