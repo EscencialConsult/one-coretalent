@@ -785,7 +785,7 @@ body {
 .one-ring { position: absolute; inset: 6px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(107,225,227,0) 0deg, #6be1e3 80deg, #7f9fe4 150deg, #9a6fd6 220deg, #d86bc0 300deg, rgba(216,107,192,0) 360deg); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px)); animation: one-spin 1.1s linear infinite; }
 @keyframes one-spin { to { transform: rotate(360deg); } }
 @keyframes one-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-@media (prefers-reduced-motion: reduce) { .one-ring { animation-duration: 2.8s; } .one-spiral { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .one-ring { animation-duration: 2.8s !important; animation-iteration-count: infinite !important; } .one-spiral { animation: none !important; } }
 
 /* ── Fondo decorativo (blobs animados) — misma identidad visual que Plataforma ONE ── */
 .fondo-blobs {
