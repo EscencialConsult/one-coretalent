@@ -69,7 +69,7 @@ sistema mixto core-talent/          ← este repo
 
 - **Módulo 360°**: descartado, no se construye (ver arriba).
 - **Informe con IA**: descartado, no se construye (ver arriba).
-- **Hosting**: backend probablemente en **Render**. Frontend lo despliega Facundo directamente en **Netlify**.
+- **Hosting**: **Render NO se usa para nada** (ni base de datos, ni backend) — es una corrección explícita de Facundo, no asumir Render en ningún punto del despliegue. La base es **Supabase** (ya en uso). El hosting del backend todavía **no está decidido** — falta definir dónde va a correr. Frontend lo despliega Facundo directamente en **Netlify**.
 - **Migración de datos reales**: NO se trae nada de la base vieja de Render/Plataforma ONE (los datos de esos tests psicométricos no andaban bien de antes, se descarta esa migración). SÍ se van a traer los datos de **postulaciones**, que hoy viven en una planilla de Google Sheets (Talent Hub) — Facundo va a pasar esa planilla para migrarla.
 - **Reutilización de resultados**: confirmado que la lógica actual es la correcta — si el resultado ya existe se reusa directo (no se pide de nuevo); si no existe, recién ahí se solicita acceso/se rinde. No requiere cambios.
 
@@ -78,7 +78,7 @@ sistema mixto core-talent/          ← este repo
 1. Falta que Facundo pruebe manualmente: revocación de acceso, doble asignación y doble finalización de una evaluación (ver Etapa 5).
 2. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
 3. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
-4. **Etapa 11 — Despliegue**: falta el dominio definitivo, cargar `SECRET_KEY`/credenciales de Supabase/SMTP reales en Render y Netlify (hoy corre local; el código ya bloquea el arranque si `SECRET_KEY` queda con el valor por defecto fuera de modo desarrollo), y definir estrategia de rollback.
+4. **Etapa 11 — Despliegue**: falta decidir dónde corre el backend (NO Render, todavía sin definir), el dominio definitivo, cargar `SECRET_KEY`/credenciales de Supabase/SMTP reales ahí y en Netlify (`VITE_API_URL` apuntando a la URL pública del backend — hoy el frontend en Netlify no tiene backend al que conectarse porque sigue corriendo solo en local), y definir estrategia de rollback. El código ya bloquea el arranque si `SECRET_KEY` queda con el valor por defecto fuera de modo desarrollo.
 5. **Email real**: no hay SMTP configurado todavía en ningún entorno — recuperación de contraseña y notificaciones no envían correos reales hasta cargar credenciales (Etapa 11).
 6. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso.
 
