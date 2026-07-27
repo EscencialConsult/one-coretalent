@@ -1,7 +1,7 @@
 # ONE Core-Talent — Documento de traspaso
 
 > Documento de traspaso para cualquier integrante que continúe el proyecto.
-> Última actualización: 2026-07-27, por Facundo.
+> Última actualización: 2026-07-27, por Facundo (con Claude).
 
 ---
 
@@ -69,18 +69,18 @@ sistema mixto core-talent/          ← este repo
 
 - **Módulo 360°**: descartado, no se construye (ver arriba).
 - **Informe con IA**: descartado, no se construye (ver arriba).
-- **Hosting**: **Render NO se usa para nada** (ni base de datos, ni backend) — es una corrección explícita de Facundo, no asumir Render en ningún punto del despliegue. La base es **Supabase** (ya en uso). El hosting del backend todavía **no está decidido** — falta definir dónde va a correr. Frontend lo despliega Facundo directamente en **Netlify**.
+- **Hosting**: **Render NO se usa para nada** (ni base de datos, ni backend). La base es **Supabase**. El backend corre en **Railway** (`backend/Procfile` + `backend/railway.json`, build con Nixpacks, arranca con `alembic upgrade head && uvicorn ...`). El frontend está desplegado en **Netlify**, dominio propio **`coretalent.onelabs.pro`**, con `VITE_API_URL` apuntando a la URL pública de Railway (tiene que incluir el `/api` al final — ver `src/api/client.js`). Ya está en producción y probado de punta a punta.
 - **Migración de datos reales**: NO se trae nada de la base vieja de Render/Plataforma ONE (los datos de esos tests psicométricos no andaban bien de antes, se descarta esa migración). SÍ se van a traer los datos de **postulaciones**, que hoy viven en una planilla de Google Sheets (Talent Hub) — Facundo va a pasar esa planilla para migrarla.
 - **Reutilización de resultados**: confirmado que la lógica actual es la correcta — si el resultado ya existe se reusa directo (no se pide de nuevo); si no existe, recién ahí se solicita acceso/se rinde. No requiere cambios.
+- **Tests psicométricos por vacante** (2026-07-27): la empresa configura los tests requeridos **una vez, a nivel de vacante** (al crearla o editarla), no postulante por postulante. Al postular, esos tests se asignan solos; para postulaciones que ya existían, editar la vacante los pone al día automáticamente (también hay un botón manual de "Aplicar a postulaciones pendientes" como red de seguridad). Ver `Vacante.tests_requeridos`, `aplicar_tests_a_postulaciones_existentes` en `evaluaciones_postulantes.py`.
 
 ### Pendientes reales para la próxima persona
 
-1. Falta que Facundo pruebe manualmente: revocación de acceso, doble asignación y doble finalización de una evaluación (ver Etapa 5).
-2. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
-3. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
-4. **Etapa 11 — Despliegue**: falta decidir dónde corre el backend (NO Render, todavía sin definir), el dominio definitivo, cargar `SECRET_KEY`/credenciales de Supabase/SMTP reales ahí y en Netlify (`VITE_API_URL` apuntando a la URL pública del backend — hoy el frontend en Netlify no tiene backend al que conectarse porque sigue corriendo solo en local), y definir estrategia de rollback. El código ya bloquea el arranque si `SECRET_KEY` queda con el valor por defecto fuera de modo desarrollo.
-5. **Email real**: no hay SMTP configurado todavía en ningún entorno — recuperación de contraseña y notificaciones no envían correos reales hasta cargar credenciales (Etapa 11).
-6. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso.
+1. **Email real**: SMTP todavía no está cargado en Railway — se va a usar **Brevo**. Sin esto, recuperación de contraseña y notificaciones no mandan correos reales (el sistema los genera pero no los envía; no rompe nada, solo queda deshabilitado). Ver `backend/app/core/email.py` y `SMTP_*` en `config.py`.
+2. Falta que Facundo pruebe manualmente: revocación de acceso, doble asignación y doble finalización de una evaluación (ver Etapa 5).
+3. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso.
+4. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
+5. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
 
 ---
 
