@@ -145,7 +145,7 @@ export default function StaiRunner({ slug, empresa, onExit, onSubmit }) {
                 </div>
                 <div className="navleg">
                   <span><i style={{ background: 'var(--grad)' }} /> Actual</span>
-                  <span><i style={{ background: 'rgba(107,225,227,.4)' }} /> Respondida</span>
+                  <span><i style={{ background: 'rgba(79,173,209,.4)' }} /> Respondida</span>
                   <span><i style={{ background: '#fff', border: '1.5px solid var(--linea)' }} /> Pendiente</span>
                 </div>
               </div>

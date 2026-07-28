@@ -71,7 +71,7 @@ export default function InformeToulouse({ data }) {
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           <Kpi n={d.aciertos} l="Aciertos" color="#0f9d6b" />
           <Kpi n={d.errores} l="Errores" color="#c0392b" />
-          <Kpi n={d.omisiones} l="Omisiones" color="#9a7d1a" />
+          <Kpi n={d.omisiones} l="Omisiones" color="#4f7a34" />
           <Kpi n={d.totalProcesado} l="Cuadrados recorridos" />
           <Kpi n={mmss(d.tiempoSegundos)} l="Tiempo" />
         </div>
@@ -120,7 +120,7 @@ export default function InformeToulouse({ data }) {
               return (
                 <div className="bf-bar" key={s.segmento}>
                   <label><span>Zona {s.segmento}</span><b>{s.cantidad} marcas</b></label>
-                  <div className="bf-track"><i style={{ width: `${(dens / maxDens) * 100}%`, background: 'linear-gradient(135deg,#4d248f,#6be1e3)' }} /></div>
+                  <div className="bf-track"><i style={{ width: `${(dens / maxDens) * 100}%`, background: 'linear-gradient(135deg,#B4272D,#4FADD1)' }} /></div>
                 </div>
               )
             })}

@@ -6,7 +6,7 @@ import FichaTest from './FichaTest.jsx'
 function colorScore(p) {
   const n = parseFloat(p) || 0
   if (n >= 3.5) return '#0f9d6b'
-  if (n >= 2.5) return '#9a7d1a'
+  if (n >= 2.5) return '#4f7a34'
   return '#c0392b'
 }
 

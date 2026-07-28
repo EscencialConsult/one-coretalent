@@ -61,7 +61,7 @@ export default function InformeCAD({ data }) {
                 <span>{f.icono ? `${f.icono} ` : ''}{f.nombre}</span>
                 <b>{num(f.avg)} <span style={{ fontWeight: 600, color: 'var(--muted)' }}>/ 4</span></b>
               </label>
-              <div className="bf-track"><i style={{ width: `${(Number(f.avg || 0) / 4) * 100}%`, background: f.color || 'linear-gradient(135deg,#4d248f,#6be1e3)' }} /></div>
+              <div className="bf-track"><i style={{ width: `${(Number(f.avg || 0) / 4) * 100}%`, background: f.color || 'linear-gradient(135deg,#B4272D,#4FADD1)' }} /></div>
               <div style={{ fontSize: 11.5, color: 'var(--muted)', marginTop: 3 }}>{f.foco} · Total {f.total}/{f.max} ({f.pct}%)</div>
             </div>
           ))}

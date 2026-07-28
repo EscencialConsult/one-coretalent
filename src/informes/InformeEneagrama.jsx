@@ -82,7 +82,7 @@ export default function InformeEneagrama({ data }) {
                 <span>{t.tipo}. {t.nombre}{t.rol === 'base' ? ' · Base' : t.rol === 'ala' ? ' · Ala' : ''}</span>
                 <b>{t.porcentaje}%</b>
               </label>
-              <div className="bf-track"><i style={{ width: `${t.porcentaje}%`, background: t.rol ? 'linear-gradient(135deg,#4d248f,#6be1e3)' : '#c6c9d7' }} /></div>
+              <div className="bf-track"><i style={{ width: `${t.porcentaje}%`, background: t.rol ? 'linear-gradient(135deg,#B4272D,#4FADD1)' : '#c6c9d7' }} /></div>
             </div>
           ))}
         </div>

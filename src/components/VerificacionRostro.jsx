@@ -89,7 +89,7 @@ export default function VerificacionRostro({ onRostroDetectado }) {
     };
   }, []);
 
-  const color = estado === "detectado" ? "#1b9aa0" : estado === "error" ? "#c0392b" : "var(--brand-acento)";
+  const color = estado === "detectado" ? "#2b6f8c" : estado === "error" ? "#c0392b" : "var(--brand-acento)";
 
   return (
     <div className="border border-linea rounded-chico overflow-hidden" aria-live="polite">

@@ -125,9 +125,9 @@ export default function InformeDnla({ data }) {
             {a.feedback && (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <Pill lbl="Lo que funciona" v={a.feedback.bien} c="#178a8f" />
-                <Pill lbl="Oportunidad" v={a.feedback.op} c="#9a7d1a" />
+                <Pill lbl="Oportunidad" v={a.feedback.op} c="#4f7a34" />
                 <Pill lbl="Herramienta" v={a.feedback.herr} c="#b5559f" />
-                <Pill lbl="Indicador" v={a.feedback.kpi} c="#4d248f" />
+                <Pill lbl="Indicador" v={a.feedback.kpi} c="#B4272D" />
               </div>
             )}
           </div>

@@ -31,7 +31,7 @@ export default function Plexus() {
         ln.setAttribute('y1', p[a].y.toFixed(1))
         ln.setAttribute('x2', p[b].x.toFixed(1))
         ln.setAttribute('y2', p[b].y.toFixed(1))
-        ln.setAttribute('stroke', '#4d248f')
+        ln.setAttribute('stroke', '#B4272D')
         ln.setAttribute('stroke-width', '1.1')
         ln.setAttribute('stroke-opacity', Math.max(0.1, 0.4 * (1 - d / (maxd * 1.6))).toFixed(3))
         svg.appendChild(ln)
@@ -53,7 +53,7 @@ export default function Plexus() {
         c.setAttribute('cx', p[i].x.toFixed(1))
         c.setAttribute('cy', p[i].y.toFixed(1))
         c.setAttribute('r', (Math.random() * 1.3 + 1.2).toFixed(1))
-        c.setAttribute('fill', '#4d248f')
+        c.setAttribute('fill', '#B4272D')
         c.setAttribute('fill-opacity', '0.6')
         svg.appendChild(c)
       }

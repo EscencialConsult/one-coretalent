@@ -161,10 +161,10 @@ async def enviar_nuevas_credenciales_empresa(email: str, password: str, link: st
 async def enviar_recuperacion_password(email: str, link: str, marca: dict | None = None) -> bool:
     """Link de recuperación (1 uso, expira) — para Usuario (admin) o Persona (candidato)."""
     marca = marca or {
-        "razon_social": "ONE Core Analytics",
-        "color_acento": "#4d248f",
-        "color_secundario": "#6be1e3",
-        "logo_url": f"{settings.PUBLIC_BASE_URL.rstrip('/')}/logo.png",
+        "razon_social": "AdRHA",
+        "color_acento": "#B4272D",
+        "color_secundario": "#4FADD1",
+        "logo_url": f"{settings.PUBLIC_BASE_URL.rstrip('/')}/iconadhracompletocolor.png",
     }
     cuerpo = (
         '<p style="font-size:14.5px;line-height:1.6;">Recibimos una solicitud para restablecer tu contraseña.</p>'
@@ -177,7 +177,7 @@ async def enviar_recuperacion_password(email: str, link: str, marca: dict | None
 
 
 async def enviar_invitacion_evaluado(marca: dict, nombre: str, email: str, password: str, link: str) -> bool:
-    c1 = marca.get("color_acento") or "#4d248f"
+    c1 = marca.get("color_acento") or "#B4272D"
     razon = escape(marca.get("razon_social") or "la empresa")
     cuerpo = (
         f'<p style="font-size:14.5px;line-height:1.6;">Hola {escape(nombre)}, <b>{razon}</b> te invitó a realizar una evaluación en línea. '

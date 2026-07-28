@@ -5,7 +5,7 @@ import FichaTest from './FichaTest.jsx'
 const BANDA = {
   excelente: { color: '#0f9d6b', bg: 'rgba(16,185,129,.12)', txt: 'Excelente' },
   muy_bien: { color: '#0f9d6b', bg: 'rgba(16,185,129,.12)', txt: 'Muy bien' },
-  bien: { color: '#9a7d1a', bg: 'rgba(228,199,106,.22)', txt: 'Aceptable' },
+  bien: { color: '#4f7a34', bg: 'rgba(111,170,70,.22)', txt: 'Aceptable' },
   insuficiente: { color: '#c0392b', bg: 'rgba(192,57,43,.1)', txt: 'Insuficiente' },
 }
 
@@ -57,7 +57,7 @@ export default function InformeExcel({ data }) {
             {cats.map((c) => (
               <div className="bf-bar" key={c.categoria}>
                 <label><span>{c.categoria}</span><b>{c.correctos}/{c.total} · {c.porcentaje}%</b></label>
-                <div className="bf-track"><i style={{ width: `${c.porcentaje}%`, background: c.porcentaje >= 50 ? 'linear-gradient(135deg,#4d248f,#6be1e3)' : 'linear-gradient(135deg,#e17bd7,#e4c76a)' }} /></div>
+                <div className="bf-track"><i style={{ width: `${c.porcentaje}%`, background: c.porcentaje >= 50 ? 'linear-gradient(135deg,#B4272D,#4FADD1)' : 'linear-gradient(135deg,#F0A030,#6FAA46)' }} /></div>
               </div>
             ))}
           </div>

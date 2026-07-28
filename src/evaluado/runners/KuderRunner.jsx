@@ -137,7 +137,7 @@ export default function KuderRunner({ slug, empresa, onExit, onSubmit }) {
               {aviso && (
                 <div className="aviso">
                   Te faltan {total - respondidas} grupos por completar.{' '}
-                  <a style={{ color: '#9a7d1a', fontWeight: 800, textDecoration: 'underline', cursor: 'pointer' }} onClick={irPrimeraPendiente}>Ir al primero pendiente</a>
+                  <a style={{ color: '#4f7a34', fontWeight: 800, textDecoration: 'underline', cursor: 'pointer' }} onClick={irPrimeraPendiente}>Ir al primero pendiente</a>
                 </div>
               )}
 

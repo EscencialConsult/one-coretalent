@@ -42,7 +42,7 @@ export default function Empresas() {
                 <tr key={e.id}>
                   <td style={{ paddingLeft: 20 }}>
                     <div className="flex items-center gap-3">
-                      <div className="fila-icono" style={{ background: "rgba(77,36,143,.1)" }}>{sigla(e.razon_social)}</div>
+                      <div className="fila-icono" style={{ background: "rgba(180,39,45,.1)" }}>{sigla(e.razon_social)}</div>
                       <div>
                         <b className="text-sm block">{e.razon_social}</b>
                         <span className="text-xs text-muted">{e.email_admin}</span>

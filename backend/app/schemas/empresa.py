@@ -17,8 +17,8 @@ class EmpresaCreate(BaseModel):
     razon_social: str
     subdominio: str
     email_admin: EmailStr
-    color_acento: str = "#4d248f"
-    color_secundario: str = "#6be1e3"
+    color_acento: str = "#B4272D"
+    color_secundario: str = "#4FADD1"
     logo_url: Optional[str] = None  # URL externa o data URI base64
     # Admin principal de la empresa (opcional al crear). Si se envía password, se crea el usuario.
     admin_password: Optional[str] = None
@@ -52,6 +52,6 @@ class EmpresaOut(BaseModel):
     email_admin: EmailStr
     logo_url: Optional[str] = None
     color_acento: str
-    color_secundario: str = "#6be1e3"
+    color_secundario: str = "#4FADD1"
     estado: EstadoEmpresa
     created_at: dt.datetime

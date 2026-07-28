@@ -53,7 +53,7 @@ export default function InformeWais({ data }) {
           {indices.map((c) => (
             <div className="bf-bar" key={c.nombre}>
               <label><span>{c.nombre}</span><b style={{ color: c.color || 'var(--brand-acento)' }}>{c.correctas}/{c.total} · {c.rango}</b></label>
-              <div className="bf-track"><i style={{ width: `${c.porcentaje}%`, background: c.color || 'linear-gradient(135deg,#4d248f,#6be1e3)' }} /></div>
+              <div className="bf-track"><i style={{ width: `${c.porcentaje}%`, background: c.color || 'linear-gradient(135deg,#B4272D,#4FADD1)' }} /></div>
             </div>
           ))}
         </div>

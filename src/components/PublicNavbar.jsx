@@ -17,7 +17,7 @@ export default function PublicNavbar({ personaAutenticada }) {
   return (
     <header className="public-navbar">
       <div className="public-navbar-inner">
-        <Link to="/" className="public-navbar-brand" aria-label="ONE Talent Hub, ir al inicio">
+        <Link to="/" className="public-navbar-brand" aria-label="AdRHA Talent Hub, ir al inicio">
           <Marca /><span>Talent Hub</span>
         </Link>
         <nav className="public-navbar-links" aria-label="Navegación principal">
