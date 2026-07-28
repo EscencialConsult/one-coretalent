@@ -1,64 +1,61 @@
-"""Envío de correos (SMTP). Best-effort: si SMTP no está configurado, no rompe nada.
+"""Envío de correos vía la API HTTP de Brevo. Best-effort: si no está configurado, no rompe nada.
 
-Se usa vía FastAPI BackgroundTasks para no demorar la respuesta del request.
+Se usa vía FastAPI BackgroundTasks para no demorar la respuesta del request. Se manda por HTTPS
+(puerto 443) y no por SMTP porque Railway (y varios hostings tipo PaaS) bloquean o no rutean bien
+los puertos SMTP salientes (25/465/587) — confirmado en producción con un TimeoutError real.
 """
 from __future__ import annotations
 
-import asyncio
 import logging
-import smtplib
-import ssl
-from email.message import EmailMessage
 from html import escape
+
+import httpx
 
 from app.core.config import settings
 
 logger = logging.getLogger("app.email")
 
-
-def _send_sync(to: str, subject: str, html: str, from_name: str | None = None) -> None:
-    msg = EmailMessage()
-    msg["Subject"] = subject
-    from_addr = settings.SMTP_FROM or settings.SMTP_USER
-    # El NOMBRE visible puede ser el de cada empresa (white-label); la DIRECCIÓN
-    # es siempre la verificada en Brevo → escala a muchas empresas sin config extra.
-    nombre = from_name or settings.SMTP_FROM_NAME
-    msg["From"] = f"{nombre} <{from_addr}>"
-    msg["To"] = to
-    msg.set_content("Este mensaje requiere un lector de correo compatible con HTML.")
-    msg.add_alternative(html, subtype="html")
-
-    ctx = ssl.create_default_context()
-    if settings.SMTP_STARTTLS:
-        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=20) as s:
-            s.starttls(context=ctx)
-            if settings.SMTP_USER:
-                s.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-            s.send_message(msg)
-    else:
-        with smtplib.SMTP_SSL(settings.SMTP_HOST, settings.SMTP_PORT, timeout=20, context=ctx) as s:
-            if settings.SMTP_USER:
-                s.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-            s.send_message(msg)
+_BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
 
 
 async def enviar_email(to: str, subject: str, html: str, from_name: str | None = None) -> bool:
     """Envía un correo HTML. Devuelve True si se envió, False si está deshabilitado o falló."""
     if not settings.email_habilitado:
-        print(f"[email] SMTP no configurado; se omite el correo '{subject}' a {to}", flush=True)
-        logger.warning("SMTP no configurado; se omite el correo '%s' a %s", subject, to)
+        print(f"[email] Brevo no configurado; se omite el correo '{subject}' a {to}", flush=True)
+        logger.warning("Brevo no configurado; se omite el correo '%s' a %s", subject, to)
         return False
+
+    from_addr = settings.SMTP_FROM
+    # El NOMBRE visible puede ser el de cada empresa (white-label); la DIRECCIÓN
+    # es siempre la verificada en Brevo → escala a muchas empresas sin config extra.
+    nombre = from_name or settings.SMTP_FROM_NAME
+    payload = {
+        "sender": {"name": nombre, "email": from_addr},
+        "to": [{"email": to}],
+        "subject": subject,
+        "htmlContent": html,
+    }
     try:
-        await asyncio.to_thread(_send_sync, to, subject, html, from_name)
+        async with httpx.AsyncClient(timeout=20) as client:
+            resp = await client.post(
+                _BREVO_API_URL,
+                json=payload,
+                headers={
+                    "api-key": settings.BREVO_API_KEY,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+            )
+            resp.raise_for_status()
         print(f"[email] Correo enviado a {to}: {subject}", flush=True)
         logger.info("Correo enviado a %s: %s", to, subject)
         return True
     except Exception as e:  # noqa: BLE001
-        # print(..., flush=True) además del logger: en más de un entorno el logger de
-        # "app.email" quedó sin handler visible en los logs del hosting y esto era
-        # imposible de diagnosticar sin saber si el intento fallaba o ni se hacía.
-        print(f"[email] ERROR enviando correo a {to}: {e!r}", flush=True)
-        logger.error("Error enviando correo a %s: %s", to, e)
+        # print(..., flush=True) además del logger: por las dudas de que el handler del
+        # logger no quede visible en los logs del hosting (ya pasó una vez).
+        detalle = e.response.text if isinstance(e, httpx.HTTPStatusError) else repr(e)
+        print(f"[email] ERROR enviando correo a {to}: {detalle}", flush=True)
+        logger.error("Error enviando correo a %s: %s", to, detalle)
         return False
 
 

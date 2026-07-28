@@ -24,15 +24,14 @@ class Settings(BaseSettings):
     # Conexión a Render desde fuera requiere SSL. Para un Postgres local sin SSL, poné DB_SSL=false.
     DB_SSL: bool = True
 
-    # ── Correo (SMTP) ─────────────────────────────────────────────────────────
-    # Si SMTP_HOST está vacío, el envío de correos queda deshabilitado (no rompe nada).
-    SMTP_HOST: str = ""
-    SMTP_PORT: int = 587
-    SMTP_USER: str = ""
-    SMTP_PASSWORD: str = ""
-    SMTP_FROM: str = ""            # remitente (ej. no-reply@escencial.com); si vacío usa SMTP_USER
+    # ── Correo (API HTTP de Brevo) ──────────────────────────────────────────────
+    # Se manda por la API HTTP de Brevo (puerto 443), no por SMTP: varios hostings tipo
+    # PaaS (Railway incluido) bloquean o no rutean bien los puertos SMTP salientes
+    # (25/465/587), pero HTTPS nunca se bloquea. Si BREVO_API_KEY está vacío, el envío
+    # de correos queda deshabilitado (no rompe nada).
+    BREVO_API_KEY: str = ""
+    SMTP_FROM: str = ""            # remitente (ej. no-reply@escencial.com), tiene que estar verificado en Brevo
     SMTP_FROM_NAME: str = "ONE Core Analytics"
-    SMTP_STARTTLS: bool = True     # True para puerto 587; False + SMTP_SSL para 465
 
     # ── IA (OpenAI) — informes gerenciales consolidados (Módulo 05) ───────────
     # La IA solo REDACTA sobre resultados ya calculados; nunca calcula resultados.
@@ -70,7 +69,7 @@ class Settings(BaseSettings):
 
     @property
     def email_habilitado(self) -> bool:
-        return bool(self.SMTP_HOST.strip())
+        return bool(self.BREVO_API_KEY.strip())
 
     @property
     def ia_habilitada(self) -> bool:
