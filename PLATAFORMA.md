@@ -76,11 +76,14 @@ sistema mixto core-talent/          ← este repo
 
 ### Pendientes reales para la próxima persona
 
-1. **Email real**: SMTP todavía no está cargado en Railway — se va a usar **Brevo**. Sin esto, recuperación de contraseña y notificaciones no mandan correos reales (el sistema los genera pero no los envía; no rompe nada, solo queda deshabilitado). Ver `backend/app/core/email.py` y `SMTP_*` en `config.py`.
-2. Falta que Facundo pruebe manualmente: revocación de acceso, doble asignación y doble finalización de una evaluación (ver Etapa 5).
-3. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso.
-4. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
-5. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
+1. Falta que Facundo pruebe manualmente: revocación de acceso, doble asignación y doble finalización de una evaluación (ver Etapa 5).
+2. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso.
+3. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
+4. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
+
+### Email real (2026-07-27) — ✅ resuelto
+
+Se manda por la **API HTTP de Brevo** (`backend/app/core/email.py`, variable `BREVO_API_KEY`), no por SMTP: se confirmó en producción que Railway bloquea/no rutea los puertos SMTP salientes (timeout real al conectar), algo común en hostings tipo PaaS. La API HTTP usa HTTPS (443), que no tiene ese problema. Recuperación de contraseña probada de punta a punta (Usuario y Persona) contra `coretalent.onelabs.pro`.
 
 ---
 
