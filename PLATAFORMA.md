@@ -76,16 +76,19 @@ sistema mixto core-talent/          ← este repo
 
 ### Pendientes reales para la próxima persona
 
-1. **Migración de archivos** (CVs, firmas de consentimiento/conformidad) del Talent Hub legacy: los datos (empresas, vacantes, personas, postulaciones) ya están migrados — ver abajo —, pero los archivos siguen en Google Drive, no en Supabase Storage, así que `cv_url`/`firma_*_url` quedaron vacíos para las personas migradas. Hay que descargarlos de Drive y volver a subirlos con `subir_archivo()`.
-2. **Rediseño de marca (AdRHA)**: la próxima etapa es actualizar el frontend con los logos de AdRHA (ya están en `public/icon*.png`, todavía sin usar en ningún componente) — en todos lados excepto el footer y el favicon, que se quedan con la marca ONE/Escencial.
-3. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
-4. Mantener bloqueados `dat`, `dnla-perfil-comercial`, `ebp` e `ipp` (superado por `ipp-r`) hasta recibir definición psicométrica autorizada.
+1. **Rediseño de marca (AdRHA)**: la próxima etapa es actualizar el frontend con los logos de AdRHA (ya están en `public/icon*.png`, todavía sin usar en ningún componente) — en todos lados excepto el footer y el favicon, que se quedan con la marca ONE/Escencial.
+2. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
+3. Mantener bloqueados `dat`, `dnla-perfil-comercial`, `ebp` e `ipp` (superado por `ipp-r`) hasta recibir definición psicométrica autorizada.
 
 Confirmado por Facundo (2026-07-27): revocación de acceso, doble asignación y doble finalización de una evaluación probadas a mano en producción — sin novedades.
 
-### Migración de postulaciones desde Google Sheets (2026-07-27) — ✅ resuelto
+### Migración del Talent Hub legacy (2026-07-27/28) — ✅ resuelto, datos y archivos
 
-Se migraron los datos del Talent Hub legacy (`backend/scripts/migrar_talent_hub.py`, corrido con `--commit` contra producción): **10 empresas** (con su usuario admin, reusando la contraseña original), **13 vacantes**, **112 personas** y **17 postulaciones** reales. Se excluyeron a propósito un perfil y una vacante de prueba interna ("Prueba"/`ejemplo@prueba.com`). Los archivos (CVs/firmas) quedan para una fase 2 — ver pendientes.
+Se migraron los datos (`backend/scripts/migrar_talent_hub.py`) y después los archivos (`backend/scripts/migrar_archivos_talent_hub.py`), ambos corridos con `--commit` contra producción:
+- **10 empresas** (con su usuario admin, reusando la contraseña original), **13 vacantes**, **112 personas** y **17 postulaciones** reales.
+- **112 CVs y firmas** de personas + **17 pares de firmas** de postulaciones, bajados de Google Drive y resubidos a Supabase Storage (0 errores).
+
+Se excluyeron a propósito un perfil y una vacante de prueba interna ("Prueba"/`ejemplo@prueba.com`).
 
 ### Email real (2026-07-27) — ✅ resuelto
 
