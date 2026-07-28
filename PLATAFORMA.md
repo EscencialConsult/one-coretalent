@@ -76,9 +76,14 @@ sistema mixto core-talent/          ← este repo
 
 ### Pendientes reales para la próxima persona
 
-1. **Rediseño de marca (AdRHA)**: la próxima etapa es actualizar el frontend con los logos de AdRHA (ya están en `public/icon*.png`, todavía sin usar en ningún componente) — en todos lados excepto el footer y el favicon, que se quedan con la marca ONE/Escencial.
-2. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
-3. Mantener bloqueados `dat`, `dnla-perfil-comercial`, `ebp` e `ipp` (superado por `ipp-r`) hasta recibir definición psicométrica autorizada.
+1. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
+2. Mantener bloqueados `dat`, `dnla-perfil-comercial`, `ebp` e `ipp` (superado por `ipp-r`) hasta recibir definición psicométrica autorizada.
+
+### Rediseño de marca (AdRHA) — ✅ resuelto (2026-07-28)
+
+Toda la plataforma (público, candidato, empresa, admin, evaluado, informes) pasó de la paleta ONE (violeta/cian/rosa/oro) a la de AdRHA (rojo/celeste/naranja/verde, tomados del isologo `public/iconadhracompletocolor.png`), vía `src/theme/brand.json` + reemplazo de los hex hardcodeados que no pasaban por ahí. El logo de AdRHA es la marca por defecto (`Marca.jsx`).
+
+Se dejó a propósito con la marca ONE/Escencial: el footer, el favicon, el loader de carga (`.one-ring`, va con el espiral ONE) y los dos correos que ONE le manda a una empresa nueva (bienvenida y reenvío de credenciales) — todo lo demás, incluido el correo de recuperación de contraseña de un candidato, ya usa la marca AdRHA por defecto.
 
 Confirmado por Facundo (2026-07-27): revocación de acceso, doble asignación y doble finalización de una evaluación probadas a mano en producción — sin novedades.
 
