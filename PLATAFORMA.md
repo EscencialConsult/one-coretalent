@@ -76,10 +76,11 @@ sistema mixto core-talent/          ← este repo
 
 ### Pendientes reales para la próxima persona
 
-1. Falta que Facundo pruebe manualmente: revocación de acceso, doble asignación y doble finalización de una evaluación (ver Etapa 5).
-2. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso.
-3. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
-4. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
+1. **Migración de postulaciones desde Google Sheets**: pendiente de que Facundo entregue la planilla; no empezar sin eso. Es lo único que falta para dar el proyecto por cerrado.
+2. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
+3. Mantener bloqueados `dat`, `dnla-perfil-comercial` y `ebp` hasta recibir definición psicométrica autorizada.
+
+Confirmado por Facundo (2026-07-27): revocación de acceso, doble asignación y doble finalización de una evaluación probadas a mano en producción — sin novedades.
 
 ### Email real (2026-07-27) — ✅ resuelto
 
