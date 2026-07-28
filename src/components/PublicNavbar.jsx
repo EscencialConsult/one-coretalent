@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Icon from "./Icon";
 import Marca from "./Marca";
@@ -6,8 +6,61 @@ import Marca from "./Marca";
 const LINKS = [
   { to: "/", label: "Inicio", exact: true },
   { to: "/busquedas", label: "Oportunidades" },
-  { to: "/registro-empresa", label: "Para empresas" },
 ];
+
+function CrearCuentaMenu() {
+  const [abierto, setAbierto] = useState(false);
+  const raiz = useRef(null);
+
+  useEffect(() => {
+    if (!abierto) return undefined;
+    const cerrarSiAfuera = (e) => {
+      if (raiz.current && !raiz.current.contains(e.target)) setAbierto(false);
+    };
+    const cerrarConEscape = (e) => {
+      if (e.key === "Escape") setAbierto(false);
+    };
+    document.addEventListener("mousedown", cerrarSiAfuera);
+    document.addEventListener("keydown", cerrarConEscape);
+    return () => {
+      document.removeEventListener("mousedown", cerrarSiAfuera);
+      document.removeEventListener("keydown", cerrarConEscape);
+    };
+  }, [abierto]);
+
+  return (
+    <div className="public-nav-crear" ref={raiz}>
+      <button
+        type="button"
+        className="public-nav-candidate"
+        aria-haspopup="menu"
+        aria-expanded={abierto}
+        onClick={() => setAbierto((v) => !v)}
+      >
+        Crear cuenta
+        <Icon name="chevD" className={`public-nav-crear-chev ${abierto ? "abierto" : ""}`} />
+      </button>
+      {abierto && (
+        <div className="public-nav-crear-menu" role="menu">
+          <Link to="/registro-candidato" role="menuitem" onClick={() => setAbierto(false)}>
+            <Icon name="user" className="w-4 h-4" />
+            <span>
+              <strong>Soy postulante</strong>
+              <small>Busco oportunidades laborales</small>
+            </span>
+          </Link>
+          <Link to="/registro-empresa" role="menuitem" onClick={() => setAbierto(false)}>
+            <Icon name="briefcase" className="w-4 h-4" />
+            <span>
+              <strong>Soy empresa</strong>
+              <small>Quiero publicar búsquedas</small>
+            </span>
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function PublicNavbar({ personaAutenticada }) {
   const [abierto, setAbierto] = useState(false);
@@ -28,8 +81,7 @@ export default function PublicNavbar({ personaAutenticada }) {
           ))}
         </nav>
         <div className="public-navbar-actions">
-          {!personaAutenticada && <Link to="/registro-candidato" className="public-nav-candidate">Crear cuenta</Link>}
-          <Link to="/registro-empresa" className="public-nav-candidate">Crear empresa</Link>
+          {!personaAutenticada && <CrearCuentaMenu />}
           <Link to={personaAutenticada ? "/candidato" : "/login"} className="public-nav-cta">
             {personaAutenticada ? "Mi portal" : "Ingresar"} <span aria-hidden="true">→</span>
           </Link>

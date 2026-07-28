@@ -14,6 +14,7 @@ const PATHS = {
   logout: <><path d="M14 4h-3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3" /><path d="M16 12H8" /><path d="M13 9l3 3-3 3" /></>,
   chevL: <path d="M14 6l-6 6 6 6" />,
   chevR: <path d="M10 6l6 6-6 6" />,
+  chevD: <path d="M6 10l6 6 6-6" />,
   trash: <><path d="M4 7h16" /><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" /><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" /><path d="M10 11v6M14 11v6" /></>,
   edit: <><path d="M4 20l4-1L19 8l-3-3L5 16l-1 4z" /><path d="M14.5 6.5l3 3" /></>,
   mail: <><rect x="3.5" y="5.5" width="17" height="13" rx="2.2" /><path d="M4 7l8 6 8-6" /></>,
