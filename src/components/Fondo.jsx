@@ -1,4 +1,7 @@
-/** Fondo decorativo compartido (blobs + velo) — misma identidad visual en toda la app. */
+import PlexusSvg from "./PlexusSvg";
+
+/** Fondo decorativo compartido (blobs + velo + red de puntos) — misma identidad
+ * visual en toda la app, el mismo fondo animado de ONE Core Analytics. */
 export default function Fondo() {
   return (
     <>
@@ -9,6 +12,7 @@ export default function Fondo() {
         <span className="blob d" />
       </div>
       <div className="velo" />
+      <PlexusSvg />
     </>
   );
 }

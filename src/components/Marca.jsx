@@ -4,10 +4,10 @@ import { useTheme } from "../theme/useTheme";
 export default function Marca({ tamaño = "text-xl" }) {
   const { marca, brand } = useTheme();
   if (marca.logo_url) {
-    return <img src={marca.logo_url} alt={marca.razon_social} className="h-9 w-auto" />;
+    return <img src={marca.logo_url} alt={marca.razon_social} className="marca-logo" />;
   }
   if (marca.razon_social === brand?.marcaDefault?.razon_social) {
-    return <img src="/logo-trim.png" alt="ONE" className="h-9 w-auto" />;
+    return <img src="/logo-trim.png" alt="ONE" className="marca-logo" />;
   }
   return (
     <span className={`font-extrabold tracking-tight ${tamaño}`}>

@@ -23,9 +23,12 @@ const Vacantes = lazy(() => import("./pages/empresa/Vacantes"));
 const VacanteDetalle = lazy(() => import("./pages/empresa/VacanteDetalle"));
 const PostulacionEmpresaDetalle = lazy(() => import("./pages/empresa/PostulacionEmpresaDetalle"));
 const Postulantes = lazy(() => import("./pages/empresa/Postulantes"));
-const EmpresasPendientes = lazy(() => import("./pages/admin/EmpresasPendientes"));
+const InicioAdmin = lazy(() => import("./pages/admin/InicioAdmin"));
 const Empresas = lazy(() => import("./pages/admin/Empresas"));
 const EmpresaTests = lazy(() => import("./pages/admin/EmpresaTests"));
+const PostulantesAdmin = lazy(() => import("./pages/admin/Postulantes"));
+const BusquedasAdmin = lazy(() => import("./pages/admin/Busquedas"));
+const Auditoria = lazy(() => import("./pages/admin/Auditoria"));
 const NoEncontrado = lazy(() => import("./pages/NoEncontrado"));
 const PortalEvaluado = lazy(() => import("./pages/evaluado/PortalEvaluado"));
 const CandidatoLayout = lazy(() => import("./layout/CandidatoLayout"));
@@ -112,10 +115,14 @@ export default function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Navigate to="empresas-pendientes" replace />} />
-          <Route path="empresas-pendientes" element={<EmpresasPendientes />} />
+          <Route index element={<Navigate to="inicio" replace />} />
+          <Route path="inicio" element={<InicioAdmin />} />
+          <Route path="empresas-pendientes" element={<Navigate to="/admin/empresas?estado=pendiente_verificacion" replace />} />
           <Route path="empresas" element={<Empresas />} />
           <Route path="empresas/:empresaId/tests" element={<EmpresaTests />} />
+          <Route path="postulantes" element={<PostulantesAdmin />} />
+          <Route path="busquedas" element={<BusquedasAdmin />} />
+          <Route path="auditoria" element={<Auditoria />} />
         </Route>
 
         <Route path="*" element={<NoEncontrado />} />

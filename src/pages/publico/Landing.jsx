@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Icon from "../../components/Icon";
 
 const BENEFICIOS = [
@@ -8,13 +9,20 @@ const BENEFICIOS = [
 ];
 
 export default function Landing() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    const destino = document.querySelector(hash);
+    if (destino) destino.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [hash]);
+
   return (
     <div className="landing-profesional">
       <section className="landing-hero">
         <div className="landing-hero-copy">
-          <div className="landing-eyebrow"><span /> Tecnología humana para decisiones de talento</div>
-          <h1>Conectamos el potencial de las personas con el lugar donde puede <em>crecer.</em></h1>
-          <p>Una plataforma integral para descubrir oportunidades, gestionar postulaciones y evaluar talento con información clara, segura y profesional.</p>
+          <h1>El mismo lugar donde postulás, evaluás y <em>decidís.</em></h1>
+          <p>Postulantes arman un perfil único y avanzan con evaluaciones reales. Empresas publican búsquedas, siguen cada candidato y deciden con resultados auditables. Todo en Core-Talent.</p>
           <div className="landing-hero-actions">
             <Link to="/busquedas" className="landing-btn landing-btn-primary">Explorar oportunidades <span aria-hidden="true">→</span></Link>
             <Link to="/registro-empresa" className="landing-btn landing-btn-secondary">Solución para empresas</Link>
@@ -27,7 +35,7 @@ export default function Landing() {
         </div>
         <div className="landing-hero-visual">
           <div className="landing-image-frame">
-            <img src="/busqueda-cover.webp" width="1600" height="594" alt="Entrevista profesional entre una candidata y un reclutador" />
+            <img src="/business-job-interview-concept.webp" width="1600" height="1067" alt="Entrevista profesional entre una candidata y un reclutador" />
             <div className="landing-image-gradient" />
           </div>
           <article className="landing-floating-card landing-floating-top">
@@ -66,18 +74,35 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="landing-section landing-process">
-        <div className="landing-process-copy">
-          <span className="landing-kicker">Simple de usar</span>
-          <h2>De la oportunidad al resultado, sin perder el hilo.</h2>
-          <p>Cada paso queda conectado para reducir tareas repetidas y ofrecer una experiencia consistente.</p>
-          <Link to="/busquedas" className="landing-btn landing-btn-secondary">Ver búsquedas activas</Link>
+      <section className="landing-section landing-process" id="como-funciona">
+        <div className="landing-section-heading compacta">
+          <span className="landing-kicker">Cómo funciona</span>
+          <h2>Dos recorridos, la misma plataforma.</h2>
+          <p>Postulantes y empresas usan el mismo lugar, cada uno con su propio camino y sin pasos de más.</p>
         </div>
-        <ol className="landing-steps">
-          <Paso numero="01" titulo="Creá tu identidad" texto="Completá tu perfil profesional una sola vez." />
-          <Paso numero="02" titulo="Conectá con una oportunidad" texto="Postulate y seguí el proceso desde tu portal." />
-          <Paso numero="03" titulo="Demostrá tu potencial" texto="Realizá evaluaciones seguras y consultá tus resultados." />
-        </ol>
+        <div className="landing-process-tracks">
+          <div className="landing-process-track">
+            <div className="landing-process-track-tag"><Icon name="user" /> Para postulantes</div>
+            <ol className="landing-steps">
+              <Paso numero="01" titulo="Creá tu perfil" texto="Cargá tu CV, formación y experiencia una sola vez. Lo vas a reutilizar en cada postulación." />
+              <Paso numero="02" titulo="Postulate a una búsqueda" texto="Elegí una oportunidad activa y postulate con un clic, sin volver a completar tus datos." />
+              <Paso numero="03" titulo="Rendí la evaluación, si corresponde" texto="Si la empresa la pidió, hacés el test online a tu ritmo. El resultado queda en tu portal." />
+              <Paso numero="04" titulo="Seguí cada proceso" texto="Consultá el estado de tus postulaciones y tus resultados desde una sola cuenta." />
+            </ol>
+            <Link to="/registro-candidato" className="landing-btn landing-btn-secondary">Crear cuenta de postulante</Link>
+          </div>
+
+          <div className="landing-process-track">
+            <div className="landing-process-track-tag"><Icon name="briefcase" /> Para empresas</div>
+            <ol className="landing-steps">
+              <Paso numero="01" titulo="Publicá tu búsqueda" texto="Cargá el puesto y sus requisitos y, si querés, los tests psicométricos que ya tenés habilitados." />
+              <Paso numero="02" titulo="Recibí postulantes organizados" texto="Cada candidato llega con su perfil completo y las respuestas a tus preguntas de filtro." />
+              <Paso numero="03" titulo="Los tests se asignan solos" texto="Si configuraste evaluaciones para el puesto, cada postulante nuevo las recibe automáticamente." />
+              <Paso numero="04" titulo="Decidí con información" texto="Consultá resultados e informes por candidato antes de avanzar en el proceso." />
+            </ol>
+            <Link to="/registro-empresa" className="landing-btn landing-btn-secondary">Crear cuenta de empresa</Link>
+          </div>
+        </div>
       </section>
 
       <section className="landing-final-cta">

@@ -17,6 +17,16 @@ export function ThemeProvider({ children }) {
     root.style.setProperty("--brand-secundario", marca.color_secundario || brand.marcaDefault.color_secundario);
   }, [marca]);
 
+  // El resto de la paleta (rosa/cian/oro/violeta/oscuro/...) es fija de la marca,
+  // no cambia por tenant — se pisa una sola vez desde brand.json, la única fuente
+  // de verdad para el color de toda la app (Tailwind y el CSS a mano).
+  useEffect(() => {
+    const root = document.documentElement;
+    Object.entries(brand.colores).forEach(([nombre, valor]) => {
+      root.style.setProperty(`--${nombre}`, valor);
+    });
+  }, []);
+
   const value = useMemo(() => ({ marca, setMarca, brand }), [marca]);
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

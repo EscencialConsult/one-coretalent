@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { usePersonaAuth } from "../auth/usePersonaAuth";
 import Icon from "../components/Icon";
-import Marca from "../components/Marca";
+import AppSidebar from "./AppSidebar";
+import AppTopbar from "./AppTopbar";
 
-const enlaces = [
-  ["Inicio", "/candidato", "home"],
-  ["Buscar oportunidades", "/candidato/busquedas", "search"],
-  ["Mis postulaciones", "/candidato/postulaciones", "briefcase"],
-  ["Evaluaciones", "/candidato/evaluaciones", "clipboard"],
-  ["Resultados", "/candidato/resultados", "chart"],
-  ["Mi perfil", "/candidato/perfil", "user"],
-  ["Seguridad", "/candidato/seguridad", "lock"],
-  ["Privacidad", "/candidato/privacidad", "shield"],
+const NAV_CANDIDATO = [
+  { to: "/candidato", icon: "home", label: "Inicio", end: true },
+  { to: "/candidato/busquedas", icon: "search", label: "Buscar oportunidades" },
+  { to: "/candidato/postulaciones", icon: "briefcase", label: "Mis postulaciones" },
+  { to: "/candidato/evaluaciones", icon: "clipboard", label: "Evaluaciones" },
+  { to: "/candidato/resultados", icon: "chart", label: "Resultados" },
+  { to: "/candidato/perfil", icon: "user", label: "Mi perfil" },
+  { to: "/candidato/seguridad", icon: "lock", label: "Seguridad" },
+  { to: "/candidato/privacidad", icon: "shield", label: "Privacidad" },
 ];
 
 const iniciales = (persona) =>
@@ -33,72 +34,31 @@ export default function CandidatoLayout() {
   return (
     <div className="candidate-app">
       {abierto && (
-        <button
-          type="button"
-          aria-label="Cerrar menú"
-          className="candidate-overlay"
-          onClick={() => setAbierto(false)}
-        />
+        <button type="button" aria-label="Cerrar menú" className="app-overlay" onClick={() => setAbierto(false)} />
       )}
 
-      <aside className={`candidate-sidebar ${abierto ? "is-open" : ""}`}>
-        <div className="candidate-brand">
-          <Marca />
-          <button
-            type="button"
-            className="candidate-close"
-            onClick={() => setAbierto(false)}
-            aria-label="Cerrar navegación"
-          >
-            <Icon name="x" />
-          </button>
-        </div>
-
-        <div className="candidate-sidebar-label">Mi espacio profesional</div>
-        <nav className="candidate-nav" aria-label="Portal del candidato">
-          {enlaces.map(([label, to, icono]) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === "/candidato"}
-              className={({ isActive }) => isActive ? "is-active" : ""}
-            >
-              <span><Icon name={icono} /></span>
-              {label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="candidate-account">
-          <div className="candidate-avatar">{iniciales(persona)}</div>
-          <div className="candidate-account-copy">
-            <strong>{persona?.nombre} {persona?.apellido}</strong>
-            <span>{persona?.email}</span>
-          </div>
-          <button type="button" onClick={logout} aria-label="Cerrar sesión">
-            <Icon name="logout" />
-          </button>
-        </div>
-      </aside>
+      <AppSidebar
+        navItems={NAV_CANDIDATO}
+        abierto={abierto}
+        onCerrar={() => setAbierto(false)}
+        iniciales={iniciales(persona)}
+        nombre={`${persona?.nombre || ""} ${persona?.apellido || ""}`.trim()}
+        subtitulo={persona?.email}
+        rolIcono="user"
+        rolEtiqueta="Candidato"
+        onLogout={logout}
+      />
 
       <div className="candidate-main">
-        <header className="candidate-topbar">
-          <button
-            type="button"
-            className="candidate-menu"
-            onClick={() => setAbierto(true)}
-            aria-label="Abrir navegación"
-          >
-            <Icon name="menu" />
-          </button>
-          <div>
-            <span>Portal del candidato</span>
+        <AppTopbar onAbrirMenu={() => setAbierto(true)}>
+          <div className="app-topbar-user">
+            <span className="app-role-tag"><Icon name="user" className="w-3.5 h-3.5" />Candidato</span>
             <strong>{persona?.nombre} {persona?.apellido}</strong>
           </div>
           <NavLink to="/candidato/busquedas" className="candidate-opportunities">
             Explorar oportunidades <Icon name="chevR" />
           </NavLink>
-        </header>
+        </AppTopbar>
 
         <main className="candidate-content">
           <Outlet />

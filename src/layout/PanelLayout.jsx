@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/useAuth";
 import Fondo from "../components/Fondo";
 import Icon from "../components/Icon";
-import Marca from "../components/Marca";
+import AppSidebar from "./AppSidebar";
+import AppTopbar from "./AppTopbar";
 
 const NAV_EMPRESA = [
   { to: "/empresa/inicio", icon: "home", label: "Inicio", titulo: "Inicio" },
@@ -13,8 +14,11 @@ const NAV_EMPRESA = [
   { to: "/empresa/perfil", icon: "user", label: "Mi perfil", titulo: "Mi perfil" },
 ];
 const NAV_SUPERADMIN = [
-  { to: "/admin/empresas-pendientes", icon: "build", label: "Empresas pendientes", titulo: "Empresas pendientes" },
-  { to: "/admin/empresas", icon: "briefcase", label: "Empresas", titulo: "Empresas" },
+  { to: "/admin/inicio", icon: "home", label: "Inicio", titulo: "Inicio" },
+  { to: "/admin/empresas", icon: "briefcase", label: "Empresas", titulo: "Empresas", descripcion: "Altas, aprobaciones y acceso a tests por empresa." },
+  { to: "/admin/postulantes", icon: "users", label: "Postulantes", titulo: "Postulantes", descripcion: "Todos los candidatos registrados en la plataforma." },
+  { to: "/admin/busquedas", icon: "clipboard", label: "Búsquedas", titulo: "Búsquedas", descripcion: "Vacantes publicadas por cualquier empresa." },
+  { to: "/admin/auditoria", icon: "clock", label: "Auditoría", titulo: "Auditoría", descripcion: "Registro de acciones sobre evaluaciones y resultados." },
 ];
 
 function inicialesDe(user) {
@@ -46,73 +50,38 @@ export default function PanelLayout() {
     <div className="panel-shell">
       <Fondo />
       {menuAbierto && (
-        <button
-          type="button"
-          aria-label="Cerrar menú al tocar fuera"
-          className="panel-overlay"
-          onClick={() => setMenuAbierto(false)}
-        />
+        <button type="button" aria-label="Cerrar menú al tocar fuera" className="app-overlay" onClick={() => setMenuAbierto(false)} />
       )}
-      <aside className={`panel-side ${menuAbierto ? "abierto" : ""}`}>
-        <div className="flex items-center gap-2.5 px-2 pb-6">
-          <Marca tamaño="text-base" />
-          <button
-            type="button"
-            aria-label="Cerrar menú"
-            className="panel-close ml-auto"
-            onClick={() => setMenuAbierto(false)}
-          >
-            <Icon name="x" />
-          </button>
-        </div>
-        <nav className="flex flex-col gap-1" aria-label="Navegación del panel">
-          {nav.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) => `panel-nav-item ${isActive ? "activo" : ""}`}
-            >
-              <Icon name={item.icon} className="w-5 h-5" />
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-        <div className="mt-auto border-t border-linea pt-3.5 flex items-center gap-2.5">
-          <div
-            className="w-9 h-9 rounded-chico grid place-items-center text-white font-extrabold flex-none"
-            style={{ fontSize: 13, backgroundColor: "var(--brand-acento)" }}
-          >
-            {inicialesDe(user)}
-          </div>
-          <div className="min-w-0">
-            <b className="block text-sm truncate">{user ? `${user.nombre} ${user.apellido}` : "Usuario"}</b>
-            <span className="block text-xs text-muted">{esSuperadmin ? "SuperAdmin" : "Administrador"}</span>
-          </div>
-          <button
-            type="button"
-            onClick={salir}
-            aria-label="Cerrar sesión"
-            title="Cerrar sesión"
-            className="ml-auto border-0 bg-transparent cursor-pointer text-muted p-1.5 rounded-chico hover:bg-linea hover:bg-opacity-30 hover:text-tinta transition-colors"
-          >
-            <Icon name="logout" className="w-5 h-5" />
-          </button>
-        </div>
-      </aside>
+
+      <AppSidebar
+        navItems={nav}
+        abierto={menuAbierto}
+        onCerrar={() => setMenuAbierto(false)}
+        iniciales={inicialesDe(user)}
+        nombre={user ? `${user.nombre} ${user.apellido}` : "Usuario"}
+        subtitulo={esSuperadmin ? "SuperAdmin" : "Administrador"}
+        rolIcono={esSuperadmin ? "shield" : "briefcase"}
+        rolEtiqueta={esSuperadmin ? "SuperAdmin" : "Empresa"}
+        onLogout={salir}
+      />
 
       <div className="panel-main">
-        <div className="panel-topbar">
-          <button
-            type="button"
-            aria-label="Abrir menú"
-            className="panel-menu-btn"
-            onClick={() => setMenuAbierto(true)}
-          >
-            <Icon name="menu" />
-          </button>
-          <h1 className="text-xl font-extrabold">{activo?.titulo || "Panel"}</h1>
-          <span className="text-xs text-muted font-semibold truncate">{user?.email}</span>
-        </div>
+        <AppTopbar onAbrirMenu={() => setMenuAbierto(true)}>
+          <div className="app-topbar-heading">
+            <span className="app-topbar-heading-icon"><Icon name={activo?.icon || "grid"} className="w-4 h-4" /></span>
+            <div>
+              <h1>{activo?.titulo || "Panel"}</h1>
+              {activo?.descripcion && <p>{activo.descripcion}</p>}
+            </div>
+          </div>
+          <div className="app-topbar-user" style={{ marginLeft: "auto" }}>
+            <span className="app-role-tag">
+              <Icon name={esSuperadmin ? "shield" : "briefcase"} className="w-3.5 h-3.5" />
+              {esSuperadmin ? "SuperAdmin" : "Empresa"}
+            </span>
+            <span className="text-xs text-muted font-semibold truncate">{user?.email}</span>
+          </div>
+        </AppTopbar>
         <div className="panel-content"><Outlet /></div>
       </div>
     </div>

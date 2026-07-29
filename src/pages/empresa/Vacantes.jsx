@@ -69,7 +69,7 @@ export default function Vacantes() {
         </button>
       </div>
 
-      <div className="tarjeta" style={{ padding: "4px 0" }}>
+      <div className="tarjeta overflow-x-auto" style={{ padding: "4px 0" }}>
         {vacantes.length === 0 && (
           <div className="text-muted text-sm px-5 py-10 text-center">Todavía no publicaste ninguna vacante.</div>
         )}

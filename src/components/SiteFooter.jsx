@@ -13,11 +13,11 @@ export default function SiteFooter() {
     <footer className="site-footer" aria-label="Pie de página">
       <div className="site-footer-columns">
         <div className="site-footer-brand">
-          <Link className="site-footer-brand-row" to="/" aria-label="ONE Talent Hub, ir al inicio">
-            <img className="site-footer-logo" src="/logo2-trim.png" alt="" />
-            <span>Talent Hub</span>
+          <Link className="site-footer-brand-row" to="/" aria-label="Core-Talent, ir al inicio">
+            <img className="site-footer-logo" src="/one-logocolor.png" alt="" />
+            <span>Core-Talent</span>
           </Link>
-          <p>Una plataforma para conectar postulantes, empresas y oportunidades laborales en un solo lugar.</p>
+          <p>La plataforma de AdRHA para conectar postulantes, empresas y oportunidades laborales en un solo lugar.</p>
         </div>
 
         <nav className="site-footer-col" aria-label="Plataforma">
@@ -49,7 +49,11 @@ export default function SiteFooter() {
       </div>
 
       <div className="site-footer-bottom">
-        <p>Desarrollado por <strong>ONE</strong></p>
+        <div className="site-footer-credito">
+          <img src="/one-logocolor.png" alt="ONE" />
+          <span>by</span>
+          <img src="/escencial-logoblanco-footer.png" alt="Escencial Consultora" />
+        </div>
         <p>Contribución de <strong>Fundación para el Desarrollo Profesional</strong></p>
       </div>
     </footer>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { registrarCandidato } from "../../api/publico";
 import { ApiError } from "../../api/client";
@@ -9,12 +9,31 @@ const INICIAL = {
   nombre: "", apellido: "", email: "", password: "", repetir: "", acepto_terminos: false,
 };
 
+// Guardamos un borrador en localStorage (no sessionStorage: tiene que sobrevivir
+// a que la persona cierre la ventana y vuelva más tarde). Nunca la contraseña.
+const DRAFT_KEY = "registro-candidato-draft";
+const CAMPOS_BORRADOR = ["nombre", "apellido", "email", "acepto_terminos"];
+
+function cargarBorrador() {
+  try {
+    const guardado = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}");
+    return { ...INICIAL, ...guardado };
+  } catch {
+    return INICIAL;
+  }
+}
+
 export default function RegistroCandidato() {
   const navigate = useNavigate();
   const { autenticado, login } = usePersonaAuth();
-  const [form, setForm] = useState(INICIAL);
+  const [form, setForm] = useState(cargarBorrador);
   const [error, setError] = useState("");
   const [enviando, setEnviando] = useState(false);
+
+  useEffect(() => {
+    const borrador = Object.fromEntries(CAMPOS_BORRADOR.map((campo) => [campo, form[campo]]));
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(borrador));
+  }, [form]);
 
   if (autenticado) return <Navigate to="/candidato" replace />;
 
@@ -41,6 +60,7 @@ export default function RegistroCandidato() {
         password: form.password,
         acepto_terminos: form.acepto_terminos,
       });
+      localStorage.removeItem(DRAFT_KEY);
       await login(form.email, form.password);
       navigate("/candidato", { replace: true });
     } catch (err) {
@@ -65,7 +85,7 @@ export default function RegistroCandidato() {
 
       <form className="candidate-register-form" onSubmit={submit}>
         <header>
-          <div><Icon name="user" /></div>
+          <div><img src="/iconadhra.png" alt="" /></div>
           <span><h2>Crear cuenta de candidato</h2><p>Completá tus datos básicos para comenzar.</p></span>
         </header>
         <div className="candidate-register-fields">

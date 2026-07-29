@@ -134,21 +134,28 @@ export default function VacanteFormModal({ onClose, onCreada, vacante }) {
 
         <h3 className="text-xs font-extrabold uppercase tracking-wide text-muted mb-1">Tests requeridos para este puesto (opcional)</h3>
         <p className="text-xs text-muted mb-3">Se van a asignar solos a cada persona que postule — no hace falta asignarlos uno por uno.</p>
-        <div className="grid md:grid-cols-2 gap-2 mb-6">
-          {catalogo.filter((t) => t.habilitado && t.disponible && t.tomable).map((t) => (
-            <label key={t.slug} className="flex items-center gap-2 rounded-chico border border-linea px-3 py-2 text-sm cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.tests_requeridos.includes(t.slug)}
-                onChange={() => alternarTest(t.slug)}
-              />
-              {t.nombre}
-            </label>
-          ))}
-          {!catalogo.some((t) => t.habilitado && t.disponible && t.tomable) && (
-            <p className="text-xs text-muted col-span-2">La empresa todavía no tiene tests habilitados en su licencia.</p>
-          )}
-        </div>
+        {catalogo.some((t) => t.habilitado && t.disponible && t.tomable) ? (
+          <div className="grid md:grid-cols-2 gap-2 mb-6">
+            {catalogo.filter((t) => t.habilitado && t.disponible && t.tomable).map((t) => (
+              <div key={t.slug} className="vacante-test-fila">
+                <span>{t.nombre}</span>
+                <button
+                  type="button"
+                  className={`interruptor ${form.tests_requeridos.includes(t.slug) ? "on" : ""}`}
+                  aria-pressed={form.tests_requeridos.includes(t.slug)}
+                  aria-label={`Requerir ${t.nombre}`}
+                  onClick={() => alternarTest(t.slug)}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="vacante-test-vacio mb-6">
+            <Icon name="lock" className="w-4 h-4" />
+            Todavía no tenés tests aprobados para usar en tus vacantes. Podés publicar igual — cuando tu cuenta
+            tenga tests habilitados vas a poder pedirlos acá, sin tener que asignarlos uno por uno.
+          </div>
+        )}
 
         <h3 className="text-xs font-extrabold uppercase tracking-wide text-muted mb-3">Preguntas al postulante (opcional)</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-6">

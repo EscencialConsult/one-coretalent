@@ -3,7 +3,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { ApiError } from "../api/client";
 import { useAuth } from "../auth/useAuth";
 import { usePersonaAuth } from "../auth/usePersonaAuth";
-import Marca from "../components/Marca";
+import Icon from "../components/Icon";
 
 function destinoPorRol(rol) {
   return rol === "superadmin" ? "/admin/empresas-pendientes" : "/empresa/inicio";
@@ -56,58 +56,74 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-[70vh] grid place-items-center px-4">
-      <form onSubmit={onSubmit} className="tarjeta w-full max-w-sm p-8">
-        <div className="mb-6 text-center"><Marca /></div>
-        <h1 className="text-xl font-extrabold text-center mb-1">Iniciar sesión</h1>
-        <p className="text-sm text-tinta text-opacity-70 text-center mb-6">
-          Entrá con tu cuenta de empresa o de candidato.
-        </p>
+    <section className="login-page">
+      <div className="login-intro">
+        <span className="candidate-register-eyebrow">Bienvenido de nuevo</span>
+        <h1>Todo tu proceso de talento, en un solo lugar.</h1>
+        <p>Entrá con tu cuenta de empresa o de candidato para seguir donde lo dejaste.</p>
+        <ul>
+          <Beneficio icono="briefcase" titulo="Una sola cuenta" texto="Postulate a búsquedas o publicalas, según tu perfil." />
+          <Beneficio icono="chart" titulo="Seguimiento claro" texto="Consultá el estado de tus postulaciones y evaluaciones." />
+          <Beneficio icono="shield" titulo="Datos protegidos" texto="Vos controlás tu información en todo momento." />
+        </ul>
+      </div>
 
-        <label htmlFor="email-login" className="block text-xs font-bold text-tinta mb-1.5 mt-2">Email</label>
-        <input
-          id="email-login"
-          type="email"
-          required
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          className="input-marca"
-          placeholder="tu@email.com"
-          autoComplete="username"
-          autoFocus
-        />
+      <form onSubmit={onSubmit} className="login-form-card">
+        <header>
+          <div><img src="/iconadhra.png" alt="" /></div>
+          <span><h2>Iniciar sesión</h2><p>Entrá con tu cuenta de empresa o de candidato.</p></span>
+        </header>
 
-        <label htmlFor="password-login" className="block text-xs font-bold text-tinta mb-1.5 mt-3">Contraseña</label>
-        <input
-          id="password-login"
-          type="password"
-          required
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          className="input-marca"
-          placeholder="••••••••"
-          autoComplete="current-password"
-        />
+        <div className="candidate-register-fields">
+          <label htmlFor="email-login">Email</label>
+          <input
+            id="email-login"
+            type="email"
+            required
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className="input-marca"
+            placeholder="tu@email.com"
+            autoComplete="username"
+            autoFocus
+          />
 
-        {error && (
-          <div role="alert" className="mt-3.5 text-sm font-semibold px-3.5 py-2.5 rounded-chico" style={{ color: "#c0392b", background: "rgba(192,57,43,.08)", border: "1px solid rgba(192,57,43,.3)" }}>
-            {error}
-          </div>
-        )}
+          <label htmlFor="password-login">Contraseña</label>
+          <input
+            id="password-login"
+            type="password"
+            required
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className="input-marca"
+            placeholder="••••••••"
+            autoComplete="current-password"
+          />
 
-        <button type="submit" disabled={enviando} className="boton boton-primario w-full mt-6">
-          {enviando ? "Ingresando…" : "Ingresar →"}
-        </button>
-        <p className="text-center text-sm mt-4">
-          <Link to="/recuperar-password" className="text-acento font-semibold">¿Olvidaste tu contraseña?</Link>
-        </p>
-        <p className="text-xs text-muted text-center mt-5">
-          ¿No tenés cuenta?{" "}
-          <Link to="/registro-candidato" className="font-semibold text-acento hover:underline">Crear cuenta</Link>
-          {" · "}
-          <Link to="/registro-empresa" className="font-semibold text-acento hover:underline">Crear empresa</Link>
-        </p>
+          {error && (
+            <div role="alert" className="login-form-error">
+              {error}
+            </div>
+          )}
+
+          <button type="submit" disabled={enviando} className="boton boton-primario w-full">
+            {enviando ? "Ingresando…" : "Ingresar →"}
+          </button>
+          <p className="text-center text-sm">
+            <Link to="/recuperar-password" className="text-acento font-semibold">¿Olvidaste tu contraseña?</Link>
+          </p>
+          <p className="text-xs text-muted text-center">
+            ¿No tenés cuenta?{" "}
+            <Link to="/registro-candidato" className="font-semibold text-acento hover:underline">Registrate como postulante</Link>
+            {" "}o{" "}
+            <Link to="/registro-empresa" className="font-semibold text-acento hover:underline">como empresa</Link>
+          </p>
+        </div>
       </form>
-    </div>
+    </section>
   );
+}
+
+function Beneficio({ icono, titulo, texto }) {
+  return <li><Icon name={icono} /><span><strong>{titulo}</strong><small>{texto}</small></span></li>;
 }

@@ -25,10 +25,10 @@ describe("PanelLayout", () => {
       </MemoryRouter>
     );
 
-    const aside = container.querySelector(".panel-side");
-    fireEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
-    expect(aside).toHaveClass("abierto");
-    fireEvent.click(screen.getByRole("button", { name: "Cerrar menú" }));
-    expect(aside).not.toHaveClass("abierto");
+    const aside = container.querySelector(".app-sidebar");
+    fireEvent.click(screen.getByRole("button", { name: "Abrir navegación" }));
+    expect(aside).toHaveClass("is-open");
+    fireEvent.click(screen.getByRole("button", { name: "Cerrar navegación" }));
+    expect(aside).not.toHaveClass("is-open");
   });
 });

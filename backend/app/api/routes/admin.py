@@ -15,9 +15,13 @@ from app.core.db import get_db
 from app.core.storage import url_firmada
 from app.models.empresa_test import EmpresaTest  # noqa: F401 (asegura metadata)
 from app.models.enums import EstadoEmpresa
+from app.models.evaluacion_postulante import EventoEvaluacion
 from app.models.evaluado import Evaluado
+from app.models.persona import Persona
+from app.models.postulacion import Postulacion
 from app.models.resultado import Resultado
 from app.models.tenant import Empresa
+from app.models.vacante import Vacante
 
 router = APIRouter(prefix="/admin", tags=["admin"], dependencies=[Depends(require_superadmin)])
 
@@ -113,3 +117,112 @@ async def rechazar_empresa(empresa_id: uuid.UUID, db: AsyncSession = Depends(get
     empresa.estado = EstadoEmpresa.RECHAZADA
     await db.commit()
     return {"ok": True, "estado": empresa.estado.value}
+
+
+# ── Postulantes (Persona), global — equivalente a la pestaña "Postulantes" de admin.html legacy ──
+@router.get("/postulantes")
+async def listar_postulantes_global(q: str | None = None, db: AsyncSession = Depends(get_db)) -> List[dict]:
+    consulta = select(Persona).order_by(Persona.created_at.desc())
+    if q:
+        patron = f"%{q.strip()}%"
+        consulta = consulta.where(
+            (Persona.nombre.ilike(patron))
+            | (Persona.apellido.ilike(patron))
+            | (Persona.email.ilike(patron))
+            | (Persona.puesto_deseado.ilike(patron))
+        )
+    personas = list((await db.execute(consulta)).scalars().all())
+
+    conteo = dict(
+        (
+            await db.execute(
+                select(Postulacion.persona_id, func.count())
+                .where(Postulacion.persona_id.in_([p.id for p in personas]))
+                .group_by(Postulacion.persona_id)
+            )
+        ).all()
+    ) if personas else {}
+
+    return [
+        {
+            "id": str(p.id),
+            "nombre": p.nombre,
+            "apellido": p.apellido,
+            "email": p.email,
+            "telefono": p.telefono,
+            "puesto_deseado": p.puesto_deseado,
+            "provincia": p.provincia,
+            "postulaciones": conteo.get(p.id, 0),
+            "activo": p.activo,
+            "created_at": p.created_at.isoformat(),
+        }
+        for p in personas
+    ]
+
+
+# ── Búsquedas (Vacante), global — equivalente a la pestaña "Búsquedas" de admin.html legacy ──
+@router.get("/vacantes")
+async def listar_vacantes_global(q: str | None = None, db: AsyncSession = Depends(get_db)) -> List[dict]:
+    consulta = (
+        select(Vacante, Empresa.razon_social)
+        .join(Empresa, Empresa.id == Vacante.tenant_id)
+        .order_by(Vacante.created_at.desc())
+    )
+    if q:
+        patron = f"%{q.strip()}%"
+        consulta = consulta.where((Vacante.puesto.ilike(patron)) | (Empresa.razon_social.ilike(patron)))
+    filas = (await db.execute(consulta)).all()
+
+    ids = [v.id for v, _ in filas]
+    conteo = dict(
+        (
+            await db.execute(
+                select(Postulacion.vacante_id, func.count())
+                .where(Postulacion.vacante_id.in_(ids))
+                .group_by(Postulacion.vacante_id)
+            )
+        ).all()
+    ) if ids else {}
+
+    return [
+        {
+            "id": str(v.id),
+            "puesto": v.puesto,
+            "empresa": razon_social,
+            "estado": v.estado,
+            "modalidad": v.modalidad,
+            "provincia": v.provincia,
+            "localidad": v.localidad,
+            "vacantes": v.vacantes,
+            "postulaciones": conteo.get(v.id, 0),
+            "created_at": v.created_at.isoformat(),
+        }
+        for v, razon_social in filas
+    ]
+
+
+# ── Auditoría, global — reusa evento_evaluacion (ya registra quién hizo qué sobre
+# evaluaciones/resultados); es la única traza de auditoría que existe hoy en el backend ──
+@router.get("/auditoria")
+async def listar_auditoria(db: AsyncSession = Depends(get_db)) -> List[dict]:
+    consulta = (
+        select(EventoEvaluacion, Empresa.razon_social, Persona.nombre, Persona.apellido)
+        .outerjoin(Empresa, Empresa.id == EventoEvaluacion.tenant_id)
+        .outerjoin(Persona, Persona.id == EventoEvaluacion.persona_id)
+        .order_by(EventoEvaluacion.created_at.desc())
+        .limit(500)
+    )
+    filas = (await db.execute(consulta)).all()
+    return [
+        {
+            "id": str(evento.id),
+            "accion": evento.accion,
+            "actor_tipo": evento.actor_tipo,
+            "actor_id": str(evento.actor_id) if evento.actor_id else None,
+            "empresa": razon_social,
+            "persona": f"{nombre} {apellido}".strip() if nombre else None,
+            "detalle": evento.detalle,
+            "created_at": evento.created_at.isoformat(),
+        }
+        for evento, razon_social, nombre, apellido in filas
+    ]

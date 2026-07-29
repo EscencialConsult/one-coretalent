@@ -6,6 +6,7 @@ import Marca from "./Marca";
 const LINKS = [
   { to: "/", label: "Inicio", exact: true },
   { to: "/busquedas", label: "Oportunidades" },
+  { to: "/#como-funciona", label: "Cómo funciona" },
 ];
 
 function CrearCuentaMenu() {
@@ -70,15 +71,19 @@ export default function PublicNavbar({ personaAutenticada }) {
   return (
     <header className="public-navbar">
       <div className="public-navbar-inner">
-        <Link to="/" className="public-navbar-brand" aria-label="AdRHA Talent Hub, ir al inicio">
-          <Marca /><span>Talent Hub</span>
+        <Link to="/" className="public-navbar-brand" aria-label="AdRHA Core-Talent, ir al inicio">
+          <Marca /><span>Core-Talent</span>
         </Link>
         <nav className="public-navbar-links" aria-label="Navegación principal">
-          {LINKS.map((item) => (
-            <NavLink key={item.to} to={item.to} end={item.exact} className={({ isActive }) => isActive ? "activo" : ""}>
-              {item.label}
-            </NavLink>
-          ))}
+          {LINKS.map((item) =>
+            item.to.includes("#") ? (
+              <Link key={item.to} to={item.to}>{item.label}</Link>
+            ) : (
+              <NavLink key={item.to} to={item.to} end={item.exact} className={({ isActive }) => isActive ? "activo" : ""}>
+                {item.label}
+              </NavLink>
+            )
+          )}
         </nav>
         <div className="public-navbar-actions">
           {!personaAutenticada && <CrearCuentaMenu />}

@@ -20,6 +20,7 @@ module.exports = {
         cian: brand.colores.cian,
         oro: brand.colores.oro,
         violeta: brand.colores.violeta,
+        oscuro: brand.colores.oscuro,
         muted: brand.colores.muted,
         linea: brand.colores.linea,
         fondo: brand.colores.fondo,

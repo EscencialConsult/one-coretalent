@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registrarEmpresa } from "../../api/publico";
 import { archivoABase64 } from "../../utils/archivo";
@@ -13,14 +13,37 @@ const VACIO = {
   acepto_terminos: false,
 };
 
+// Borrador en localStorage para no perder el formulario si cierran la ventana.
+// Nunca guardamos admin_password, y la selfie/firma no se pueden persistir así
+// (son captura en vivo) — esas dos se vuelven a hacer si hay que retomar.
+const DRAFT_KEY = "registro-empresa-draft";
+const CAMPOS_BORRADOR = [
+  "razon_social", "subdominio", "email_admin",
+  "admin_nombre", "admin_apellido", "cuit", "rubro", "dni", "acepto_terminos",
+];
+
+function cargarBorrador() {
+  try {
+    const guardado = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}");
+    return { ...VACIO, ...guardado };
+  } catch {
+    return VACIO;
+  }
+}
+
 export default function RegistroEmpresa() {
   const navigate = useNavigate();
-  const [form, setForm] = useState(VACIO);
+  const [form, setForm] = useState(cargarBorrador);
   const [selfie, setSelfie] = useState(null);
   const [firma, setFirma] = useState(null);
   const [error, setError] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [ok, setOk] = useState(false);
+
+  useEffect(() => {
+    const borrador = Object.fromEntries(CAMPOS_BORRADOR.map((campo) => [campo, form[campo]]));
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(borrador));
+  }, [form]);
 
   const campo = (nombre, valor) => setForm((actual) => ({ ...actual, [nombre]: valor }));
 
@@ -34,6 +57,7 @@ export default function RegistroEmpresa() {
     try {
       const selfie_base64 = await archivoABase64(selfie);
       await registrarEmpresa({ ...form, selfie_base64, firma_legal_base64: firma });
+      localStorage.removeItem(DRAFT_KEY);
       setOk(true);
     } catch (err) {
       setError(err instanceof ApiError ? err.detail : "No se pudo completar el registro.");

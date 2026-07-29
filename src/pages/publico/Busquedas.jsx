@@ -173,6 +173,7 @@ export default function Busquedas({ modoCandidato = false }) {
             </div>
           ) : (
             <>
+              <img className="jobs-hero-marca" src="/iconadhranegro.png" alt="" aria-hidden="true" />
               <span className="jobs-eyebrow"><span /> Oportunidades activas</span>
               <h1>Encontrá un trabajo que acompañe tu próximo paso.</h1>
               <p>Explorá búsquedas de empresas y consultoras, conocé cada propuesta y postulate con un perfil que podés reutilizar.</p>

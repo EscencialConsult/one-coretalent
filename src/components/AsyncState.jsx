@@ -5,9 +5,9 @@ export function PageLoader({ mensaje = "Cargando…" }) {
     <div className="candidate-loader" role="status" aria-live="polite">
       <div className="one-spinwrap" aria-hidden="true">
         <span className="one-ring" />
-        <img className="one-spiral" src="/espiral-one.png" alt="" width={72} height={72} />
+        <img className="one-spiral" src="/espiral-one.png" alt="" width={104} height={104} />
       </div>
-      <p>{mensaje}</p>
+      <span className="sr-only">{mensaje}</span>
     </div>
   );
 }
