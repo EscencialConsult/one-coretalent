@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import ProtectedPersonaRoute from "./auth/ProtectedPersonaRoute";
 import { PageLoader } from "./components/AsyncState";
@@ -45,9 +45,19 @@ const PerfilCandidato = lazy(() => import("./pages/candidato/PerfilCandidato"));
 const SeguridadCandidato = lazy(() => import("./pages/candidato/SeguridadCandidato"));
 const PrivacidadCandidato = lazy(() => import("./pages/candidato/PrivacidadCandidato"));
 
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) return;
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+}
+
 export default function App() {
   return (
     <Suspense fallback={<PageLoader mensaje="Cargando sección…" />}>
+      <ScrollToTop />
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Landing />} />
