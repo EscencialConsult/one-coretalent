@@ -37,3 +37,4 @@ backend/.pytest_cache
 
 # Claude Code (artefactos de sesión, no son del proyecto)
 .claude/
+.playwright-mcp/

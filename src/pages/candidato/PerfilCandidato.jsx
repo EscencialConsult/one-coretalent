@@ -3,8 +3,10 @@ import { actualizarMiCv, actualizarMiPerfil, obtenerMiPerfil } from "../../api/p
 import { usePersonaAuth } from "../../auth/usePersonaAuth";
 import { ErrorState, PageLoader } from "../../components/AsyncState";
 import Icon from "../../components/Icon";
+import SelectorBuscable from "../../components/SelectorBuscable";
 import { useApiResource } from "../../hooks/useApiResource";
 import { archivoABase64 } from "../../utils/archivo";
+import { IDIOMAS, localidadesDe, NIVELES_IDIOMA, PROVINCIAS_ARGENTINA, PUESTOS } from "../../utils/opcionesPerfil";
 import { combinarPerfilConCv } from "../../utils/perfilCandidato";
 import { Titulo } from "./MisPostulaciones";
 
@@ -36,6 +38,7 @@ export default function PerfilCandidato() {
   if (recurso.error) return <ErrorState mensaje={recurso.error} onReintentar={recurso.recargar} />;
 
   const set = (campo, valor) => setForm((actual) => ({ ...actual, [campo]: valor }));
+  const cambiarProvincia = (valor) => setForm((actual) => ({ ...actual, provincia: valor, codigo_postal_ciudad: "" }));
 
   async function guardar(evento) {
     evento.preventDefault();
@@ -98,10 +101,36 @@ export default function PerfilCandidato() {
             <Campo label="Apellido" value={form.apellido} onChange={(valor) => set("apellido", valor)} required />
             <Campo label="Email" value={form.email} disabled ayuda="El email identifica tu cuenta y no puede modificarse." />
             <Campo label="Teléfono" value={form.telefono} onChange={(valor) => set("telefono", valor)} />
-            <Campo label="Puesto deseado" value={form.puesto_deseado} onChange={(valor) => set("puesto_deseado", valor)} />
+            <label className="candidate-field">
+              <span>Puesto deseado</span>
+              <SelectorBuscable
+                value={form.puesto_deseado}
+                onChange={(valor) => set("puesto_deseado", valor)}
+                opciones={PUESTOS}
+                conOtro
+                placeholder="Escribí para buscar un puesto…"
+                otroPlaceholder="Especificá el puesto"
+              />
+            </label>
             <Campo label="Perfil profesional" value={form.perfil_profesional} onChange={(valor) => set("perfil_profesional", valor)} />
-            <Campo label="Provincia" value={form.provincia} onChange={(valor) => set("provincia", valor)} />
-            <Campo label="Ciudad / Código postal" value={form.codigo_postal_ciudad} onChange={(valor) => set("codigo_postal_ciudad", valor)} />
+            <label className="candidate-field">
+              <span>Provincia</span>
+              <select value={form.provincia || ""} onChange={(evento) => cambiarProvincia(evento.target.value)}>
+                <option value="">Seleccionar…</option>
+                {PROVINCIAS_ARGENTINA.map((p) => <option key={p} value={p}>{p}</option>)}
+              </select>
+            </label>
+            <label className="candidate-field">
+              <span>Localidad</span>
+              <SelectorBuscable
+                value={form.codigo_postal_ciudad}
+                onChange={(valor) => set("codigo_postal_ciudad", valor)}
+                opciones={localidadesDe(form.provincia)}
+                disabled={!form.provincia}
+                disabledPlaceholder="Elegí primero la provincia"
+                placeholder="Escribí para buscar tu localidad…"
+              />
+            </label>
           </div>
           <label className="candidate-field candidate-field-wide">
             <span>Descripción profesional</span>
@@ -110,7 +139,17 @@ export default function PerfilCandidato() {
         </FormSection>
 
         <SeccionLista icono="doc" titulo="Formación" descripcion="Estudios, carreras y cursos relevantes." items={form.formacion || []} setItems={(valor) => set("formacion", valor)} campos={["institucion", "titulo", "anio"]} />
-        <SeccionLista icono="globe" titulo="Idiomas" descripcion="Idiomas y nivel de dominio." items={form.idiomas || []} setItems={(valor) => set("idiomas", valor)} campos={["idioma", "nivel"]} />
+        <SeccionLista
+          icono="globe"
+          titulo="Idiomas"
+          descripcion="Idiomas y nivel de dominio."
+          items={form.idiomas || []}
+          setItems={(valor) => set("idiomas", valor)}
+          campos={[
+            { nombre: "idioma", tipo: "buscable", opciones: IDIOMAS, conOtro: true },
+            { nombre: "nivel", tipo: "nativo", opciones: NIVELES_IDIOMA },
+          ]}
+        />
         <SeccionLista icono="briefcase" titulo="Experiencia" descripcion="Experiencias laborales y responsabilidades principales." items={form.experiencias || []} setItems={(valor) => set("experiencias", valor)} campos={["empresa", "puesto", "periodo", "descripcion"]} />
 
         <FormSection icono="file" titulo="Currículum vitae" descripcion="PDF privado utilizado en tus postulaciones.">
@@ -174,9 +213,38 @@ function SeccionLista({ icono, titulo, descripcion, items, setItems, campos }) {
           <div className="candidate-repeat-item" key={`${titulo}-${indice}`}>
             <div className="candidate-repeat-number">{indice + 1}</div>
             <div className="candidate-form-grid">
-              {campos.map((campo) => (
-                <Campo key={campo} label={ETIQUETAS[campo] || campo} value={item[campo]} onChange={(valor) => actualizar(indice, campo, valor)} />
-              ))}
+              {campos.map((campoDef) => {
+                const nombre = typeof campoDef === "string" ? campoDef : campoDef.nombre;
+                const etiqueta = ETIQUETAS[nombre] || nombre;
+
+                if (typeof campoDef !== "string" && campoDef.tipo === "nativo") {
+                  return (
+                    <label className="candidate-field" key={nombre}>
+                      <span>{etiqueta}</span>
+                      <select value={item[nombre] || ""} onChange={(evento) => actualizar(indice, nombre, evento.target.value)}>
+                        <option value="">Seleccionar…</option>
+                        {campoDef.opciones.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+                      </select>
+                    </label>
+                  );
+                }
+
+                if (typeof campoDef !== "string" && campoDef.tipo === "buscable") {
+                  return (
+                    <label className="candidate-field" key={nombre}>
+                      <span>{etiqueta}</span>
+                      <SelectorBuscable
+                        value={item[nombre]}
+                        onChange={(valor) => actualizar(indice, nombre, valor)}
+                        opciones={campoDef.opciones}
+                        conOtro={campoDef.conOtro}
+                      />
+                    </label>
+                  );
+                }
+
+                return <Campo key={nombre} label={etiqueta} value={item[nombre]} onChange={(valor) => actualizar(indice, nombre, valor)} />;
+              })}
             </div>
             <button type="button" className="candidate-remove" onClick={() => setItems(items.filter((_, posicion) => posicion !== indice))}>
               <Icon name="trash" /> Eliminar
@@ -184,7 +252,11 @@ function SeccionLista({ icono, titulo, descripcion, items, setItems, campos }) {
           </div>
         ))}
       </div>
-      <button type="button" className="candidate-add" onClick={() => setItems([...items, Object.fromEntries(campos.map((campo) => [campo, ""]))])}>
+      <button
+        type="button"
+        className="candidate-add"
+        onClick={() => setItems([...items, Object.fromEntries(campos.map((campoDef) => [typeof campoDef === "string" ? campoDef : campoDef.nombre, ""]))])}
+      >
         <Icon name="plus" /> Agregar {titulo.toLocaleLowerCase("es")}
       </button>
     </FormSection>

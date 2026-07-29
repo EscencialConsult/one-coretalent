@@ -8,7 +8,7 @@ describe("Landing", () => {
 
   it("presenta propuestas y llamados a la acción para ambos públicos", () => {
     render(<MemoryRouter><Landing /></MemoryRouter>);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Conectamos el potencial");
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("El mismo lugar donde postulás");
     expect(screen.getByRole("link", { name: /Explorar oportunidades/ })).toHaveAttribute("href", "/busquedas");
     expect(screen.getByRole("heading", { name: "Tu carrera, en un espacio que te representa." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Procesos de selección con criterio y trazabilidad." })).toBeInTheDocument();

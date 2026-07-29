@@ -8,6 +8,8 @@ import { ApiError } from "../../api/client";
 import FirmaCanvas from "../../components/FirmaCanvas";
 import Icon from "../../components/Icon";
 import { validarPasoPostulacion } from "../../utils/validacionPostulacion";
+import SelectorBuscable from "../../components/SelectorBuscable";
+import { IDIOMAS, localidadesDe, PROVINCIAS_ARGENTINA, PUESTOS } from "../../utils/opcionesPerfil";
 
 const PASOS = [
   { key: "datos", titulo: "Tus datos", icon: "user" },
@@ -100,6 +102,10 @@ export default function Postular() {
 
   function campo(nombre, valor) {
     setForm((f) => ({ ...f, [nombre]: valor }));
+  }
+
+  function cambiarProvincia(valor) {
+    setForm((f) => ({ ...f, provincia: valor, codigo_postal_ciudad: "" }));
   }
 
   function actualizarFila(lista, setLista, i, campo, valor) {
@@ -222,8 +228,25 @@ export default function Postular() {
               <Campo label="Teléfono" value={form.telefono} onChange={(v) => campo("telefono", v)} />
               <Campo label="Fecha de nacimiento" type="date" value={form.fecha_nacimiento} onChange={(v) => campo("fecha_nacimiento", v)} />
               <Campo label="DNI" value={form.identificacion} onChange={(v) => campo("identificacion", v)} />
-              <Campo label="Provincia" value={form.provincia} onChange={(v) => campo("provincia", v)} />
-              <Campo label="Localidad" value={form.codigo_postal_ciudad} onChange={(v) => campo("codigo_postal_ciudad", v)} />
+              <div>
+                <label className="block text-xs font-semibold mb-1.5">Provincia</label>
+                <select className="input-marca" value={form.provincia} onChange={(e) => cambiarProvincia(e.target.value)}>
+                  <option value="">Seleccionar…</option>
+                  {PROVINCIAS_ARGENTINA.map((p) => <option key={p} value={p}>{p}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold mb-1.5">Localidad</label>
+                <SelectorBuscable
+                  inputClassName="input-marca"
+                  value={form.codigo_postal_ciudad}
+                  onChange={(v) => campo("codigo_postal_ciudad", v)}
+                  opciones={localidadesDe(form.provincia)}
+                  disabled={!form.provincia}
+                  disabledPlaceholder="Elegí primero la provincia"
+                  placeholder="Escribí para buscar tu localidad…"
+                />
+              </div>
             </div>
           </PasoWrapper>
         )}
@@ -232,7 +255,18 @@ export default function Postular() {
         {paso === 1 && (
           <PasoWrapper titulo="Perfil profesional">
             <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Campo label="Puesto deseado" value={form.puesto_deseado} onChange={(v) => campo("puesto_deseado", v)} />
+              <div>
+                <label className="block text-xs font-semibold mb-1.5">Puesto deseado</label>
+                <SelectorBuscable
+                  inputClassName="input-marca"
+                  value={form.puesto_deseado}
+                  onChange={(v) => campo("puesto_deseado", v)}
+                  opciones={PUESTOS}
+                  conOtro
+                  placeholder="Escribí para buscar un puesto…"
+                  otroPlaceholder="Especificá el puesto"
+                />
+              </div>
               <Campo label="Perfil profesional" value={form.perfil_profesional} onChange={(v) => campo("perfil_profesional", v)} />
             </div>
             <label className="block text-xs font-semibold mb-1.5">Contanos sobre vos</label>
@@ -267,11 +301,14 @@ export default function Postular() {
           <PasoWrapper titulo="Idiomas">
             {idiomas.map((it, i) => (
               <div key={i} className="grid grid-cols-2 gap-3 mb-2">
-                <input
-                  placeholder="Idioma"
-                  className="input-marca"
+                <SelectorBuscable
+                  inputClassName="input-marca"
                   value={it.idioma}
-                  onChange={(e) => actualizarFila(idiomas, setIdiomas, i, "idioma", e.target.value)}
+                  onChange={(v) => actualizarFila(idiomas, setIdiomas, i, "idioma", v)}
+                  opciones={IDIOMAS}
+                  conOtro
+                  placeholder="Idioma"
+                  otroPlaceholder="Especificá el idioma"
                 />
                 <select
                   className="input-marca"
