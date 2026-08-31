@@ -1,0 +1,25 @@
+# Backend de AdRHA Core-Talent, para correr con Docker en un servidor propio (self-host).
+# Pensado originalmente para reemplazar el hosting en Railway (trial vencido) — ver
+# PLATAFORMA.md, sección "Hosting" para el contexto completo.
+#
+# No corre nada de base de datos acá: la app se conecta a Supabase Postgres (externo),
+# igual que en Railway. Solo empaqueta y corre el backend.
+#
+# Uso:
+#   1) cp backend/.env.example backend/.env   y completar los valores reales
+#   2) docker compose up -d --build
+#   3) docker compose logs -f   (para ver que "alembic upgrade head" corrió bien)
+#
+# Health check disponible en GET /api/health una vez arriba.
+
+services:
+  core-talent-backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: core-talent-backend
+    restart: unless-stopped
+    env_file:
+      - backend/.env
+    ports:
+      - "8000:8000"

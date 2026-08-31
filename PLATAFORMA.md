@@ -69,7 +69,10 @@ sistema mixto core-talent/          ← este repo
 
 - **Módulo 360°**: descartado, no se construye (ver arriba).
 - **Informe con IA**: descartado, no se construye (ver arriba).
-- **Hosting**: **Render NO se usa para nada** (ni base de datos, ni backend). La base es **Supabase**. El backend corre en **Railway** (`backend/Procfile` + `backend/railway.json`, build con Nixpacks, arranca con `alembic upgrade head && uvicorn ...`). El frontend está desplegado en **Netlify**, dominio propio **`coretalent.onelabs.pro`**, con `VITE_API_URL` apuntando a la URL pública de Railway (tiene que incluir el `/api` al final — ver `src/api/client.js`). Ya está en producción y probado de punta a punta.
+- **Hosting**: la base sigue siendo **Supabase** (esto no cambió). El frontend sigue en **Netlify**, dominio propio **`coretalent.onelabs.pro`**.
+  - **Backend (histórico)**: corrió en **Railway** (`backend/Procfile` + `backend/railway.json`) hasta el 2026-08-31, cuando venció el trial gratuito y Railway pidió plan pago. Facundo decidió no pagar — ese hosting queda dado de baja, el proyecto de Railway sigue existiendo pero pausado (service offline).
+  - **Backend (situación actual)**: preparado para self-host en Docker (`backend/Dockerfile` + `docker-compose.yml` en la raíz del repo — **el build context tiene que ser la raíz del repo, no `backend/`**, porque la imagen necesita empaquetar también `catalogo/`, que vive afuera de `backend/`). Pensado para correr en el servidor local de la oficina (la X270 de Santiago, ver skill `servidor-local`) — **requiere el OK explícito de Santiago antes de levantar el contenedor ahí**, no es autorización automática. Hasta que eso pase (o se elija otro hosting, ej. Render), el backend de producción está caído y `coretalent.onelabs.pro` no tiene API a la que pegarle.
+  - Sea cual sea el hosting final, `VITE_API_URL` del frontend tiene que apuntar a la URL pública real del backend nuevo (con el `/api` al final — ver `src/api/client.js`), y `CORS_ORIGINS`/`PUBLIC_BASE_URL` del backend tienen que reflejar `coretalent.onelabs.pro`.
 - **Migración de datos reales**: NO se trae nada de la base vieja de Render/Plataforma ONE (los datos de esos tests psicométricos no andaban bien de antes, se descarta esa migración). SÍ se van a traer los datos de **postulaciones**, que hoy viven en una planilla de Google Sheets (Talent Hub) — Facundo va a pasar esa planilla para migrarla.
 - **Reutilización de resultados**: confirmado que la lógica actual es la correcta — si el resultado ya existe se reusa directo (no se pide de nuevo); si no existe, recién ahí se solicita acceso/se rinde. No requiere cambios.
 - **Tests psicométricos por vacante** (2026-07-27): la empresa configura los tests requeridos **una vez, a nivel de vacante** (al crearla o editarla), no postulante por postulante. Al postular, esos tests se asignan solos; para postulaciones que ya existían, editar la vacante los pone al día automáticamente (también hay un botón manual de "Aplicar a postulaciones pendientes" como red de seguridad). Ver `Vacante.tests_requeridos`, `aplicar_tests_a_postulaciones_existentes` en `evaluaciones_postulantes.py`.
@@ -78,6 +81,7 @@ sistema mixto core-talent/          ← este repo
 
 1. Dar seguimiento al advisory RSC de React Router antes de adoptar APIs RSC o actualizar a la próxima versión compatible.
 2. Mantener bloqueados `dat`, `dnla-perfil-comercial`, `ebp` e `ipp` (superado por `ipp-r`) hasta recibir definición psicométrica autorizada.
+3. **Backend sin hosting activo desde 2026-08-31** (ver "Hosting" arriba): conseguir el OK de Santiago para el servidor local, o elegir un hosting alternativo (ej. Render), y desplegar `backend/Dockerfile` ahí. Actualizar `VITE_API_URL` en el build del frontend (Netlify) para que apunte a la URL nueva.
 
 ### Rediseño de marca (AdRHA) — ✅ resuelto (2026-07-28)
 

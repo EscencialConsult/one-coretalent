@@ -1,0 +1,15 @@
+# Reduce lo que se manda al daemon de Docker al buildear (context = raíz del repo,
+# ver backend/Dockerfile). Nada de esto lo necesita la imagen del backend.
+
+.git
+node_modules
+dist
+.playwright-mcp
+
+backend/.venv
+backend/__pycache__
+backend/**/__pycache__
+backend/.env
+backend/.pytest_cache
+
+*.log
