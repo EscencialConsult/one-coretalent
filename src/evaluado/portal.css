@@ -13,7 +13,7 @@
 
 /* saludo */
 .pe-hello { padding: 30px 34px; margin-bottom: 22px; }
-.pe-hello .eb { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: 2px; color: var(--violeta); background: rgba(180,39,45,.08); padding: 6px 13px; border-radius: 999px; margin-bottom: 14px; }
+.pe-hello .eb { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: 2px; color: var(--violeta); background: rgba(77,36,143,.08); padding: 6px 13px; border-radius: 999px; margin-bottom: 14px; }
 .pe-hello h1 { font-size: 30px; letter-spacing: -.5px; margin-bottom: 8px; }
 .pe-hello p { color: var(--tinta); opacity: .72; font-size: 15px; line-height: 1.6; max-width: 620px; }
 .pe-stats { display: flex; gap: 26px; margin-top: 20px; flex-wrap: wrap; }
@@ -29,7 +29,7 @@
 .pe-card::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 4px; background: var(--grad); opacity: 0; transition: .2s; }
 .pe-card.can:hover { transform: translateY(-3px); } .pe-card.can:hover::before { opacity: 1; }
 .pe-card.done { opacity: .82; }
-.pe-cat { font-size: 10.5px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; color: var(--violeta); background: rgba(180,39,45,.08); padding: 4px 10px; border-radius: 6px; align-self: flex-start; margin-bottom: 12px; }
+.pe-cat { font-size: 10.5px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; color: var(--violeta); background: rgba(77,36,143,.08); padding: 4px 10px; border-radius: 6px; align-self: flex-start; margin-bottom: 12px; }
 .pe-card h3 { font-size: 18px; margin-bottom: 6px; }
 .pe-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
 .pe-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--tinta); background: #fff; border: 1px solid var(--linea); padding: 7px 12px; border-radius: 11px; }
@@ -37,9 +37,9 @@
 .pe-foot { margin-top: auto; display: flex; align-items: center; gap: 12px; }
 .pe-estado { font-size: 11px; font-weight: 800; padding: 5px 11px; border-radius: 999px; }
 .pe-estado.pendiente { color: #4f7a34; background: rgba(111,170,70,.26); }
-.pe-estado.completado { color: #2b6f8c; background: rgba(79,173,209,.2); }
+.pe-estado.completado { color: #2b6f8c; background: rgba(107,225,227,.2); }
 .pe-btn { margin-left: auto; border: 0; cursor: pointer; font-weight: 700; font-size: 13.5px; padding: 11px 20px; border-radius: 12px; transition: .2s; }
-.pe-btn.prim { background: var(--grad); color: #fff; box-shadow: 0 12px 26px -12px rgba(240,160,48,.85); }
+.pe-btn.prim { background: var(--grad); color: #fff; box-shadow: 0 12px 26px -12px rgba(225,123,215,.85); }
 .pe-btn.prim:hover { transform: translateY(-1px); }
 .pe-btn.ghost { background: #fff; color: var(--muted); border: 1.5px solid var(--linea); cursor: default; }
 

@@ -81,7 +81,7 @@ export default function Busquedas() {
                 <tr key={v.id}>
                   <td style={{ paddingLeft: 20 }}>
                     <div className="flex items-center gap-3">
-                      <div className="fila-icono" style={{ background: "rgba(180,39,45,.1)" }}><Icon name="briefcase" className="w-4 h-4" /></div>
+                      <div className="fila-icono" style={{ background: "rgba(77,36,143,.1)" }}><Icon name="briefcase" className="w-4 h-4" /></div>
                       <b className="text-sm">{v.puesto}</b>
                     </div>
                   </td>

@@ -190,7 +190,7 @@ export default function DominoRunner({ slug, empresa, onExit, onSubmit, initialA
           <>
             <div className="card runhead">
               <div className="r1">
-                <span className="en" style={{ color: '#2b6f8c', background: 'rgba(79,173,209,.16)', borderColor: 'rgba(79,173,209,.42)' }}>
+                <span className="en" style={{ color: '#2b6f8c', background: 'rgba(107,225,227,.16)', borderColor: 'rgba(107,225,227,.42)' }}>
                   <span className="pulse" style={{ background: 'var(--cian)' }} /> PRÁCTICA
                 </span>
                 <span className="qcount">Ejemplo {pIdx + 1} de {practica.length}</span>

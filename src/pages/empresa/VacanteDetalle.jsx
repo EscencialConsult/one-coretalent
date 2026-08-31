@@ -95,7 +95,7 @@ export default function VacanteDetalle() {
           <div className="flex items-center gap-4 min-w-0">
             <div
               className="w-14 h-14 rounded-marca grid place-items-center font-extrabold text-lg flex-none"
-              style={{ background: "rgba(180,39,45,.1)", color: "var(--brand-acento)" }}
+              style={{ background: "rgba(77,36,143,.1)", color: "var(--brand-acento)" }}
             >
               <Icon name="briefcase" className="w-6 h-6" />
             </div>
@@ -133,7 +133,7 @@ export default function VacanteDetalle() {
 
         {error && <p className="text-sm text-rosa font-semibold mt-4">{error}</p>}
         {vacante.estado === "activa" && (
-          <p className="text-xs mt-4 inline-flex items-center gap-1.5 px-3 py-2 rounded-chico" style={{ color: "#2b6f8c", background: "rgba(79,173,209,.12)", border: "1px solid rgba(79,173,209,.3)" }}>
+          <p className="text-xs mt-4 inline-flex items-center gap-1.5 px-3 py-2 rounded-chico" style={{ color: "#2b6f8c", background: "rgba(107,225,227,.12)", border: "1px solid rgba(107,225,227,.3)" }}>
             <Icon name="check" className="w-3.5 h-3.5" /> Al quedar activa, se notificó automáticamente a los candidatos compatibles.
           </p>
         )}

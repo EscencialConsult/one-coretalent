@@ -97,7 +97,7 @@ export default function PerfilEmpresa() {
             </div>
           )}
           {ok && (
-            <div className="mt-3.5 text-sm font-semibold px-3.5 py-2.5 rounded-chico" style={{ color: "#2b6f8c", background: "rgba(79,173,209,.12)", border: "1px solid rgba(79,173,209,.3)" }}>
+            <div className="mt-3.5 text-sm font-semibold px-3.5 py-2.5 rounded-chico" style={{ color: "#2b6f8c", background: "rgba(107,225,227,.12)", border: "1px solid rgba(107,225,227,.3)" }}>
               Contraseña actualizada.
             </div>
           )}

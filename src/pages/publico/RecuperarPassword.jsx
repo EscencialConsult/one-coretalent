@@ -38,7 +38,7 @@ export default function RecuperarPassword() {
         </p>
 
         {ok ? (
-          <div className="text-sm text-center px-3.5 py-4 rounded-chico" style={{ color: "#2b6f8c", background: "rgba(79,173,209,.12)", border: "1px solid rgba(79,173,209,.3)" }}>
+          <div className="text-sm text-center px-3.5 py-4 rounded-chico" style={{ color: "#2b6f8c", background: "rgba(107,225,227,.12)", border: "1px solid rgba(107,225,227,.3)" }}>
             Si el email existe en nuestro sistema, vas a recibir un enlace para restablecer tu contraseña en los próximos minutos.
           </div>
         ) : (

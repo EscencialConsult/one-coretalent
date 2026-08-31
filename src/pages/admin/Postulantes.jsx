@@ -82,7 +82,7 @@ export default function Postulantes() {
                 <tr key={p.id}>
                   <td style={{ paddingLeft: 20 }}>
                     <div className="flex items-center gap-3">
-                      <div className="fila-icono" style={{ background: "rgba(180,39,45,.1)" }}>{sigla(p.nombre, p.apellido)}</div>
+                      <div className="fila-icono" style={{ background: "rgba(77,36,143,.1)" }}>{sigla(p.nombre, p.apellido)}</div>
                       <div>
                         <b className="text-sm block">{p.nombre} {p.apellido}</b>
                         <span className="text-xs text-muted">{p.provincia || "Sin provincia"}</span>

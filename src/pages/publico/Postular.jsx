@@ -170,7 +170,7 @@ export default function Postular() {
   if (ok) {
     return (
       <div className="tarjeta p-10 text-center">
-        <div className="w-16 h-16 rounded-full mx-auto mb-4 grid place-items-center" style={{ background: "rgba(79,173,209,.15)", color: "#2b6f8c" }}>
+        <div className="w-16 h-16 rounded-full mx-auto mb-4 grid place-items-center" style={{ background: "rgba(107,225,227,.15)", color: "#2b6f8c" }}>
           <Icon name="check" className="w-8 h-8" />
         </div>
         <h1 className="text-2xl font-extrabold mb-2">¡Listo, {form.nombre}!</h1>

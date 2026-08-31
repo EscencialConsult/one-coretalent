@@ -48,7 +48,7 @@ export default function RestablecerPassword() {
         <h1 className="text-xl font-extrabold text-center mb-1">Elegí tu nueva contraseña</h1>
 
         {ok ? (
-          <div className="text-sm text-center px-3.5 py-4 rounded-chico mt-4" style={{ color: "#2b6f8c", background: "rgba(79,173,209,.12)", border: "1px solid rgba(79,173,209,.3)" }}>
+          <div className="text-sm text-center px-3.5 py-4 rounded-chico mt-4" style={{ color: "#2b6f8c", background: "rgba(107,225,227,.12)", border: "1px solid rgba(107,225,227,.3)" }}>
             Contraseña actualizada. Te llevamos al login…
           </div>
         ) : (
