@@ -120,7 +120,7 @@ export default function InformeToulouse({ data }) {
               return (
                 <div className="bf-bar" key={s.segmento}>
                   <label><span>Zona {s.segmento}</span><b>{s.cantidad} marcas</b></label>
-                  <div className="bf-track"><i style={{ width: `${(dens / maxDens) * 100}%`, background: 'linear-gradient(135deg,#B4272D,#4FADD1)' }} /></div>
+                  <div className="bf-track"><i style={{ width: `${(dens / maxDens) * 100}%`, background: 'linear-gradient(135deg,#4d248f,#6be1e3)' }} /></div>
                 </div>
               )
             })}

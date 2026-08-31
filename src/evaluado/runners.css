@@ -1,8 +1,8 @@
 :root{
   --negro:#000; --tinta:#1a181d; --blanco:#fefeff;
-  --rosa:#F0A030; --cian:#4FADD1; --oro:#6FAA46; --violeta:#B4272D;
+  --rosa:#e17bd7; --cian:#6be1e3; --oro:#e4c76a; --violeta:#4d248f;
   --muted:#a4a8c0; --linea:#c6c9d7;
-  --grad:linear-gradient(135deg,#F0A030 0%,#4FADD1 100%);
+  --grad:linear-gradient(135deg,#e17bd7 0%,#6be1e3 100%);
   --sombra:0 22px 60px -22px rgba(26,24,29,.28); --radio:22px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -12,10 +12,10 @@ body{font-family:"Segoe UI",-apple-system,Roboto,system-ui,sans-serif;color:var(
 /* fondo */
 .bg{position:fixed;inset:0;z-index:-3;overflow:hidden}
 .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;animation:float 20s ease-in-out infinite}
-.blob.a{width:520px;height:520px;background:radial-gradient(circle,#F0A030,transparent 68%);top:-160px;left:-120px}
-.blob.b{width:480px;height:480px;background:radial-gradient(circle,#4FADD1,transparent 68%);top:-120px;right:-130px;animation-delay:-7s}
-.blob.c{width:460px;height:460px;background:radial-gradient(circle,#6FAA46,transparent 70%);bottom:-180px;left:30%;opacity:.4;animation-delay:-13s}
-.blob.d{width:380px;height:380px;background:radial-gradient(circle,#F0A030,transparent 70%);bottom:-140px;right:-80px;opacity:.35;animation-delay:-4s}
+.blob.a{width:520px;height:520px;background:radial-gradient(circle,#e17bd7,transparent 68%);top:-160px;left:-120px}
+.blob.b{width:480px;height:480px;background:radial-gradient(circle,#6be1e3,transparent 68%);top:-120px;right:-130px;animation-delay:-7s}
+.blob.c{width:460px;height:460px;background:radial-gradient(circle,#e4c76a,transparent 70%);bottom:-180px;left:30%;opacity:.4;animation-delay:-13s}
+.blob.d{width:380px;height:380px;background:radial-gradient(circle,#e17bd7,transparent 70%);bottom:-140px;right:-80px;opacity:.35;animation-delay:-4s}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(70px,50px) scale(1.12)}66%{transform:translate(-50px,30px) scale(.92)}}
 .veil{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(254,254,255,.30),rgba(254,254,255,.62))}
 .plexus{position:fixed;inset:0;z-index:-1;width:100%;height:100%;opacity:.5}

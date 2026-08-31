@@ -49,7 +49,7 @@ function nombreArchivo(informe) {
 export default function InformeRouter({ informe }) {
   const [bajando, setBajando] = useState(false);
   const [errorPdf, setErrorPdf] = useState("");
-  const color = informe.empresa?.color_acento || "#B4272D";
+  const color = informe.empresa?.color_acento || "#4d248f";
   const volver = informe.audiencia === "persona"
     ? "/candidato/resultados"
     : informe.contexto?.vacante_id && informe.contexto?.postulacion_id

@@ -127,7 +127,7 @@ export default function InformeDnla({ data }) {
                 <Pill lbl="Lo que funciona" v={a.feedback.bien} c="#178a8f" />
                 <Pill lbl="Oportunidad" v={a.feedback.op} c="#4f7a34" />
                 <Pill lbl="Herramienta" v={a.feedback.herr} c="#b5559f" />
-                <Pill lbl="Indicador" v={a.feedback.kpi} c="#B4272D" />
+                <Pill lbl="Indicador" v={a.feedback.kpi} c="#4d248f" />
               </div>
             )}
           </div>

@@ -70,7 +70,7 @@ export default function Login() {
 
       <form onSubmit={onSubmit} className="login-form-card">
         <header>
-          <div><img src="/iconadhra.png" alt="" /></div>
+          <div><img src="/one-icon-color.png" alt="" /></div>
           <span><h2>Iniciar sesión</h2><p>Entrá con tu cuenta de empresa o de candidato.</p></span>
         </header>
 

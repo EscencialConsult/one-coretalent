@@ -807,8 +807,8 @@
 :root {
   /* White-label por empresa: ThemeProvider pisa estos dos valores en runtime.
      El resto de la identidad visual (rosa/cian/oro/violeta/tinta) es fija de la marca ONE. */
-  --brand-acento: #B4272D;
-  --brand-secundario: #4FADD1;
+  --brand-acento: #4d248f;
+  --brand-secundario: #6be1e3;
   /* Fondo tenue derivado del acento — reemplaza los ~15 lilas sueltos que quedaban
      de la marca ONE detrás de íconos/badges en rojo (se notaban como color pisado). */
   --acento-tinte: color-mix(in srgb, var(--brand-acento) 9%, white);

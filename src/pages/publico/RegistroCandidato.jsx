@@ -85,7 +85,7 @@ export default function RegistroCandidato() {
 
       <form className="candidate-register-form" onSubmit={submit}>
         <header>
-          <div><img src="/iconadhra.png" alt="" /></div>
+          <div><img src="/one-icon-color.png" alt="" /></div>
           <span><h2>Crear cuenta de candidato</h2><p>Completá tus datos básicos para comenzar.</p></span>
         </header>
         <div className="candidate-register-fields">

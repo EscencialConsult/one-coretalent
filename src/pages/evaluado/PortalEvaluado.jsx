@@ -67,8 +67,8 @@ export default function PortalEvaluado() {
   const tema = empresa ? {
     "--violeta": empresa.color_acento,
     "--grad": empresa.color_acento,
-    "--acento2": empresa.color_secundario || "#4FADD1",
-    "--rosa": empresa.color_secundario || "#4FADD1",
+    "--acento2": empresa.color_secundario || "#6be1e3",
+    "--rosa": empresa.color_secundario || "#6be1e3",
   } : undefined;
 
   return (
@@ -208,7 +208,7 @@ function Resumen({ cantidad, etiqueta, color }) {
 
 function Marca({ empresa }) {
   if (empresa?.logo_url) return <img className="pe-logoimg" src={empresa.logo_url} alt={empresa.razon_social} />;
-  return <img className="pe-logoimg" src="/iconadhracompletocolor.png" alt="AdRHA" />;
+  return <img className="pe-logoimg" src="/logo-trim.png" alt="ONE" />;
 }
 
 function iniciales(evaluado) {
