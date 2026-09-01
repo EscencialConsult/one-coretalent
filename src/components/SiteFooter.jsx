@@ -17,7 +17,7 @@ export default function SiteFooter() {
             <img className="site-footer-logo" src="/one-logocolor.png" alt="" />
             <span>Core-Talent</span>
           </Link>
-          <p>La plataforma de AdRHA para conectar postulantes, empresas y oportunidades laborales en un solo lugar.</p>
+          <p>La plataforma de ONE para conectar postulantes, empresas y oportunidades laborales en un solo lugar.</p>
         </div>
 
         <nav className="site-footer-col" aria-label="Plataforma">

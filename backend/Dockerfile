@@ -1,4 +1,4 @@
-# Imagen del backend de AdRHA Core-Talent (FastAPI).
+# Imagen del backend de ONE Core-Talent (FastAPI).
 #
 # IMPORTANTE — build context: este Dockerfile se arma para correr desde la RAÍZ del repo,
 # no desde adentro de backend/. Necesita ver también catalogo/, que vive como carpeta
