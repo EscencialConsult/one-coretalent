@@ -35,6 +35,8 @@ export default function RegistroEmpresa() {
   const navigate = useNavigate();
   const [form, setForm] = useState(cargarBorrador);
   const [selfie, setSelfie] = useState(null);
+  const [dniFrente, setDniFrente] = useState(null);
+  const [dniDorso, setDniDorso] = useState(null);
   const [firma, setFirma] = useState(null);
   const [error, setError] = useState("");
   const [enviando, setEnviando] = useState(false);
@@ -51,12 +53,23 @@ export default function RegistroEmpresa() {
     event.preventDefault();
     setError("");
     if (!selfie) return setError("Falta capturar o subir la selfie del representante.");
+    if (!dniFrente || !dniDorso) return setError("Falta la foto del DNI (frente y dorso) del representante.");
     if (!firma) return setError("Falta la firma del representante.");
     if (!form.acepto_terminos) return setError("Tenés que aceptar los términos y la política de privacidad.");
     setEnviando(true);
     try {
-      const selfie_base64 = await archivoABase64(selfie);
-      await registrarEmpresa({ ...form, selfie_base64, firma_legal_base64: firma });
+      const [selfie_base64, dni_frente_base64, dni_dorso_base64] = await Promise.all([
+        archivoABase64(selfie),
+        archivoABase64(dniFrente),
+        archivoABase64(dniDorso),
+      ]);
+      await registrarEmpresa({
+        ...form,
+        selfie_base64,
+        dni_frente_base64,
+        dni_dorso_base64,
+        firma_legal_base64: firma,
+      });
       localStorage.removeItem(DRAFT_KEY);
       setOk(true);
     } catch (err) {
@@ -123,7 +136,7 @@ export default function RegistroEmpresa() {
             </div>
           </Seccion>
 
-          <Seccion icono="camera" titulo="Verificación de identidad" bajada="Necesitamos una selfie actual y la firma del representante.">
+          <Seccion icono="camera" titulo="Verificación de identidad" bajada="Necesitamos una selfie actual, el DNI y la firma del representante.">
             <div className="registro-verificacion-grid">
               <div>
                 <h3>Selfie del representante</h3>
@@ -131,9 +144,35 @@ export default function RegistroEmpresa() {
                 <CapturaSelfie archivo={selfie} onCambio={setSelfie} />
               </div>
               <div>
+                <h3>DNI — frente</h3>
+                <p className="registro-ayuda">Que se lean bien los datos y la foto.</p>
+                <CapturaSelfie
+                  archivo={dniFrente}
+                  onCambio={setDniFrente}
+                  titulo="La foto del frente del DNI aparecerá acá"
+                  ayuda="Apoyalo sobre una superficie plana, con buena luz."
+                  altCapturada="Foto del frente del DNI del representante"
+                  mensajeListo="Frente del DNI listo"
+                  prefijoArchivo="dni-frente"
+                />
+              </div>
+              <div>
+                <h3>DNI — dorso</h3>
+                <p className="registro-ayuda">El lado con el código de barras.</p>
+                <CapturaSelfie
+                  archivo={dniDorso}
+                  onCambio={setDniDorso}
+                  titulo="La foto del dorso del DNI aparecerá acá"
+                  ayuda="Apoyalo sobre una superficie plana, con buena luz."
+                  altCapturada="Foto del dorso del DNI del representante"
+                  mensajeListo="Dorso del DNI listo"
+                  prefijoArchivo="dni-dorso"
+                />
+              </div>
+              <div>
                 <h3>Firma</h3>
-                <p className="registro-ayuda">Firmá dentro del recuadro con el mouse o el dedo.</p>
-                <FirmaCanvas onCambio={setFirma} className="firma-registro-canvas" />
+                <p className="registro-ayuda">Te vamos a pedir mostrar tu rostro un segundo antes de firmar, como prueba de que hay una persona real haciendo el registro.</p>
+                <FirmaCanvas onCambio={setFirma} requiereVerificacion className="firma-registro-canvas" />
               </div>
             </div>
           </Seccion>

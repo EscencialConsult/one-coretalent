@@ -105,13 +105,11 @@ async def registro_empresa(
     firma_url = await subir_archivo(
         "verificaciones-empresa", base64.b64decode(data.firma_legal_base64), "image/png", "firma-legal.png"
     )
-    dni_frente_url = (
-        await subir_archivo("verificaciones-empresa", base64.b64decode(data.dni_frente_base64), "image/jpeg", "dni-frente.jpg")
-        if data.dni_frente_base64 else None
+    dni_frente_url = await subir_archivo(
+        "verificaciones-empresa", base64.b64decode(data.dni_frente_base64), "image/jpeg", "dni-frente.jpg"
     )
-    dni_dorso_url = (
-        await subir_archivo("verificaciones-empresa", base64.b64decode(data.dni_dorso_base64), "image/jpeg", "dni-dorso.jpg")
-        if data.dni_dorso_base64 else None
+    dni_dorso_url = await subir_archivo(
+        "verificaciones-empresa", base64.b64decode(data.dni_dorso_base64), "image/jpeg", "dni-dorso.jpg"
     )
 
     empresa = Empresa(

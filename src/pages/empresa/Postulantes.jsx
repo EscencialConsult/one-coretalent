@@ -5,6 +5,7 @@ import { listarTodasPostulaciones, listarEvaluacionesPostulacion } from "../../a
 import { ErrorState, PageLoader } from "../../components/AsyncState";
 import Icon from "../../components/Icon";
 import { ApiError } from "../../api/client";
+import { descargarCsv } from "../../utils/csv";
 
 const ESTADO_EVAL_LABEL = {
   pendiente: "Pendiente",
@@ -46,6 +47,17 @@ export default function Postulantes() {
   if (error) return <ErrorState mensaje={error} onReintentar={() => setIntento((n) => n + 1)} />;
   if (!postulaciones) return <PageLoader mensaje="Cargando postulaciones…" />;
 
+  function exportar() {
+    descargarCsv(
+      "postulantes.csv",
+      ["Nombre", "Apellido", "Email", "Teléfono", "Vacante", "Fecha", "Perfil profesional"],
+      postulaciones.map((p) => [
+        p.nombre, p.apellido, p.email, p.telefono || "", p.vacante_puesto,
+        new Date(p.created_at).toLocaleDateString("es-AR"), p.perfil_profesional || "",
+      ])
+    );
+  }
+
   const filtradas = postulaciones.filter((p) => {
     if (!filtro) return true;
     const buscar = filtro.toLowerCase();
@@ -79,13 +91,18 @@ export default function Postulantes() {
 
       <div className="barra-herramientas">
         <h3 className="text-sm font-bold">Todas las postulaciones</h3>
-        <div className="panel-search">
-          <Icon name="search" className="w-4 h-4 text-muted" />
-          <input
-            placeholder="Buscar por nombre, email o puesto…"
-            value={filtro}
-            onChange={(e) => setFiltro(e.target.value)}
-          />
+        <div style={{ display: "flex", flexWrap: "nowrap", alignItems: "center", gap: 10 }}>
+          <div className="panel-search">
+            <Icon name="search" className="w-4 h-4 text-muted" />
+            <input
+              placeholder="Buscar por nombre, email o puesto…"
+              value={filtro}
+              onChange={(e) => setFiltro(e.target.value)}
+            />
+          </div>
+          <button onClick={exportar} disabled={!postulaciones?.length} className="boton boton-fantasma inline-flex items-center gap-1.5 whitespace-nowrap !py-2 !px-3.5 text-xs" style={{ flex: "none" }}>
+            <Icon name="doc" className="w-3.5 h-3.5" /> Exportar CSV
+          </button>
         </div>
       </div>
 

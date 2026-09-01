@@ -1,7 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 
-export default function CapturaSelfie({ archivo, onCambio }) {
+export default function CapturaSelfie({
+  archivo,
+  onCambio,
+  titulo = "Tu selfie aparecerá acá",
+  ayuda = "Buscá buena luz y mirá de frente a la cámara.",
+  altCapturada = "Selfie capturada del representante",
+  mensajeListo = "Selfie lista para enviar",
+  prefijoArchivo = "selfie",
+}) {
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const [camaraActiva, setCamaraActiva] = useState(false);
@@ -70,7 +78,7 @@ export default function CapturaSelfie({ archivo, onCambio }) {
         setError("No se pudo capturar la imagen. Intentá nuevamente.");
         return;
       }
-      onCambio(new File([blob], `selfie-${Date.now()}.jpg`, { type: "image/jpeg" }));
+      onCambio(new File([blob], `${prefijoArchivo}-${Date.now()}.jpg`, { type: "image/jpeg" }));
       detenerCamara();
       setError("");
     }, "image/jpeg", 0.9);
@@ -98,12 +106,12 @@ export default function CapturaSelfie({ archivo, onCambio }) {
           aria-label="Vista previa en vivo de la cámara frontal"
           className={camaraActiva ? "selfie-video visible" : "selfie-video"}
         />
-        {!camaraActiva && preview && <img src={preview} alt="Selfie capturada del representante" />}
+        {!camaraActiva && preview && <img src={preview} alt={altCapturada} />}
         {!camaraActiva && !preview && (
           <div className="selfie-placeholder">
             <span><Icon name="camera" className="w-7 h-7" /></span>
-            <strong>Tu selfie aparecerá acá</strong>
-            <small>Buscá buena luz y mirá de frente a la cámara.</small>
+            <strong>{titulo}</strong>
+            <small>{ayuda}</small>
           </div>
         )}
         {camaraActiva && <div className="selfie-guia" aria-hidden="true" />}
@@ -130,7 +138,7 @@ export default function CapturaSelfie({ archivo, onCambio }) {
           </>
         )}
       </div>
-      {preview && !camaraActiva && <p className="selfie-ok"><Icon name="check" className="w-4 h-4" /> Selfie lista para enviar</p>}
+      {preview && !camaraActiva && <p className="selfie-ok"><Icon name="check" className="w-4 h-4" /> {mensajeListo}</p>}
       {error && <p className="selfie-error" role="alert">{error}</p>}
       <p className="selfie-privacidad">La cámara se utiliza solamente para capturar esta foto. Se apaga al confirmar, cancelar o salir de la página.</p>
     </div>

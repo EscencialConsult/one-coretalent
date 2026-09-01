@@ -45,10 +45,12 @@ class RegistroEmpresaIn(BaseModel):
     acepto_terminos: bool
 
     # Verificación de identidad del representante — en base64, se suben a Storage server-side.
+    # Las 3 fotos son obligatorias (selfie + ambas caras del DNI): sin esto no hay forma de que
+    # un humano revise de verdad la identidad antes de aprobar la cuenta (ver auditoría 2026-09-01).
     selfie_base64: str
     firma_legal_base64: str
-    dni_frente_base64: str | None = None
-    dni_dorso_base64: str | None = None
+    dni_frente_base64: str
+    dni_dorso_base64: str
 
     @field_validator("subdominio")
     @classmethod
@@ -85,9 +87,7 @@ class RegistroEmpresaIn(BaseModel):
 
     @field_validator("dni_frente_base64", "dni_dorso_base64")
     @classmethod
-    def _validar_dni_foto(cls, v: str | None) -> str | None:
-        if v is None:
-            return None
+    def _validar_dni_foto(cls, v: str) -> str:
         return _validar_imagen(v, "el DNI")
 
 
