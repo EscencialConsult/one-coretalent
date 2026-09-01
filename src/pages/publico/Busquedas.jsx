@@ -45,6 +45,17 @@ function antiguedad(fecha) {
   return `Publicada hace ${dias} días`;
 }
 
+// Cada empresa "elige" siempre el mismo color de rol (hash del nombre, no al azar) —
+// da variedad real a la grilla de búsquedas sin perder el criterio de la Regla de los
+// Cuatro (DESIGN.md): un color, un significado ("esta empresa"), nunca decorativo suelto.
+const ROLES_EMPRESA = ["violeta", "cian", "rosa", "oro"];
+function rolDeEmpresa(nombre) {
+  const texto = String(nombre || "");
+  let hash = 0;
+  for (let i = 0; i < texto.length; i++) hash = (hash * 31 + texto.charCodeAt(i)) >>> 0;
+  return ROLES_EMPRESA[hash % ROLES_EMPRESA.length];
+}
+
 export default function Busquedas({ modoCandidato = false }) {
   const { autenticado = false, persona = null, token = null } = useContext(PersonaAuthContext) || {};
   const personalizada = modoCandidato && autenticado;
@@ -314,8 +325,9 @@ function CampoSelect({ id, label, items, todos, ...selectProps }) {
 
 function VacanteCard({ vacante, autenticado, postulacion, onOpen }) {
   const ubicacion = [vacante.localidad || vacante.provincia, vacante.modalidad].filter(Boolean);
+  const rol = rolDeEmpresa(vacante.empresa);
   return (
-    <article className="job-card">
+    <article className={`job-card rol-${rol}`}>
       <button type="button" className="job-card-main" onClick={onOpen} aria-label={`Ver detalle de ${vacante.puesto}`}>
         <div className="job-card-cover">
           <span>{vacante.area || "Nueva oportunidad"}</span>
@@ -345,9 +357,10 @@ function VacanteCard({ vacante, autenticado, postulacion, onOpen }) {
 function DetalleVacante({ vacante, autenticado, postulacion, copiado, onCopy, onClose }) {
   const habilidades = String(vacante.habilidades || "").split(",").map((item) => item.trim()).filter(Boolean);
   const beneficios = String(vacante.beneficios || "").split(",").map((item) => item.trim()).filter(Boolean);
+  const rol = rolDeEmpresa(vacante.empresa);
   return (
     <div className="job-dialog-backdrop" role="presentation" onMouseDown={(evento) => evento.target === evento.currentTarget && onClose()}>
-      <section className="job-dialog" role="dialog" aria-modal="true" aria-labelledby="detalle-vacante-titulo">
+      <section className={`job-dialog rol-${rol}`} role="dialog" aria-modal="true" aria-labelledby="detalle-vacante-titulo">
         <button type="button" className="job-dialog-close" onClick={onClose} aria-label="Cerrar detalle" autoFocus><Icon name="x" /></button>
         <div className="job-dialog-cover">
           <span>{vacante.area || "Oportunidad laboral"}</span>
