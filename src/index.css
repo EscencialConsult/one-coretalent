@@ -100,7 +100,7 @@
 .landing-proof strong { font-size: .88rem; }.landing-proof span { margin-top: .25rem; color: #79727e; font-size: .72rem; }
 .landing-section { width: min(1120px, calc(100% - 3rem)); margin: 0 auto; padding: clamp(5rem, 9vw, 8rem) 0; }
 .landing-section-heading { max-width: 680px; margin: 0 auto 2.6rem; text-align: center; }
-.landing-section-heading > span, .landing-kicker, .landing-final-cta > div > span { color: var(--brand-acento); font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.landing-kicker { display: inline-block; margin-bottom: .3rem; color: var(--brand-acento); font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .landing-section-heading h2, .landing-process h2, .landing-final-cta h2 { margin-top: .8rem; font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.08; letter-spacing: -.04em; font-weight: 900; }
 .landing-section-heading p { margin-top: 1rem; color: #746d79; line-height: 1.7; }
 .landing-section-heading.compacta { margin-bottom: 2rem; }
@@ -121,15 +121,30 @@
 .landing-audience.empresa > a { color: #8aedef; }
 .landing-benefits { padding-top: 1rem; }
 .landing-benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.landing-benefit-grid article { padding: 1.7rem; border: 1px solid #e2dee6; border-radius: 1rem; background: rgba(255,255,255,.8); transition: transform .2s ease, box-shadow .2s ease; }
+.landing-benefit-grid article { padding: 1.7rem; border: 1.5px solid var(--linea); border-radius: 1rem; background: rgba(255,255,255,.85); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 .landing-benefit-grid article:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(39,29,47,.08); }
-.landing-benefit-grid article > span { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: .7rem; color: var(--brand-acento); background: var(--acento-tinte); }
+.landing-benefit-grid article > span { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: .7rem; }
+
+/* Cada beneficio tiene un color de rol propio (ver DESIGN.md "Regla de los Cuatro") en vez
+   de repetir el mismo acento violeta en las tres tarjetas. */
+.landing-benefit-violeta { border-color: color-mix(in srgb, var(--violeta) 22%, var(--linea)); }
+.landing-benefit-violeta:hover { border-color: var(--violeta); }
+.landing-benefit-violeta > span { color: var(--violeta); background: color-mix(in srgb, var(--violeta) 12%, white); }
+.landing-benefit-cian { border-color: color-mix(in srgb, var(--cian) 30%, var(--linea)); }
+.landing-benefit-cian:hover { border-color: var(--cian); }
+.landing-benefit-cian > span { color: #1a8a8e; background: color-mix(in srgb, var(--cian) 20%, white); }
+.landing-benefit-oro { border-color: color-mix(in srgb, var(--oro) 30%, var(--linea)); }
+.landing-benefit-oro:hover { border-color: var(--oro); }
+.landing-benefit-oro > span { color: #96792b; background: color-mix(in srgb, var(--oro) 22%, white); }
 .landing-benefit-grid h3 { margin-top: 1rem; font-size: 1rem; font-weight: 900; }
 .landing-benefit-grid p { margin-top: .55rem; color: #756e7a; font-size: .8rem; line-height: 1.6; }
 .landing-process-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 2.5rem); margin-top: 2.5rem; }
 .landing-process-track { padding: clamp(1.75rem, 3vw, 2.25rem); border: 1px solid #e6e2ea; border-radius: 1.15rem; background: #fff; box-shadow: 0 20px 45px -25px rgba(38,29,45,.18); }
 .landing-process-track-tag { display: inline-flex; align-items: center; gap: .45rem; margin-bottom: 1.1rem; padding: .45rem .8rem; border-radius: 999px; color: var(--brand-acento); background: var(--acento-tinte); font-size: .72rem; font-weight: 850; }
 .landing-process-track-tag svg { width: .95rem; height: .95rem; }
+/* Postulantes vs. empresas se distinguen por color de rol, no solo por texto —
+   empresas ya usa violeta en .landing-audience.empresa, acá se hace eco de eso. */
+.landing-process-track-tag.rosa { color: #b23c9e; background: color-mix(in srgb, var(--rosa) 16%, white); }
 .landing-process-track .landing-btn { margin-top: 1.5rem; width: 100%; }
 .landing-steps { counter-reset: pasos; display: grid; }
 .landing-steps li { display: grid; grid-template-columns: 2.4rem 1fr; gap: .85rem; padding: 1.1rem 0; border-bottom: 1px solid #ede9ef; }
@@ -140,7 +155,6 @@
 .landing-final-cta { display: flex; align-items: center; justify-content: space-between; gap: 2rem; width: min(1180px, calc(100% - 3rem)); margin: 0 auto clamp(4rem, 8vw, 7rem); padding: clamp(2rem, 5vw, 3.5rem); border-radius: 1.4rem; color: white; background: linear-gradient(130deg, var(--oscuro) 0%, var(--brand-acento) 65%, var(--oscuro) 100%); box-shadow: 0 30px 65px rgba(30,10,12,.28); }
 .landing-final-cta > div:first-child { max-width: 650px; }
 .landing-final-cta > div:last-child { display: flex; flex-wrap: wrap; gap: .7rem; flex: none; }
-.landing-final-cta > div > span { color: #86eef0; }
 .landing-final-cta h2 { font-size: clamp(1.8rem, 3.4vw, 2.8rem); }
 .landing-btn-light { color: #312638; background: white; }.landing-btn-outline-light { color: white; border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.08); }
 

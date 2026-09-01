@@ -3,9 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import Icon from "../../components/Icon";
 
 const BENEFICIOS = [
-  { icono: "user", titulo: "Una identidad profesional", texto: "Tu perfil, CV y resultados disponibles desde una cuenta personal segura." },
-  { icono: "chart", titulo: "Evaluaciones confiables", texto: "Scoring determinista en backend, versiones registradas y progreso recuperable." },
-  { icono: "shield", titulo: "Privacidad por diseño", texto: "Consentimientos claros, accesos revocables y trazabilidad de consultas sensibles." },
+  { icono: "user", rol: "violeta", titulo: "Una identidad profesional", texto: "Tu perfil, CV y resultados disponibles desde una cuenta personal segura." },
+  { icono: "chart", rol: "cian", titulo: "Evaluaciones confiables", texto: "Scoring determinista en backend, versiones registradas y progreso recuperable." },
+  { icono: "shield", rol: "oro", titulo: "Privacidad por diseño", texto: "Consentimientos claros, accesos revocables y trazabilidad de consultas sensibles." },
 ];
 
 export default function Landing() {
@@ -57,7 +57,6 @@ export default function Landing() {
 
       <section className="landing-section landing-intro">
         <div className="landing-section-heading">
-          <span>Una experiencia conectada</span>
           <h2>Más claridad para cada persona involucrada</h2>
           <p>ONE reúne búsqueda laboral, selección y evaluación en un ecosistema donde cada actor sabe qué hacer y conserva el control de su información.</p>
         </div>
@@ -68,9 +67,9 @@ export default function Landing() {
       </section>
 
       <section className="landing-section landing-benefits">
-        <div className="landing-section-heading compacta"><span>Confianza desde la arquitectura</span><h2>Profesional por fuera. Sólida por dentro.</h2></div>
+        <div className="landing-section-heading compacta"><h2>Profesional por fuera. Sólida por dentro.</h2></div>
         <div className="landing-benefit-grid">
-          {BENEFICIOS.map((item) => <article key={item.titulo}><span><Icon name={item.icono} /></span><h3>{item.titulo}</h3><p>{item.texto}</p></article>)}
+          {BENEFICIOS.map((item) => <article key={item.titulo} className={`landing-benefit-${item.rol}`}><span><Icon name={item.icono} /></span><h3>{item.titulo}</h3><p>{item.texto}</p></article>)}
         </div>
       </section>
 
@@ -82,7 +81,7 @@ export default function Landing() {
         </div>
         <div className="landing-process-tracks">
           <div className="landing-process-track">
-            <div className="landing-process-track-tag"><Icon name="user" /> Para postulantes</div>
+            <div className="landing-process-track-tag rosa"><Icon name="user" /> Para postulantes</div>
             <ol className="landing-steps">
               <Paso numero="01" titulo="Creá tu perfil" texto="Cargá tu CV, formación y experiencia una sola vez. Lo vas a reutilizar en cada postulación." />
               <Paso numero="02" titulo="Postulate a una búsqueda" texto="Elegí una oportunidad activa y postulate con un clic, sin volver a completar tus datos." />
@@ -106,7 +105,7 @@ export default function Landing() {
       </section>
 
       <section className="landing-final-cta">
-        <div><span>El próximo paso puede empezar hoy</span><h2>Talento y oportunidades, conectados con propósito.</h2></div>
+        <div><h2>El próximo paso puede empezar hoy.</h2></div>
         <div><Link to="/registro-candidato" className="landing-btn landing-btn-light">Soy candidato</Link><Link to="/registro-empresa" className="landing-btn landing-btn-outline-light">Represento una empresa</Link></div>
       </section>
     </div>
