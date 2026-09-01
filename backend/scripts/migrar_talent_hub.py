@@ -52,6 +52,24 @@ def leer_csv(path: Path) -> list[dict]:
         return list(csv.DictReader(f))
 
 
+# El Sheet viejo (columna "Estado" de la hoja Usuarios, ver Codigo.gs:81/2226) solo usa
+# 'aprobado' | 'rechazado' | 'pendiente'. Antes esto se ignoraba por completo y toda empresa
+# migrada quedaba ACTIVO sin importar si de verdad había pasado la revisión manual de RRHH —
+# auditoría 2026-09-01: 18 de 21 empresas activas en producción sin selfie/firma/DNI cargados.
+_ESTADO_SHEET_A_ENUM = {
+    "aprobado": EstadoEmpresa.ACTIVO,
+    "rechazado": EstadoEmpresa.RECHAZADA,
+    "pendiente": EstadoEmpresa.PENDIENTE_VERIFICACION,
+}
+
+
+def mapear_estado_empresa(valor: str | None) -> EstadoEmpresa:
+    """Default seguro: si el Sheet no trae un Estado reconocido (fila vieja, columna vacía),
+    la empresa queda PENDIENTE_VERIFICACION en vez de ACTIVO — que la revise un humano antes
+    de operar, en vez de asumir que ya pasó control."""
+    return _ESTADO_SHEET_A_ENUM.get((valor or "").strip().lower(), EstadoEmpresa.PENDIENTE_VERIFICACION)
+
+
 def slugify(texto: str) -> str:
     texto = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode("ascii")
     texto = re.sub(r"[^a-zA-Z0-9]+", "-", texto).strip("-").lower()
@@ -142,8 +160,10 @@ async def migrar(directorio: Path, commit: bool) -> None:
 
             empresa_id = uuid.uuid4()
             usuario_id = uuid.uuid4()
+            estado_mapeado = mapear_estado_empresa(fila.get("Estado"))
             resumen["empresas_creadas"].append(
-                f"{razon_social} (subdominio={slug}, admin={email}, cuit={fila.get('Cuit') or '-'})"
+                f"{razon_social} (subdominio={slug}, admin={email}, cuit={fila.get('Cuit') or '-'}, "
+                f"estado={estado_mapeado.value})"
             )
             if commit:
                 empresa = Empresa(
@@ -151,7 +171,7 @@ async def migrar(directorio: Path, commit: bool) -> None:
                     razon_social=razon_social,
                     subdominio=slug,
                     email_admin=email,
-                    estado=EstadoEmpresa.ACTIVO,
+                    estado=mapear_estado_empresa(fila.get("Estado")),
                     cuit=(fila.get("Cuit") or "").strip() or None,
                     rubro=(fila.get("Rubro") or "").strip() or None,
                     dni=(fila.get("Dni") or "").strip() or None,

@@ -32,6 +32,10 @@ class Settings(BaseSettings):
     BREVO_API_KEY: str = ""
     SMTP_FROM: str = ""            # remitente (ej. no-reply@escencial.com), tiene que estar verificado en Brevo
     SMTP_FROM_NAME: str = "ONE Core Analytics"
+    # A dónde avisar cuando una empresa se auto-registra y queda pendiente de revisión
+    # (equivalente al mail interno a RRHH que mandaba Hub Talent legacy). Si está vacío, se
+    # omite ese aviso interno — el registro de la empresa sigue funcionando igual.
+    ADMIN_NOTIFY_EMAIL: str = ""
 
     # ── IA (OpenAI) — informes gerenciales consolidados (Módulo 05) ───────────
     # La IA solo REDACTA sobre resultados ya calculados; nunca calcula resultados.

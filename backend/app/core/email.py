@@ -161,10 +161,10 @@ async def enviar_nuevas_credenciales_empresa(email: str, password: str, link: st
 async def enviar_recuperacion_password(email: str, link: str, marca: dict | None = None) -> bool:
     """Link de recuperación (1 uso, expira) — para Usuario (admin) o Persona (candidato)."""
     marca = marca or {
-        "razon_social": "AdRHA",
-        "color_acento": "#B4272D",
-        "color_secundario": "#4FADD1",
-        "logo_url": f"{settings.PUBLIC_BASE_URL.rstrip('/')}/iconadhracompletocolor.png",
+        "razon_social": "ONE Core Analytics",
+        "color_acento": "#4d248f",
+        "color_secundario": "#6be1e3",
+        "logo_url": f"{settings.PUBLIC_BASE_URL.rstrip('/')}/logo.png",
     }
     cuerpo = (
         '<p style="font-size:14.5px;line-height:1.6;">Recibimos una solicitud para restablecer tu contraseña.</p>'
@@ -217,3 +217,61 @@ async def enviar_invitacion_evaluador360(
     return await enviar_email(
         email, f"Invitación a una evaluación · {marca.get('razon_social') or 'ONE Core Analytics'}", html, from_name=remitente,
     )
+
+
+# ── Auto-registro de empresa (flujo Talent Hub, ver publico.py:registro_empresa) ──────────────
+# Equivalente a emailNuevaEmpresaPendiente_/emailEmpresaAprobada_/emailEmpresaRechazada_ del
+# Codigo.gs legacy: sin esto, una empresa nueva puede quedar días pendiente sin que nadie
+# se entere (auditoría 2026-09-01, hallazgo 3).
+_MARCA_ONE = {
+    "razon_social": "ONE Core Analytics",
+    "color_acento": "#4d248f",
+    "color_secundario": "#6be1e3",
+}
+
+
+async def enviar_registro_empresa_recibido(email: str, razon_social: str) -> bool:
+    """A la empresa, apenas se auto-registra: confirma que llegó y que hay revisión manual."""
+    cuerpo = (
+        f'<p style="font-size:14.5px;line-height:1.6;">Hola, equipo <b>{escape(razon_social)}</b>:</p>'
+        '<p style="font-size:14.5px;line-height:1.6;">Recibimos tu registro en ONE Core Analytics. '
+        'Un administrador va a revisar tus datos y documentos de verificación antes de habilitar tu cuenta — '
+        'te avisamos por correo apenas quede aprobada.</p>'
+    )
+    html = _plantilla(_MARCA_ONE, "Registro recibido", cuerpo, "Visitar el sitio", settings.PUBLIC_BASE_URL, pie="Equipo de ONE Core Analytics")
+    return await enviar_email(email, "Registro recibido — ONE Core Analytics", html, from_name="ONE Core Analytics")
+
+
+async def enviar_aviso_empresa_pendiente_interno(razon_social: str, email_admin: str, cuit: str | None) -> bool:
+    """Al equipo interno (ADMIN_NOTIFY_EMAIL), para que nadie se olvide de revisarla."""
+    if not settings.ADMIN_NOTIFY_EMAIL:
+        return False
+    link = f"{settings.PUBLIC_BASE_URL.rstrip('/')}/admin/empresas-pendientes"
+    cuerpo = (
+        f'<p style="font-size:14.5px;line-height:1.6;">Nueva empresa auto-registrada, pendiente de revisión:</p>'
+        f'<div style="background:#f7f7fb;border:1px solid #e6e7ee;border-radius:12px;padding:14px 18px;margin:10px 0;font-size:13.5px;">'
+        f'<div><span style="color:#8a8f9c;">Razón social:</span> <b>{escape(razon_social)}</b></div>'
+        f'<div><span style="color:#8a8f9c;">Email admin:</span> <b>{escape(email_admin)}</b></div>'
+        f'<div><span style="color:#8a8f9c;">CUIT:</span> <b>{escape(cuit or "-")}</b></div>'
+        '</div>'
+    )
+    html = _plantilla(_MARCA_ONE, "Empresa pendiente de revisión", cuerpo, "Revisar en el panel", link, pie="Aviso automático · ONE Core Analytics")
+    return await enviar_email(settings.ADMIN_NOTIFY_EMAIL, f"Empresa pendiente: {razon_social}", html, from_name="ONE Core Analytics")
+
+
+async def enviar_empresa_aprobada(email: str, razon_social: str, link: str) -> bool:
+    cuerpo = (
+        f'<p style="font-size:14.5px;line-height:1.6;">¡Buenas noticias! Revisamos el registro de <b>{escape(razon_social)}</b> '
+        'y tu cuenta ya está <b>aprobada y activa</b>. Ya podés ingresar a tu panel y empezar a publicar búsquedas.</p>'
+    )
+    html = _plantilla(_MARCA_ONE, "Tu cuenta fue aprobada", cuerpo, "Ingresar al panel", link, pie="Equipo de ONE Core Analytics")
+    return await enviar_email(email, "Tu cuenta fue aprobada — ONE Core Analytics", html, from_name="ONE Core Analytics")
+
+
+async def enviar_empresa_rechazada(email: str, razon_social: str) -> bool:
+    cuerpo = (
+        f'<p style="font-size:14.5px;line-height:1.6;">Revisamos el registro de <b>{escape(razon_social)}</b> y, por ahora, '
+        'no pudimos aprobar la cuenta. Si creés que fue un error o querés más información, respondé este correo.</p>'
+    )
+    html = _plantilla(_MARCA_ONE, "Tu registro no fue aprobado", cuerpo, "Visitar el sitio", settings.PUBLIC_BASE_URL, pie="Equipo de ONE Core Analytics")
+    return await enviar_email(email, "Sobre tu registro — ONE Core Analytics", html, from_name="ONE Core Analytics")

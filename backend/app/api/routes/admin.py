@@ -5,13 +5,15 @@ from __future__ import annotations
 import uuid
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import require_superadmin
 from app.core import engine
+from app.core.config import settings
 from app.core.db import get_db
+from app.core.email import enviar_empresa_aprobada, enviar_empresa_rechazada
 from app.core.storage import url_firmada
 from app.models.empresa_test import EmpresaTest  # noqa: F401 (asegura metadata)
 from app.models.enums import EstadoEmpresa
@@ -103,19 +105,27 @@ async def listar_empresas_pendientes(db: AsyncSession = Depends(get_db)) -> List
 
 
 @router.post("/empresas-pendientes/{empresa_id}/aprobar")
-async def aprobar_empresa(empresa_id: uuid.UUID, db: AsyncSession = Depends(get_db)) -> dict:
+async def aprobar_empresa(
+    empresa_id: uuid.UUID, background: BackgroundTasks, db: AsyncSession = Depends(get_db)
+) -> dict:
     empresa = await _get_empresa_pendiente(empresa_id, db)
     empresa.nombre_verificado = empresa.razon_social
     empresa.estado = EstadoEmpresa.ACTIVO
     await db.commit()
+    background.add_task(
+        enviar_empresa_aprobada, empresa.email_admin, empresa.razon_social, settings.url_empresa(empresa.subdominio)
+    )
     return {"ok": True, "estado": empresa.estado.value}
 
 
 @router.post("/empresas-pendientes/{empresa_id}/rechazar")
-async def rechazar_empresa(empresa_id: uuid.UUID, db: AsyncSession = Depends(get_db)) -> dict:
+async def rechazar_empresa(
+    empresa_id: uuid.UUID, background: BackgroundTasks, db: AsyncSession = Depends(get_db)
+) -> dict:
     empresa = await _get_empresa_pendiente(empresa_id, db)
     empresa.estado = EstadoEmpresa.RECHAZADA
     await db.commit()
+    background.add_task(enviar_empresa_rechazada, empresa.email_admin, empresa.razon_social)
     return {"ok": True, "estado": empresa.estado.value}
 
 

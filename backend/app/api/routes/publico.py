@@ -13,6 +13,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import get_optional_current_persona
 from app.api.routes.evaluaciones_postulantes import _asignar_test_a_postulacion
 from app.core.db import apply_rls_context, apply_rls_pre_auth, get_db
+from app.core.email import enviar_aviso_empresa_pendiente_interno, enviar_registro_empresa_recibido
 from app.core.outbox import procesar_evento_outbox
 from app.core.rate_limit import limiter
 from app.core.security import hash_password
@@ -83,7 +84,9 @@ async def marca_por_subdominio(subdominio: str, db: AsyncSession = Depends(get_d
 
 @router.post("/registro-empresa", status_code=status.HTTP_201_CREATED)
 @limiter.limit("5/hour")
-async def registro_empresa(request: Request, data: RegistroEmpresaIn, db: AsyncSession = Depends(get_db)) -> dict:
+async def registro_empresa(
+    request: Request, data: RegistroEmpresaIn, background: BackgroundTasks, db: AsyncSession = Depends(get_db)
+) -> dict:
     """Auto-registro de empresa con verificación de identidad (flujo de Talent Hub).
     A diferencia del alta que hace el SuperAdmin (empresas.py, queda ACTIVO directo), acá
     la empresa queda PENDIENTE_VERIFICACION hasta que un admin la aprueba (ver admin.py)."""
@@ -144,6 +147,10 @@ async def registro_empresa(request: Request, data: RegistroEmpresaIn, db: AsyncS
         )
     )
     await db.commit()
+    background.add_task(enviar_registro_empresa_recibido, email, empresa.razon_social)
+    background.add_task(
+        enviar_aviso_empresa_pendiente_interno, empresa.razon_social, email, empresa.cuit
+    )
     return {
         "ok": True,
         "estado": empresa.estado.value,
