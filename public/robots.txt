@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hubtalent.onelabs.pro/sitemap.xml
