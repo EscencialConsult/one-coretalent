@@ -38,3 +38,6 @@ backend/.pytest_cache
 # Claude Code (artefactos de sesión, no son del proyecto)
 .claude/
 .playwright-mcp/
+
+# Netlify CLI local state (site id link, no va al repo)
+.netlify/
