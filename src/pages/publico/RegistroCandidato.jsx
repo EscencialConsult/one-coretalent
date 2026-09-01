@@ -77,9 +77,9 @@ export default function RegistroCandidato() {
         <h1>Creá tu perfil y encontrá tu próxima oportunidad.</h1>
         <p>Centralizá tus datos, reutilizá tu CV y seguí todas tus postulaciones desde un único espacio seguro.</p>
         <ul>
-          <Beneficio icono="check" titulo="Un único perfil" texto="Actualizalo una vez y reutilizalo en futuras búsquedas." />
-          <Beneficio icono="check" titulo="Seguimiento claro" texto="Consultá postulaciones, evaluaciones y resultados." />
-          <Beneficio icono="shield" titulo="Datos protegidos" texto="Vos controlás tu información profesional." />
+          <Beneficio rol="violeta" icono="check" titulo="Un único perfil" texto="Actualizalo una vez y reutilizalo en futuras búsquedas." />
+          <Beneficio rol="cian" icono="check" titulo="Seguimiento claro" texto="Consultá postulaciones, evaluaciones y resultados." />
+          <Beneficio rol="oro" icono="shield" titulo="Datos protegidos" texto="Vos controlás tu información profesional." />
         </ul>
       </div>
 
@@ -115,6 +115,6 @@ function Campo({ label, ayuda, type = "text", ...props }) {
   return <label className="candidate-register-field"><span>{label}</span><input type={type} required {...props} />{ayuda && <small>{ayuda}</small>}</label>;
 }
 
-function Beneficio({ icono, titulo, texto }) {
-  return <li><Icon name={icono} /><span><strong>{titulo}</strong><small>{texto}</small></span></li>;
+function Beneficio({ icono, titulo, texto, rol }) {
+  return <li className={rol ? `rol-${rol}` : ""}><Icon name={icono} /><span><strong>{titulo}</strong><small>{texto}</small></span></li>;
 }

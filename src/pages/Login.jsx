@@ -62,9 +62,9 @@ export default function Login() {
         <h1>Todo tu proceso de talento, en un solo lugar.</h1>
         <p>Entrá con tu cuenta de empresa o de candidato para seguir donde lo dejaste.</p>
         <ul>
-          <Beneficio icono="briefcase" titulo="Una sola cuenta" texto="Postulate a búsquedas o publicalas, según tu perfil." />
-          <Beneficio icono="chart" titulo="Seguimiento claro" texto="Consultá el estado de tus postulaciones y evaluaciones." />
-          <Beneficio icono="shield" titulo="Datos protegidos" texto="Vos controlás tu información en todo momento." />
+          <Beneficio rol="violeta" icono="briefcase" titulo="Una sola cuenta" texto="Postulate a búsquedas o publicalas, según tu perfil." />
+          <Beneficio rol="cian" icono="chart" titulo="Seguimiento claro" texto="Consultá el estado de tus postulaciones y evaluaciones." />
+          <Beneficio rol="oro" icono="shield" titulo="Datos protegidos" texto="Vos controlás tu información en todo momento." />
         </ul>
       </div>
 
@@ -124,6 +124,6 @@ export default function Login() {
   );
 }
 
-function Beneficio({ icono, titulo, texto }) {
-  return <li><Icon name={icono} /><span><strong>{titulo}</strong><small>{texto}</small></span></li>;
+function Beneficio({ icono, titulo, texto, rol }) {
+  return <li className={rol ? `rol-${rol}` : ""}><Icon name={icono} /><span><strong>{titulo}</strong><small>{texto}</small></span></li>;
 }
