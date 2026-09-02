@@ -1,1 +1,17 @@
+# Links viejos de Hub Talent (el sitio estático anterior, archivos .html con URLs "bonitas"
+# tipo /empresas en vez de /empresas.html) — cualquiera que tenga uno de esos links guardado
+# o compartido no debe caer en 404 ahora que el dominio apunta a esta plataforma nueva.
+# Reportado en vivo 2026-09-02 (404 en /empresas + un postulante real sin poder registrarse).
+/empresas          /login                 302
+/empresas.html     /login                 302
+/postular          /busquedas             302
+/postular.html     /busquedas             302
+/admin.html        /login                 302
+/recuperar         /recuperar-password    302
+/recuperar.html    /recuperar-password    302
+/busquedas.html    /busquedas             302
+/index.html        /                      302
+/politica-privacidad.html   /politica-privacidad    302
+/terminos-condiciones.html  /terminos-condiciones   302
+
 /*    /index.html   200
