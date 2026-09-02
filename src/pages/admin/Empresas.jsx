@@ -83,7 +83,15 @@ export default function Empresas() {
       </div>
 
       <div className="tarjeta overflow-x-auto" style={{ padding: "4px 0" }}>
-        {filtradas.length === 0 && (
+        {filtradas.length === 0 && estadoFiltro === "pendiente_verificacion" && (
+          <div className="text-muted text-sm px-5 py-10 text-center flex flex-col items-center gap-3">
+            <span>No hay ninguna empresa esperando revisión ahora mismo — al día.</span>
+            <button onClick={() => setParams({})} className="boton boton-fantasma !py-2 !px-3.5 text-xs">
+              Ver todas las empresas
+            </button>
+          </div>
+        )}
+        {filtradas.length === 0 && estadoFiltro !== "pendiente_verificacion" && (
           <div className="text-muted text-sm px-5 py-10 text-center">No hay empresas para este filtro.</div>
         )}
         {filtradas.length > 0 && (

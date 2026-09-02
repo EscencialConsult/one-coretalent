@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../auth/useAuth";
-import { listarTodasPostulaciones, listarEvaluacionesPostulacion } from "../../api/empresa";
+import { listarTodasPostulaciones, listarEvaluacionesTodasPostulaciones } from "../../api/empresa";
 import { ErrorState, PageLoader } from "../../components/AsyncState";
 import Icon from "../../components/Icon";
 import { ApiError } from "../../api/client";
@@ -26,15 +26,18 @@ export default function Postulantes() {
     let activo = true;
     setError("");
     setPostulaciones(null);
-    listarTodasPostulaciones(token)
-      .then((data) => {
+    // Antes: 1 llamado por postulación en paralelo (con varias decenas de postulantes,
+    // varias decenas de requests al mismo tiempo — causa real de que esta pantalla se
+    // trabara). Ahora: 2 llamados fijos, sea cual sea la cantidad de postulantes.
+    Promise.all([listarTodasPostulaciones(token), listarEvaluacionesTodasPostulaciones(token)])
+      .then(([data, evaluaciones]) => {
         if (!activo) return;
         setPostulaciones(data);
-        data.forEach((p) => {
-          listarEvaluacionesPostulacion(token, p.vacante_id, p.id)
-            .then((evals) => activo && setEvaluacionesPorPostulacion((actual) => ({ ...actual, [p.id]: evals })))
-            .catch(() => {});
-        });
+        const agrupadas = {};
+        for (const ev of evaluaciones) {
+          (agrupadas[ev.postulacion_id] ??= []).push(ev);
+        }
+        setEvaluacionesPorPostulacion(agrupadas);
       })
       .catch((err) => {
         if (activo) setError(err instanceof ApiError ? err.detail : "No se pudieron cargar las postulaciones.");

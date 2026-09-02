@@ -428,6 +428,26 @@ async def aplicar_tests_requeridos(
     return [resumen for resumen, _ in resultados]
 
 
+@router.get("/postulaciones/evaluaciones", response_model=list[EvaluacionResumenOut])
+async def listar_evaluaciones_todas_postulaciones(
+    tenant_id: uuid.UUID = Depends(get_current_tenant_id),
+    db: AsyncSession = Depends(get_db),
+) -> list[EvaluacionResumenOut]:
+    """Todas las asignaciones de la empresa que cuelgan de una postulación, en una sola consulta.
+    Reemplaza a llamar listar_evaluaciones_postulante() una vez POR postulación desde el
+    frontend (src/pages/empresa/Postulantes.jsx) — con varias decenas de postulantes eso eran
+    varias decenas de requests simultáneos al cargar la pantalla, causa real de la lentitud/
+    trabazón reportada 2026-09-02. El frontend agrupa el resultado por postulacion_id."""
+    asignaciones = (
+        await db.execute(
+            select(Asignacion)
+            .where(Asignacion.tenant_id == tenant_id, Asignacion.postulacion_id.is_not(None))
+            .order_by(Asignacion.created_at.desc())
+        )
+    ).scalars().all()
+    return await _resumenes(list(asignaciones), db)
+
+
 @router.get(
     "/vacantes/{vacante_id}/postulaciones/{postulacion_id}/evaluaciones",
     response_model=list[EvaluacionResumenOut],

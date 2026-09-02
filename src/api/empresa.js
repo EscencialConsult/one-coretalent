@@ -22,6 +22,10 @@ export const listarCatalogoTestsEmpresa = (token) =>
 export const listarMisTestsEmpresa = (token) => apiFetch("/empresa/tests", { token });
 export const listarEvaluacionesPostulacion = (token, vacanteId, postulacionId) =>
   apiFetch(`/vacantes/${vacanteId}/postulaciones/${postulacionId}/evaluaciones`, { token });
+// Todas las evaluaciones de todas las postulaciones de la empresa, en 1 sola llamada — usar
+// esta en listados (Postulantes.jsx), no la de arriba en un loop (era N llamados en paralelo).
+export const listarEvaluacionesTodasPostulaciones = (token) =>
+  apiFetch("/postulaciones/evaluaciones", { token });
 export const asignarEvaluacionPostulacion = (token, vacanteId, postulacionId, testSlug) =>
   apiFetch(`/vacantes/${vacanteId}/postulaciones/${postulacionId}/evaluaciones`, {
     method: "POST",
