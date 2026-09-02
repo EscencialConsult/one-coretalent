@@ -22,6 +22,7 @@ export default function VerificacionRostro({ onRostroDetectado }) {
   // Antes arrancaba solo al montar y quedaba corriendo todo el tiempo que la persona estuviera
   // en la página, aunque todavía no hubiera llegado a firmar (hallazgo de rendimiento 2026-09-01).
   const [activadoPorUsuario, setActivadoPorUsuario] = useState(false);
+  const [intento, setIntento] = useState(0);
   const [estado, setEstado] = useState("inactivo");
   const [mensaje, setMensaje] = useState("Tocá el botón para habilitar la cámara");
 
@@ -79,10 +80,19 @@ export default function VerificacionRostro({ onRostroDetectado }) {
         if (!activo) return;
         callbackRef.current?.(false);
         setEstado("error");
+        // Mensajes distintos según la causa real — "no se pudo iniciar" tapaba señales
+        // distintas (cámara ocupada por otra app, sin cámara, o el modelo de MediaPipe sin
+        // poder bajar de su CDN por una extensión/firewall) bajo un mismo texto genérico,
+        // imposible de diagnosticar a distancia (hallazgo 2026-09-02, bloqueaba postularse).
+        const mensajes = {
+          NotAllowedError: "Permiso de cámara denegado. Habilitá el acceso y volvé a intentar.",
+          NotFoundError: "No se encontró ninguna cámara conectada.",
+          NotReadableError: "La cámara está siendo usada por otra aplicación o pestaña. Cerrala e intentá de nuevo.",
+          OverconstrainedError: "La cámara no admite la configuración pedida.",
+        };
         setMensaje(
-          error.name === "NotAllowedError"
-            ? "Permiso de cámara denegado. Habilitá el acceso y recargá."
-            : "No se pudo iniciar la comprobación de presencia."
+          mensajes[error.name] ||
+            "No se pudo iniciar la verificación (puede ser la conexión, no la cámara). Podés reintentar o continuar sin ella."
         );
       }
     }
@@ -95,7 +105,7 @@ export default function VerificacionRostro({ onRostroDetectado }) {
       if (stream) stream.getTracks().forEach((track) => track.stop());
       callbackRef.current?.(false);
     };
-  }, [activadoPorUsuario]);
+  }, [activadoPorUsuario, intento]);
 
   const color = estado === "detectado" ? "#2b6f8c" : estado === "error" ? "#c0392b" : "var(--brand-acento)";
 
@@ -123,11 +133,36 @@ export default function VerificacionRostro({ onRostroDetectado }) {
           </button>
         ) : (
           <div
-            className="absolute bottom-0 inset-x-0 px-3 py-2 flex items-center gap-2 text-xs font-semibold text-white"
+            className="absolute bottom-0 inset-x-0 px-3 py-2 flex flex-col gap-2 text-xs font-semibold text-white"
             style={{ background: `${color}dd` }}
           >
-            <Icon name={estado === "detectado" ? "check" : "camera"} className="w-3.5 h-3.5" />
-            {mensaje}
+            <span className="flex items-center gap-2">
+              <Icon name={estado === "detectado" ? "check" : "camera"} className="w-3.5 h-3.5" />
+              {mensaje}
+            </span>
+            {estado === "error" && (
+              <span className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIntento((n) => n + 1)}
+                  className="underline decoration-dotted"
+                >
+                  Reintentar
+                </button>
+                <span aria-hidden="true">·</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEstado("detectado");
+                    setMensaje("Continuás sin verificación de presencia");
+                    callbackRef.current?.(true);
+                  }}
+                  className="underline decoration-dotted"
+                >
+                  Continuar sin verificación
+                </button>
+              </span>
+            )}
           </div>
         )}
       </div>
