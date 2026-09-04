@@ -177,7 +177,7 @@ async def enviar_recuperacion_password(email: str, link: str, marca: dict | None
 
 
 async def enviar_invitacion_evaluado(marca: dict, nombre: str, email: str, password: str, link: str) -> bool:
-    c1 = marca.get("color_acento") or "#B4272D"
+    c1 = marca.get("color_acento") or "#4d248f"
     razon = escape(marca.get("razon_social") or "la empresa")
     cuerpo = (
         f'<p style="font-size:14.5px;line-height:1.6;">Hola {escape(nombre)}, <b>{razon}</b> te invitó a realizar una evaluación en línea. '

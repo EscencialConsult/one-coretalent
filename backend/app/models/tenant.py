@@ -21,9 +21,9 @@ class Empresa(UUIDPkMixin, TimestampMixin, Base):
     email_admin: Mapped[str] = mapped_column(String(255), nullable=False)
     # Guarda una URL externa o un data URI base64 (por eso Text, no String corto).
     logo_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    color_acento: Mapped[str] = mapped_column(String(9), default="#B4272D", nullable=False)
+    color_acento: Mapped[str] = mapped_column(String(9), default="#4d248f", nullable=False)
     color_secundario: Mapped[str] = mapped_column(
-        String(9), default="#4FADD1", server_default=text("'#6be1e3'"), nullable=False
+        String(9), default="#6be1e3", server_default=text("'#6be1e3'"), nullable=False
     )
     estado: Mapped[EstadoEmpresa] = mapped_column(
         SAEnum(EstadoEmpresa, name="estado_empresa", values_callable=lambda e: [m.value for m in e]),
